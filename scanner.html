@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Pemindai Presensi &amp; Locator Kursi — Sales Mastery Bootcamp</title>
   <meta name="description" content="Aplikasi Pemindai QR Code Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
   
@@ -26,7 +26,6 @@
     --line-2: #EAE3D6;
     --navy: #12357F;
     --navy-d: #0E2A66;
-    --sky: #A9D9F2;
     --gold: #C5A059;
     --ok: #2F6B4F;
     --r: 12px;
@@ -35,122 +34,110 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 34%, var(--paper) 100%);
-    background-attachment: fixed;
+  html, body {
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 16px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-size: 15px;
     -webkit-font-smoothing: antialiased;
   }
 
-  .band { height: 6px; background: var(--navy); }
+  .band { height: 5px; background: var(--navy); }
 
-  /* Sticky Top Header Bar */
+  /* Header Bar */
   .bar {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(239, 233, 221, 0.94);
+    height: 48px;
+    background: rgba(239, 233, 221, 0.96);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: 12px 24px;
-  }
-  .bar-in {
-    max-width: 1080px; margin: 0 auto;
+    padding: 0 20px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
   .brand-logo {
-    width: 36px; height: 36px; background: var(--navy); border-radius: 50%;
+    width: 32px; height: 32px; background: var(--navy); border-radius: 50%;
     color: #fff; display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 15px; font-weight: 700;
-    box-shadow: 0 2px 8px rgba(18, 53, 127, 0.25);
+    font-family: var(--serif); font-size: 14px; font-weight: 700;
   }
-  .brand-text b { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--navy); }
-  .brand-text span { display: block; font-size: 12px; color: var(--ink-3); }
+  .brand-text b { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--navy); }
+  .brand-text span { font-size: 11.5px; color: var(--ink-3); margin-left: 8px; }
 
-  .bar-stats {
-    display: flex; align-items: center; gap: 16px; font-size: 13px;
-  }
+  .bar-stats { display: flex; align-items: center; gap: 12px; }
   .counter-badge {
-    background: var(--navy); color: #fff; font-weight: 700; font-size: 12px;
-    padding: 4px 12px; border-radius: 999px; letter-spacing: 0.04em;
+    background: var(--navy); color: #fff; font-weight: 700; font-size: 11.5px;
+    padding: 3px 10px; border-radius: 999px; letter-spacing: 0.03em;
   }
   .btn-link {
     background: transparent; border: 1px solid var(--line); color: var(--ink-2);
-    padding: 6px 14px; border-radius: 6px; font-size: 13px; text-decoration: none;
-    transition: all 0.2s; font-weight: 600;
+    padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
-  .btn-link:hover { background: #E6EBF4; border-color: var(--navy); color: var(--navy); }
 
-  /* Main Wrap */
-  .wrap { max-width: 1080px; margin: 24px auto; padding: 0 20px 60px; width: 100%; flex: 1; }
-
-  .layout { display: grid; grid-template-columns: 360px 1fr; gap: 32px; align-items: start; }
-  @media(max-width: 920px) { .layout { grid-template-columns: 1fr; gap: 24px; } }
+  /* Single Viewport Layout */
+  .viewport-grid {
+    height: calc(100vh - 53px);
+    display: grid; grid-template-columns: 320px 1fr; gap: 16px;
+    padding: 14px 16px; width: 100%; max-width: 1280px; margin: 0 auto;
+  }
+  @media(max-width: 860px) {
+    body { overflow-y: auto; height: auto; }
+    .viewport-grid { height: auto; grid-template-columns: 1fr; overflow-y: visible; }
+  }
 
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    display: flex; flex-direction: column; overflow: hidden;
   }
   .card-h {
-    font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--navy);
-    border-bottom: 1px solid var(--line-2); padding-bottom: 10px; margin-bottom: 16px;
-    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--navy);
+    border-bottom: 1px solid var(--line-2); padding-bottom: 8px; margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: space-between; flex: none;
   }
 
-  /* Mode Switcher */
-  .mode-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
-  .tab-btn {
-    flex: 1; padding: 8px 10px; font-size: 12.5px; font-weight: 600; border-radius: 6px;
-    background: #EAE4D6; border: 1px solid var(--line); color: var(--ink-2);
-    cursor: pointer; transition: all 0.2s; text-align: center;
+  /* Camera Container */
+  .camera-container {
+    flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: #000; border-radius: 8px; overflow: hidden; position: relative; min-height: 220px;
   }
-  .tab-btn.active { background: var(--navy); color: #fff; border-color: var(--navy-d); }
-
-  /* Camera Box */
-  #reader { width: 100%; border-radius: 8px; overflow: hidden; background: #000; margin-bottom: 12px; }
-
-  /* Simulator Pills */
-  .sim-box { display: flex; flex-wrap: wrap; gap: 6px; max-height: 220px; overflow-y: auto; padding-right: 4px; }
-  .sim-pill {
-    font-size: 11.5px; font-weight: 600; padding: 6px 10px; border-radius: 6px;
-    background: #E6EBF4; border: 1px solid #D3DCEB; color: var(--navy);
-    cursor: pointer; transition: all 0.15s; text-align: left;
-  }
-  .sim-pill:hover { background: var(--navy); color: #fff; border-color: var(--navy-d); }
-  .sim-pill.checked { border-left: 3px solid var(--ok); }
-  .sim-pill.active { background: var(--gold); color: #000; border-color: #784519; font-weight: 700; }
+  #reader { width: 100%; height: 100%; border: none !important; }
+  #reader video { object-fit: cover !important; }
 
   /* Search Input */
-  .search-row { display: flex; gap: 8px; margin-top: 14px; }
+  .search-row { display: flex; gap: 6px; margin-top: 10px; flex: none; }
   .search-input {
     flex: 1; background: #FFF; border: 1px solid var(--line); color: var(--ink);
-    padding: 10px 12px; border-radius: 8px; font-size: 14px; outline: none;
+    padding: 8px 10px; border-radius: 6px; font-size: 13px; outline: none;
   }
   .search-input:focus { border-color: var(--navy); }
   .btn-search {
-    background: var(--navy); color: #FFF; font-weight: 600; padding: 10px 16px;
-    border: 0; border-radius: 8px; cursor: pointer; transition: background 0.2s;
+    background: var(--navy); color: #FFF; font-weight: 600; padding: 8px 14px;
+    border: 0; border-radius: 6px; cursor: pointer; font-size: 13px;
   }
-  .btn-search:hover { background: var(--navy-d); }
 
-  /* Right Side: Map & Check-In Card */
+  /* Right Column: Map & Result Grid */
+  .right-grid {
+    display: grid; grid-template-rows: auto 1fr; gap: 12px; height: 100%; overflow: hidden;
+  }
+
+  /* Screen Header */
   .screen-box {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 8px; padding: 12px; text-align: center;
-    font-family: var(--serif); font-size: 13px; letter-spacing: 0.12em; margin-bottom: 18px;
-    box-shadow: 0 2px 6px rgba(18,53,127,0.2);
+    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
+    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
+  }
+
+  .map-card-inner {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 10px; height: 100%; min-height: 0; overflow: hidden;
   }
 
   /* SVG Seats Styling */
   .seat-node { transition: all 0.3s ease; cursor: pointer; }
   .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
-
   .seat-node.checked-in .seat-rect { fill: #12357F; stroke: #0E2A66; }
 
   /* Active Highlight Glow */
@@ -165,45 +152,45 @@
     to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
   }
 
-  /* Result Card Styling (Handbook Style) */
-  .result-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 22px; margin-top: 20px; text-align: left; box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-    animation: fadeIn 0.3s ease-in-out;
+  /* Compact Result Overlay Card */
+  .result-card-compact {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; margin-top: 10px; text-align: left; width: 100%; flex: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04); animation: fadeIn 0.25s ease-in-out;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
   .status-badge-ok {
-    display: inline-flex; align-items: center; gap: 6px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 4px; background: #E6F4EA; border: 1px solid #CEEAD6;
+    color: var(--ok); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-bottom: 8px;
   }
 
-  .res-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-  .res-head h3 { font-family: var(--serif); font-size: 22px; color: var(--navy); font-weight: 400; }
-  .res-head p { font-size: 13.5px; color: var(--ink-3); margin-top: 2px; }
+  .res-head-compact { display: flex; justify-content: space-between; align-items: flex-start; }
+  .res-head-compact h3 { font-family: var(--serif); font-size: 19px; color: var(--navy); font-weight: 400; line-height: 1.1; }
+  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
 
-  .disc-badge {
-    display: inline-block; font-size: 11.5px; font-weight: 700; color: var(--navy);
-    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 6px; padding: 3px 8px; margin-top: 6px;
+  .disc-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
+    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 4px; padding: 2px 6px; margin-top: 4px;
   }
 
-  .res-seat-hero {
-    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 10px; padding: 14px 20px;
-    display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;
+  .hero-seat-compact {
+    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 8px; padding: 8px 14px;
+    display: flex; align-items: center; justify-content: space-between; margin: 8px 0;
   }
-  .res-seat-hero .no { font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1; }
-  .res-seat-hero .pos { text-align: right; font-size: 13px; color: var(--ink-2); }
+  .hero-seat-compact .no { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .hero-seat-compact .pos { text-align: right; font-size: 12px; color: var(--ink-2); }
 
   /* Neighbor DiSC Profile Grid */
-  .neighbors-box {
-    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 10px;
-    padding: 14px 16px; border-left: 3px solid var(--navy);
+  .neighbors-box-compact {
+    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 8px;
+    padding: 8px 12px; border-left: 3px solid var(--navy); font-size: 12px;
   }
-  .neighbors-box h4 { font-size: 11.5px; font-weight: 700; color: var(--navy); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-  .neighbor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .neighbor-col span { display: block; font-size: 11px; color: var(--ink-3); }
-  .neighbor-col b { display: block; font-size: 13.5px; color: var(--ink); margin-top: 2px; }
-  .neighbor-col i { font-style: normal; font-size: 11.5px; color: var(--navy); font-weight: 600; display: block; margin-top: 2px; }
+  .neighbors-box-compact h4 { font-size: 10.5px; font-weight: 700; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .neighbor-col span { display: block; font-size: 10px; color: var(--ink-3); }
+  .neighbor-col b { display: block; font-size: 12.5px; color: var(--ink); margin-top: 1px; }
+  .neighbor-col i { font-style: normal; font-size: 11px; color: var(--navy); font-weight: 600; display: block; }
   </style>
 </head>
 <body>
@@ -217,7 +204,7 @@
         <div class="brand-logo">SM</div>
         <div class="brand-text">
           <b>Sales Mastery Bootcamp</b>
-          <span>Pemindai Presensi &amp; Denah Kursi · Kalyana Resort</span>
+          <span>Pemindai Presensi &amp; Seat Locator</span>
         </div>
       </div>
       <div class="bar-stats">
@@ -227,119 +214,98 @@
     </div>
   </header>
 
-  <!-- Main Content Wrap -->
-  <main class="wrap">
-    <div class="layout">
-      
-      <!-- Left Column: Scanner Controls -->
-      <div class="card">
-        <div class="card-h">
-          <span>Pemindai QR Tiket</span>
-          <small style="font-size: 12px; font-weight: 400; color: var(--ink-3);" id="checkin-time-status">Real-time API</small>
-        </div>
-
-        <div class="mode-tabs">
-          <button class="tab-btn active" id="btn-sim" onclick="setMode('sim')">⚡ Barcode Instan</button>
-          <button class="tab-btn" id="btn-cam" onclick="setMode('cam')">📷 Kamera Web</button>
-        </div>
-
-        <!-- Camera Box -->
-        <div id="camera-box" style="display: none;">
-          <div id="reader"></div>
-          <p style="font-size: 11.5px; color: var(--ink-3); text-align: center; margin-bottom: 12px;">
-            Panitia dapat mengarahkan kamera ke QR Code tiket peserta di meja registrasi.
-          </p>
-        </div>
-
-        <!-- Simulator Pills Box -->
-        <div id="simulator-box">
-          <p style="font-size: 12.5px; color: var(--ink-3); margin-bottom: 10px;">
-            Klik nama/kode peserta untuk verifikasi presensi instan:
-          </p>
-          <div class="sim-box" id="sim-pills-container"></div>
-        </div>
-
-        <!-- Manual Search Form -->
-        <form class="search-row" onsubmit="handleManualSearch(event)">
-          <input type="text" class="search-input" id="search-input" placeholder="Cari Kode Tiket (SMB-005) atau Nama..." required>
-          <button type="submit" class="btn-search">Cari</button>
-        </form>
+  <!-- Single Viewport Grid -->
+  <main class="viewport-grid">
+    
+    <!-- Left Column: Automatic Camera Scanner -->
+    <div class="card">
+      <div class="card-h">
+        <span>Kamera Pemindai QR</span>
+        <small style="font-size: 11px; font-weight: 400; color: var(--ok);">● Aktif Memindai</small>
       </div>
 
-      <!-- Right Column: Interactive Seat Map & Check-In Result -->
-      <div>
-        <div class="card" style="text-align: center;">
-          <div class="card-h" style="text-align: left;">Denah Kursi Pelatihan (U-Shape)</div>
+      <!-- Camera Scanner Viewport -->
+      <div class="camera-container">
+        <div id="reader"></div>
+      </div>
 
-          <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
+      <!-- Quick Search / Manual Ticket Input -->
+      <form class="search-row" onsubmit="handleManualSearch(event)">
+        <input type="text" class="search-input" id="search-input" placeholder="Kode Tiket (SMB-005) / Nama..." required>
+        <button type="submit" class="btn-search">Cari</button>
+      </form>
+    </div>
 
-          <!-- SVG U-SHAPE SEAT MAP (22 SEATS) -->
-          <svg viewBox="0 0 540 430" width="100%" height="auto" style="max-width:520px; margin: 0 auto; display:block;">
-            <g>
-              <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
-                       fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-              <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
-              <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
-              <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
-              <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
-              <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
-            </g>
+    <!-- Right Column: Interactive Seat Map & Check-In Result -->
+    <div class="right-grid">
+      
+      <div class="map-card-inner">
+        <div class="screen-box" style="width: 100%; max-width: 480px;">PANGGUNG / LAYAR / WHITEBOARD</div>
 
-            <g id="svg-seats-group"></g>
-          </svg>
-        </div>
+        <!-- SVG U-SHAPE SEAT MAP -->
+        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:480px; max-height: 280px; display:block; margin: 0 auto;">
+          <g>
+            <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
+                     fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+            <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
+            <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
+            <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          </g>
 
-        <!-- Scan Result Card Output (Handbook Card Design) -->
-        <div id="result-container" style="display: none;">
-          <div class="result-card">
-            <div class="status-badge-ok">
-              ✓ PRESENSI TERVERIFIKASI · HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
-            </div>
-            
-            <div class="res-head">
-              <div>
-                <h3 id="res-name">Dian Permata</h3>
-                <p id="res-dept">Sales Lead · Werkudara Group</p>
-                <div class="disc-badge" id="res-disc">DiSC Profile: I (Influencing / Promoter)</div>
-              </div>
-              <div style="font-size: 11px; color: var(--ink-3); text-align: right;">
-                KODE TIKET<br><b style="color: var(--navy); font-size: 14px;" id="res-code">SMB-005</b>
-              </div>
-            </div>
+          <g id="svg-seats-group"></g>
+        </svg>
 
-            <div class="res-seat-hero">
-              <div>
-                <span style="font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; font-weight: 700;">NOMOR KURSI</span>
-                <div class="no" id="res-seat-no">#05</div>
-              </div>
-              <div class="pos" id="res-seat-pos">
-                <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Ruang Pelatihan Utama</small>
-              </div>
-            </div>
-
-            <!-- Neighbor DiSC Profile Box -->
-            <div class="neighbors-box">
-              <h4>👥 REKAN DUDUK DI SEBELAH PESERTA &amp; DiSC PROFILE</h4>
-              <div class="neighbor-grid">
-                <div class="neighbor-col">
-                  <span>👈 SEBELAH KIRI (KURSI <span id="res-left-no">#04</span>)</span>
-                  <b id="res-left-name">Budi Santoso</b>
-                  <i id="res-left-disc">DiSC: S (Steadiness)</i>
-                </div>
-                <div class="neighbor-col">
-                  <span>SEBELAH KANAN (KURSI <span id="res-right-no">#06</span>) 👉</span>
-                  <b id="res-right-name">Fitriani Putri</b>
-                  <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
-                </div>
-              </div>
-            </div>
-
+        <!-- Result Card Output (Handbook Card Design) -->
+        <div id="result-container" class="result-card-compact" style="display: none;">
+          <div class="status-badge-ok">
+            ✓ PRESENSI HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
           </div>
-        </div>
+          
+          <div class="res-head-compact">
+            <div>
+              <h3 id="res-name">Dian Permata</h3>
+              <p id="res-dept">Sales Lead · Werkudara Group</p>
+              <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
+            </div>
+            <div style="font-size: 10.5px; color: var(--ink-3); text-align: right;">
+              KODE TIKET<br><b style="color: var(--navy); font-size: 13px;" id="res-code">SMB-005</b>
+            </div>
+          </div>
 
+          <div class="hero-seat-compact">
+            <div>
+              <span style="font-size: 10px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
+              <div class="no" id="res-seat-no">#05</div>
+            </div>
+            <div class="pos" id="res-seat-pos">
+              <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Ruang Pelatihan Utama</small>
+            </div>
+          </div>
+
+          <!-- Neighbor DiSC Profile Box -->
+          <div class="neighbors-box-compact">
+            <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
+            <div class="neighbor-grid-compact">
+              <div class="neighbor-col">
+                <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
+                <b id="res-left-name">Budi Santoso</b>
+                <i id="res-left-disc">DiSC: S (Steadiness)</i>
+              </div>
+              <div class="neighbor-col">
+                <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
+                <b id="res-right-name">Fitriani Putri</b>
+                <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
     </div>
+
   </main>
 
   <script>
@@ -404,7 +370,6 @@
     const saved = localStorage.getItem("smb_presensi_data");
     if (saved) checkedInSeats = JSON.parse(saved);
     else {
-      // Default pre-checkin 3 participants for demo
       const now = new Date().toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' });
       checkedInSeats = { 1: now, 8: now, 12: now };
       saveCheckIns();
@@ -465,23 +430,6 @@
     });
   }
 
-  // Render Simulator Pills
-  function renderSimPills() {
-    const container = document.getElementById("sim-pills-container");
-    container.innerHTML = "";
-
-    PARTICIPANTS_DB.forEach(item => {
-      const isChecked = !!checkedInSeats[item.seat];
-      const isActive = currentActiveSeat === item.seat;
-
-      const btn = document.createElement("button");
-      btn.className = `sim-pill ${isActive ? "active" : ""} ${isChecked ? "checked" : ""}`;
-      btn.textContent = `${item.code} - ${item.name.split(' ')[0]} ${isChecked ? '✓' : ''}`;
-      btn.onclick = () => selectByTicketCode(item.code);
-      container.appendChild(btn);
-    });
-  }
-
   // Select Participant & Record Check-In
   async function selectByTicketCode(code) {
     const item = PARTICIPANTS_DB.find(d => d.code.toUpperCase() === code.toUpperCase() || d.name.toLowerCase().includes(code.toLowerCase()));
@@ -497,20 +445,17 @@
     if (item) recordCheckIn(item);
   }
 
-  // Record Check-In Timestamp (API or Fallback)
+  // Record Check-In Timestamp
   async function recordCheckIn(item) {
     let now = new Date().toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    // Try Vercel Serverless API first
     try {
       const res = await fetch(`/api/checkin?code=${encodeURIComponent(item.code)}`, { method: "POST" });
       if (res.ok) {
         const data = await res.json();
         if (data.timestamp) now = data.timestamp;
       }
-    } catch (e) {
-      // Local fallback
-    }
+    } catch (e) {}
 
     if (!checkedInSeats[item.seat]) {
       checkedInSeats[item.seat] = now;
@@ -519,7 +464,6 @@
 
     currentActiveSeat = item.seat;
     renderSeats();
-    renderSimPills();
 
     // Show Result Card
     const container = document.getElementById("result-container");
@@ -557,8 +501,6 @@
       document.getElementById("res-right-name").textContent = "Ujung Meja Utama";
       document.getElementById("res-right-disc").textContent = "";
     }
-
-    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function handleManualSearch(e) {
@@ -567,47 +509,20 @@
     if (val) selectByTicketCode(val);
   }
 
-  function setMode(mode) {
-    const btnSim = document.getElementById("btn-sim");
-    const btnCam = document.getElementById("btn-cam");
-    const boxSim = document.getElementById("simulator-box");
-    const boxCam = document.getElementById("camera-box");
-
-    if (mode === 'sim') {
-      btnSim.classList.add("active");
-      btnCam.classList.remove("active");
-      boxSim.style.display = "block";
-      boxCam.style.display = "none";
-      stopCamera();
-    } else {
-      btnCam.classList.add("active");
-      btnSim.classList.remove("active");
-      boxCam.style.display = "block";
-      boxSim.style.display = "none";
-      startCamera();
-    }
-  }
-
-  function startCamera() {
+  // Automatic Camera Scanner Start
+  function startAutoCamera() {
     if (html5QrcodeScanner) return;
-    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 220, height: 220 } }, false);
+    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 200, height: 200 } }, false);
     html5QrcodeScanner.render((decodedText) => {
       selectByTicketCode(decodedText);
     }, (error) => {});
-  }
-
-  function stopCamera() {
-    if (html5QrcodeScanner) {
-      html5QrcodeScanner.clear().catch(() => {});
-      html5QrcodeScanner = null;
-    }
   }
 
   // App Init
   window.addEventListener("DOMContentLoaded", () => {
     loadCheckIns();
     renderSeats();
-    renderSimPills();
+    startAutoCamera();
     selectBySeatNumber(5); // Default display Dian Permata
   });
   </script>
