@@ -161,21 +161,48 @@
     flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
     background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px;
   }
-  .seat-node { transition: all 0.3s ease; cursor: pointer; }
-  .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12.5px; fill: #FFFFFF; pointer-events: none; }
+  /* Regular / Un-selected Seats: Subtle & Neutral */
+  .seat-node { transition: all 0.3s ease; opacity: 0.45; }
+  .seat-rect { fill: #2C3E50; stroke: #1E293B; stroke-width: 1; transition: all 0.3s; }
+  .seat-num { font-family: var(--sans); font-weight: 600; font-size: 11.5px; fill: #CBD5E1; pointer-events: none; }
   
-  .seat-node.filled .seat-rect { fill: #12357F; stroke: #0E2A66; }
-  .seat-node.near .seat-rect { stroke: var(--amber); stroke-width: 3; }
-  .seat-node.me .seat-rect {
-    fill: var(--amber) !important; stroke: #784519 !important; stroke-width: 3 !important;
-    filter: drop-shadow(0 0 14px rgba(197, 160, 89, 0.95)); animation: pulseGlow 1.5s infinite alternate;
-  }
-  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 700; font-size: 13.5px; }
+  .seat-node.filled { opacity: 0.7; }
+  .seat-node.filled .seat-rect { fill: #1E3A8A; stroke: #1D4ED8; }
+  .seat-node.filled .seat-num { fill: #93C5FD; }
 
-  @keyframes pulseGlow {
-    from { filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.6)); }
-    to { filter: drop-shadow(0 0 18px rgba(197, 160, 89, 1)); }
+  /* Currently Checking-in Seat: MAXIMUM VISIBILITY & EYE-CATCHING BEACON */
+  .seat-node.me {
+    opacity: 1 !important;
+  }
+  .seat-node.me .seat-rect {
+    fill: #F59E0B !important;
+    stroke: #78350F !important;
+    stroke-width: 3.5 !important;
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95));
+  }
+  .seat-node.me .seat-num {
+    fill: #000000 !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+  }
+
+  /* Sonar Ripple & Location Pin Animations */
+  @keyframes sonarPulse {
+    0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
+    100% { r: 36px; opacity: 0; stroke-width: 1px; }
+  }
+  @keyframes bouncePin {
+    0%, 100% { transform: translate(14px, -12px); }
+    50% { transform: translate(14px, -18px); }
+  }
+
+  .sonar-ring {
+    animation: sonarPulse 1.6s infinite ease-out;
+    pointer-events: none;
+  }
+  .pin-marker {
+    animation: bouncePin 1.2s infinite ease-in-out;
+    pointer-events: none;
   }
 
   /* ---------- Kartu Hasil Presensi ---------- */
@@ -387,25 +414,34 @@ function denah(sorot) {
     { n: 22, x: 388, y: 80, rot: 0 }
   ];
 
-  const svgSeats = coords.map(item => {
+  // Ensure highlighted active seat renders on top of all other seats
+  const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
+
+  const svgSeats = sortedCoords.map(item => {
     const n = item.n;
     const p = org(n);
     const aku = n === sorot;
-    const dekat = (t.kiri && t.kiri.kursi === n) || (t.kanan && t.kanan.kursi === n);
     const isi = p && S.hadir.has(p.kode);
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
-    if (dekat) cls += "near ";
-    if (isi) cls += "filled ";
+    else if (isi) cls += "filled ";
 
     const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
 
     return `
       <g class="${cls}" transform="translate(${item.x}, ${item.y})">
+        ${aku ? `<circle class="sonar-ring" cx="14" cy="12.5" fill="none" stroke="#F59E0B" />` : ""}
         <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
         <text x="14" y="17" class="seat-num" text-anchor="middle">${n}</text>
-        <title>Kursi #${n}: ${p ? esc(p.nama) : ''}</title>
+        ${aku ? `
+          <g class="pin-marker">
+            <polygon points="0,-4 -5,-12 5,-12" fill="#DC2626" />
+            <circle cx="0" cy="-12" r="5.5" fill="#DC2626" />
+            <circle cx="0" cy="-12" r="2.2" fill="#FFFFFF" />
+          </g>
+        ` : ""}
+        <title>Kursi #${n}: ${p ? esc(p.nama) : 'Kosong'}</title>
       </g>
     `;
   }).join("");
