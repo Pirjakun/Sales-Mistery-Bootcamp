@@ -74,11 +74,11 @@
     padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
 
-  /* Single Viewport Grid Layout: Kamera (Kiri) | Info Denah (Tengah) & Ticket (Kanan) */
+  /* 3-Column Single Viewport Grid Layout */
   .viewport-grid {
     height: calc(100vh - 51px);
     display: grid; 
-    grid-template-columns: 310px 1fr; 
+    grid-template-columns: 290px 1fr 340px; 
     gap: 12px;
     padding: 12px 14px; 
     width: 100%; 
@@ -86,7 +86,10 @@
     margin: 0 auto;
     overflow: hidden;
   }
-  @media(max-width: 920px) {
+  @media(max-width: 1100px) {
+    .viewport-grid { grid-template-columns: 260px 1fr 310px; gap: 10px; }
+  }
+  @media(max-width: 880px) {
     body { overflow-y: auto; height: auto; }
     .viewport-grid { height: auto; grid-template-columns: 1fr; overflow-y: visible; }
   }
@@ -102,7 +105,7 @@
     display: flex; align-items: center; justify-content: space-between; flex: none;
   }
 
-  /* Left Column: Full Height Camera Container */
+  /* Column 1: Camera Container */
   .camera-container {
     flex: 1; min-height: 0; position: relative; background: #000; border-radius: 8px; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
@@ -160,31 +163,12 @@
     border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
   }
 
-  /* Right Card: Vertical Split (Denah Kursi Left | Ticket Details Right) */
-  .right-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    display: flex; flex-direction: column; height: 100%; overflow: hidden;
-  }
-
-  .vertical-split-grid {
-    flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; overflow: hidden;
-  }
-  @media(max-width: 1000px) {
-    .vertical-split-grid { grid-template-columns: 1fr; overflow-y: auto; }
-  }
-
-  /* Sub-Panel 1: Denah Kursi */
-  .map-subpanel {
-    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 8px;
-    padding: 10px; display: flex; flex-direction: column; height: 100%; overflow: hidden;
-  }
-
+  /* Column 2: Seat Map Layout */
   .screen-box {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 7px; text-align: center;
-    font-family: var(--serif); font-size: 11.5px; letter-spacing: 0.12em; flex: none;
-    margin-bottom: 6px;
+    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
+    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
+    margin-bottom: 8px;
   }
 
   .map-wrapper { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 4px; }
@@ -205,8 +189,8 @@
     to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
   }
 
-  /* Sub-Panel 2: Keterangan Ticket & Presensi Result Box */
-  .ticket-subpanel {
+  /* Column 3: Keterangan Ticket & Presensi Box */
+  .ticket-box {
     flex: 1; min-height: 0; background: var(--paper-2); border: 1px solid var(--line-2);
     border-radius: 8px; padding: 12px 14px; overflow-y: auto;
     display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
@@ -219,7 +203,7 @@
 
   .res-head-compact { margin-top: 4px; }
   .res-head-compact h3 { font-family: var(--serif); font-size: 20px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; }
 
   .disc-tag {
     display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
@@ -261,7 +245,7 @@
         <div class="brand-logo">SM</div>
         <div class="brand-text">
           <b>Sales Mastery Bootcamp</b>
-          <span>Pemindai Presensi &amp; Seat Locator</span>
+          <span>Pemindai Presensi &amp; Seat Locator v3.0</span>
         </div>
       </div>
       <div class="bar-stats">
@@ -271,10 +255,10 @@
     </div>
   </header>
 
-  <!-- Single Viewport Grid Layout -->
+  <!-- 3 Separate Cards Single Viewport Grid -->
   <main class="viewport-grid">
     
-    <!-- Kolom 1: Kamera Pemindai QR (Full Height Viewport) -->
+    <!-- Kolom 1 (Kartu Kiri): Kamera Pemindai QR -->
     <div class="card">
       <div class="card-h">
         <span>Kamera Pemindai QR</span>
@@ -300,87 +284,82 @@
       </form>
     </div>
 
-    <!-- Kolom 2 & 3: Right Panel Dibagi Vertikal (Denah Kursi | Keterangan Tiket) -->
-    <div class="right-card">
-      <div class="card-h">
-        <span>Denah Kursi Pelatihan &amp; Keterangan Tiket Presensi</span>
+    <!-- Kolom 2 (Kartu Tengah): Denah Kursi Pelatihan (U-Shape Map) -->
+    <div class="card">
+      <div class="card-h">Denah Kursi Pelatihan (U-Shape)</div>
+
+      <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
+
+      <!-- SVG U-SHAPE SEAT MAP -->
+      <div class="map-wrapper">
+        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:520px; max-height: 380px; display:block; margin: 0 auto;">
+          <g>
+            <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
+                     fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+            <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
+            <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
+            <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          </g>
+
+          <g id="svg-seats-group"></g>
+        </svg>
       </div>
+    </div>
 
-      <div class="vertical-split-grid">
-        
-        <!-- Sub-Panel Kiri: Denah Kursi Pelatihan (U-Shape) -->
-        <div class="map-subpanel">
-          <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
+    <!-- Kolom 3 (Kartu Kanan): Keterangan Tiket & Presensi -->
+    <div class="card">
+      <div class="card-h">Keterangan Tiket &amp; Presensi</div>
 
-          <!-- SVG U-SHAPE SEAT MAP -->
-          <div class="map-wrapper">
-            <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:480px; max-height: 340px; display:block; margin: 0 auto;">
-              <g>
-                <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
-                         fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-                <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
-                <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
-                <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
-                <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
-                <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
-              </g>
+      <div id="result-container" class="ticket-box">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="status-badge-ok">
+              ✓ PRESENSI TERVERIFIKASI · HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
+            </div>
+            <div style="font-size: 10.5px; color: var(--ink-3);">
+              KODE TIKET: <b style="color: var(--navy);" id="res-code">SMB-005</b>
+            </div>
+          </div>
+          
+          <div class="res-head-compact">
+            <h3 id="res-name">Dian Permata</h3>
+            <p id="res-dept">Sales Lead · Werkudara Group</p>
+            <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
+          </div>
 
-              <g id="svg-seats-group"></g>
-            </svg>
+          <div class="hero-seat-compact">
+            <div>
+              <span style="font-size: 9.5px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
+              <div class="no" id="res-seat-no">#05</div>
+            </div>
+            <div class="pos" id="res-seat-pos">
+              <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Kalyana Resort Kaliurang</small>
+            </div>
           </div>
         </div>
 
-        <!-- Sub-Panel Kanan: Keterangan Ticket & Presensi Result Box -->
-        <div id="result-container" class="ticket-subpanel">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div class="status-badge-ok">
-                ✓ PRESENSI TERVERIFIKASI · HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
-              </div>
-              <div style="font-size: 10.5px; color: var(--ink-3);">
-                KODE TIKET: <b style="color: var(--navy);" id="res-code">SMB-005</b>
-              </div>
+        <!-- Neighbor DiSC Profile Grid -->
+        <div class="neighbors-box-compact">
+          <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
+          <div class="neighbor-grid-compact">
+            <div class="neighbor-col">
+              <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
+              <b id="res-left-name">Budi Santoso</b>
+              <i id="res-left-disc">DiSC: S (Steadiness)</i>
             </div>
-            
-            <div class="res-head-compact">
-              <h3 id="res-name">Dian Permata</h3>
-              <p id="res-dept">Sales Lead · Werkudara Group</p>
-              <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
+            <div class="neighbor-col">
+              <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
+              <b id="res-right-name">Fitriani Putri</b>
+              <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
             </div>
-
-            <div class="hero-seat-compact">
-              <div>
-                <span style="font-size: 9.5px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
-                <div class="no" id="res-seat-no">#05</div>
-              </div>
-              <div class="pos" id="res-seat-pos">
-                <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Kalyana Resort Kaliurang</small>
-              </div>
-            </div>
-          </div>
-
-          <!-- Neighbor DiSC Profile Grid -->
-          <div class="neighbors-box-compact">
-            <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
-            <div class="neighbor-grid-compact">
-              <div class="neighbor-col">
-                <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
-                <b id="res-left-name">Budi Santoso</b>
-                <i id="res-left-disc">DiSC: S (Steadiness)</i>
-              </div>
-              <div class="neighbor-col">
-                <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
-                <b id="res-right-name">Fitriani Putri</b>
-                <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
-              </div>
-            </div>
-          </div>
-
-          <div class="disc-info-footer">
-            💡 <b>Info DiSC Profile:</b> Membantu fasilitator &amp; sesama peserta untuk menyesuaikan pola komunikasi &amp; dinamika tim selama sesi bootcamp.
           </div>
         </div>
 
+        <div class="disc-info-footer">
+          💡 <b>Info DiSC Profile:</b> Membantu fasilitator &amp; sesama peserta untuk menyesuaikan pola komunikasi &amp; dinamika tim selama sesi bootcamp.
+        </div>
       </div>
     </div>
 
@@ -543,7 +522,7 @@
     currentActiveSeat = item.seat;
     renderSeats();
 
-    // Show Result Card inside Sub-Panel Kanan
+    // Show Result Card inside Column 3
     const container = document.getElementById("result-container");
     container.style.display = "flex";
 
