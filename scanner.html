@@ -31,6 +31,7 @@
     --ok-soft: #E7F0EA;
     --warn: #B4402F;
     --amber: #C08A2E;
+    --gold: #C5A059;
     --serif: 'Marcellus', Georgia, serif;
     --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
   }
@@ -149,36 +150,32 @@
   .recent .seat-tag { margin-left: auto; font-family: var(--serif); font-size: 16px; color: var(--navy); font-weight: 700; }
   .empty { color: var(--ink-3); font-size: 13px; padding: 20px 0; text-align: center; }
 
-  /* ---------- DenahKursi ---------- */
+  /* ---------- SVG Denah Kursi U-Shape ---------- */
   .map { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .stage {
     background: var(--navy); color: #fff; border-radius: 8px; padding: 8px; text-align: center;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 12px; flex: none;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 8px; flex: none;
     font-family: var(--serif);
   }
-  .grid {
-    flex: 1; display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr);
-    gap: 6px; min-height: 0; padding: 4px;
+  .map-wrapper-maximized {
+    flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
+    background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px;
   }
-  .seat-cell {
-    border-radius: 8px; background: var(--ok-soft); border: 1px solid rgba(47,107,79,0.28);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
-    font-family: var(--serif); font-size: 16px; color: var(--ok); min-height: 0; transition: transform 0.2s;
+  .seat-node { transition: all 0.3s ease; cursor: pointer; }
+  .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
+  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12.5px; fill: #FFFFFF; pointer-events: none; }
+  
+  .seat-node.filled .seat-rect { fill: #12357F; stroke: #0E2A66; }
+  .seat-node.near .seat-rect { stroke: var(--amber); stroke-width: 3; }
+  .seat-node.me .seat-rect {
+    fill: var(--amber) !important; stroke: #784519 !important; stroke-width: 3 !important;
+    filter: drop-shadow(0 0 14px rgba(197, 160, 89, 0.95)); animation: pulseGlow 1.5s infinite alternate;
   }
-  .seat-cell small {
-    font-family: var(--sans); font-size: 9px; font-weight: 600; color: var(--ink-3);
-    max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .seat-cell.filled { background: #E7ECF5; border-color: #C3CFE4; color: var(--navy); }
-  .seat-cell.me {
-    background: var(--amber); border-color: #9A6E1E; color: #fff; transform: scale(1.08);
-    box-shadow: 0 6px 18px rgba(192,138,46,0.4); z-index: 2;
-  }
-  .seat-cell.me small { color: #FFF3DC; }
-  .seat-cell.near { border-color: var(--amber); border-width: 2px; }
-  .floor {
-    grid-column: 2 / 8; grid-row: 1 / 8; border: 2px solid #E0D6C2; border-radius: 10px;
-    background: repeating-linear-gradient(45deg, #F4EFE4 0 10px, #F1EBDE 10px 20px);
+  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 700; font-size: 13.5px; }
+
+  @keyframes pulseGlow {
+    from { filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.6)); }
+    to { filter: drop-shadow(0 0 18px rgba(197, 160, 89, 1)); }
   }
 
   /* ---------- Kartu Hasil Presensi ---------- */
@@ -248,7 +245,6 @@
 
   @media(max-width: 1100px) {
     main { grid-template-columns: 1fr !important; grid-template-rows: auto 1fr; }
-    .seat-cell small { display: none; }
   }
   </style>
 </head>
@@ -300,12 +296,6 @@ const SARAN = {
   C: "cenderung teliti pada detail. Siapkan data pendukung."
 };
 
-/* Posisi kursi grid 8x8 — U-Shape */
-const POS = {};
-for (let n = 1; n <= 7; n++) POS[n] = { c: 1, r: n };          // sisi kiri
-for (let n = 8; n <= 15; n++) POS[n] = { c: n - 7, r: 8 };      // sisi bawah
-for (let n = 16; n <= 22; n++) POS[n] = { c: 8, r: 8 - (n - 15) }; // sisi kanan
-
 const S = {
   layar: "idle",
   orang: null,
@@ -323,13 +313,20 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 const jam = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
 const men = t => (+t.slice(0, 2)) * 60 + (+t.slice(3, 5));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
-const sisi = n => n <= 7 ? "Sisi Kiri Meja U" : n <= 15 ? "Sisi Bawah Meja U" : "Sisi Kanan Meja U";
+
+const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
+  : n === 9 ? "Sudut Kiri Bawah Meja U (Kursi #9)"
+  : n <= 13 ? "Sisi Bawah Meja U (Kursi #" + n + ")"
+  : n === 14 ? "Sudut Kanan Bawah Meja U (Kursi #14)"
+  : "Sisi Kanan Meja U (Kursi #" + n + ")";
+
 const org = k => P.find(p => p.kursi === k);
 
 function sesiKini() {
   const n = S.jam;
   return SESI.find(s => men(s.mulai) <= n && men(s.selesai) > n) || null;
 }
+
 function tetangga(kursi) {
   const kiri = org(kursi - 1), kanan = org(kursi + 1);
   return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 22 ? kanan : null };
@@ -363,19 +360,73 @@ function bilahAtas() {
 
 function denah(sorot) {
   const t = sorot ? tetangga(sorot) : {};
-  const kursi = [];
-  for (let n = 1; n <= 22; n++) {
-    const p = org(n), pos = POS[n];
+  
+  /* SVG Seat Coordinates with Corner Seats #9 (-45deg) and #14 (+45deg) */
+  const coords = [
+    { n: 1, x: 124, y: 80, rot: 0 },
+    { n: 2, x: 124, y: 111, rot: 0 },
+    { n: 3, x: 124, y: 142, rot: 0 },
+    { n: 4, x: 124, y: 173, rot: 0 },
+    { n: 5, x: 124, y: 204, rot: 0 },
+    { n: 6, x: 124, y: 235, rot: 0 },
+    { n: 7, x: 124, y: 266, rot: 0 },
+    { n: 8, x: 124, y: 297, rot: 0 },
+    { n: 9, x: 138, y: 345, rot: -45 }, // Sudut Kiri Bawah Corner Seat
+    { n: 10, x: 195, y: 368, rot: 0 },
+    { n: 11, x: 235, y: 368, rot: 0 },
+    { n: 12, x: 275, y: 368, rot: 0 },
+    { n: 13, x: 315, y: 368, rot: 0 },
+    { n: 14, x: 374, y: 345, rot: 45 }, // Sudut Kanan Bawah Corner Seat
+    { n: 15, x: 388, y: 297, rot: 0 },
+    { n: 16, x: 388, y: 266, rot: 0 },
+    { n: 17, x: 388, y: 235, rot: 0 },
+    { n: 18, x: 388, y: 204, rot: 0 },
+    { n: 19, x: 388, y: 173, rot: 0 },
+    { n: 20, x: 388, y: 142, rot: 0 },
+    { n: 21, x: 388, y: 111, rot: 0 },
+    { n: 22, x: 388, y: 80, rot: 0 }
+  ];
+
+  const svgSeats = coords.map(item => {
+    const n = item.n;
+    const p = org(n);
     const aku = n === sorot;
     const dekat = (t.kiri && t.kiri.kursi === n) || (t.kanan && t.kanan.kursi === n);
     const isi = p && S.hadir.has(p.kode);
-    kursi.push(`<div class="seat-cell ${aku ? "me" : isi ? "filled" : ""} ${dekat ? "near" : ""}"
-      style="grid-column:${pos.c};grid-row:${pos.r}">
-      ${n}${p ? `<small>${esc(p.nama.split(" ")[0])}</small>` : ""}</div>`);
-  }
+
+    let cls = "seat-node ";
+    if (aku) cls += "me ";
+    if (dekat) cls += "near ";
+    if (isi) cls += "filled ";
+
+    const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
+
+    return `
+      <g class="${cls}" transform="translate(${item.x}, ${item.y})">
+        <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
+        <text x="14" y="17" class="seat-num" text-anchor="middle">${n}</text>
+        <title>Kursi #${n}: ${p ? esc(p.nama) : ''}</title>
+      </g>
+    `;
+  }).join("");
+
   return `<div class="map">
     <div class="stage">PANGGUNG · LAYAR · WHITEBOARD</div>
-    <div class="grid"><div class="floor"></div>${kursi.join("")}</div>
+    <div class="map-wrapper-maximized">
+      <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
+        <g>
+          <!-- Wooden U-Shape Table Graphic with Corner Bevels -->
+          <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
+                   fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+          <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
+          <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
+          <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
+          <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
+          <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+        </g>
+        <g id="svg-seats-group">${svgSeats}</g>
+      </svg>
+    </div>
   </div>`;
 }
 
@@ -401,7 +452,7 @@ function layarSiaga() {
       </div>
       <div class="demo">
         <b>Simulasi Pemindaian Fast Check-In</b>
-        ${["SMB-018", "SMB-005", "SMB-012", "SMB-022"].map(k => `<button data-demo="${k}">${k}</button>`).join("")}
+        ${["SMB-018", "SMB-005", "SMB-009", "SMB-014", "SMB-022"].map(k => `<button data-demo="${k}">${k}</button>`).join("")}
       </div>
     </section>
 
