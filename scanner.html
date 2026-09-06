@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scan Barcode &amp; Cari Tempat Duduk — Sales Mastery Bootcamp 2026</title>
+  <meta name="description" content="Aplikasi Pemindai Barcode / QR Code Tiket Digital dan Pencari Tempat Duduk Interaktif di Kalyana Resort Kaliurang.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- HTML5 QR Code Scanner Library -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
+  <style>
+  :root {
+    --bg-main: #0B132B;
+    --bg-card: #1C2541;
+    --bg-card-light: #2A365C;
+    --accent: #E0A96D;
+    --accent-bright: #F7C582;
+    --navy-blue: #12357F;
+    --text-light: #F4F5F7;
+    --text-muted: #9BA4B5;
+    --success: #2A9D8F;
+    --font-serif: 'Marcellus', Georgia, serif;
+    --font-sans: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --r: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header Bar */
+  .navbar {
+    background: rgba(11, 19, 43, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky; top: 0; z-index: 100;
+    padding: 14px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-logo {
+    width: 38px; height: 38px; background: linear-gradient(135deg, #C5A059, var(--accent));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-weight: 700; color: #000; font-size: 18px;
+    box-shadow: 0 0 12px rgba(224, 169, 109, 0.3);
+  }
+  .brand-text h1 { font-family: var(--font-serif); font-size: 18px; color: var(--accent-bright); font-weight: 400; }
+  .brand-text p { font-size: 12px; color: var(--text-muted); }
+
+  .nav-actions { display: flex; gap: 10px; }
+  .btn-link {
+    background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--text-light);
+    padding: 7px 14px; border-radius: 6px; font-size: 13px; text-decoration: none; transition: all 0.2s;
+  }
+  .btn-link:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); color: var(--accent); }
+
+  /* Main Container */
+  .container { max-width: 1100px; margin: 24px auto; padding: 0 20px 60px; width: 100%; flex: 1; }
+
+  /* Top Scanner Card Section */
+  .scanner-grid { display: grid; grid-template-columns: 360px 1fr; gap: 28px; align-items: start; }
+  @media(max-width: 900px) { .scanner-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r);
+    padding: 22px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .card-title { font-family: var(--font-serif); font-size: 18px; color: var(--accent-bright); margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+
+  /* Scanner Box */
+  #reader { width: 100%; border-radius: 10px; overflow: hidden; background: #000; margin-bottom: 16px; }
+  .scanner-mode-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+  .btn-tab {
+    flex: 1; padding: 8px 12px; font-size: 12.5px; font-weight: 600; border-radius: 6px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-tab.active { background: var(--navy-blue); border-color: #A9D9F2; color: #FFF; }
+
+  /* Quick Barcode Simulator Pills */
+  .barcode-sim-box { display: flex; flex-wrap: wrap; gap: 6px; max-height: 180px; overflow-y: auto; padding-right: 4px; }
+  .barcode-pill {
+    font-size: 11.5px; font-weight: 600; padding: 6px 10px; border-radius: 6px; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12); color: var(--text-light); cursor: pointer; transition: all 0.15s;
+  }
+  .barcode-pill:hover { background: var(--accent); color: #000; border-color: var(--accent-bright); transform: translateY(-1px); }
+  .barcode-pill.active { background: var(--accent-bright); color: #000; font-weight: 700; border-color: #FFF; box-shadow: 0 0 10px rgba(247, 197, 130, 0.4); }
+
+  /* Search Box */
+  .search-form { display: flex; gap: 8px; margin-top: 14px; }
+  .search-input {
+    flex: 1; background: var(--bg-main); border: 1px solid rgba(255,255,255,0.15); color: #FFF;
+    padding: 10px 12px; border-radius: 8px; font-size: 13.5px; outline: none;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  .btn-search {
+    background: var(--accent); color: #000; font-weight: 700; padding: 10px 16px; border: 0;
+    border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-search:hover { background: var(--accent-bright); }
+
+  /* Right Section: U-Shape Map & Result Card */
+  .map-box { text-align: center; }
+  .screen-box {
+    background: linear-gradient(180deg, rgba(169, 217, 242, 0.15) 0%, rgba(18, 53, 127, 0.05) 100%);
+    border: 2px solid rgba(169, 217, 242, 0.4); border-radius: 8px;
+    text-align: center; padding: 12px; margin-bottom: 20px;
+  }
+  .screen-title { font-family: var(--font-serif); font-size: 13.5px; letter-spacing: 0.15em; color: #A9D9F2; font-weight: 600; }
+
+  /* SVG Seats Styling */
+  .seat-node { transition: all 0.3s ease; }
+  .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
+  .seat-num { font-family: var(--font-sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
+
+  /* Active Highlight Glow State */
+  .seat-node.highlight .seat-rect {
+    fill: var(--accent-bright) !important; stroke: #FFFFFF !important; stroke-width: 3 !important;
+    filter: drop-shadow(0 0 14px rgba(247, 197, 130, 0.9)); animation: pulseGlow 1.5s infinite alternate;
+  }
+  .seat-node.highlight .seat-num { fill: #000000 !important; font-size: 13.5px !important; }
+
+  @keyframes pulseGlow {
+    from { filter: drop-shadow(0 0 8px rgba(247, 197, 130, 0.7)); }
+    to { filter: drop-shadow(0 0 18px rgba(247, 197, 130, 1)); }
+  }
+
+  /* Scan Result Card Overlay */
+  .result-card {
+    background: linear-gradient(145deg, #1C2541 0%, #0F172A 100%);
+    border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin-top: 20px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4); animation: slideUp 0.3s ease; text-align: left;
+  }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: rgba(42, 157, 143, 0.15);
+    border: 1px solid var(--success); color: #4EBEB0; padding: 4px 10px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px;
+  }
+
+  .result-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .result-name h3 { font-family: var(--font-serif); font-size: 20px; color: var(--accent-bright); }
+  .result-name p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+  .result-seat-hero {
+    background: rgba(224, 169, 109, 0.1); border: 1px solid rgba(224, 169, 109, 0.3);
+    border-radius: 10px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .result-seat-hero .no { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--accent-bright); }
+  .result-seat-hero .pos { text-align: right; font-size: 13px; color: var(--text-light); }
+
+  /* Neighbors Box */
+  .neighbors-box {
+    background: rgba(255,255,255,0.03); border-radius: 8px; padding: 12px 14px;
+    border-left: 3px solid var(--accent); font-size: 12.5px;
+  }
+  .neighbors-box h4 { font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .neighbor-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .neighbor-col span { display: block; font-size: 10.5px; color: var(--text-muted); }
+  .neighbor-col b { color: var(--text-light); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-logo">SMB</div>
+      <div class="brand-text">
+        <h1>Sales Mastery Bootcamp</h1>
+        <p>Pencari Tempat Duduk &amp; Verifikasi Tiket Barcode · Kalyana Resort</p>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="index.html" class="btn-link">📖 Handbook Digital</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <div class="scanner-grid">
+      
+      <!-- Left Column: Barcode Scanner & Quick Ticket Select -->
+      <div class="card">
+        <h3 class="card-title">Pemindai Barcode / QR</h3>
+        
+        <div class="scanner-mode-toggle">
+          <button class="btn-tab active" id="btn-mode-sim" onclick="setMode('sim')">⚡ Barcode Instan</button>
+          <button class="btn-tab" id="btn-mode-cam" onclick="setMode('cam')">📷 Scan Kamera</button>
+        </div>
+
+        <!-- Camera Scanner Area -->
+        <div id="camera-box" style="display: none;">
+          <div id="reader"></div>
+          <p style="font-size: 11.5px; color: var(--text-muted); text-align: center; margin-bottom: 12px;">
+            Arahkan kamera HP / laptop Anda ke QR Code atau Barcode Tiket Digital peserta.
+          </p>
+        </div>
+
+        <!-- Simulator & Quick Code Selector -->
+        <div id="simulator-box">
+          <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px;">
+            Klik salah satu Kode Barcode Tiket untuk simulasi pemindaian instan:
+          </p>
+          <div class="barcode-sim-box" id="barcode-pills-container"></div>
+        </div>
+
+        <!-- Search Input Form -->
+        <form class="search-form" onsubmit="handleManualSearch(event)">
+          <input type="text" class="search-input" id="search-code-input" placeholder="Masukkan Kode Tiket / Nama..." required>
+          <button type="submit" class="btn-search">Cari</button>
+        </form>
+      </div>
+
+      <!-- Right Column: Interactive Seat Map & Scan Result -->
+      <div class="card map-box">
+        <h3 class="card-title" style="text-align: left;">Denah Kursi Pelatihan (U-Shape)</h3>
+        
+        <div class="screen-box">
+          <div class="screen-title">PANGGUNG / LAYAR / WHITEBOARD</div>
+        </div>
+
+        <!-- SVG U-Shape Seat Map -->
+        <svg viewBox="0 0 540 430" width="100%" height="auto" style="max-width:520px; margin: 0 auto; display:block;">
+          <g>
+            <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
+                     fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+            <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
+            <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
+            <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
+            <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          </g>
+
+          <g id="svg-seats-group"></g>
+        </svg>
+
+        <!-- Result Card Output -->
+        <div id="result-box" style="display: none;">
+          <div class="result-card">
+            <div class="status-badge">✓ TIKET TERVERIFIKASI · DUDUK TERSEDIA</div>
+            
+            <div class="result-header">
+              <div class="result-name">
+                <h3 id="res-name">Dian Permata</h3>
+                <p id="res-dept">Sales Lead · Werkudara Group</p>
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted); text-align: right;">
+                KODE TIKET<br><b style="color: var(--accent); font-size: 13px;" id="res-code">SMB-005</b>
+              </div>
+            </div>
+
+            <div class="result-seat-hero">
+              <div>
+                <span style="font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em;">NOMOR KURSI</span>
+                <div class="no" id="res-seat-no">#05</div>
+              </div>
+              <div class="pos" id="res-seat-pos">
+                <b>Meja Sisi Kiri</b><br><small style="color: var(--text-muted);">Ruang Pelatihan Utama</small>
+              </div>
+            </div>
+
+            <!-- Neighbor Seats -->
+            <div class="neighbors-box">
+              <h4>👥 REKAN DUDUK DI SEBELAH PESERTA</h4>
+              <div class="neighbor-row">
+                <div class="neighbor-col">
+                  <span>👈 SEBELAH KIRI (KURSI <span id="res-left-no">#04</span>)</span>
+                  <b id="res-left-name">Budi Santoso</b>
+                </div>
+                <div class="neighbor-col">
+                  <span>SEBELAH KANAN (KURSI <span id="res-right-no">#06</span>) 👉</span>
+                  <b id="res-right-name">Fitriani Putri</b>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+  // Complete 22 Seats Participants Database
+  const BOOTCAMP_DATABASE = [
+    { seat: 1, code: "SMB-001", name: "Fadli Fahmi Ali", email: "fadli.ali@werkudara.com", dept: "CEO · Werkudara Group", pos: "Sisi Kiri Meja U (Kursi #1)" },
+    { seat: 2, code: "SMB-002", name: "Ahmad Rizki", email: "ahmad.rizki@ailesh.com", dept: "Business Development · Ailesh", pos: "Sisi Kiri Meja U (Kursi #2)" },
+    { seat: 3, code: "SMB-003", name: "Eko Prasetyo", email: "eko.prasetyo@sandler.co.id", dept: "Senior Sales Specialist · Sandler", pos: "Sisi Kiri Meja U (Kursi #3)" },
+    { seat: 4, code: "SMB-004", name: "Budi Santoso", email: "budi.santoso@werkudara.com", dept: "Sales Executive · Werkudara", pos: "Sisi Kiri Meja U (Kursi #4)" },
+    { seat: 5, code: "SMB-005", name: "Dian Permata", email: "dian.permata@werkudara.com", dept: "Sales Lead · Werkudara Group", pos: "Sisi Kiri Meja U (Kursi #5)" },
+    { seat: 6, code: "SMB-006", name: "Fitriani Putri", email: "fitri.putri@werkudara.com", dept: "Key Account Executive · Werkudara", pos: "Sisi Kiri Meja U (Kursi #6)" },
+    { seat: 7, code: "SMB-007", name: "Gilang Ramadhan", email: "gilang.r@ailesh.com", dept: "Sustainability Consultant · Ailesh", pos: "Sisi Kiri Meja U (Kursi #7)" },
+    { seat: 8, code: "SMB-008", name: "Delon Sianipar", email: "delon.sianipar@sandler.co.id", dept: "Senior Consultant · Sandler Training", pos: "Sisi Kiri Meja U (Kursi #8)" },
+    { seat: 9, code: "SMB-009", name: "Hendra Wijaya", email: "hendra.w@werkudara.com", dept: "Regional Sales Manager · Werkudara", pos: "Sudut Kiri Bawah Meja U (Kursi #9)" },
+    { seat: 10, code: "SMB-010", name: "Indah Lestari", email: "indah.lestari@werkudara.com", dept: "Corporate Sales · Werkudara", pos: "Sisi Tengah Bawah (Kursi #10)" },
+    { seat: 11, code: "SMB-011", name: "Joko Susilo", email: "joko.susilo@werkudara.com", dept: "Enterprise Sales Executive · Werkudara", pos: "Sisi Tengah Bawah (Kursi #11)" },
+    { seat: 12, code: "SMB-012", name: "Fano Alfian Ardiansyah", email: "fano.alfian@ailesh.com", dept: "Founder & CEO · Ailesh", pos: "Sisi Tengah Bawah (Kursi #12)" },
+    { seat: 13, code: "SMB-013", name: "Karin Novita", email: "karin.novita@sandler.co.id", dept: "Sales Trainer Associate · Sandler", pos: "Sisi Tengah Bawah (Kursi #13)" },
+    { seat: 14, code: "SMB-014", name: "Lukman Hakim", email: "lukman.hakim@werkudara.com", dept: "Strategic Account Manager · Werkudara", pos: "Sudut Kanan Bawah Meja U (Kursi #14)" },
+    { seat: 15, code: "SMB-015", name: "Maya Anggraini", email: "maya.a@ailesh.com", dept: "ESG & Sales Specialist · Ailesh", pos: "Sisi Kanan Meja U (Kursi #15)" },
+    { seat: 16, code: "SMB-016", name: "Naufal Pratama", email: "naufal.p@werkudara.com", dept: "Commercial Executive · Werkudara", pos: "Sisi Kanan Meja U (Kursi #16)" },
+    { seat: 17, code: "SMB-017", name: "Olivia Zahrani", email: "olivia.z@werkudara.com", dept: "Client Relations Lead · Werkudara", pos: "Sisi Kanan Meja U (Kursi #17)" },
+    { seat: 18, code: "SMB-018", name: "Panji Kusuma", email: "panji.k@werkudara.com", dept: "Business Development · Werkudara", pos: "Sisi Kanan Meja U (Kursi #18)" },
+    { seat: 19, code: "SMB-019", name: "Rina Marlina", email: "rina.marlina@werkudara.com", dept: "Sales Consultant · Werkudara", pos: "Sisi Kanan Meja U (Kursi #19)" },
+    { seat: 20, code: "SMB-020", name: "Siti Rahmawati", email: "siti.rahma@werkudara.com", dept: "Account Manager · Werkudara", pos: "Sisi Kanan Meja U (Kursi #20)" },
+    { seat: 21, code: "SMB-021", name: "Surya Saputra", email: "surya.s@werkudara.com", dept: "Area Sales Executive · Werkudara", pos: "Sisi Kanan Meja U (Kursi #21)" },
+    { seat: 22, code: "SMB-022", name: "Wahyu Hidayat", email: "wahyu.h@werkudara.com", dept: "Sales Performance Analyst · Werkudara", pos: "Sisi Kanan Meja U (Kursi #22)" }
+  ];
+
+  // SVG Coordinates for 22 Seats
+  const SEAT_COORDS = [
+    { seat: 1, x: 124, y: 80, rot: 0 },
+    { seat: 2, x: 124, y: 111, rot: 0 },
+    { seat: 3, x: 124, y: 142, rot: 0 },
+    { seat: 4, x: 124, y: 173, rot: 0 },
+    { seat: 5, x: 124, y: 204, rot: 0 },
+    { seat: 6, x: 124, y: 235, rot: 0 },
+    { seat: 7, x: 124, y: 266, rot: 0 },
+    { seat: 8, x: 124, y: 297, rot: 0 },
+    { seat: 9, x: 138, y: 345, rot: -45 },
+    { seat: 10, x: 195, y: 368, rot: 0 },
+    { seat: 11, x: 235, y: 368, rot: 0 },
+    { seat: 12, x: 275, y: 368, rot: 0 },
+    { seat: 13, x: 315, y: 368, rot: 0 },
+    { seat: 14, x: 374, y: 345, rot: 45 },
+    { seat: 15, x: 388, y: 297, rot: 0 },
+    { seat: 16, x: 388, y: 266, rot: 0 },
+    { seat: 17, x: 388, y: 235, rot: 0 },
+    { seat: 18, x: 388, y: 204, rot: 0 },
+    { seat: 19, x: 388, y: 173, rot: 0 },
+    { seat: 20, x: 388, y: 142, rot: 0 },
+    { seat: 21, x: 388, y: 111, rot: 0 },
+    { seat: 22, x: 388, y: 80, rot: 0 }
+  ];
+
+  let currentActiveSeat = null;
+  let html5QrcodeScanner = null;
+
+  // Render SVG Seat Map
+  function renderSeats() {
+    const g = document.getElementById("svg-seats-group");
+    g.innerHTML = "";
+
+    SEAT_COORDS.forEach(item => {
+      const isHighlighted = currentActiveSeat === item.seat;
+      const dataItem = BOOTCAMP_DATABASE.find(d => d.seat === item.seat);
+
+      const nodeG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      nodeG.setAttribute("class", `seat-node ${isHighlighted ? "highlight" : ""}`);
+      nodeG.setAttribute("id", `seat-svg-node-${item.seat}`);
+      nodeG.setAttribute("transform", `translate(${item.x}, ${item.y})`);
+      nodeG.style.cursor = "pointer";
+      nodeG.onclick = () => selectBySeatNumber(item.seat);
+
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("width", "28");
+      rect.setAttribute("height", "25");
+      rect.setAttribute("rx", "7");
+      rect.setAttribute("class", "seat-rect");
+      if (item.rot !== 0) rect.setAttribute("transform", `rotate(${item.rot}, 14, 12.5)`);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", "14");
+      text.setAttribute("y", "17");
+      text.setAttribute("class", "seat-num");
+      text.setAttribute("text-anchor", "middle");
+      text.textContent = item.seat;
+
+      const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+      title.textContent = `Kursi #${item.seat}: ${dataItem ? dataItem.name : "Peserta"}`;
+
+      nodeG.appendChild(rect);
+      nodeG.appendChild(text);
+      nodeG.appendChild(title);
+      g.appendChild(nodeG);
+    });
+  }
+
+  // Render Barcode Simulator Pills
+  function renderBarcodePills() {
+    const container = document.getElementById("barcode-pills-container");
+    container.innerHTML = "";
+
+    BOOTCAMP_DATABASE.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = `barcode-pill ${currentActiveSeat === item.seat ? "active" : ""}`;
+      btn.textContent = `${item.code} (${item.name.split(' ')[0]})`;
+      btn.onclick = () => selectByTicketCode(item.code);
+      container.appendChild(btn);
+    });
+  }
+
+  // Select Participant by Ticket Code or Seat
+  function selectByTicketCode(code) {
+    const found = BOOTCAMP_DATABASE.find(d => d.code.toUpperCase() === code.toUpperCase() || d.name.toLowerCase().includes(code.toLowerCase()));
+    if (found) {
+      highlightSeatAndShowResult(found);
+    } else {
+      alert(`Kode tiket atau nama "${code}" tidak ditemukan dalam database peserta.`);
+    }
+  }
+
+  function selectBySeatNumber(seatNum) {
+    const found = BOOTCAMP_DATABASE.find(d => d.seat === seatNum);
+    if (found) highlightSeatAndShowResult(found);
+  }
+
+  // Highlight Seat & Render Result Card
+  function highlightSeatAndShowResult(item) {
+    currentActiveSeat = item.seat;
+    renderSeats();
+    renderBarcodePills();
+
+    // Show Result Card
+    const resBox = document.getElementById("result-box");
+    resBox.style.display = "block";
+
+    document.getElementById("res-name").textContent = item.name;
+    document.getElementById("res-dept").textContent = item.dept;
+    document.getElementById("res-code").textContent = item.code;
+    document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
+    document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><br><small style="color:var(--text-muted)">Kalyana Resort Kaliurang</small>`;
+
+    // Calculate left & right neighbors
+    const leftSeatNum = item.seat > 1 ? item.seat - 1 : null;
+    const rightSeatNum = item.seat < 22 ? item.seat + 1 : null;
+
+    const leftObj = leftSeatNum ? BOOTCAMP_DATABASE.find(d => d.seat === leftSeatNum) : null;
+    const rightObj = rightSeatNum ? BOOTCAMP_DATABASE.find(d => d.seat === rightSeatNum) : null;
+
+    document.getElementById("res-left-no").textContent = leftSeatNum ? `#${leftSeatNum}` : "-";
+    document.getElementById("res-left-name").textContent = leftObj ? leftObj.name : "Ujung Meja Utama";
+
+    document.getElementById("res-right-no").textContent = rightSeatNum ? `#${rightSeatNum}` : "-";
+    document.getElementById("res-right-name").textContent = rightObj ? rightObj.name : "Ujung Meja Utama";
+
+    // Scroll smoothly to result card on mobile
+    resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function handleManualSearch(e) {
+    e.preventDefault();
+    const val = document.getElementById("search-code-input").value.trim();
+    if (val) selectByTicketCode(val);
+  }
+
+  // Mode Switcher (Simulator vs Camera)
+  function setMode(mode) {
+    const btnSim = document.getElementById("btn-mode-sim");
+    const btnCam = document.getElementById("btn-mode-cam");
+    const boxSim = document.getElementById("simulator-box");
+    const boxCam = document.getElementById("camera-box");
+
+    if (mode === 'sim') {
+      btnSim.classList.add("active");
+      btnCam.classList.remove("active");
+      boxSim.style.display = "block";
+      boxCam.style.display = "none";
+      stopCameraScanner();
+    } else {
+      btnCam.classList.add("active");
+      btnSim.classList.remove("active");
+      boxCam.style.display = "block";
+      boxSim.style.display = "none";
+      startCameraScanner();
+    }
+  }
+
+  function startCameraScanner() {
+    if (html5QrcodeScanner) return;
+    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 220, height: 220 } }, false);
+    html5QrcodeScanner.render((decodedText) => {
+      selectByTicketCode(decodedText);
+    }, (error) => {
+      // quiet errors
+    });
+  }
+
+  function stopCameraScanner() {
+    if (html5QrcodeScanner) {
+      html5QrcodeScanner.clear().catch(() => {});
+      html5QrcodeScanner = null;
+    }
+  }
+
+  // Initialize Default State (Select Seat #5 Dian Permata on load)
+  window.addEventListener("DOMContentLoaded", () => {
+    renderSeats();
+    renderBarcodePills();
+    selectBySeatNumber(5); // Default display seat #5
+  });
+  </script>
+</body>
+</html>
