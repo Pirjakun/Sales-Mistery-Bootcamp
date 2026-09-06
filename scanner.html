@@ -78,7 +78,7 @@
   .viewport-grid {
     height: calc(100vh - 51px);
     display: grid; 
-    grid-template-columns: 290px 1fr 340px; 
+    grid-template-columns: 300px 1.15fr 360px; 
     gap: 12px;
     padding: 12px 14px; 
     width: 100%; 
@@ -86,8 +86,8 @@
     margin: 0 auto;
     overflow: hidden;
   }
-  @media(max-width: 1100px) {
-    .viewport-grid { grid-template-columns: 260px 1fr 310px; gap: 10px; }
+  @media(max-width: 1150px) {
+    .viewport-grid { grid-template-columns: 260px 1fr 320px; gap: 10px; }
   }
   @media(max-width: 880px) {
     body { overflow-y: auto; height: auto; }
@@ -163,75 +163,122 @@
     border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
   }
 
-  /* Column 2: Seat Map Layout */
+  /* Column 2: Maximized Seat Map Layout (Zero Whitespace) */
   .screen-box {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
+    color: #FFF; border-radius: 6px; padding: 8px 12px; text-align: center;
     font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
-    margin-bottom: 8px;
+    margin-bottom: 4px; box-shadow: 0 2px 6px rgba(18, 53, 127, 0.15);
   }
 
-  .map-wrapper { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 4px; }
+  .map-wrapper-maximized {
+    flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
+    background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 8px; padding: 6px;
+  }
   .seat-node { transition: all 0.3s ease; cursor: pointer; }
   .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
+  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12.5px; fill: #FFFFFF; pointer-events: none; }
   .seat-node.checked-in .seat-rect { fill: #12357F; stroke: #0E2A66; }
 
   /* Active Highlight Glow */
   .seat-node.highlight .seat-rect {
     fill: #C5A059 !important; stroke: #784519 !important; stroke-width: 3 !important;
-    filter: drop-shadow(0 0 12px rgba(197, 160, 89, 0.9)); animation: pulseGlow 1.5s infinite alternate;
+    filter: drop-shadow(0 0 14px rgba(197, 160, 89, 0.95)); animation: pulseGlow 1.5s infinite alternate;
   }
-  .seat-node.highlight .seat-num { fill: #000000 !important; font-weight: 700; font-size: 13px; }
+  .seat-node.highlight .seat-num { fill: #000000 !important; font-weight: 700; font-size: 13.5px; }
 
   @keyframes pulseGlow {
     from { filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.6)); }
-    to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
+    to { filter: drop-shadow(0 0 18px rgba(197, 160, 89, 1)); }
   }
 
-  /* Column 3: Keterangan Ticket & Presensi Box */
-  .ticket-box {
-    flex: 1; min-height: 0; background: var(--paper-2); border: 1px solid var(--line-2);
-    border-radius: 8px; padding: 12px 14px; overflow-y: auto;
-    display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+  /* Column 3: Aesthetic Digital Check-In Pass Styling */
+  .checkin-pass {
+    flex: 1; min-height: 0; background: #FFF; border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04); position: relative;
   }
+
+  .pass-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
+    color: #FFF; padding: 10px 14px; position: relative; flex: none;
+    border-bottom: 2px solid var(--gold);
+  }
+  .pass-header-top { display: flex; justify-content: space-between; align-items: center; }
+  .pass-title { font-family: var(--serif); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .pass-code { font-family: var(--sans); font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; }
 
   .status-badge-ok {
-    display: inline-flex; align-items: center; gap: 4px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 5px; background: #E6F4EA; border: 1px solid #CEEAD6;
+    color: var(--ok); padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700;
+    margin-top: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
-  .res-head-compact { margin-top: 4px; }
-  .res-head-compact h3 { font-family: var(--serif); font-size: 20px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; }
-
-  .disc-tag {
-    display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
-    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 5px; padding: 3px 8px; margin-top: 6px;
+  .pass-body {
+    flex: 1; min-height: 0; padding: 12px 14px; display: flex; flex-direction: column;
+    justify-content: space-between; overflow-y: auto; gap: 8px;
   }
 
-  .hero-seat-compact {
-    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 8px; padding: 10px 14px;
-    display: flex; align-items: center; justify-content: space-between; margin: 4px 0;
+  .profile-block { display: flex; align-items: center; gap: 12px; margin-top: 2px; }
+  .profile-avatar {
+    width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--navy) 0%, var(--gold) 100%);
+    color: #FFF; font-family: var(--serif); font-size: 18px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex: none;
+    box-shadow: 0 2px 8px rgba(18, 53, 127, 0.25); border: 2px solid #FFF;
   }
-  .hero-seat-compact .no { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; }
-  .hero-seat-compact .pos { text-align: right; font-size: 11.5px; color: var(--ink-2); }
+  .profile-details h3 { font-family: var(--serif); font-size: 19px; color: var(--navy); font-weight: 400; line-height: 1.1; }
+  .profile-details p { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+  .disc-badge-pill {
+    display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700;
+    color: var(--navy); background: #EAEFF9; border: 1px solid #C7D4EC; border-radius: 999px;
+    padding: 3px 10px; margin-top: 6px;
+  }
+
+  /* Stub Divider Cutout */
+  .stub-divider {
+    display: flex; align-items: center; justify-content: space-between; margin: 4px -14px; position: relative;
+  }
+  .stub-cutout-l, .stub-cutout-r {
+    width: 14px; height: 14px; background: var(--card); border-radius: 50%; border: 1px solid var(--line); flex: none;
+  }
+  .stub-line { flex: 1; border-bottom: 2px dashed var(--line); margin: 0 4px; }
+
+  /* Hero Seat Section */
+  .hero-seat-ticket {
+    background: linear-gradient(135deg, #F6F1E7 0%, #EFE7D6 100%);
+    border: 1px solid #E2D7C3; border-radius: 8px; padding: 10px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .hero-seat-ticket .label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-3); text-transform: uppercase; }
+  .hero-seat-ticket .no { font-family: var(--serif); font-size: 32px; font-weight: 700; color: var(--navy); line-height: 1; margin-top: 2px; }
+  .hero-seat-ticket .pos-info { text-align: right; }
+  .hero-seat-ticket .pos-info b { font-size: 12.5px; color: var(--navy); display: block; }
+  .hero-seat-ticket .pos-info small { font-size: 10.5px; color: var(--ink-3); }
 
   /* Neighbor DiSC Profile Grid */
-  .neighbors-box-compact {
-    background: #FFF; border: 1px solid var(--line); border-radius: 8px;
-    padding: 8px 12px; border-left: 3px solid var(--navy); font-size: 11.5px;
+  .neighbors-ticket-box {
+    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 8px;
+    padding: 8px 10px; border-left: 3px solid var(--navy);
   }
-  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+  .neighbors-ticket-box h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
   .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .neighbor-col span { display: block; font-size: 9.5px; color: var(--ink-3); }
   .neighbor-col b { display: block; font-size: 12px; color: var(--ink); margin-top: 1px; }
   .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; margin-top: 1px; }
 
-  .disc-info-footer {
-    background: #F9F7F2; border: 1px dashed var(--line); border-radius: 6px;
-    padding: 6px 10px; font-size: 10.5px; color: var(--ink-3); line-height: 1.35;
+  /* Decorative Ticket Barcode Footer */
+  .barcode-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #FAFAFA; border-top: 1px dashed var(--line); padding: 8px 14px; flex: none;
   }
+  .barcode-lines {
+    display: flex; gap: 2px; height: 24px; align-items: center;
+  }
+  .barcode-lines span {
+    background: #222; height: 100%; border-radius: 1px;
+  }
+  .barcode-num { font-family: monospace; font-size: 11px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.1em; }
   </style>
 </head>
 <body>
@@ -245,7 +292,7 @@
         <div class="brand-logo">SM</div>
         <div class="brand-text">
           <b>Sales Mastery Bootcamp</b>
-          <span>Pemindai Presensi &amp; Seat Locator v3.0</span>
+          <span>Pemindai Presensi &amp; Seat Locator</span>
         </div>
       </div>
       <div class="bar-stats">
@@ -284,15 +331,18 @@
       </form>
     </div>
 
-    <!-- Kolom 2 (Kartu Tengah): Denah Kursi Pelatihan (U-Shape Map) -->
+    <!-- Kolom 2 (Kartu Tengah): Denah Kursi Pelatihan (U-Shape Map Max Size) -->
     <div class="card">
-      <div class="card-h">Denah Kursi Pelatihan (U-Shape)</div>
+      <div class="card-h">
+        <span>Denah Kursi Pelatihan (U-Shape)</span>
+        <small style="font-size: 11px; color: var(--ink-3);">Kalyana Resort</small>
+      </div>
 
       <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
 
-      <!-- SVG U-SHAPE SEAT MAP -->
-      <div class="map-wrapper">
-        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:520px; max-height: 380px; display:block; margin: 0 auto;">
+      <!-- SVG U-SHAPE SEAT MAP (Zoomed & Fitted ViewBox to remove whitespace) -->
+      <div class="map-wrapper-maximized">
+        <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
           <g>
             <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
                      fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -308,58 +358,89 @@
       </div>
     </div>
 
-    <!-- Kolom 3 (Kartu Kanan): Keterangan Tiket & Presensi -->
+    <!-- Kolom 3 (Kartu Kanan): Estetik Digital Event Check-In Pass -->
     <div class="card">
-      <div class="card-h">Keterangan Tiket &amp; Presensi</div>
+      <div class="card-h">
+        <span>Tiket &amp; Presensi Digital</span>
+        <small style="font-size: 11px; color: var(--ok); font-weight:700;">● Verified Pass</small>
+      </div>
 
-      <div id="result-container" class="ticket-box">
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="status-badge-ok">
-              ✓ PRESENSI TERVERIFIKASI · HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
-            </div>
-            <div style="font-size: 10.5px; color: var(--ink-3);">
-              KODE TIKET: <b style="color: var(--navy);" id="res-code">SMB-005</b>
-            </div>
+      <!-- Aesthetic Check-In Pass Card -->
+      <div id="result-container" class="checkin-pass">
+        
+        <!-- Pass Banner Header -->
+        <div class="pass-header">
+          <div class="pass-header-top">
+            <span class="pass-title">VIP CHECK-IN PASS</span>
+            <span class="pass-code" id="res-code">SMB-005</span>
           </div>
+          <div class="status-badge-ok">
+            ✓ PRESENSI HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
+          </div>
+        </div>
+
+        <!-- Pass Body Details -->
+        <div class="pass-body">
           
-          <div class="res-head-compact">
-            <h3 id="res-name">Dian Permata</h3>
-            <p id="res-dept">Sales Lead · Werkudara Group</p>
-            <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
+          <!-- Participant Profile -->
+          <div class="profile-block">
+            <div class="profile-avatar" id="res-avatar">DP</div>
+            <div class="profile-details">
+              <h3 id="res-name">Dian Permata</h3>
+              <p id="res-dept">Sales Lead · Werkudara Group</p>
+              <div class="disc-badge-pill" id="res-disc">⚡ DiSC: I (Influencing)</div>
+            </div>
           </div>
 
-          <div class="hero-seat-compact">
+          <!-- Stub Divider Cutout -->
+          <div class="stub-divider">
+            <div class="stub-cutout-l"></div>
+            <div class="stub-line"></div>
+            <div class="stub-cutout-r"></div>
+          </div>
+
+          <!-- Hero Seat Ticket Stub -->
+          <div class="hero-seat-ticket">
             <div>
-              <span style="font-size: 9.5px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
+              <div class="label">NOMOR KURSI</div>
               <div class="no" id="res-seat-no">#05</div>
             </div>
-            <div class="pos" id="res-seat-pos">
-              <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Kalyana Resort Kaliurang</small>
+            <div class="pos-info" id="res-seat-pos">
+              <b>Meja Sisi Kiri</b>
+              <small>Kalyana Resort Kaliurang</small>
             </div>
           </div>
-        </div>
 
-        <!-- Neighbor DiSC Profile Grid -->
-        <div class="neighbors-box-compact">
-          <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
-          <div class="neighbor-grid-compact">
-            <div class="neighbor-col">
-              <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
-              <b id="res-left-name">Budi Santoso</b>
-              <i id="res-left-disc">DiSC: S (Steadiness)</i>
-            </div>
-            <div class="neighbor-col">
-              <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
-              <b id="res-right-name">Fitriani Putri</b>
-              <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
+          <!-- Neighbor DiSC Profile Grid -->
+          <div class="neighbors-ticket-box">
+            <h4>👥 REKAN DUDUK SEBELAH &amp; DiSC PROFILE</h4>
+            <div class="neighbor-grid-compact">
+              <div class="neighbor-col">
+                <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
+                <b id="res-left-name">Budi Santoso</b>
+                <i id="res-left-disc">DiSC: S (Steadiness)</i>
+              </div>
+              <div class="neighbor-col">
+                <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
+                <b id="res-right-name">Fitriani Putri</b>
+                <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
+              </div>
             </div>
           </div>
+
         </div>
 
-        <div class="disc-info-footer">
-          💡 <b>Info DiSC Profile:</b> Membantu fasilitator &amp; sesama peserta untuk menyesuaikan pola komunikasi &amp; dinamika tim selama sesi bootcamp.
+        <!-- Decorative Ticket Barcode Footer -->
+        <div class="barcode-footer">
+          <div class="barcode-lines">
+            <span style="width:2px;"></span><span style="width:4px;"></span><span style="width:1px;"></span>
+            <span style="width:3px;"></span><span style="width:2px;"></span><span style="width:5px;"></span>
+            <span style="width:1px;"></span><span style="width:3px;"></span><span style="width:2px;"></span>
+            <span style="width:4px;"></span><span style="width:1px;"></span><span style="width:3px;"></span>
+          </div>
+          <span class="barcode-num" id="res-barcode-text">SMB-005-2026</span>
         </div>
+
       </div>
     </div>
 
@@ -417,6 +498,14 @@
     { seat: 21, x: 388, y: 111, rot: 0 },
     { seat: 22, x: 388, y: 80, rot: 0 }
   ];
+
+  // Helper Initials generator
+  function getInitials(name) {
+    if (!name) return "P";
+    const parts = name.trim().split(" ");
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    return parts[0].substring(0, 2).toUpperCase();
+  }
 
   // State Management
   let checkedInSeats = {}; // { [seatNum]: timestamp }
@@ -528,11 +617,13 @@
 
     document.getElementById("res-timestamp").textContent = checkedInSeats[item.seat] || now;
     document.getElementById("res-name").textContent = item.name;
+    document.getElementById("res-avatar").textContent = getInitials(item.name);
     document.getElementById("res-dept").textContent = item.dept;
-    document.getElementById("res-disc").textContent = `DiSC Profile: ${item.disc}`;
+    document.getElementById("res-disc").textContent = `⚡ DiSC: ${item.disc}`;
     document.getElementById("res-code").textContent = item.code;
+    document.getElementById("res-barcode-text").textContent = `${item.code}-2026`;
     document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
-    document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><br><small style="color:var(--ink-3)">Kalyana Resort Kaliurang</small>`;
+    document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><small>Kalyana Resort Kaliurang</small>`;
 
     // Calculate left & right neighbors + DiSC
     const leftSeatNum = item.seat > 1 ? item.seat - 1 : null;
