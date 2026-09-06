@@ -74,14 +74,22 @@
     padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
 
-  /* Single Viewport Grid Layout */
+  /* 3-Column Single Viewport Grid Layout */
   .viewport-grid {
     height: calc(100vh - 51px);
-    display: grid; grid-template-columns: 320px 1fr; gap: 14px;
-    padding: 12px 14px; width: 100%; max-width: 1280px; margin: 0 auto;
+    display: grid; 
+    grid-template-columns: 290px 1fr 340px; 
+    gap: 12px;
+    padding: 12px 14px; 
+    width: 100%; 
+    max-width: 1440px; 
+    margin: 0 auto;
     overflow: hidden;
   }
-  @media(max-width: 860px) {
+  @media(max-width: 1100px) {
+    .viewport-grid { grid-template-columns: 260px 1fr 310px; gap: 10px; }
+  }
+  @media(max-width: 880px) {
     body { overflow-y: auto; height: auto; }
     .viewport-grid { height: auto; grid-template-columns: 1fr; overflow-y: visible; }
   }
@@ -92,12 +100,12 @@
     display: flex; flex-direction: column; overflow: hidden; height: 100%;
   }
   .card-h {
-    font-family: var(--serif); font-size: 16.5px; font-weight: 400; color: var(--navy);
+    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--navy);
     border-bottom: 1px solid var(--line-2); padding-bottom: 6px; margin-bottom: 8px;
     display: flex; align-items: center; justify-content: space-between; flex: none;
   }
 
-  /* Automatic Camera Container */
+  /* Column 1: Camera Container */
   .camera-container {
     flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
     background: #000; border-radius: 8px; overflow: hidden; position: relative; min-height: 0;
@@ -117,23 +125,15 @@
     border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
   }
 
-  /* Right Column Layout */
-  .right-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    display: flex; flex-direction: column; height: 100%; overflow: hidden;
-  }
-
-  /* Screen Header */
+  /* Column 2: Seat Map Layout */
   .screen-box {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 6px; text-align: center;
-    font-family: var(--serif); font-size: 11.5px; letter-spacing: 0.12em; flex: none;
-    margin-bottom: 6px;
+    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
+    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
+    margin-bottom: 8px;
   }
 
-  /* SVG Seats Styling */
-  .map-wrapper { flex: none; height: 210px; display: flex; align-items: center; justify-content: center; }
+  .map-wrapper { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 4px; }
   .seat-node { transition: all 0.3s ease; cursor: pointer; }
   .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
@@ -151,44 +151,49 @@
     to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
   }
 
-  /* Integrated Result Info Box (Seamless 1-Page Layout) */
-  .result-box-integrated {
+  /* Column 3: Keterangan Ticket & Presensi Box */
+  .ticket-box {
     flex: 1; min-height: 0; background: var(--paper-2); border: 1px solid var(--line-2);
-    border-radius: 8px; padding: 10px 14px; margin-top: 6px; overflow-y: auto;
-    display: flex; flex-direction: column; justify-content: space-between;
+    border-radius: 8px; padding: 12px 14px; overflow-y: auto;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
   }
 
   .status-badge-ok {
     display: inline-flex; align-items: center; gap: 4px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+    color: var(--ok); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
   }
 
-  .res-head-compact { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px; }
-  .res-head-compact h3 { font-family: var(--serif); font-size: 18px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .res-head-compact p { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+  .res-head-compact { margin-top: 6px; }
+  .res-head-compact h3 { font-family: var(--serif); font-size: 20px; color: var(--navy); font-weight: 400; line-height: 1.1; }
+  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; }
 
   .disc-tag {
-    display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--navy);
-    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 4px; padding: 2px 6px; margin-top: 3px;
+    display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
+    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 5px; padding: 3px 8px; margin-top: 6px;
   }
 
   .hero-seat-compact {
-    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 6px; padding: 6px 12px;
-    display: flex; align-items: center; justify-content: space-between; margin: 6px 0;
+    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 8px; padding: 10px 14px;
+    display: flex; align-items: center; justify-content: space-between; margin: 4px 0;
   }
-  .hero-seat-compact .no { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .hero-seat-compact .no { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; }
   .hero-seat-compact .pos { text-align: right; font-size: 11.5px; color: var(--ink-2); }
 
   /* Neighbor DiSC Profile Grid */
   .neighbors-box-compact {
-    background: #FFF; border: 1px solid var(--line); border-radius: 6px;
-    padding: 6px 10px; border-left: 3px solid var(--navy); font-size: 11.5px;
+    background: #FFF; border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; border-left: 3px solid var(--navy); font-size: 11.5px;
   }
-  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
   .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .neighbor-col span { display: block; font-size: 9.5px; color: var(--ink-3); }
-  .neighbor-col b { display: block; font-size: 12px; color: var(--ink); }
-  .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; }
+  .neighbor-col b { display: block; font-size: 12px; color: var(--ink); margin-top: 1px; }
+  .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; margin-top: 1px; }
+
+  .disc-info-footer {
+    background: #F9F7F2; border: 1px dashed var(--line); border-radius: 6px;
+    padding: 6px 10px; font-size: 10.5px; color: var(--ink-3); line-height: 1.35;
+  }
   </style>
 </head>
 <body>
@@ -212,10 +217,10 @@
     </div>
   </header>
 
-  <!-- Single Viewport Grid -->
+  <!-- 3-Column Single Viewport Grid -->
   <main class="viewport-grid">
     
-    <!-- Left Column: Automatic Camera Scanner Only -->
+    <!-- Kolom 1: Kamera Scanner & Input Pencarian Manual -->
     <div class="card">
       <div class="card-h">
         <span>Pemindai QR Tiket</span>
@@ -234,15 +239,15 @@
       </form>
     </div>
 
-    <!-- Right Column: Interactive Seat Map & Integrated Result Card (1 Page) -->
-    <div class="right-card">
+    <!-- Kolom 2: Denah Kursi Pelatihan (U-Shape Map) -->
+    <div class="card">
       <div class="card-h">Denah Kursi Pelatihan (U-Shape)</div>
 
       <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
 
       <!-- SVG U-SHAPE SEAT MAP -->
       <div class="map-wrapper">
-        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:440px; max-height: 200px; display:block; margin: 0 auto;">
+        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:500px; max-height: 320px; display:block; margin: 0 auto;">
           <g>
             <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
                      fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -256,9 +261,13 @@
           <g id="svg-seats-group"></g>
         </svg>
       </div>
+    </div>
 
-      <!-- Result Card Output (Seamlessly Integrated inside 1 Page) -->
-      <div id="result-container" class="result-box-integrated" style="display: none;">
+    <!-- Kolom 3: Keterangan Tiket & Data Presensi -->
+    <div class="card">
+      <div class="card-h">Keterangan Tiket &amp; Presensi</div>
+
+      <div id="result-container" class="ticket-box">
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <div class="status-badge-ok">
@@ -270,10 +279,8 @@
           </div>
           
           <div class="res-head-compact">
-            <div>
-              <h3 id="res-name">Dian Permata</h3>
-              <p id="res-dept">Sales Lead · Werkudara Group</p>
-            </div>
+            <h3 id="res-name">Dian Permata</h3>
+            <p id="res-dept">Sales Lead · Werkudara Group</p>
             <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
           </div>
 
@@ -305,6 +312,9 @@
           </div>
         </div>
 
+        <div class="disc-info-footer">
+          💡 <b>Info DiSC Profile:</b> Membantu fasilitator &amp; sesama peserta untuk menyesuaikan pola komunikasi &amp; dinamika tim selama sesi bootcamp.
+        </div>
       </div>
     </div>
 
@@ -467,7 +477,7 @@
     currentActiveSeat = item.seat;
     renderSeats();
 
-    // Show Result Card inside Right Column
+    // Show Result Card inside Column 3
     const container = document.getElementById("result-container");
     container.style.display = "flex";
 
@@ -514,7 +524,7 @@
   // Automatic Camera Scanner Start
   function startAutoCamera() {
     if (html5QrcodeScanner) return;
-    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 190, height: 190 } }, false);
+    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 180, height: 180 } }, false);
     html5QrcodeScanner.render((decodedText) => {
       selectByTicketCode(decodedText);
     }, (error) => {});
