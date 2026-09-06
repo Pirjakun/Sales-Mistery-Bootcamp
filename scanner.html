@@ -210,46 +210,71 @@
     background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
     display: flex; flex-direction: column; min-height: 0; position: relative; box-shadow: 0 4px 14px rgba(0,0,0,0.03);
   }
-  .pass-top { background: var(--navy); color: #fff; padding: 14px 18px; flex: none; border-bottom: 3px solid var(--amber); }
-  .pass-top .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--sky); }
-  .pass-top h2 { margin: 4px 0 0; font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.15; }
-  .pass-top .role { font-size: 13px; color: #C9D6EC; margin-top: 3px; }
+  .pass-top { background: var(--navy); color: #fff; padding: 18px 22px; flex: none; border-bottom: 3px solid var(--amber); }
+  .pass-top .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--sky); }
+  .pass-top h2 { margin: 6px 0 2px; font-family: var(--serif); font-size: 25px; font-weight: 400; line-height: 1.15; }
+  .pass-top .role { font-size: 13.5px; color: #C9D6EC; margin-top: 2px; }
+  .top-badges { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
   .ok-badge {
-    display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; background: rgba(123,211,160,0.18);
-    border: 1px solid rgba(123,211,160,0.5); color: #BFEFD3; border-radius: 999px; padding: 5px 12px;
-    font-size: 12px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px; background: rgba(123,211,160,0.18);
+    border: 1px solid rgba(123,211,160,0.5); color: #BFEFD3; border-radius: 999px; padding: 5px 13px;
+    font-size: 12.5px; font-weight: 600;
   }
-  .pass-body { padding: 14px 16px; overflow-y: auto; flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; }
+  .disc-top-badge {
+    display: inline-flex; align-items: center; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25); color: #F1F5F9; border-radius: 999px; padding: 5px 13px;
+    font-size: 12.5px; font-weight: 600;
+  }
+  
+  .pass-body {
+    padding: 18px 20px; overflow-y: auto; flex: 1; min-height: 0;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  }
   
   .bigseat {
-    display: flex; align-items: center; gap: 16px; background: #F4EFE4; border: 1px solid var(--line);
-    border-radius: 10px; padding: 10px 14px; flex: none;
+    display: flex; align-items: center; gap: 18px; background: linear-gradient(135deg, #F5EFE3 0%, #EFE5D3 100%);
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 18px; flex: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
   }
-  .bigseat .num { font-family: var(--serif); font-size: 42px; line-height: 1; color: var(--navy); font-weight: 700; }
-  .bigseat .where b { display: block; font-size: 14.5px; font-weight: 600; color: var(--navy); }
-  .bigseat .where span { font-size: 12px; color: var(--ink-3); }
+  .bigseat .num {
+    font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--navy); font-weight: 700;
+    background: #fff; border: 1.5px solid var(--line); border-radius: 10px; width: 66px; height: 66px;
+    display: grid; place-items: center; flex: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .bigseat .where b { display: block; font-size: 16px; font-weight: 700; color: var(--navy); }
+  .bigseat .where span { font-size: 13px; color: var(--ink-2); margin-top: 3px; display: block; }
 
   .sec { margin: 0; }
-  .sec h3 { margin: 0 0 8px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-3); text-transform: uppercase; }
-  .nb { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .nb div { border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; background: #fff; }
-  .nb .side { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); display: flex; justify-content: space-between; }
-  .nb b { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.25; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sec h3 { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-3); text-transform: uppercase; }
+  .nb { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nb div { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+  .nb .side { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); display: flex; justify-content: space-between; }
+  .nb b { display: block; margin-top: 6px; font-size: 14.5px; line-height: 1.25; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   
-  .disc { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; border-radius: 999px; padding: 3px 8px; }
+  .disc { display: inline-block; margin-top: 6px; font-size: 11.5px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
   .disc.D { background: #F8E6E2; color: #A33A28; }
   .disc.I { background: #FBF0DC; color: #8A6112; }
   .disc.S { background: #E7F0EA; color: var(--ok); }
   .disc.C { background: #E6EBF4; color: var(--navy); }
 
   .tip {
-    margin: 0; background: #F4EFE4; border-left: 3px solid var(--amber); border-radius: 6px;
-    padding: 9px 12px; font-size: 12px; line-height: 1.5; color: var(--ink-2);
+    margin: 0; background: #F4EFE4; border-left: 4px solid var(--amber); border-radius: 8px;
+    padding: 12px 15px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2);
   }
+  .tip b { color: var(--navy); }
   
-  .sesi-kini { border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; background: #fff; margin-top: auto !important; }
-  .sesi-kini b { display: block; font-size: 13.5px; line-height: 1.25; color: var(--navy); }
-  .sesi-kini span { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+  .pass-meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px;
+  }
+  .meta-item {
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; background: #fff;
+  }
+  .meta-item .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); text-transform: uppercase; }
+  .meta-item b { display: block; font-size: 12.5px; color: var(--navy); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .sesi-kini { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; }
+  .sesi-kini b { display: block; font-size: 14px; line-height: 1.25; color: var(--navy); }
+  .sesi-kini span { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
 
   .pass-foot { border-top: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex: none; background: #fff; }
   .pass-foot .code { font-family: var(--serif); font-size: 14px; color: var(--ink-3); letter-spacing: 0.1em; font-weight: 700; }
@@ -530,7 +555,10 @@ function layarHasil() {
         <div class="lbl">PRESENSI TERCATAT</div>
         <h2>${esc(p.nama)}</h2>
         <div class="role">${esc(p.peran)} · Werkudara Group</div>
-        <div class="ok-badge">✓ Hadir pukul ${jam(S.jam)}</div>
+        <div class="top-badges">
+          <div class="ok-badge">✓ Hadir pukul ${jam(S.jam)}</div>
+          <div class="disc-top-badge">Gaya DiSC: ${p.disc} · ${DISC[p.disc]}</div>
+        </div>
       </div>
       <div class="pass-body">
         <div class="bigseat">
@@ -557,13 +585,23 @@ function layarHasil() {
           <b>${esc(s.nama)}</b>
           <span>${s.mulai} – ${s.selesai} · ${esc(s.tempat)}</span>
         </div>` : ""}
+
+        <div class="pass-meta-grid">
+          <div class="meta-item">
+            <div class="lbl">LOKASI BOOTCAMP</div>
+            <b>Kalyana Resort Kaliurang</b>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">AKSES FASILITAS</div>
+            <b>Meeting Room &amp; Dining</b>
+          </div>
+        </div>
       </div>
       <div class="pass-foot">
         <div class="bar-graphic">${Array.from({ length: 26 }, (_, i) => `<i style="height:${10 + ((i * 7) % 15)}px"></i>`).join("")}</div>
         <div class="code">${p.kode}</div>
         <button data-selesai>Selesai</button>
       </div>
-    </section>
   </main>`;
 }
 
