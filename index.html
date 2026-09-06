@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handbook — Sales Mastery Bootcamp</title>
+  <meta name="description" content="Handbook Digital Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang, Yogyakarta. Organised by Werkudara Group.">
+  
+  <!-- Google Fonts: Marcellus (Serif) & Source Sans 3 (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+  :root{
+    --paper:#EFE9DD; --paper-2:#F7F4ED; --card:#FCFAF6;
+    --ink:#141414; --ink-2:#4C4A45; --ink-3:#8A857A;
+    --line:#DCD4C4; --line-2:#EAE3D6;
+    --navy:#12357F; --navy-d:#0E2A66; --sky:#A9D9F2;
+    --ok:#2F6B4F; --no:#B4402F;
+    --r:12px;
+    --serif:'Marcellus',Georgia,'Times New Roman',serif;
+    --sans:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);font-family:var(--sans);font-size:16px;
+    background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 34%,var(--paper) 100%);
+    background-attachment:fixed;-webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .wrap{max-width:520px;margin:0 auto;padding:0 20px 40px}
+
+  /* pita atas & bawah */
+  .band{height:6px;background:var(--navy)}
+
+  /* header */
+  .bar{position:sticky;top:0;z-index:20;background:rgba(239,233,221,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:520px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:10px}
+  .bar b{font-family:var(--serif);font-size:15px;font-weight:400;letter-spacing:.01em}
+  .bar span{font-size:12px;color:var(--ink-3);margin-left:auto}
+
+  /* sampul */
+  .cover{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:2px}
+  .cover-in{padding:40px 22px;text-align:center;border:1px solid var(--line-2);margin:6px}
+  .kicker{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.16em}
+  .cover h1{margin:16px 0 0;font-family:var(--serif);font-size:31px;font-weight:400;
+    letter-spacing:.005em;line-height:1.08;text-transform:uppercase}
+  .cover .tag{margin:12px 0 0;font-size:14px;line-height:1.5;color:var(--ink-2)}
+  .rule{display:flex;align-items:center;justify-content:center;gap:9px;margin:20px 0}
+  .rule::before,.rule::after{content:"";height:1px;width:52px;background:var(--navy);opacity:.5}
+  .rule i{width:6px;height:6px;background:var(--navy);border-radius:50%}
+  .cover .meta{margin:0;font-size:13px;line-height:1.7;color:var(--ink-2);letter-spacing:.04em}
+  .note{margin-top:20px;border-left:2px solid var(--navy);padding:2px 0 2px 15px;
+    font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+
+  /* bab */
+  .chap{padding-top:30px;margin-top:28px;border-top:1px solid var(--line)}
+  .doc>.chap:first-child{margin-top:0}
+  .chap-h{display:flex;align-items:baseline;gap:12px}
+  .chap-n{font-family:var(--serif);font-size:13px;color:var(--navy);min-width:20px}
+  .chap-h h2{margin:0;font-family:var(--serif);font-size:23px;font-weight:400;letter-spacing:.005em;line-height:1.2}
+  .p{margin:12px 0 16px;font-size:15px;line-height:1.72;color:var(--ink-2)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+  .card+.card{margin-top:10px}
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:11px 0;
+    border-bottom:1px solid var(--line-2);font-size:14.5px}
+  .kv:first-child{padding-top:0}
+  .kv:last-child{border-bottom:0;padding-bottom:0}
+  .kv span{color:var(--ink-3);flex:none}
+  .kv b{font-weight:600;text-align:right;max-width:62%}
+  .kv b small{display:block;font-weight:400;font-size:12.5px;color:var(--ink-3);margin-top:3px}
+
+  /* daftar per hari */
+  .day{margin-top:18px}
+  .day h3{margin:0 0 8px;font-size:11.5px;font-weight:700;color:var(--navy);letter-spacing:.12em}
+  .row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-2);align-items:baseline}
+  .row:last-child{border-bottom:0}
+  .row .t{font-family:var(--serif);font-size:13.5px;width:46px;flex:none;color:var(--navy);
+    font-variant-numeric:tabular-nums}
+  .row .c b{display:block;font-size:15px;font-weight:600;line-height:1.35}
+  .row .c i{display:block;font-style:normal;font-size:13px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+
+  /* lain-lain */
+  .pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .pill{font-size:12.5px;padding:6px 11px;border-radius:999px;background:#E6EBF4;color:var(--navy);
+    border:1px solid #D3DCEB}
+  .rules{display:flex;flex-direction:column;gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .rules span{background:var(--card);padding:14px 16px;font-family:var(--serif);font-size:17px}
+  .qa+.qa{margin-top:15px;padding-top:15px;border-top:1px solid var(--line-2)}
+  .qa b{font-size:14.5px}
+  .qa p{margin:6px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .two h4{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.12em}
+  .two ul{margin:0;padding:0;list-style:none}
+  .two li{font-size:13.5px;line-height:1.5;padding:6px 0;color:var(--ink-2);display:flex;gap:8px}
+  .two li i{font-style:normal;font-weight:700;flex:none}
+  .ok h4,.ok li i{color:var(--ok)}
+  .no h4,.no li i{color:var(--no)}
+
+  /* foto */
+  .fig{margin:0 0 18px;padding:0}
+  .fig img{display:block;width:100%;height:auto;border-radius:var(--r);border:1px solid var(--line)}
+  .fig-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    width:100%;background:#E7E1D4;border:1px dashed #C6BCA6;border-radius:var(--r);text-align:center;padding:16px}
+  .fig-ph span{font-size:13px;font-weight:600;color:var(--ink-3)}
+  .fig-ph small{font-size:11.5px;color:#A29B8B;max-width:80%;line-height:1.5}
+  .fig figcaption{margin-top:99px;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+  .fig img + figcaption {margin-top:9px}
+
+  /* kartu pemateri */
+  .sp{display:flex;gap:16px;align-items:flex-start;padding:18px}
+  .sp-ph{width:88px;height:88px;border-radius:50%;object-fit:cover;flex:none;
+    border:1px solid var(--line);background:#E6E1D6}
+  .sp-tx{min-width:0}
+  .sp-day{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--navy);
+    background:#E6EBF4;border:1px solid #D3DCEB;border-radius:999px;padding:4px 10px}
+  .sp h3{margin:10px 0 0;font-family:var(--serif);font-size:20px;font-weight:400;letter-spacing:.01em}
+  .sp-role{font-size:13px;color:var(--ink-3);margin-top:3px}
+  .sp p{margin:11px 0 0;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+  .sp .sp-note{margin-top:9px;font-size:12.5px;color:var(--navy);font-weight:600}
+  .dummy{background:#F3EDE0;border:1px dashed #C6BCA6;border-radius:8px;padding:10px 12px;color:#8A857A!important;font-style:italic;margin-top:10px;font-size:13px;line-height:1.6}
+  @media(max-width:480px){
+    .sp{flex-direction:column;gap:14px}
+    .sp-ph{width:76px;height:76px}
+  }
+  @media(min-width:680px){
+    .sp{padding:22px;gap:20px}
+    .sp-ph{width:104px;height:104px}
+  }
+  .kv-banner{margin:22px 0 0;padding:0}
+  .kv-banner img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+  @media(min-width:1000px){.kv-banner{margin:32px 0 4px}}
+
+
+  /* denah kursi 22-seat U-shape */
+  .room-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 14px;margin-top:16px;box-shadow:0 2px 10px rgba(0,0,0,0.02)}
+  .room-stage{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);color:#fff;border-radius:8px;padding:12px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.14em;box-shadow:0 2px 6px rgba(18,53,127,0.2);margin-bottom:16px}
+  .ushape-22{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(9,minmax(42px,1fr));gap:6px;position:relative;padding:10px 6px;background:var(--paper-2);border:1px solid var(--line-2);border-radius:10px}
+  .seat-b{background:#fff;border:1px solid #D3DCEB;border-radius:8px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,0.04);transition:transform .15s ease,border-color .15s ease}
+  .seat-b:hover{transform:translateY(-2px);border-color:var(--navy)}
+  .seat-b .num{font-family:var(--serif);font-size:13.5px;font-weight:700;color:var(--navy);line-height:1}
+  .seat-b.corner{background:#EBF2FC;border-color:#B8CEE8}
+  .room-info{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--ink-3)}
+  .entrance{display:inline-flex;align-items:center;gap:4px;background:#EAE4D6;padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;color:var(--ink-2);border:1px solid var(--line)}
+
+
+  /* wi-fi penutup */
+  .wifi{margin-top:34px;background:var(--navy);border-radius:2px}
+  .wifi-in{padding:30px 20px;text-align:center;border:1px solid rgba(255,255,255,.22);margin:6px}
+  .wifi .kicker{color:var(--sky)}
+  .wifi h3{margin:14px 0 20px;font-family:var(--serif);font-size:27px;font-weight:400;color:#fff}
+  .wifi-grid{display:grid;gap:10px}
+  .wifi-grid div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+    border-radius:8px;padding:14px}
+  .wifi-grid span{display:block;font-size:10.5px;font-weight:700;color:var(--sky);letter-spacing:.14em}
+  .wifi-grid b{display:block;margin-top:6px;font-size:21px;font-weight:600;color:#fff}
+  .wifi p{margin:18px 0 0;font-size:13.5px;line-height:1.7;color:#C9D6EC}
+  .end{text-align:center;padding:30px 20px 0;font-family:var(--serif);font-size:16px;color:var(--navy)}
+  .top{display:block;margin:20px auto 0;font-size:13px;color:var(--ink-3);background:none;border:0;
+    text-decoration:none;text-align:center}
+
+  /* ---------- responsif ---------- */
+  @media(max-width:360px){
+    .cover-in{padding:32px 15px}
+    .cover h1{font-size:26px}
+    .row .t{width:42px;font-size:12.5px}
+    .ushape{gap:4px;grid-template-rows:auto repeat(5,minmax(42px,1fr))}
+    .st b{font-size:10px}
+  }
+  @media(min-width:680px){
+    .wrap{max-width:660px;padding:0 28px 48px}
+    .bar-in{max-width:660px;padding:14px 28px}
+    .cover-in{padding:56px 30px}
+    .cover h1{font-size:40px}
+    .chap-h h2{font-size:25px}
+    .wifi-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(min-width:1000px){
+    .wrap{max-width:1040px;padding:0 32px 72px}
+    .bar-in{max-width:1040px;padding:16px 32px}
+    .layout{display:grid;grid-template-columns:330px 1fr;gap:56px;align-items:start}
+    .side{position:sticky;top:88px}
+    .cover{margin-top:38px}
+    .cover-in{padding:40px 24px}
+    .cover h1{font-size:30px}
+    .doc{padding-top:38px;min-width:0}
+    .doc>.chap:first-child{padding-top:0;border-top:0}
+    .end,.top{text-align:left}
+  }
+  @media(min-width:1360px){
+    .wrap{max-width:1140px}
+    .bar-in{max-width:1140px}
+    .layout{grid-template-columns:350px 1fr;gap:72px}
+  }
+  </style>
+</head>
+<body>
+
+<div class="band"></div>
+
+<header class="bar">
+  <div class="bar-in">
+    <b>Sales Mastery Bootcamp</b>
+    <span>8–10 Sep 2026 · Kaliurang</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <figure class="kv-banner" id="atas">
+    <img src="aset/key-visual.jpg" alt="Key visual Sales Mastery Bootcamp: judul acara, tanggal 8-10 September 2026, Kalyana Resort Kaliurang, beserta tiga trainer dan fasilitator">
+  </figure>
+
+<div class="layout">
+
+  <aside class="side">
+    <p class="note">Panduan ini disusun untuk dibaca secara berurutan dari awal hingga akhir. Seluruh keterangan yang Anda perlukan selama tiga hari pelaksanaan tercantum di dalamnya, termasuk informasi akses Wi-Fi.</p>
+  </aside>
+
+  <div class="doc">
+
+  <!-- Bab 01 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">01</span><h2>Tentang Bootcamp Ini</h2></div>
+    <p class="p">Program ini dirancang secara bertahap selama tiga hari. Hari pertama meletakkan fondasi, hari kedua menajamkan penawaran sustainability beserta cara menyampaikannya, dan hari ketiga menuntaskan penerapan metode Sandler hingga tahap praktik serta komitmen.</p>
+    
+    <figure class="fig">
+      <img src="aset/kalyana-resort.jpg" alt="Kalyana Resort Kaliurang">
+      <figcaption>Kalyana Resort Kaliurang, berlatar suasana pegunungan yang sejuk dan hijau di dekat Gunung Merapi.</figcaption>
+    </figure>
+
+    <div class="card">
+      <div class="kv"><span>Tanggal</span><b>8 – 10 September 2026</b></div>
+      <div class="kv"><span>Tempat</span><b>Kalyana Resort Kaliurang, Yogyakarta<small>Dataran tinggi Kaliurang, berpanorama Gunung Merapi</small></b></div>
+      <div class="kv"><span>Durasi</span><b>2 malam 3 hari</b></div>
+      <div class="kv"><span>Peserta</span><b>20 orang</b></div>
+      <div class="kv"><span>Hari 1</span><b>Foundation</b></div>
+      <div class="kv"><span>Hari 2</span><b>Sustainability Offering &amp; Pitching</b></div>
+      <div class="kv"><span>Hari 3</span><b>Sandler Sales Execution</b></div>
+    </div>
+  </section>
+
+  <!-- Bab 02 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">02</span><h2>Kontak Penting</h2></div>
+    <p class="p">Apabila Anda memerlukan bantuan atau menemui hal yang kurang jelas, mohon menghubungi PIC acara terlebih dahulu. Untuk keperluan kamar maupun keadaan darurat di luar jam kegiatan, front office resort melayani selama 24 jam.</p>
+    <div class="card">
+      <div class="kv"><span>Event PIC</span><b>Nama PIC<small>Nomor menyusul</small></b></div>
+      <div class="kv"><span>Front Office</span><b>Kalyana Resort<small>(0274) 897931 · 897932 · WhatsApp 0815 7870 7187</small></b></div>
+    </div>
+  </section>
+
+  <!-- Bab 03 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">03</span><h2>Perjalanan Menuju Kalyana</h2></div>
+    <p class="p">Keberangkatan dilaksanakan tepat waktu. Kami mengimbau seluruh peserta telah berada di titik kumpul sekurang-kurangnya sepuluh menit sebelum jadwal.</p>
+    <p class="p">Sesi pertama dimulai segera setelah rombongan tiba di Kalyana. Mohon menyiapkan perlengkapan tulis pada tas jinjing, sementara koper dapat dititipkan terlebih dahulu. Kamar baru dapat ditempati pukul 18.00, setelah rangkaian sesi hari pertama selesai.</p>
+    <div class="card">
+      <div class="kv"><span>Alamat</span><b>Jl. Kaliurang Km 22,38<small>Dusun Banteng, Hargobinangun, Yogyakarta 55582</small></b></div>
+      <div class="kv"><span>Titik kumpul</span><b>Kantor Werkudara</b></div>
+      <div class="kv"><span>Berangkat</span><b>08:00, Hari 1</b></div>
+      <div class="kv"><span>Perkiraan tiba</span><b>09:00 — langsung sesi training</b></div>
+      <div class="kv"><span>Kepulangan</span><b>17:30, Hari 3<small>Tiba di kantor sekitar 18:30</small></b></div>
+    </div>
+  </section>
+
+  <!-- Bab 04 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">04</span><h2>Akomodasi &amp; Tempat Duduk</h2></div>
+    <p class="p">Setiap kamar ditempati oleh dua peserta, demikian pula setiap meja di ruang pelatihan. Kunci kamar diserahkan per pasangan, sehingga cukup diwakili oleh salah seorang di antaranya.</p>
+    <p class="p">Mohon memeriksa laci, kamar mandi, serta stopkontak sebelum meninggalkan kamar. Pertukaran teman sekamar dapat diatur secara mandiri setelah kunci diterima, sepanjang jumlahnya tetap dua peserta per kamar dan dikomunikasikan kepada PIC.</p>
+    <div class="card">
+      <div class="kv"><span>Check-in</span><b>Hari pertama, pukul 18.00 di lobi</b></div>
+      <div class="kv"><span>Check-out</span><b>Hari ketiga, sebelum sesi pagi<small>Barang dapat dititipkan hingga keberangkatan pukul 17.30</small></b></div>
+      <div class="kv"><span>Nomor kamar</span><b>Disampaikan pada saat check-in</b></div>
+      <div class="kv"><span>Nomor kursi</span><b>Tertera pada meja masing-masing</b></div>
+    </div>
+  </section>
+
+  <!-- Bab 05 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">05</span><h2>Agenda Tiga Hari</h2></div>
+    
+    <div class="day">
+      <h3>HARI 1 · SELASA, 8 SEPTEMBER · FOUNDATION</h3>
+      <div class="card">
+        <div class="row"><span class="t">06:30</span><div class="c"><b>Keberangkatan dari kantor Werkudara</b><i>Titik kumpul di kantor</i></div></div>
+        <div class="row"><span class="t">07:00</span><div class="c"><b>Breakfast</b><i>Badai Resto, dalam perjalanan</i></div></div>
+        <div class="row"><span class="t">08:00</span><div class="c"><b>Perjalanan menuju Kalyana Resort</b><i>15 menit</i></div></div>
+        <div class="row"><span class="t">08:15</span><div class="c"><b>Registrasi training</b><i>30 menit</i></div></div>
+        <div class="row"><span class="t">08:45</span><div class="c"><b>Training — Fundamental Sandler Selling Approach</b><i>3 jam 15 menit · Fadli Fahmi Ali</i></div></div>
+        <div class="row"><span class="t">12:00</span><div class="c"><b>Lunch</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">13:00</span><div class="c"><b>Training lanjutan</b><i>5 jam · Fadli Fahmi Ali · sesi terpanjang selama bootcamp</i></div></div>
+        <div class="row"><span class="t">18:00</span><div class="c"><b>Check-in &amp; refresh</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">19:00</span><div class="c"><b>Dinner</b><i>2 jam</i></div></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <h3>HARI 2 · RABU, 9 SEPTEMBER · SUSTAINABILITY OFFERING &amp; PITCHING</h3>
+      <div class="card">
+        <div class="row"><span class="t">06:00</span><div class="c"><b>Morning trekking &amp; exercise</b><i>1 jam 30 menit</i></div></div>
+        <div class="row"><span class="t">07:30</span><div class="c"><b>Breakfast &amp; refresh</b><i>1 jam 30 menit</i></div></div>
+        <div class="row"><span class="t">09:00</span><div class="c"><b>Training — Sandler Fundamentals (lanjutan)</b><i>4 jam</i></div></div>
+        <div class="row"><span class="t">13:00</span><div class="c"><b>Lunch</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">14:00</span><div class="c"><b>Outdoor training — Turning Sustainability &amp; ESG Challenges Into Solutions</b><i>4 jam · Fano Alfian Ardiansyah</i></div></div>
+        <div class="row"><span class="t">18:00</span><div class="c"><b>Break &amp; refresh</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">19:00</span><div class="c"><b>Dinner</b><i>2 jam</i></div></div>
+      </div>
+    </div>
+
+    <div class="day">
+      <h3>HARI 3 · KAMIS, 10 SEPTEMBER · SANDLER SALES EXECUTION</h3>
+      <div class="card">
+        <div class="row"><span class="t">06:00</span><div class="c"><b>Werkudara Work Out — fitness exercise</b><i>1 jam 30 menit</i></div></div>
+        <div class="row"><span class="t">07:30</span><div class="c"><b>Breakfast &amp; refresh</b><i>1 jam 30 menit</i></div></div>
+        <div class="row"><span class="t">09:00</span><div class="c"><b>Sandler Sales Mastery — Practical Application Day, sesi pertama</b><i>3 jam 30 menit · Delon Sianipar</i></div></div>
+        <div class="row"><span class="t">12:30</span><div class="c"><b>Lunch</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">13:30</span><div class="c"><b>Sandler Sales Mastery — Practical Application Day, sesi kedua</b><i>3 jam · Delon Sianipar</i></div></div>
+        <div class="row"><span class="t">16:30</span><div class="c"><b>Closing &amp; commitment</b><i>1 jam</i></div></div>
+        <div class="row"><span class="t">17:30</span><div class="c"><b>Kembali ke kantor Werkudara</b><i>1 jam</i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bab 06 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">06</span><h2>Trainer &amp; Fasilitator</h2></div>
+    <p class="p">Tiga pemateri membawakan tiga lapis materi yang saling melengkapi, masing-masing untuk satu hari pelaksanaan.</p>
+    
+    <div class="card sp">
+      <img class="sp-ph" src="aset/trainer-fadli.jpg" alt="Fadli Fahmi Ali" loading="lazy">
+      <div class="sp-tx">
+        <span class="sp-day">HARI 1 · FOUNDATION</span>
+        <h3>Fadli Fahmi Ali</h3>
+        <div class="sp-role">CEO, Werkudara Group</div>
+        <p>Membawakan sesi Fundamental Sandler Selling Approach pada pagi hari pertama dan melanjutkannya sepanjang sesi siang.</p>
+      </div>
+    </div>
+
+    <div class="card sp">
+      <img class="sp-ph" src="aset/trainer-fano.jpg" alt="Fano Alfian Ardiansyah" loading="lazy">
+      <div class="sp-tx">
+        <span class="sp-day">HARI 2 · SUSTAINABILITY OFFERING</span>
+        <h3>Fano Alfian</h3>
+        <div class="sp-role">CEO &amp; Founder, Ailesh</div>
+        <p>Membangun Ailesh sejak 2018 pada bidang layanan energi dan lingkungan, dengan fokus pada circular economy serta pencapaian target net zero. Beliau berpengalaman memimpin studi kelayakan dan analisis daur hidup bagi sektor energi, kelapa sawit, dan pertambangan, serta aktif sebagai mentor wirausaha rintisan di Creative Hub Fisipol UGM dan Shell LiveWIRE.</p>
+        <div class="sp-note">Sesi luar ruang: Sustainability Solutions &amp; Business Context</div>
+      </div>
+    </div>
+
+    <div class="card sp">
+      <img class="sp-ph" src="aset/trainer-delon.jpg" alt="Delon Sianipar" loading="lazy">
+      <div class="sp-tx">
+        <span class="sp-day">HARI 3 · SANDLER EXECUTION</span>
+        <h3>Delon Sianipar</h3>
+        <div class="sp-role">Senior Consultant, Sandler Training Indonesia</div>
+        <p>Memiliki pengalaman lebih dari tiga belas tahun pada industri lembaga keuangan dan konsultan pelatihan, dengan ratusan klien dari beragam latar belakang. Sebelumnya beliau memimpin divisi akuisisi di Barclays Indonesia, wealth management di HSBC, serta SME Banking di Standard Chartered. Beliau merupakan Certified Professional Coach (ICF) sekaligus Certified Strengths Coach.</p>
+        <div class="sp-note">Dua sesi Sandler Sales Mastery hingga tahap praktik langsung</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bab 07 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">07</span><h2>Waktu Santap</h2></div>
+    <p class="p">Seluruh sesi santap diselenggarakan di Kalyana Resort. Bagi Anda yang memiliki pantangan makanan tertentu, mohon menyampaikannya kepada petugas restoran pada saat pengambilan hidangan.</p>
+    <p class="p">Rincian menu untuk setiap sesi akan dilengkapi setelah memperoleh konfirmasi dari pihak resort.</p>
+    <div class="card">
+      <div class="kv"><span>Hari 1</span><b>Lunch 12:00 · Dinner 19:00</b></div>
+      <div class="kv"><span>Hari 2</span><b>Breakfast 07:30 · Lunch 13:00 · Dinner 19:00</b></div>
+      <div class="kv"><span>Hari 3</span><b>Breakfast 07:30 · Lunch 12:30</b></div>
+    </div>
+  </section>
+
+  <!-- Bab 08 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">08</span><h2>Aktivitas Pagi</h2></div>
+    <p class="p">Dua pagi selama bootcamp diawali dengan aktivitas fisik sebelum sesi kelas dimulai, mencakup morning exercise, outdoor workout, maupun trekking. Kegiatan ini bukan perlombaan, melainkan sarana menyiapkan kondisi tubuh sekaligus kesiapan pikiran sebelum memasuki ruang pelatihan.</p>
+    <p class="p">Suhu Kaliurang cukup dingin pada pagi hari, sehingga kami menyarankan Anda membawa jaket tipis untuk kegiatan olahraga dan trekking. Sarapan telah tersedia setelahnya, pukul 07.30.</p>
+    
+    <figure class="fig">
+      <img src="aset/aktivitas-pagi.jpg" alt="Aktivitas fisik pagi, outdoor workout dan trekking" loading="lazy">
+      <figcaption>Aktivitas fisik pagi (outdoor workout &amp; trekking) di kawasan Kaliurang.</figcaption>
+    </figure>
+
+    <div class="card">
+      <div class="kv"><span>Hari 2</span><b>Morning exercise &amp; workout<small>06:00 – 07:30</small></b></div>
+      <div class="kv"><span>Hari 3</span><b>Morning trekking &amp; workout<small>06:00 – 07:30, jalur &amp; area olahraga Kaliurang</small></b></div>
+    </div>
+
+    <div class="pills">
+      <span class="pill">Sepatu olahraga</span>
+      <span class="pill">Botol minum</span>
+      <span class="pill">Handuk kecil</span>
+      <span class="pill">Baju ganti</span>
+      <span class="pill">Jaket tipis</span>
+    </div>
+  </section>
+
+  <!-- Bab 09 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">09</span><h2>Kegiatan Luar Ruang</h2></div>
+    <p class="p">Sesi luar ruang pada hari kedua berlangsung pukul 14.00 hingga 18.00. Seluruh perlengkapan pendukung telah kami siapkan di pos Outdoor Care, sehingga Anda dapat mengikuti kegiatan dengan tenang dan nyaman.</p>
+    
+    <figure class="fig">
+      <img src="aset/kalyana-outdoor.jpg" alt="Area luar ruang Kalyana Resort" loading="lazy">
+      <figcaption>Area luar ruang Kalyana Resort, lokasi sesi hari kedua.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Bab 10 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">10</span><h2>Denah Ruang Pelatihan</h2></div>
+    <p class="p">Denah tempat duduk 22 kursi bernomor yang mengelilingi meja U (Nomor 1–8 di sisi kiri, 9 di sudut kiri bawah, 10–13 di sisi tengah bawah, 14 di sudut kanan bawah, dan 15–22 di sisi kanan).</p>
+    
+    <figure class="fig">
+      <img src="aset/ruang-pelatihan.jpg" alt="Ruang pelatihan utama Kalyana Resort dengan susunan meja U" loading="lazy">
+      <figcaption>Ruang pelatihan utama Kalyana Resort dengan tata letak meja U.</figcaption>
+    </figure>
+
+    <div class="card" style="padding:16px 12px; overflow:hidden; text-align:center">
+      <svg viewBox="0 0 540 430" width="100%" height="auto" style="display:block; max-width:100%; height:auto; font-family:var(--sans); margin:0 auto;">
+        <!-- Screen / Whiteboard -->
+        <rect x="140" y="12" width="260" height="38" fill="#EBF3FD" stroke="#12357F" stroke-width="2" rx="6"/>
+        <text x="270" y="36" font-size="14" font-weight="700" fill="#12357F" text-anchor="middle">Screen / Whiteboard</text>
+
+        <!-- U-SHAPED WOODEN TABLE -->
+        <g>
+          <!-- Main Table Shape -->
+          <polygon points="
+            160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330
+          " fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+          
+          <!-- Miter Joints -->
+          <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
+          <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
+          <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
+          <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
+
+          <!-- Top Bevel Line -->
+          <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+        </g>
+
+        <!-- 22 GREEN CHAIRS -->
+        <!-- SISI KIRI: Seats 1 to 8 -->
+        <g transform="translate(124, 80)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text></g>
+        <g transform="translate(124, 111)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text></g>
+        <g transform="translate(124, 142)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text></g>
+        <g transform="translate(124, 173)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text></g>
+        <g transform="translate(124, 204)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text></g>
+        <g transform="translate(124, 235)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text></g>
+        <g transform="translate(124, 266)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text></g>
+        <g transform="translate(124, 297)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text></g>
+
+        <!-- SUDUT KIRI BAWAH: Seat 9 (Bentuk kursi miring, angka 9 tetap TEGAK LURUS) -->
+        <g transform="translate(138, 345)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5" transform="rotate(-45, 14, 12.5)"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">9</text></g>
+
+        <!-- SISI TENGAH BAWAH: Seats 10 to 13 -->
+        <g transform="translate(195, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text></g>
+        <g transform="translate(235, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">11</text></g>
+        <g transform="translate(275, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">12</text></g>
+        <g transform="translate(315, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">13</text></g>
+
+        <!-- SUDUT KANAN BAWAH: Seat 14 (Bentuk kursi miring, angka 14 tetap TEGAK LURUS) -->
+        <g transform="translate(374, 345)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5" transform="rotate(45, 14, 12.5)"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">14</text></g>
+
+        <!-- SISI KANAN: Seats 15 to 22 -->
+        <g transform="translate(388, 297)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">15</text></g>
+        <g transform="translate(388, 266)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">16</text></g>
+        <g transform="translate(388, 235)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text></g>
+        <g transform="translate(388, 204)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">18</text></g>
+        <g transform="translate(388, 173)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">19</text></g>
+        <g transform="translate(388, 142)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">20</text></g>
+        <g transform="translate(388, 111)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">21</text></g>
+        <g transform="translate(388, 80)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">22</text></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Bab 11 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">11</span><h2>Mengenal Area Resort</h2></div>
+    <p class="p">Kalyana Resort berdiri di dataran tinggi Kaliurang dengan pemandangan Gunung Merapi serta perbukitan dan hutan tropis di seberang tebing. Berikut fasilitas yang tersedia di dalam area resort.</p>
+
+    <div class="card">
+      <div class="kv"><span>Meeting room</span><b>Ruang pelatihan utama<small>Kapasitas hingga 100 orang, atau 60 orang dengan meja. Dilengkapi proyektor, layar, dan tata suara.</small></b></div>
+      <div class="kv"><span>Audio visual room</span><b>Ruang pendukung<small>Berkapasitas 25 orang, dilengkapi proyektor dan tata suara</small></b></div>
+      <div class="kv"><span>Dining hall</span><b>Ruang santap<small>Bersebelahan dengan kolam ikan, terasnya menghadap Pendopo dan taman bunga</small></b></div>
+      <div class="kv"><span>Pendopo gazebo</span><b>Area istirahat terbuka<small>Menghadap panorama Merapi</small></b></div>
+      <div class="kv"><span>Open air amphitheater</span><b>Area diskusi luar ruang<small>Terletak di bawah taman bunga</small></b></div>
+      <div class="kv"><span>Kolam renang</span><b>Tersedia untuk tamu menginap<small>Dikelilingi pepohonan buah</small></b></div>
+      <div class="kv"><span>Perpustakaan</span><b>Ruang baca dan diskusi</b></div>
+      <div class="kv"><span>Titik kumpul acara</span><b>Lobi resort<small>Registrasi dan seluruh keberangkatan</small></b></div>
+      <div class="kv"><span>Titik kumpul darurat</span><b>Area parkir<small>Tujuan evakuasi apabila alarm berbunyi</small></b></div>
+    </div>
+
+    <p class="p">Tersedia teknisi resort yang mendampingi penggunaan perangkat audio visual selama sesi berlangsung. Pada hari pertama, panitia akan menunjukkan letak masing-masing area beserta pintu keluar terdekat.</p>
+  </section>
+
+  <!-- Bab 12 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">12</span><h2>Menjelajah Sekitar</h2></div>
+    <p class="p">Di luar jadwal pelatihan, Anda dipersilakan menikmati kawasan sekitar resort. Kaliurang menawarkan tiga hal yang sayang untuk dilewatkan.</p>
+    <p class="p">Mohon menyesuaikan waktu penjelajahan dengan jadwal sesi berikutnya, dan memberi tahu PIC apabila Anda meninggalkan area resort.</p>
+    <div class="card">
+      <div class="kv"><span>Alam</span><b>Panorama lereng Merapi dan udara pegunungan</b></div>
+      <div class="kv"><span>Budaya</span><b>Sejumlah destinasi budaya di sekitar Kaliurang</b></div>
+      <div class="kv"><span>Kuliner</span><b>Hidangan khas setempat di sekitar kawasan resort</b></div>
+    </div>
+  </section>
+
+  <!-- Bab 13 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">13</span><h2>Keselamatan &amp; Keamanan</h2></div>
+    <p class="p">Induksi keselamatan disampaikan melalui video sebelum rangkaian acara dimulai. Berikut rangkumannya, dan kami mengimbau Anda menyempatkan diri membacanya sekali sebelum kegiatan berlangsung.</p>
+    <p class="p">Tetap aman, tetap fokus, dan bertindaklah dengan penuh tanggung jawab.</p>
+    
+    <div class="card qa">
+      <b>Kenali posisi Anda</b>
+      <p>Begitu memasuki ruangan, perhatikan letak pintu keluar terdekat serta alat pemadam api ringan. Titik kumpul apabila terjadi keadaan darurat berada di area parkir.</p>
+    </div>
+    <div class="card qa">
+      <b>Jaga jalur tetap lapang</b>
+      <p>Seluruh lorong dan pintu harus bebas hambatan setiap saat, agar dapat segera digunakan apabila alarm berbunyi.</p>
+    </div>
+    <div class="card qa">
+      <b>Apabila terjadi gempa bumi</b>
+      <p>Tetap tenang dan ikuti arahan marshall. Berjalanlah, jangan berlari. Lindungi kepala Anda dan menjauh dari permukaan kaca.</p>
+    </div>
+    <div class="card qa">
+      <b>Selama sesi berlangsung</b>
+      <p>Senyapkan perangkat elektronik, jaga fokus, hindari percakapan yang mengganggu, dan pastikan lorong antarmeja tetap lapang.</p>
+    </div>
+    <div class="card qa">
+      <b>Kebersihan dan lingkungan</b>
+      <p>Jaga kebersihan area, pilah sampah sesuai jenisnya, gunakan air seperlunya, isi ulang botol minum Anda, serta matikan perangkat listrik yang tidak sedang digunakan.</p>
+    </div>
+    <div class="card qa">
+      <b>Kontak darurat</b>
+      <p>Nomor PIC acara dan front office resort akan disampaikan menjelang keberangkatan.</p>
+    </div>
+  </section>
+
+  <!-- Bab 14 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">14</span><h2>Anjuran &amp; Larangan</h2></div>
+    <div class="card two">
+      <div class="ok">
+        <h4>DIANJURKAN</h4>
+        <ul>
+          <li><i>✓</i> Hadir tepat waktu pada setiap sesi</li>
+          <li><i>✓</i> Membawa perlengkapan tulis pribadi</li>
+          <li><i>✓</i> Mengenakan sepatu olahraga pada sesi pagi</li>
+          <li><i>✓</i> Menjaga kecukupan cairan tubuh</li>
+          <li><i>✓</i> Menggunakan pelindung matahari</li>
+          <li><i>✓</i> Mengajukan pertanyaan selama sesi</li>
+          <li><i>✓</i> Saling membantu rekan sekelompok</li>
+          <li><i>✓</i> Menyenyapkan perangkat selama sesi</li>
+          <li><i>✓</i> Memilah sampah sesuai jenisnya</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>MOHON DIHINDARI</h4>
+        <ul>
+          <li><i>✕</i> Meninggalkan lokasi tanpa sepengetahuan PIC</li>
+          <li><i>✕</i> Terlambat pada jadwal keberangkatan</li>
+          <li><i>✕</i> Membawa barang berharga ke area luar ruang</li>
+          <li><i>✕</i> Meletakkan barang di depan pintu darurat</li>
+          <li><i>✕</i> Percakapan yang mengganggu jalannya sesi</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bab 15 -->
+  <section class="chap">
+    <div class="chap-h"><span class="chap-n">15</span><h2>Tata Tertib</h2></div>
+    <p class="p">Tujuh hal sederhana yang menjadikan tiga hari ini berjalan sebagaimana mestinya.</p>
+    <div class="rules">
+      <span>1. Hadir sepenuhnya</span>
+      <span>2. Terlibat aktif</span>
+      <span>3. Berani bertanya</span>
+      <span>4. Berbagi gagasan</span>
+      <span>5. Menghargai ruang bersama</span>
+      <span>6. Memelihara rasa ingin tahu</span>
+      <span>7. Menikmati prosesnya</span>
+    </div>
+  </section>
+
+  <!-- Blok Wi-Fi Penutup (Posisi Terakhir) -->
+  <section class="wifi">
+    <div class="wifi-in">
+      <div class="kicker">TERIMA KASIH TELAH MEMBACA HINGGA BAGIAN INI</div>
+      <h3>Wi-Fi Kalyana</h3>
+      <div class="wifi-grid">
+        <div><span>KETERSEDIAAN</span><b>Seluruh area resort</b></div>
+        <div><span>KODE AKSES</span><b>Front desk</b></div>
+      </div>
+      <p>Kalyana Resort menyediakan akses internet nirkabel tanpa biaya di seluruh area resort. Kode aksesnya diperoleh dengan menanyakan langsung kepada petugas front desk.</p>
+    </div>
+  </section>
+
+  <div class="end">Selamat datang, dan selamat mengikuti Sales Mastery Bootcamp.</div>
+  <a class="top" href="#atas">↑ Kembali ke bagian awal</a>
+
+  </div>
+</div>
+</div>
+
+<div class="band" style="margin-top:40px"></div>
+
+</body>
+</html>

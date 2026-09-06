@@ -1,0 +1,379 @@
+{
+  "acara": {
+    "nama": "Sales Mastery Bootcamp",
+    "tagline": "Building Strategy, Discipline & Execution for Revenue Growth",
+    "penyelenggara": "Werkudara Group",
+    "tanggal": {
+      "mulai": "2026-09-08",
+      "selesai": "2026-09-10",
+      "tampil": "8 – 10 September 2026"
+    },
+    "tempat": {
+      "nama": "Kalyana Resort Kaliurang",
+      "kota": "Yogyakarta",
+      "catatan": "Kawasan pegunungan di dekat Gunung Merapi"
+    },
+    "durasi": "2 malam 3 hari",
+    "jumlah_peserta": 20,
+    "alur": {
+      "hari_1": "Foundation",
+      "hari_2": "Sustainability Offering & Pitching",
+      "hari_3": "Sandler Sales Execution"
+    }
+  },
+  "kontak": [
+    {
+      "peran": "Event PIC",
+      "nama": null,
+      "telepon": null,
+      "catatan": "menyusul"
+    },
+    {
+      "peran": "Front Office",
+      "nama": "Kalyana Resort",
+      "telepon": null,
+      "catatan": "menyusul, layanan 24 jam"
+    }
+  ],
+  "rundown": [
+    {
+      "hari": 1,
+      "tanggal": "2026-09-08",
+      "label": "Selasa, 8 September",
+      "tema": "Foundation",
+      "acara": [
+        {
+          "mulai": "06:30",
+          "selesai": "07:00",
+          "kegiatan": "Keberangkatan dari kantor Werkudara"
+        },
+        {
+          "mulai": "07:00",
+          "selesai": "08:00",
+          "kegiatan": "Breakfast",
+          "tempat": "Badai Resto (dalam perjalanan)"
+        },
+        {
+          "mulai": "08:00",
+          "selesai": "08:15",
+          "kegiatan": "Perjalanan menuju Kalyana Resort"
+        },
+        {
+          "mulai": "08:15",
+          "selesai": "08:45",
+          "kegiatan": "Registrasi training"
+        },
+        {
+          "mulai": "08:45",
+          "selesai": "12:00",
+          "kegiatan": "Training — Fundamental Sandler Selling Approach",
+          "pemateri": "Fadli Fahmi Ali"
+        },
+        {
+          "mulai": "12:00",
+          "selesai": "13:00",
+          "kegiatan": "Lunch"
+        },
+        {
+          "mulai": "13:00",
+          "selesai": "18:00",
+          "kegiatan": "Training lanjutan",
+          "pemateri": "Fadli Fahmi Ali",
+          "keterangan": "sesi terpanjang selama bootcamp"
+        },
+        {
+          "mulai": "18:00",
+          "selesai": "19:00",
+          "kegiatan": "Check-in & refresh"
+        },
+        {
+          "mulai": "19:00",
+          "selesai": "21:00",
+          "kegiatan": "Dinner"
+        }
+      ]
+    },
+    {
+      "hari": 2,
+      "tanggal": "2026-09-09",
+      "label": "Rabu, 9 September",
+      "tema": "Sustainability Offering & Pitching",
+      "acara": [
+        {
+          "mulai": "06:00",
+          "selesai": "07:30",
+          "kegiatan": "Morning trekking & exercise"
+        },
+        {
+          "mulai": "07:30",
+          "selesai": "09:00",
+          "kegiatan": "Breakfast & refresh"
+        },
+        {
+          "mulai": "09:00",
+          "selesai": "13:00",
+          "kegiatan": "Training — Sandler Fundamentals (lanjutan)"
+        },
+        {
+          "mulai": "13:00",
+          "selesai": "14:00",
+          "kegiatan": "Lunch"
+        },
+        {
+          "mulai": "14:00",
+          "selesai": "18:00",
+          "kegiatan": "Outdoor training — Turning Sustainability & ESG Challenges Into Solutions",
+          "pemateri": "Fano Alfian Ardiansyah"
+        },
+        {
+          "mulai": "18:00",
+          "selesai": "19:00",
+          "kegiatan": "Break & refresh"
+        },
+        {
+          "mulai": "19:00",
+          "selesai": "21:00",
+          "kegiatan": "Dinner"
+        }
+      ]
+    },
+    {
+      "hari": 3,
+      "tanggal": "2026-09-10",
+      "label": "Kamis, 10 September",
+      "tema": "Sandler Sales Execution",
+      "acara": [
+        {
+          "mulai": "06:00",
+          "selesai": "07:30",
+          "kegiatan": "Werkudara Work Out — fitness exercise"
+        },
+        {
+          "mulai": "07:30",
+          "selesai": "09:00",
+          "kegiatan": "Breakfast & refresh"
+        },
+        {
+          "mulai": "09:00",
+          "selesai": "12:30",
+          "kegiatan": "Sandler Sales Mastery — Practical Application Day, sesi pertama",
+          "pemateri": "Delon Sianipar"
+        },
+        {
+          "mulai": "12:30",
+          "selesai": "13:30",
+          "kegiatan": "Lunch"
+        },
+        {
+          "mulai": "13:30",
+          "selesai": "16:30",
+          "kegiatan": "Sandler Sales Mastery — Practical Application Day, sesi kedua",
+          "pemateri": "Delon Sianipar"
+        },
+        {
+          "mulai": "16:30",
+          "selesai": "17:30",
+          "kegiatan": "Closing & commitment"
+        },
+        {
+          "mulai": "17:30",
+          "selesai": "18:30",
+          "kegiatan": "Kembali ke kantor Werkudara"
+        }
+      ]
+    }
+  ],
+  "trainer": [
+    {
+      "nama": "Fadli Fahmi Ali",
+      "jabatan": "CEO, Werkudara Group",
+      "hari": 1,
+      "label": "HARI 1 · FOUNDATION",
+      "foto": "aset/trainer-fadli.jpg",
+      "catatan": "Uraian profil masih sementara, menunggu CV resmi.",
+      "sumber_foto": "Dipotong dari key visual, resolusi hanya sekitar 130 px. Ganti bila ada foto asli."
+    },
+    {
+      "nama": "Fano Alfian Ardiansyah",
+      "jabatan": "CEO & Founder, Ailesh",
+      "hari": 2,
+      "label": "HARI 2 · SUSTAINABILITY OFFERING",
+      "foto": "aset/trainer-fano.jpg",
+      "sesi": "Sesi luar ruang: Turning Sustainability & ESG Challenges Into Solutions"
+    },
+    {
+      "nama": "Delon Sianipar",
+      "jabatan": "Senior Consultant, Sandler Training Indonesia",
+      "hari": 3,
+      "label": "HARI 3 · SANDLER EXECUTION",
+      "foto": "aset/trainer-delon.jpg",
+      "sesi": "Dua sesi Sandler Sales Mastery hingga tahap praktik langsung",
+      "catatan": "Key visual menulis jabatannya 'Master Trainer'. Perlu dikonfirmasi mana yang dipakai."
+    }
+  ],
+  "denah_kursi": {
+    "bentuk": "U menghadap layar",
+    "jumlah_meja": 10,
+    "kursi_per_meja": 2,
+    "total_kursi": 20,
+    "grid": {
+      "kolom": 6,
+      "baris": "1 baris panggung + 5 baris meja"
+    },
+    "meja": [
+      {
+        "id": "M1",
+        "baris": 2,
+        "kolom": 1
+      },
+      {
+        "id": "M2",
+        "baris": 3,
+        "kolom": 1
+      },
+      {
+        "id": "M3",
+        "baris": 4,
+        "kolom": 1
+      },
+      {
+        "id": "M4",
+        "baris": 5,
+        "kolom": 1
+      },
+      {
+        "id": "M5",
+        "baris": 6,
+        "kolom": 2,
+        "lebar_kolom": 2,
+        "posisi": "tengah",
+        "kursi": "bersebelahan"
+      },
+      {
+        "id": "M6",
+        "baris": 6,
+        "kolom": 4,
+        "lebar_kolom": 2,
+        "posisi": "tengah",
+        "kursi": "bersebelahan"
+      },
+      {
+        "id": "M7",
+        "baris": 5,
+        "kolom": 6
+      },
+      {
+        "id": "M8",
+        "baris": 4,
+        "kolom": 6
+      },
+      {
+        "id": "M9",
+        "baris": 3,
+        "kolom": 6
+      },
+      {
+        "id": "M10",
+        "baris": 2,
+        "kolom": 6
+      }
+    ],
+    "format_nomor": "M3-B berarti meja ketiga, kursi B",
+    "catatan": "Kursi ditampilkan kosong tanpa nama karena halaman ini sama untuk semua peserta."
+  },
+  "santap": [
+    {
+      "hari": 1,
+      "sesi": [
+        {
+          "jam": "07:00",
+          "nama": "Breakfast",
+          "tempat": "Badai Resto (dalam perjalanan)"
+        },
+        {
+          "jam": "12:00",
+          "nama": "Lunch"
+        },
+        {
+          "jam": "19:00",
+          "nama": "Dinner"
+        }
+      ]
+    },
+    {
+      "hari": 2,
+      "sesi": [
+        {
+          "jam": "07:30",
+          "nama": "Breakfast"
+        },
+        {
+          "jam": "13:00",
+          "nama": "Lunch"
+        },
+        {
+          "jam": "19:00",
+          "nama": "Dinner"
+        }
+      ]
+    },
+    {
+      "hari": 3,
+      "sesi": [
+        {
+          "jam": "07:30",
+          "nama": "Breakfast"
+        },
+        {
+          "jam": "12:30",
+          "nama": "Lunch"
+        }
+      ]
+    }
+  ],
+  "wifi": {
+    "jaringan": "Kalyana-Guest",
+    "sandi": "kalyana2026",
+    "posisi": "Wajib diletakkan di blok terakhir halaman"
+  },
+  "aset": [
+    {
+      "berkas": "aset/kalyana-resort.jpg",
+      "dipakai_di": "Bab 01",
+      "alt": "Kalyana Resort Kaliurang"
+    },
+    {
+      "berkas": "aset/kalyana-outdoor.jpg",
+      "dipakai_di": "Bab 09",
+      "alt": "Area luar ruang Kalyana Resort"
+    },
+    {
+      "berkas": "aset/trainer-fadli.jpg",
+      "dipakai_di": "Bab 06"
+    },
+    {
+      "berkas": "aset/trainer-fano.jpg",
+      "dipakai_di": "Bab 06"
+    },
+    {
+      "berkas": "aset/trainer-delon.jpg",
+      "dipakai_di": "Bab 06"
+    }
+  ],
+  "slot_foto_kosong": [
+    {
+      "bab": "Bab 08 — Aktivitas Pagi",
+      "butuh": "Foto jalur trekking Kaliurang",
+      "rasio": "4 / 3"
+    },
+    {
+      "bab": "Bab 13 — Keselamatan & Keamanan",
+      "butuh": "Foto ruang pelatihan",
+      "rasio": "16 / 10"
+    }
+  ],
+  "catatan_versi": "Rundown mengikuti draft revisi kedua (berkas Werkudara_Sales_Mastery_Draft_Rundown (2).xlsx).",
+  "perlu_konfirmasi": [
+    "Pada berkas Excel, kedua sesi hari ketiga sama-sama ditulis 'Session 2'. Di handbook ditulis sesi pertama dan sesi kedua."
+  ]
+}
