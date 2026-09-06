@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Pemindai Presensi &amp; Locator Kursi — Sales Mastery Bootcamp</title>
-  <meta name="description" content="Aplikasi Pemindai QR Code Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
+  <title>Check-in Kiosk — Sales Mastery Bootcamp</title>
+  <meta name="description" content="Aplikasi Kiosk Pemindai QR Code Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
   
   <!-- Google Fonts: Marcellus & Source Sans 3 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,121 +26,87 @@
     --line-2: #EAE3D6;
     --navy: #12357F;
     --navy-d: #0E2A66;
-    --gold: #C5A059;
+    --sky: #A9D9F2;
     --ok: #2F6B4F;
-    --r: 12px;
-    --serif: 'Marcellus', Georgia, 'Times New Roman', serif;
-    --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --ok-soft: #E7F0EA;
+    --warn: #B4402F;
+    --amber: #C08A2E;
+    --serif: 'Marcellus', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
-    color: var(--ink);
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
     font-family: var(--sans);
-    font-size: 14.5px;
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 40%, var(--paper) 100%);
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
   }
+  button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
-  .band { height: 5px; background: var(--navy); }
+  .app { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
 
-  /* Header Bar - Fixed Non-Cropped Flex Alignment */
-  .bar {
-    min-height: 48px;
-    height: auto;
-    background: rgba(239, 233, 221, 0.96);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-    padding: 6px 18px;
-    display: flex; align-items: center; justify-content: space-between;
+  /* ---------- Topbar ---------- */
+  .top {
+    display: flex; align-items: center; gap: 16px; padding: 10px 24px; border-bottom: 1px solid var(--line);
+    background: rgba(247, 244, 237, 0.95); flex: none;
   }
-  .bar-in {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: nowrap;
+  .logo {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
+    place-items: center; font-family: var(--serif); font-size: 14px; font-weight: 700; flex: none;
   }
-  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .brand-logo {
-    width: 30px; height: 30px; background: var(--navy); border-radius: 50%;
-    color: #fff; display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 13.5px; font-weight: 700;
+  .top h1 { margin: 0; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--navy); }
+  .top .sub { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
+  .top .right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .count {
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+    font-size: 13px; font-weight: 600;
   }
-  .brand-text b { font-family: var(--serif); font-size: 15.5px; font-weight: 400; color: var(--navy); }
-  .brand-text span { font-size: 11px; color: var(--ink-3); margin-left: 6px; }
-
-  .bar-stats { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .counter-badge {
-    background: var(--navy); color: #fff; font-weight: 700; font-size: 11px;
-    padding: 4px 12px; border-radius: 999px; letter-spacing: 0.03em;
-  }
-  .btn-link {
-    background: transparent; border: 1px solid var(--line); color: var(--ink-2);
-    padding: 4px 12px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
+  .count b { font-family: var(--serif); font-size: 16px; color: var(--navy); }
+  .clock { font-family: var(--serif); font-size: 16px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .btn-hb {
+    border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 5px 12px;
+    font-size: 12px; text-decoration: none; font-weight: 600; color: var(--ink-2); display: inline-block;
   }
 
-  /* 3-Column Single Viewport Grid Layout */
-  .viewport-grid {
-    height: calc(100vh - 53px);
-    display: grid; 
-    grid-template-columns: 290px 1.15fr 360px; 
-    gap: 12px;
-    padding: 12px 14px; 
-    width: 100%; 
-    max-width: 1440px; 
-    margin: 0 auto;
-    overflow: hidden;
+  /* ---------- Sesi Berjalan ---------- */
+  .now {
+    display: flex; align-items: center; gap: 14px; padding: 10px 24px; background: var(--navy); color: #fff; flex: none;
   }
-  @media(max-width: 1150px) {
-    .viewport-grid { grid-template-columns: 260px 1fr 320px; gap: 10px; }
-  }
-  @media(max-width: 880px) {
-    body { overflow-y: auto; height: auto; }
-    .viewport-grid { height: auto; grid-template-columns: 1fr; overflow-y: visible; }
-  }
+  .now .dot { width: 8px; height: 8px; border-radius: 50%; background: #7BD3A0; animation: pulse 2s infinite; flex: none; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .now .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--sky); }
+  .now b { font-size: 15px; font-weight: 600; }
+  .now .meta { margin-left: auto; font-size: 12.5px; color: #C9D6EC; text-align: right; }
 
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    display: flex; flex-direction: column; overflow: hidden; height: 100%;
-  }
-  .card-h {
-    font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--navy);
-    border-bottom: 1px solid var(--line-2); padding-bottom: 6px; margin-bottom: 8px;
-    display: flex; align-items: center; justify-content: space-between; flex: none;
-  }
+  /* ---------- Panggung Utama ---------- */
+  main { flex: 1; min-height: 0; padding: 16px 20px; display: grid; gap: 16px; }
+  .idle { grid-template-columns: 1fr 420px; }
+  .result { grid-template-columns: 1fr 460px; }
 
-  /* Column 1: Camera Container */
-  .camera-container {
-    flex: 1; min-height: 0; position: relative; background: #000; border-radius: 8px; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
+    display: flex; flex-direction: column; min-height: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+  .panel h2 { margin: 0 0 3px; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--navy); }
+  .panel .hint { font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; }
+
+  /* Kondisi Siaga / Kamera Live */
+  .scanbox {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 1px solid var(--line); border-radius: 12px; background: #000; min-height: 0; position: relative; overflow: hidden;
   }
   #reader {
-    width: 100% !important;
-    height: 100% !important;
-    position: absolute !important;
-    top: 0; left: 0;
-    border: none !important;
-    background: #000;
+    width: 100% !important; height: 100% !important; position: absolute !important; top: 0; left: 0; border: none !important;
   }
-  #reader video {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    border-radius: 8px;
-  }
-  #reader img, #reader select, #reader button, #reader span {
-    display: none !important;
-  }
+  #reader video { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+  #reader img, #reader select, #reader button, #reader span { display: none !important; }
 
-  /* Scanner Target Overlay */
   .scanner-overlay {
-    position: absolute; width: 75%; aspect-ratio: 1; max-width: 220px;
-    pointer-events: none; z-index: 10;
+    position: absolute; width: 70%; aspect-ratio: 1; max-width: 210px; pointer-events: none; z-index: 10;
   }
   .scanner-corner {
     position: absolute; width: 22px; height: 22px; border-color: rgba(255, 255, 255, 0.9); border-style: solid;
@@ -149,185 +115,277 @@
   .scanner-corner.tr { top: 0; right: 0; border-width: 3.5px 3.5px 0 0; border-top-right-radius: 6px; }
   .scanner-corner.bl { bottom: 0; left: 0; border-width: 0 0 3.5px 3.5px; border-bottom-left-radius: 6px; }
   .scanner-corner.br { bottom: 0; right: 0; border-width: 0 3.5px 3.5px 0; border-bottom-right-radius: 6px; }
-
   .scan-laser {
-    position: absolute; left: 5%; right: 5%; height: 2px; background: var(--gold);
-    box-shadow: 0 0 10px var(--gold); animation: scanLine 2.2s infinite ease-in-out;
+    position: absolute; left: 5%; right: 5%; height: 2px; background: var(--amber);
+    box-shadow: 0 0 10px var(--amber); animation: scanLine 2.2s infinite ease-in-out;
   }
-  @keyframes scanLine {
-    0% { top: 12%; opacity: 0.3; }
-    50% { top: 88%; opacity: 1; }
-    100% { top: 12%; opacity: 0.3; }
+  @keyframes scanLine { 0% { top: 12%; opacity: 0.3; } 50% { top: 88%; opacity: 1; } 100% { top: 12%; opacity: 0.3; } }
+
+  .manual { margin-top: 12px; display: flex; gap: 8px; flex: none; }
+  .manual input {
+    flex: 1; padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px;
+    background: #fff; font-size: 14.5px; outline: none;
+  }
+  .manual input:focus { border-color: var(--navy); }
+  .manual button { padding: 11px 18px; border-radius: 8px; background: var(--navy); color: #fff; font-weight: 600; font-size: 14px; }
+  
+  .demo { margin-top: 10px; font-size: 12px; color: var(--ink-3); flex: none; }
+  .demo b { display: block; margin-bottom: 4px; font-weight: 600; }
+  .demo button {
+    border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 5px 10px;
+    font-size: 12px; margin: 0 4px 4px 0; font-weight: 600; color: var(--navy);
   }
 
-  /* Search Input */
-  .search-row { display: flex; gap: 6px; margin-top: 8px; flex: none; }
-  .search-input {
-    flex: 1; background: #FFF; border: 1px solid var(--line); color: var(--ink);
-    padding: 7px 10px; border-radius: 6px; font-size: 12.5px; outline: none;
+  /* Daftar Hadir Terakhir */
+  .recent { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; min-height: 0; }
+  .recent li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+  .recent li:last-child { border-bottom: 0; }
+  .av {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
+    place-items: center; font-size: 13px; font-weight: 700; flex: none; font-family: var(--serif);
   }
-  .search-input:focus { border-color: var(--navy); }
-  .btn-search {
-    background: var(--navy); color: #FFF; font-weight: 600; padding: 7px 12px;
-    border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
+  .recent b { font-size: 14px; font-weight: 600; display: block; color: var(--ink); }
+  .recent span { font-size: 12px; color: var(--ink-3); }
+  .recent .seat-tag { margin-left: auto; font-family: var(--serif); font-size: 16px; color: var(--navy); font-weight: 700; }
+  .empty { color: var(--ink-3); font-size: 13px; padding: 20px 0; text-align: center; }
+
+  /* ---------- DenahKursi ---------- */
+  .map { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .stage {
+    background: var(--navy); color: #fff; border-radius: 8px; padding: 8px; text-align: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 12px; flex: none;
+    font-family: var(--serif);
+  }
+  .grid {
+    flex: 1; display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr);
+    gap: 6px; min-height: 0; padding: 4px;
+  }
+  .seat-cell {
+    border-radius: 8px; background: var(--ok-soft); border: 1px solid rgba(47,107,79,0.28);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    font-family: var(--serif); font-size: 16px; color: var(--ok); min-height: 0; transition: transform 0.2s;
+  }
+  .seat-cell small {
+    font-family: var(--sans); font-size: 9px; font-weight: 600; color: var(--ink-3);
+    max-width: 90%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .seat-cell.filled { background: #E7ECF5; border-color: #C3CFE4; color: var(--navy); }
+  .seat-cell.me {
+    background: var(--amber); border-color: #9A6E1E; color: #fff; transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(192,138,46,0.4); z-index: 2;
+  }
+  .seat-cell.me small { color: #FFF3DC; }
+  .seat-cell.near { border-color: var(--amber); border-width: 2px; }
+  .floor {
+    grid-column: 2 / 8; grid-row: 1 / 8; border: 2px solid #E0D6C2; border-radius: 10px;
+    background: repeating-linear-gradient(45deg, #F4EFE4 0 10px, #F1EBDE 10px 20px);
   }
 
-  /* Column 2: Maximized Seat Map Layout (Zero Whitespace) */
-  .screen-box {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 8px 12px; text-align: center;
-    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
-    margin-bottom: 4px; box-shadow: 0 2px 6px rgba(18, 53, 127, 0.15);
+  /* ---------- Kartu Hasil Presensi ---------- */
+  .pass {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    display: flex; flex-direction: column; min-height: 0; position: relative; box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  }
+  .pass-top { background: var(--navy); color: #fff; padding: 14px 18px; flex: none; border-bottom: 3px solid var(--amber); }
+  .pass-top .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--sky); }
+  .pass-top h2 { margin: 4px 0 0; font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.15; }
+  .pass-top .role { font-size: 13px; color: #C9D6EC; margin-top: 3px; }
+  .ok-badge {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; background: rgba(123,211,160,0.18);
+    border: 1px solid rgba(123,211,160,0.5); color: #BFEFD3; border-radius: 999px; padding: 5px 12px;
+    font-size: 12px; font-weight: 600;
+  }
+  .pass-body { padding: 14px 16px; overflow-y: auto; flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; }
+  
+  .bigseat {
+    display: flex; align-items: center; gap: 16px; background: #F4EFE4; border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 14px; flex: none;
+  }
+  .bigseat .num { font-family: var(--serif); font-size: 42px; line-height: 1; color: var(--navy); font-weight: 700; }
+  .bigseat .where b { display: block; font-size: 14.5px; font-weight: 600; color: var(--navy); }
+  .bigseat .where span { font-size: 12px; color: var(--ink-3); }
+
+  .sec { margin: 0; }
+  .sec h3 { margin: 0 0 8px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-3); text-transform: uppercase; }
+  .nb { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nb div { border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; background: #fff; }
+  .nb .side { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); display: flex; justify-content: space-between; }
+  .nb b { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.25; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  
+  .disc { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; border-radius: 999px; padding: 3px 8px; }
+  .disc.D { background: #F8E6E2; color: #A33A28; }
+  .disc.I { background: #FBF0DC; color: #8A6112; }
+  .disc.S { background: #E7F0EA; color: var(--ok); }
+  .disc.C { background: #E6EBF4; color: var(--navy); }
+
+  .tip {
+    margin: 0; background: #F4EFE4; border-left: 3px solid var(--amber); border-radius: 6px;
+    padding: 9px 12px; font-size: 12px; line-height: 1.5; color: var(--ink-2);
+  }
+  
+  .sesi-kini { border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; background: #fff; margin-top: auto !important; }
+  .sesi-kini b { display: block; font-size: 13.5px; line-height: 1.25; color: var(--navy); }
+  .sesi-kini span { display: block; font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+
+  .pass-foot { border-top: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex: none; background: #fff; }
+  .pass-foot .code { font-family: var(--serif); font-size: 14px; color: var(--ink-3); letter-spacing: 0.1em; font-weight: 700; }
+  .pass-foot button {
+    margin-left: auto; background: var(--navy); color: #fff; border-radius: 8px;
+    padding: 8px 16px; font-weight: 600; font-size: 13.5px;
+  }
+  .bar-graphic { display: flex; gap: 2px; align-items: flex-end; height: 22px; }
+  .bar-graphic i { width: 2px; background: var(--ink); display: block; }
+
+  /* Reset Timer Bar */
+  .reset-line { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--amber); animation: shrink 18s linear forwards; }
+  @keyframes shrink { from { width: 100%; } to { width: 0; } }
+
+  .toast {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 24px; background: var(--warn);
+    color: #fff; padding: 11px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  .map-wrapper-maximized {
-    flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
-    background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 8px; padding: 6px;
+  @media(max-width: 1100px) {
+    main { grid-template-columns: 1fr !important; grid-template-rows: auto 1fr; }
+    .seat-cell small { display: none; }
   }
-  .seat-node { transition: all 0.3s ease; cursor: pointer; }
-  .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12.5px; fill: #FFFFFF; pointer-events: none; }
-  .seat-node.checked-in .seat-rect { fill: #12357F; stroke: #0E2A66; }
-
-  /* Active Highlight Glow */
-  .seat-node.highlight .seat-rect {
-    fill: #C5A059 !important; stroke: #784519 !important; stroke-width: 3 !important;
-    filter: drop-shadow(0 0 14px rgba(197, 160, 89, 0.95)); animation: pulseGlow 1.5s infinite alternate;
-  }
-  .seat-node.highlight .seat-num { fill: #000000 !important; font-weight: 700; font-size: 13.5px; }
-
-  @keyframes pulseGlow {
-    from { filter: drop-shadow(0 0 6px rgba(197, 160, 89, 0.6)); }
-    to { filter: drop-shadow(0 0 18px rgba(197, 160, 89, 1)); }
-  }
-
-  /* Column 3: Zero Whitespace Luxury Event Pass Card */
-  .card-pass-full {
-    background: #FCFAF6; border: 1px solid var(--line); border-radius: var(--r);
-    padding: 0; box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    display: flex; flex-direction: column; overflow: hidden; height: 100%;
-  }
-
-  .pass-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; padding: 12px 16px; position: relative; flex: none;
-    border-bottom: 3px solid var(--gold);
-  }
-  .pass-header-top { display: flex; justify-content: space-between; align-items: center; }
-  .pass-title { font-family: var(--serif); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-  .pass-code { font-family: var(--sans); font-size: 12.5px; font-weight: 700; background: rgba(255,255,255,0.18); padding: 2px 10px; border-radius: 4px; }
-
-  .status-badge-ok {
-    display: inline-flex; align-items: center; gap: 6px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 4px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700;
-    margin-top: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-
-  .pass-body {
-    flex: 1; min-height: 0; padding: 14px 16px; display: flex; flex-direction: column;
-    justify-content: space-between; gap: 12px; overflow-y: auto; background: var(--paper-2);
-  }
-
-  .profile-block { display: flex; align-items: center; gap: 14px; }
-  .profile-avatar {
-    width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--navy) 0%, var(--gold) 100%);
-    color: #FFF; font-family: var(--serif); font-size: 20px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; flex: none;
-    box-shadow: 0 3px 10px rgba(18, 53, 127, 0.25); border: 2px solid #FFF;
-  }
-  .profile-details h3 { font-family: var(--serif); font-size: 21px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .profile-details p { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; font-weight: 600; }
-
-  .disc-badge-pill {
-    display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700;
-    color: var(--navy); background: #EAEFF9; border: 1px solid #C7D4EC; border-radius: 999px;
-    padding: 4px 12px; margin-top: 6px;
-  }
-
-  /* Hero Seat Section */
-  .hero-seat-ticket {
-    background: linear-gradient(135deg, #F5EFE3 0%, #E9DFC9 100%);
-    border: 1px solid #DFD2B7; border-radius: 10px; padding: 12px 16px;
-    display: flex; align-items: center; justify-content: space-between; flex: none;
-    box-shadow: inset 0 1px 3px rgba(255,255,255,0.8), 0 2px 6px rgba(0,0,0,0.03);
-  }
-  .hero-seat-ticket .label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em; color: var(--ink-3); text-transform: uppercase; }
-  .hero-seat-ticket .no { font-family: var(--serif); font-size: 36px; font-weight: 700; color: var(--navy); line-height: 1; margin-top: 2px; }
-  .hero-seat-ticket .pos-info { text-align: right; }
-  .hero-seat-ticket .pos-info b { font-size: 13px; color: var(--navy); display: block; }
-  .hero-seat-ticket .pos-info small { font-size: 11px; color: var(--ink-3); margin-top: 2px; display: block; }
-
-  /* Neighbor DiSC Profile Grid */
-  .neighbors-ticket-box {
-    background: #FFF; border: 1px solid var(--line-2); border-radius: 10px;
-    padding: 12px; border-left: 4px solid var(--navy); flex: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-  }
-  .neighbors-title {
-    font-size: 10.5px; font-weight: 700; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
-  }
-  .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .neighbor-col {
-    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 10px;
-  }
-  .neighbor-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
-  .neighbor-head span { font-size: 9.5px; font-weight: 700; color: var(--ink-3); letter-spacing: 0.04em; }
-  .neighbor-head .seat-tag { font-size: 10.5px; font-weight: 700; color: var(--navy); background: #EAEFF9; padding: 1px 6px; border-radius: 4px; }
-  .neighbor-col b { display: block; font-size: 12.5px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-  .neighbor-col i { font-style: normal; font-size: 11px; color: var(--navy); font-weight: 600; display: block; margin-top: 2px; }
-
-  .disc-info-tip {
-    background: #F2ECDF; border: 1px dashed #D6C8AC; border-radius: 6px;
-    padding: 8px 12px; font-size: 11px; color: var(--ink-2); line-height: 1.35; flex: none;
-  }
-
-  /* Decorative Ticket Barcode Footer */
-  .barcode-footer {
-    display: flex; align-items: center; justify-content: space-between;
-    background: #FFF; border-top: 1px dashed var(--line); padding: 10px 16px; flex: none;
-  }
-  .barcode-lines {
-    display: flex; gap: 2.5px; height: 26px; align-items: center;
-  }
-  .barcode-lines span {
-    background: #111; height: 100%; border-radius: 1px;
-  }
-  .barcode-num { font-family: monospace; font-size: 11.5px; font-weight: 700; color: var(--ink); letter-spacing: 0.12em; }
   </style>
 </head>
 <body>
 
-  <div class="band"></div>
+<div class="app" id="app"></div>
 
-  <!-- Header Bar - Clean Non-Cropped Flex Header -->
-  <header class="bar">
-    <div class="bar-in">
-      <div class="brand">
-        <div class="brand-logo">SM</div>
-        <div class="brand-text">
-          <b>Sales Mastery Bootcamp</b>
-          <span>Pemindai Presensi &amp; Seat Locator</span>
-        </div>
-      </div>
-      <div class="bar-stats">
-        <div class="counter-badge" id="attendance-counter">0 / 22 Hadir</div>
-        <a href="index.html" class="btn-link">Handbook</a>
-      </div>
+<script>
+/* ---------------- Database ---------------- */
+const SESI = [
+  { mulai: "08:15", selesai: "08:45", nama: "Registrasi Training", tempat: "Lobi Resort" },
+  { mulai: "08:45", selesai: "12:00", nama: "Fundamental Sandler Selling Approach", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
+  { mulai: "12:00", selesai: "13:00", nama: "Lunch Break", tempat: "Dining Hall" },
+  { mulai: "13:00", selesai: "18:00", nama: "Sandler Advanced Execution", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
+  { mulai: "18:00", selesai: "19:00", nama: "Check-in Kamar & Refreshing", tempat: "Lobi Resort" },
+  { mulai: "19:00", selesai: "21:00", nama: "Dinner & Networking", tempat: "Dining Hall" }
+];
+
+const P = [
+  ["SMB-001", "Fadli Fahmi Ali", "CEO", "D", 1],
+  ["SMB-002", "Ahmad Rizki", "Business Development", "I", 2],
+  ["SMB-003", "Eko Prasetyo", "Senior Sales Specialist", "S", 3],
+  ["SMB-004", "Budi Santoso", "Sales Executive", "S", 4],
+  ["SMB-005", "Dian Permata", "Sales Lead", "I", 5],
+  ["SMB-006", "Fitriani Putri", "Key Account Executive", "C", 6],
+  ["SMB-007", "Gilang Ramadhan", "Sustainability Consultant", "I", 7],
+  ["SMB-008", "Delon Sianipar", "Senior Consultant", "C", 8],
+  ["SMB-009", "Hendra Wijaya", "Regional Sales Manager", "D", 9],
+  ["SMB-010", "Indah Lestari", "Corporate Sales", "S", 10],
+  ["SMB-011", "Joko Susilo", "Enterprise Sales Executive", "D", 11],
+  ["SMB-012", "Fano Alfian Ardiansyah", "Founder & CEO", "I", 12],
+  ["SMB-013", "Karin Novita", "Sales Trainer Associate", "C", 13],
+  ["SMB-014", "Lukman Hakim", "Strategic Account Manager", "S", 14],
+  ["SMB-015", "Maya Anggraini", "ESG & Sales Specialist", "I", 15],
+  ["SMB-016", "Naufal Pratama", "Commercial Executive", "D", 16],
+  ["SMB-017", "Olivia Zahrani", "Client Relations Lead", "S", 17],
+  ["SMB-018", "Panji Kusuma", "Business Development", "I", 18],
+  ["SMB-019", "Rina Marlina", "Sales Consultant", "C", 19],
+  ["SMB-020", "Siti Rahmawati", "Account Manager", "S", 20],
+  ["SMB-021", "Surya Saputra", "Area Sales Executive", "D", 21],
+  ["SMB-022", "Wahyu Hidayat", "Sales Performance Analyst", "C", 22]
+].map(a => ({ kode: a[0], nama: a[1], peran: a[2], disc: a[3], kursi: a[4] }));
+
+const DISC = { D: "Dominance", I: "Influencing", S: "Steadiness", C: "Conscientiousness" };
+const SARAN = {
+  D: "cenderung langsung ke inti. Sampaikan poin utama lebih dulu.",
+  I: "cenderung ekspresif. Beri ruang untuk berbicara dan bertukar ide.",
+  S: "cenderung tenang dan konsisten. Beri waktu untuk mencerna.",
+  C: "cenderung teliti pada detail. Siapkan data pendukung."
+};
+
+/* Posisi kursi grid 8x8 — U-Shape */
+const POS = {};
+for (let n = 1; n <= 7; n++) POS[n] = { c: 1, r: n };          // sisi kiri
+for (let n = 8; n <= 15; n++) POS[n] = { c: n - 7, r: 8 };      // sisi bawah
+for (let n = 16; n <= 22; n++) POS[n] = { c: 8, r: 8 - (n - 15) }; // sisi kanan
+
+const S = {
+  layar: "idle",
+  orang: null,
+  hadir: new Set(["SMB-001", "SMB-005", "SMB-008", "SMB-012", "SMB-018"]),
+  riwayat: ["SMB-001", "SMB-008", "SMB-012", "SMB-005", "SMB-018"],
+  jam: 8 * 60 + 52,
+  pesan: null
+};
+
+let html5QrCode = null;
+
+/* ---------------- Util ---------------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const jam = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+const men = t => (+t.slice(0, 2)) * 60 + (+t.slice(3, 5));
+const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+const sisi = n => n <= 7 ? "Sisi Kiri Meja U" : n <= 15 ? "Sisi Bawah Meja U" : "Sisi Kanan Meja U";
+const org = k => P.find(p => p.kursi === k);
+
+function sesiKini() {
+  const n = S.jam;
+  return SESI.find(s => men(s.mulai) <= n && men(s.selesai) > n) || null;
+}
+function tetangga(kursi) {
+  const kiri = org(kursi - 1), kanan = org(kursi + 1);
+  return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 22 ? kanan : null };
+}
+
+/* ---------------- Tampilan Components ---------------- */
+function bilahAtas() {
+  const s = sesiKini();
+  return `
+  <header class="top">
+    <div class="logo">SM</div>
+    <div>
+      <h1>Sales Mastery Bootcamp</h1>
+      <div class="sub">Pemindai Presensi &amp; Seat Locator</div>
+    </div>
+    <div class="right">
+      <div class="count"><b>${S.hadir.size}</b> / ${P.length} Hadir</div>
+      <div class="clock">${jam(S.jam)}</div>
+      <a href="index.html" class="btn-hb">Handbook</a>
     </div>
   </header>
+  ${s ? `<div class="now">
+    <span class="dot"></span>
+    <div>
+      <div class="lbl">SEDANG BERLANGSUNG</div>
+      <b>${esc(s.nama)}</b>
+    </div>
+    <div class="meta">${s.mulai} – ${s.selesai}<br>${esc(s.tempat)}${s.oleh ? " · " + esc(s.oleh) : ""}</div>
+  </div>` : ""}`;
+}
 
-  <!-- 3 Separate Cards Single Viewport Grid -->
-  <main class="viewport-grid">
-    
-    <!-- Kolom 1 (Kartu Kiri): Kamera Pemindai QR -->
-    <div class="card">
-      <div class="card-h">
-        <span>Kamera Pemindai QR</span>
-        <small style="font-size: 11px; font-weight: 600; color: var(--ok);">● Aktif Memindai</small>
-      </div>
+function denah(sorot) {
+  const t = sorot ? tetangga(sorot) : {};
+  const kursi = [];
+  for (let n = 1; n <= 22; n++) {
+    const p = org(n), pos = POS[n];
+    const aku = n === sorot;
+    const dekat = (t.kiri && t.kiri.kursi === n) || (t.kanan && t.kanan.kursi === n);
+    const isi = p && S.hadir.has(p.kode);
+    kursi.push(`<div class="seat-cell ${aku ? "me" : isi ? "filled" : ""} ${dekat ? "near" : ""}"
+      style="grid-column:${pos.c};grid-row:${pos.r}">
+      ${n}${p ? `<small>${esc(p.nama.split(" ")[0])}</small>` : ""}</div>`);
+  }
+  return `<div class="map">
+    <div class="stage">PANGGUNG · LAYAR · WHITEBOARD</div>
+    <div class="grid"><div class="floor"></div>${kursi.join("")}</div>
+  </div>`;
+}
 
-      <!-- Camera Scanner Viewport -->
-      <div class="camera-container">
+function layarSiaga() {
+  const r = S.riwayat.slice(-6).reverse();
+  return `<main class="idle">
+    <section class="panel">
+      <h2>Pemindai QR Tiket</h2>
+      <div class="hint">Arahkan QR Code tiket ke kamera untuk presensi instan</div>
+      <div class="scanbox">
         <div id="reader"></div>
         <div class="scanner-overlay">
           <div class="scanner-corner tl"></div>
@@ -337,344 +395,104 @@
           <div class="scan-laser"></div>
         </div>
       </div>
-
-      <!-- Quick Search / Manual Ticket Input -->
-      <form class="search-row" onsubmit="handleManualSearch(event)">
-        <input type="text" class="search-input" id="search-input" placeholder="Kode Tiket (SMB-005) / Nama..." required>
-        <button type="submit" class="btn-search">Cari</button>
-      </form>
-    </div>
-
-    <!-- Kolom 2 (Kartu Tengah): Denah Kursi Pelatihan (U-Shape Map Max Size) -->
-    <div class="card">
-      <div class="card-h">
-        <span>Denah Kursi Pelatihan (U-Shape)</span>
-        <small style="font-size: 11px; color: var(--ink-3);">Kalyana Resort</small>
+      <div class="manual">
+        <input id="kode" placeholder="Atau ketik kode tiket / nama, mis. SMB-018" autocomplete="off">
+        <button data-cari>Cari</button>
       </div>
-
-      <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
-
-      <!-- SVG U-SHAPE SEAT MAP (Zoomed & Fitted ViewBox to remove whitespace) -->
-      <div class="map-wrapper-maximized">
-        <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
-          <g>
-            <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
-                     fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-            <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
-            <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
-            <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
-            <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
-            <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
-          </g>
-
-          <g id="svg-seats-group"></g>
-        </svg>
+      <div class="demo">
+        <b>Simulasi Pemindaian Fast Check-In</b>
+        ${["SMB-018", "SMB-005", "SMB-012", "SMB-022"].map(k => `<button data-demo="${k}">${k}</button>`).join("")}
       </div>
-    </div>
+    </section>
 
-    <!-- Kolom 3 (Kartu Kanan): Estetik Digital Event Check-In Pass (Full Card View) -->
-    <div id="result-container" class="card-pass-full">
-      
-      <!-- Pass Banner Header -->
-      <div class="pass-header">
-        <div class="pass-header-top">
-          <span class="pass-title">VIP CHECK-IN PASS</span>
-          <span class="pass-code" id="res-code">SMB-018</span>
-        </div>
-        <div class="status-badge-ok">
-          ✓ PRESENSI HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">01:51:14</span>
-        </div>
+    <section class="panel">
+      <h2>Baru Saja Hadir</h2>
+      <div class="hint">${S.hadir.size} dari ${P.length} peserta sudah check-in</div>
+      ${r.length ? `<ul class="recent">${r.map(k => {
+        const p = P.find(x => x.kode === k);
+        return `
+        <li>
+          <div class="av">${inisial(p.nama)}</div>
+          <div><b>${esc(p.nama)}</b><span>${esc(p.peran)}</span></div>
+          <div class="seat-tag">#${p.kursi}</div>
+        </li>`;
+      }).join("")}</ul>` : `<div class="empty">Belum ada peserta yang memindai tiket di perangkat ini.</div>`}
+    </section>
+  </main>`;
+}
+
+function layarHasil() {
+  const p = S.orang, t = tetangga(p.kursi);
+  const kartu = (lbl, o) => o ? `
+    <div>
+      <div class="side"><span>${lbl}</span><span>#${o.kursi}</span></div>
+      <b>${esc(o.nama)}</b>
+      <span class="disc ${o.disc}">${o.disc} · ${DISC[o.disc]}</span>
+    </div>` : `
+    <div>
+      <div class="side"><span>${lbl}</span><span>—</span></div>
+      <b style="color:var(--ink-3)">Ujung Meja Utama</b>
+    </div>`;
+  const s = sesiKini();
+  return `<main class="result">
+    <section class="panel">${denah(p.kursi)}</section>
+
+    <section class="pass">
+      <div class="reset-line"></div>
+      <div class="pass-top">
+        <div class="lbl">PRESENSI TERCATAT</div>
+        <h2>${esc(p.nama)}</h2>
+        <div class="role">${esc(p.peran)} · Werkudara Group</div>
+        <div class="ok-badge">✓ Hadir pukul ${jam(S.jam)}</div>
       </div>
-
-      <!-- Pass Body Details -->
       <div class="pass-body">
-        
-        <!-- Participant Profile -->
-        <div class="profile-block">
-          <div class="profile-avatar" id="res-avatar">PK</div>
-          <div class="profile-details">
-            <h3 id="res-name">Panji Kusuma</h3>
-            <p id="res-dept">Business Development · Werkudara</p>
-            <div class="disc-badge-pill" id="res-disc">DiSC: I (Influencing)</div>
+        <div class="bigseat">
+          <div class="num">${p.kursi}</div>
+          <div class="where">
+            <b>${sisi(p.kursi)}</b>
+            <span>Nomor kursi tertera di denah U-Shape</span>
           </div>
         </div>
 
-        <!-- Hero Seat Ticket Stub -->
-        <div class="hero-seat-ticket">
-          <div>
-            <div class="label">NOMOR KURSI</div>
-            <div class="no" id="res-seat-no">#18</div>
-          </div>
-          <div class="pos-info" id="res-seat-pos">
-            <b>Sisi Kanan Meja U (Kursi #18)</b>
-            <small>Kalyana Resort Kaliurang</small>
-          </div>
+        <div class="sec">
+          <h3>REKAN DUDUK SEBELAH &amp; DiSC PROFILE</h3>
+          <div class="nb">${kartu("SEBELAH KIRI", t.kiri)}${kartu("SEBELAH KANAN", t.kanan)}</div>
         </div>
 
-        <!-- Neighbor DiSC Profile Grid -->
-        <div class="neighbors-ticket-box">
-          <div class="neighbors-title">REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
-          <div class="neighbor-grid-compact">
-            <div class="neighbor-col">
-              <div class="neighbor-head">
-                <span>SEBELAH KIRI</span>
-                <span class="seat-tag" id="res-left-no">#17</span>
-              </div>
-              <b id="res-left-name">Olivia Zahrani</b>
-              <i id="res-left-disc">DiSC: S (Steadiness)</i>
-            </div>
-            <div class="neighbor-col">
-              <div class="neighbor-head">
-                <span>SEBELAH KANAN</span>
-                <span class="seat-tag" id="res-right-no">#19</span>
-              </div>
-              <b id="res-right-name">Rina Marlina</b>
-              <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
-            </div>
-          </div>
-        </div>
+        ${t.kiri || t.kanan ? `<div class="tip">
+          <b>Menyesuaikan Gaya Komunikasi:</b>
+          ${t.kiri ? `${esc(t.kiri.nama.split(" ")[0])} ${SARAN[t.kiri.disc]}` : ""}
+          ${t.kanan ? ` ${esc(t.kanan.nama.split(" ")[0])} ${SARAN[t.kanan.disc]}` : ""}
+        </div>` : ""}
 
-        <!-- DiSC Communication Tip Box -->
-        <div class="disc-info-tip">
-          <b>Fasilitasi &amp; Komunikasi:</b> Profil DiSC peserta membantu fasilitator &amp; sesama rekan dalam menyesuaikan gaya komunikasi selama sesi bootcamp.
-        </div>
-
+        ${s ? `<div class="sec sesi-kini">
+          <h3>SESI BERLANGSUNG</h3>
+          <b>${esc(s.nama)}</b>
+          <span>${s.mulai} – ${s.selesai} · ${esc(s.tempat)}</span>
+        </div>` : ""}
       </div>
-
-      <!-- Decorative Ticket Barcode Footer -->
-      <div class="barcode-footer">
-        <div class="barcode-lines">
-          <span style="width:2px;"></span><span style="width:4px;"></span><span style="width:1.5px;"></span>
-          <span style="width:3px;"></span><span style="width:2px;"></span><span style="width:5px;"></span>
-          <span style="width:1.5px;"></span><span style="width:3px;"></span><span style="width:2px;"></span>
-          <span style="width:4px;"></span><span style="width:1.5px;"></span><span style="width:3px;"></span>
-        </div>
-        <span class="barcode-num" id="res-barcode-text">SMB-018-2026</span>
+      <div class="pass-foot">
+        <div class="bar-graphic">${Array.from({ length: 26 }, (_, i) => `<i style="height:${10 + ((i * 7) % 15)}px"></i>`).join("")}</div>
+        <div class="code">${p.kode}</div>
+        <button data-selesai>Selesai</button>
       </div>
+    </section>
+  </main>`;
+}
 
-    </div>
-
-  </main>
-
-  <script>
-  // Complete 22 Participants Database with DiSC Personality Profiles
-  const PARTICIPANTS_DB = [
-    { seat: 1, code: "SMB-001", name: "Fadli Fahmi Ali", email: "fadli.ali@werkudara.com", dept: "CEO · Werkudara Group", disc: "D (Dominant)", pos: "Sisi Kiri Meja U (Kursi #1)" },
-    { seat: 2, code: "SMB-002", name: "Ahmad Rizki", email: "ahmad.rizki@ailesh.com", dept: "Business Development · Ailesh", disc: "I (Influencing)", pos: "Sisi Kiri Meja U (Kursi #2)" },
-    { seat: 3, code: "SMB-003", name: "Eko Prasetyo", email: "eko.prasetyo@sandler.co.id", dept: "Senior Sales Specialist · Sandler", disc: "S (Steadiness)", pos: "Sisi Kiri Meja U (Kursi #3)" },
-    { seat: 4, code: "SMB-004", name: "Budi Santoso", email: "budi.santoso@werkudara.com", dept: "Sales Executive · Werkudara", disc: "S (Steadiness)", pos: "Sisi Kiri Meja U (Kursi #4)" },
-    { seat: 5, code: "SMB-005", name: "Dian Permata", email: "dian.permata@werkudara.com", dept: "Sales Lead · Werkudara Group", disc: "I (Influencing)", pos: "Sisi Kiri Meja U (Kursi #5)" },
-    { seat: 6, code: "SMB-006", name: "Fitriani Putri", email: "fitri.putri@werkudara.com", dept: "Key Account Executive · Werkudara", disc: "C (Conscientiousness)", pos: "Sisi Kiri Meja U (Kursi #6)" },
-    { seat: 7, code: "SMB-007", name: "Gilang Ramadhan", email: "gilang.r@ailesh.com", dept: "Sustainability Consultant · Ailesh", disc: "I (Influencing)", pos: "Sisi Kiri Meja U (Kursi #7)" },
-    { seat: 8, code: "SMB-008", name: "Delon Sianipar", email: "delon.sianipar@sandler.co.id", dept: "Senior Consultant · Sandler Training", disc: "C (Conscientiousness)", pos: "Sisi Kiri Meja U (Kursi #8)" },
-    { seat: 9, code: "SMB-009", name: "Hendra Wijaya", email: "hendra.w@werkudara.com", dept: "Regional Sales Manager · Werkudara", disc: "D (Dominant)", pos: "Sudut Kiri Bawah Meja U (Kursi #9)" },
-    { seat: 10, code: "SMB-010", name: "Indah Lestari", email: "indah.lestari@werkudara.com", dept: "Corporate Sales · Werkudara", disc: "S (Steadiness)", pos: "Sisi Tengah Bawah (Kursi #10)" },
-    { seat: 11, code: "SMB-011", name: "Joko Susilo", email: "joko.susilo@werkudara.com", dept: "Enterprise Sales Executive · Werkudara", disc: "D (Dominant)", pos: "Sisi Tengah Bawah (Kursi #11)" },
-    { seat: 12, code: "SMB-012", name: "Fano Alfian Ardiansyah", email: "fano.alfian@ailesh.com", dept: "Founder & CEO · Ailesh", disc: "I (Influencing)", pos: "Sisi Tengah Bawah (Kursi #12)" },
-    { seat: 13, code: "SMB-013", name: "Karin Novita", email: "karin.novita@sandler.co.id", dept: "Sales Trainer Associate · Sandler", disc: "C (Conscientiousness)", pos: "Sisi Tengah Bawah (Kursi #13)" },
-    { seat: 14, code: "SMB-014", name: "Lukman Hakim", email: "lukman.hakim@werkudara.com", dept: "Strategic Account Manager · Werkudara", disc: "S (Steadiness)", pos: "Sudut Kanan Bawah Meja U (Kursi #14)" },
-    { seat: 15, code: "SMB-015", name: "Maya Anggraini", email: "maya.a@ailesh.com", dept: "ESG & Sales Specialist · Ailesh", disc: "I (Influencing)", pos: "Sisi Kanan Meja U (Kursi #15)" },
-    { seat: 16, code: "SMB-016", name: "Naufal Pratama", email: "naufal.p@werkudara.com", dept: "Commercial Executive · Werkudara", disc: "D (Dominant)", pos: "Sisi Kanan Meja U (Kursi #16)" },
-    { seat: 17, code: "SMB-017", name: "Olivia Zahrani", email: "olivia.z@werkudara.com", dept: "Client Relations Lead · Werkudara", disc: "S (Steadiness)", pos: "Sisi Kanan Meja U (Kursi #17)" },
-    { seat: 18, code: "SMB-018", name: "Panji Kusuma", email: "panji.k@werkudara.com", dept: "Business Development · Werkudara", disc: "I (Influencing)", pos: "Sisi Kanan Meja U (Kursi #18)" },
-    { seat: 19, code: "SMB-019", name: "Rina Marlina", email: "rina.marlina@werkudara.com", dept: "Sales Consultant · Werkudara", disc: "C (Conscientiousness)", pos: "Sisi Kanan Meja U (Kursi #19)" },
-    { seat: 20, code: "SMB-020", name: "Siti Rahmawati", email: "siti.rahma@werkudara.com", dept: "Account Manager · Werkudara", disc: "S (Steadiness)", pos: "Sisi Kanan Meja U (Kursi #20)" },
-    { seat: 21, code: "SMB-021", name: "Surya Saputra", email: "surya.s@werkudara.com", dept: "Area Sales Executive · Werkudara", disc: "D (Dominant)", pos: "Sisi Kanan Meja U (Kursi #21)" },
-    { seat: 22, code: "SMB-022", name: "Wahyu Hidayat", email: "wahyu.h@werkudara.com", dept: "Sales Performance Analyst · Werkudara", disc: "C (Conscientiousness)", pos: "Sisi Kanan Meja U (Kursi #22)" }
-  ];
-
-  // SVG Coordinates
-  const SEAT_COORDS = [
-    { seat: 1, x: 124, y: 80, rot: 0 },
-    { seat: 2, x: 124, y: 111, rot: 0 },
-    { seat: 3, x: 124, y: 142, rot: 0 },
-    { seat: 4, x: 124, y: 173, rot: 0 },
-    { seat: 5, x: 124, y: 204, rot: 0 },
-    { seat: 6, x: 124, y: 235, rot: 0 },
-    { seat: 7, x: 124, y: 266, rot: 0 },
-    { seat: 8, x: 124, y: 297, rot: 0 },
-    { seat: 9, x: 138, y: 345, rot: -45 },
-    { seat: 10, x: 195, y: 368, rot: 0 },
-    { seat: 11, x: 235, y: 368, rot: 0 },
-    { seat: 12, x: 275, y: 368, rot: 0 },
-    { seat: 13, x: 315, y: 368, rot: 0 },
-    { seat: 14, x: 374, y: 345, rot: 45 },
-    { seat: 15, x: 388, y: 297, rot: 0 },
-    { seat: 16, x: 388, y: 266, rot: 0 },
-    { seat: 17, x: 388, y: 235, rot: 0 },
-    { seat: 18, x: 388, y: 204, rot: 0 },
-    { seat: 19, x: 388, y: 173, rot: 0 },
-    { seat: 20, x: 388, y: 142, rot: 0 },
-    { seat: 21, x: 388, y: 111, rot: 0 },
-    { seat: 22, x: 388, y: 80, rot: 0 }
-  ];
-
-  // Helper Initials generator
-  function getInitials(name) {
-    if (!name) return "P";
-    const parts = name.trim().split(" ");
-    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-    return parts[0].substring(0, 2).toUpperCase();
-  }
-
-  // State Management
-  let checkedInSeats = {}; // { [seatNum]: timestamp }
-  let currentActiveSeat = null;
-  let html5QrCode = null;
-
-  function loadCheckIns() {
-    const saved = localStorage.getItem("smb_presensi_data");
-    if (saved) checkedInSeats = JSON.parse(saved);
-    else {
-      const now = new Date().toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit' });
-      checkedInSeats = { 1: now, 8: now, 12: now };
-      saveCheckIns();
+/* ---------------- Camera Scanner Init ---------------- */
+function startAutoCamera() {
+  if (S.layar !== "idle") return;
+  setTimeout(() => {
+    const readerEl = document.getElementById("reader");
+    if (!readerEl) return;
+    if (html5QrCode) {
+      try { html5QrCode.clear(); } catch(e){}
     }
-    updateAttendanceCounter();
-  }
-
-  function saveCheckIns() {
-    localStorage.setItem("smb_presensi_data", JSON.stringify(checkedInSeats));
-    updateAttendanceCounter();
-  }
-
-  function updateAttendanceCounter() {
-    const count = Object.keys(checkedInSeats).length;
-    document.getElementById("attendance-counter").textContent = `${count} / 22 Hadir`;
-  }
-
-  // Render SVG Seats
-  function renderSeats() {
-    const g = document.getElementById("svg-seats-group");
-    g.innerHTML = "";
-
-    SEAT_COORDS.forEach(item => {
-      const isHighlighted = currentActiveSeat === item.seat;
-      const isChecked = !!checkedInSeats[item.seat];
-      const dataItem = PARTICIPANTS_DB.find(d => d.seat === item.seat);
-
-      const nodeG = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      let cls = "seat-node ";
-      if (isHighlighted) cls += "highlight ";
-      if (isChecked) cls += "checked-in ";
-
-      nodeG.setAttribute("class", cls);
-      nodeG.setAttribute("transform", `translate(${item.x}, ${item.y})`);
-      nodeG.onclick = () => selectBySeatNumber(item.seat);
-
-      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      rect.setAttribute("width", "28");
-      rect.setAttribute("height", "25");
-      rect.setAttribute("rx", "7");
-      rect.setAttribute("class", "seat-rect");
-      if (item.rot !== 0) rect.setAttribute("transform", `rotate(${item.rot}, 14, 12.5)`);
-
-      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      text.setAttribute("x", "14");
-      text.setAttribute("y", "17");
-      text.setAttribute("class", "seat-num");
-      text.setAttribute("text-anchor", "middle");
-      text.textContent = item.seat;
-
-      const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
-      title.textContent = `Kursi #${item.seat}: ${dataItem ? dataItem.name : "Peserta"} (${dataItem ? dataItem.disc : ""})`;
-
-      nodeG.appendChild(rect);
-      nodeG.appendChild(text);
-      nodeG.appendChild(title);
-      g.appendChild(nodeG);
-    });
-  }
-
-  // Select Participant & Record Check-In
-  async function selectByTicketCode(code) {
-    const item = PARTICIPANTS_DB.find(d => d.code.toUpperCase() === code.toUpperCase() || d.name.toLowerCase().includes(code.toLowerCase()));
-    if (item) {
-      recordCheckIn(item);
-    } else {
-      alert(`Kode tiket / nama "${code}" tidak terdaftar dalam sistem presensi.`);
-    }
-  }
-
-  function selectBySeatNumber(seatNum) {
-    const item = PARTICIPANTS_DB.find(d => d.seat === seatNum);
-    if (item) recordCheckIn(item);
-  }
-
-  // Record Check-In Timestamp
-  async function recordCheckIn(item) {
-    let now = new Date().toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-    try {
-      const res = await fetch(`/api/checkin?code=${encodeURIComponent(item.code)}`, { method: "POST" });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.timestamp) now = data.timestamp;
-      }
-    } catch (e) {}
-
-    if (!checkedInSeats[item.seat]) {
-      checkedInSeats[item.seat] = now;
-      saveCheckIns();
-    }
-
-    currentActiveSeat = item.seat;
-    renderSeats();
-
-    // Show Result Card inside Column 3
-    const container = document.getElementById("result-container");
-    container.style.display = "flex";
-
-    document.getElementById("res-timestamp").textContent = checkedInSeats[item.seat] || now;
-    document.getElementById("res-name").textContent = item.name;
-    document.getElementById("res-avatar").textContent = getInitials(item.name);
-    document.getElementById("res-dept").textContent = item.dept;
-    document.getElementById("res-disc").textContent = `DiSC: ${item.disc}`;
-    document.getElementById("res-code").textContent = item.code;
-    document.getElementById("res-barcode-text").textContent = `${item.code}-2026`;
-    document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
-    document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><small>Kalyana Resort Kaliurang</small>`;
-
-    // Calculate left & right neighbors + DiSC
-    const leftSeatNum = item.seat > 1 ? item.seat - 1 : null;
-    const rightSeatNum = item.seat < 22 ? item.seat + 1 : null;
-
-    const leftObj = leftSeatNum ? PARTICIPANTS_DB.find(d => d.seat === leftSeatNum) : null;
-    const rightObj = rightSeatNum ? PARTICIPANTS_DB.find(d => d.seat === rightSeatNum) : null;
-
-    document.getElementById("res-left-no").textContent = leftSeatNum ? `#${leftSeatNum}` : "-";
-    if (leftObj) {
-      document.getElementById("res-left-name").textContent = leftObj.name;
-      document.getElementById("res-left-disc").textContent = `DiSC: ${leftObj.disc}`;
-    } else {
-      document.getElementById("res-left-name").textContent = "Ujung Meja Utama";
-      document.getElementById("res-left-disc").textContent = "";
-    }
-
-    document.getElementById("res-right-no").textContent = rightSeatNum ? `#${rightSeatNum}` : "-";
-    if (rightObj) {
-      document.getElementById("res-right-name").textContent = rightObj.name;
-      document.getElementById("res-right-disc").textContent = `DiSC: ${rightObj.disc}`;
-    } else {
-      document.getElementById("res-right-name").textContent = "Ujung Meja Utama";
-      document.getElementById("res-right-disc").textContent = "";
-    }
-  }
-
-  function handleManualSearch(e) {
-    e.preventDefault();
-    const val = document.getElementById("search-input").value.trim();
-    if (val) selectByTicketCode(val);
-  }
-
-  // Direct Clean Camera Scanner Initialization (No default UI buttons or cropped black boxes)
-  function startAutoCamera() {
-    if (html5QrCode) return;
     html5QrCode = new Html5Qrcode("reader");
-    const config = { fps: 15, qrbox: { width: 220, height: 220 } };
-
+    const config = { fps: 15, qrbox: { width: 200, height: 200 } };
     const onScanSuccess = (decodedText) => {
-      selectByTicketCode(decodedText);
+      cari(decodedText);
     };
 
     html5QrCode.start({ facingMode: "user" }, config, onScanSuccess)
@@ -685,18 +503,87 @@
               if (cameras && cameras.length) {
                 html5QrCode.start(cameras[0].id, config, onScanSuccess);
               }
-            }).catch(err3 => console.error("No camera found", err3));
+            }).catch(e => {});
           });
       });
-  }
+  }, 100);
+}
 
-  // App Init
-  window.addEventListener("DOMContentLoaded", () => {
-    loadCheckIns();
-    renderSeats();
+function stopAutoCamera() {
+  if (html5QrCode) {
+    try {
+      html5QrCode.stop().then(() => {
+        html5QrCode.clear();
+      }).catch(e => {});
+    } catch(e){}
+  }
+}
+
+/* ---------------- Render & Logic Handler ---------------- */
+function render() {
+  $("#app").innerHTML = bilahAtas() + (S.layar === "idle" ? layarSiaga() : layarHasil()) +
+    (S.pesan ? `<div class="toast">${esc(S.pesan)}</div>` : "");
+  
+  const i = $("#kode"); if (i) i.focus();
+  clearTimeout(window._kembali);
+
+  if (S.layar === "idle") {
     startAutoCamera();
-    selectBySeatNumber(18); // Default display Panji Kusuma (#18)
-  });
-  </script>
+  } else {
+    stopAutoCamera();
+    window._kembali = setTimeout(() => {
+      S.layar = "idle";
+      S.orang = null;
+      render();
+    }, 18000);
+  }
+}
+
+function cari(kode) {
+  const k = String(kode || "").trim().toUpperCase();
+  const p = P.find(x => x.kode === k) || P.find(x => x.nama.toUpperCase().includes(k) && k.length > 2);
+  if (!p) { pesan("Kode tiket atau nama tidak terdaftar dalam sistem presensi."); return; }
+  
+  S.hadir.add(p.kode);
+  S.riwayat = S.riwayat.filter(x => x !== p.kode).concat(p.kode);
+  S.orang = p;
+  S.layar = "hasil";
+  render();
+}
+
+function pesan(t) {
+  S.pesan = t;
+  render();
+  clearTimeout(window._p);
+  window._p = setTimeout(() => { S.pesan = null; render(); }, 3200);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-cari],[data-demo],[data-selesai]");
+  if (!t) return;
+  if (t.dataset.demo !== undefined) return cari(t.dataset.demo);
+  if (t.hasAttribute("data-cari")) return cari($("#kode").value);
+  if (t.hasAttribute("data-selesai")) { S.layar = "idle"; S.orang = null; render(); }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  if (S.layar === "hasil") { S.layar = "idle"; S.orang = null; render(); return; }
+  const i = $("#kode"); if (i && i.value.trim()) cari(i.value);
+});
+
+setInterval(() => {
+  const now = new Date();
+  S.jam = now.getHours() * 60 + now.getMinutes();
+  if (S.layar === "idle") render();
+}, 30000);
+
+// Initial Load
+window.addEventListener("DOMContentLoaded", () => {
+  const now = new Date();
+  S.jam = now.getHours() * 60 + now.getMinutes();
+  render();
+});
+</script>
 </body>
 </html>
