@@ -46,37 +46,46 @@
 
   .band { height: 5px; background: var(--navy); }
 
-  /* Header Bar */
+  /* Header Bar - Fixed Non-Cropped Flex Alignment */
   .bar {
-    height: 46px;
+    min-height: 48px;
+    height: auto;
     background: rgba(239, 233, 221, 0.96);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: 0 18px;
+    padding: 6px 18px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .brand { display: flex; align-items: center; gap: 10px; }
+  .bar-in {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .brand-logo {
     width: 30px; height: 30px; background: var(--navy); border-radius: 50%;
     color: #fff; display: flex; align-items: center; justify-content: center;
     font-family: var(--serif); font-size: 13.5px; font-weight: 700;
   }
   .brand-text b { font-family: var(--serif); font-size: 15.5px; font-weight: 400; color: var(--navy); }
-  .brand-text span { font-size: 11px; color: var(--ink-3); margin-left: 8px; }
+  .brand-text span { font-size: 11px; color: var(--ink-3); margin-left: 6px; }
 
-  .bar-stats { display: flex; align-items: center; gap: 10px; }
+  .bar-stats { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .counter-badge {
     background: var(--navy); color: #fff; font-weight: 700; font-size: 11px;
-    padding: 3px 10px; border-radius: 999px; letter-spacing: 0.03em;
+    padding: 4px 12px; border-radius: 999px; letter-spacing: 0.03em;
   }
   .btn-link {
     background: transparent; border: 1px solid var(--line); color: var(--ink-2);
-    padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
+    padding: 4px 12px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
 
   /* 3-Column Single Viewport Grid Layout */
   .viewport-grid {
-    height: calc(100vh - 51px);
+    height: calc(100vh - 53px);
     display: grid; 
     grid-template-columns: 290px 1.15fr 360px; 
     gap: 12px;
@@ -290,7 +299,7 @@
 
   <div class="band"></div>
 
-  <!-- Header Bar -->
+  <!-- Header Bar - Clean Non-Cropped Flex Header -->
   <header class="bar">
     <div class="bar-in">
       <div class="brand">
@@ -302,7 +311,7 @@
       </div>
       <div class="bar-stats">
         <div class="counter-badge" id="attendance-counter">0 / 22 Hadir</div>
-        <a href="index.html" class="btn-link">📖 Handbook</a>
+        <a href="index.html" class="btn-link">Handbook</a>
       </div>
     </div>
   </header>
@@ -386,7 +395,7 @@
           <div class="profile-details">
             <h3 id="res-name">Panji Kusuma</h3>
             <p id="res-dept">Business Development · Werkudara</p>
-            <div class="disc-badge-pill" id="res-disc">⚡ DiSC: I (Influencing)</div>
+            <div class="disc-badge-pill" id="res-disc">DiSC: I (Influencing)</div>
           </div>
         </div>
 
@@ -404,7 +413,7 @@
 
         <!-- Neighbor DiSC Profile Grid -->
         <div class="neighbors-ticket-box">
-          <div class="neighbors-title">👥 REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
+          <div class="neighbors-title">REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
           <div class="neighbor-grid-compact">
             <div class="neighbor-col">
               <div class="neighbor-head">
@@ -427,7 +436,7 @@
 
         <!-- DiSC Communication Tip Box -->
         <div class="disc-info-tip">
-          💡 <b>Fasilitasi &amp; Komunikasi:</b> Profil DiSC peserta membantu fasilitator &amp; sesama rekan dalam menyesuaikan gaya komunikasi selama sesi bootcamp.
+          <b>Fasilitasi &amp; Komunikasi:</b> Profil DiSC peserta membantu fasilitator &amp; sesama rekan dalam menyesuaikan gaya komunikasi selama sesi bootcamp.
         </div>
 
       </div>
@@ -620,7 +629,7 @@
     document.getElementById("res-name").textContent = item.name;
     document.getElementById("res-avatar").textContent = getInitials(item.name);
     document.getElementById("res-dept").textContent = item.dept;
-    document.getElementById("res-disc").textContent = `⚡ DiSC: ${item.disc}`;
+    document.getElementById("res-disc").textContent = `DiSC: ${item.disc}`;
     document.getElementById("res-code").textContent = item.code;
     document.getElementById("res-barcode-text").textContent = `${item.code}-2026`;
     document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
