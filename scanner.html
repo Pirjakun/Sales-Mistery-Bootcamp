@@ -40,7 +40,7 @@
     background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: 14.5px;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -48,25 +48,25 @@
 
   /* Header Bar */
   .bar {
-    height: 48px;
+    height: 46px;
     background: rgba(239, 233, 221, 0.96);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: 0 20px;
+    padding: 0 18px;
     display: flex; align-items: center; justify-content: space-between;
   }
   .brand { display: flex; align-items: center; gap: 10px; }
   .brand-logo {
-    width: 32px; height: 32px; background: var(--navy); border-radius: 50%;
+    width: 30px; height: 30px; background: var(--navy); border-radius: 50%;
     color: #fff; display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 14px; font-weight: 700;
+    font-family: var(--serif); font-size: 13.5px; font-weight: 700;
   }
-  .brand-text b { font-family: var(--serif); font-size: 16px; font-weight: 400; color: var(--navy); }
-  .brand-text span { font-size: 11.5px; color: var(--ink-3); margin-left: 8px; }
+  .brand-text b { font-family: var(--serif); font-size: 15.5px; font-weight: 400; color: var(--navy); }
+  .brand-text span { font-size: 11px; color: var(--ink-3); margin-left: 8px; }
 
-  .bar-stats { display: flex; align-items: center; gap: 12px; }
+  .bar-stats { display: flex; align-items: center; gap: 10px; }
   .counter-badge {
-    background: var(--navy); color: #fff; font-weight: 700; font-size: 11.5px;
+    background: var(--navy); color: #fff; font-weight: 700; font-size: 11px;
     padding: 3px 10px; border-radius: 999px; letter-spacing: 0.03em;
   }
   .btn-link {
@@ -74,11 +74,12 @@
     padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
 
-  /* Single Viewport Layout */
+  /* Single Viewport Grid Layout */
   .viewport-grid {
-    height: calc(100vh - 53px);
-    display: grid; grid-template-columns: 320px 1fr; gap: 16px;
-    padding: 14px 16px; width: 100%; max-width: 1280px; margin: 0 auto;
+    height: calc(100vh - 51px);
+    display: grid; grid-template-columns: 320px 1fr; gap: 14px;
+    padding: 12px 14px; width: 100%; max-width: 1280px; margin: 0 auto;
+    overflow: hidden;
   }
   @media(max-width: 860px) {
     body { overflow-y: auto; height: auto; }
@@ -87,54 +88,52 @@
 
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    display: flex; flex-direction: column; overflow: hidden;
+    padding: 12px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    display: flex; flex-direction: column; overflow: hidden; height: 100%;
   }
   .card-h {
-    font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--navy);
-    border-bottom: 1px solid var(--line-2); padding-bottom: 8px; margin-bottom: 10px;
+    font-family: var(--serif); font-size: 16.5px; font-weight: 400; color: var(--navy);
+    border-bottom: 1px solid var(--line-2); padding-bottom: 6px; margin-bottom: 8px;
     display: flex; align-items: center; justify-content: space-between; flex: none;
   }
 
-  /* Camera Container */
+  /* Automatic Camera Container */
   .camera-container {
     flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    background: #000; border-radius: 8px; overflow: hidden; position: relative; min-height: 220px;
+    background: #000; border-radius: 8px; overflow: hidden; position: relative; min-height: 0;
   }
   #reader { width: 100%; height: 100%; border: none !important; }
   #reader video { object-fit: cover !important; }
 
   /* Search Input */
-  .search-row { display: flex; gap: 6px; margin-top: 10px; flex: none; }
+  .search-row { display: flex; gap: 6px; margin-top: 8px; flex: none; }
   .search-input {
     flex: 1; background: #FFF; border: 1px solid var(--line); color: var(--ink);
-    padding: 8px 10px; border-radius: 6px; font-size: 13px; outline: none;
+    padding: 7px 10px; border-radius: 6px; font-size: 12.5px; outline: none;
   }
   .search-input:focus { border-color: var(--navy); }
   .btn-search {
-    background: var(--navy); color: #FFF; font-weight: 600; padding: 8px 14px;
-    border: 0; border-radius: 6px; cursor: pointer; font-size: 13px;
+    background: var(--navy); color: #FFF; font-weight: 600; padding: 7px 12px;
+    border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
   }
 
-  /* Right Column: Map & Result Grid */
-  .right-grid {
-    display: grid; grid-template-rows: auto 1fr; gap: 12px; height: 100%; overflow: hidden;
+  /* Right Column Layout */
+  .right-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    display: flex; flex-direction: column; height: 100%; overflow: hidden;
   }
 
   /* Screen Header */
   .screen-box {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
-    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
-  }
-
-  .map-card-inner {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
-    padding: 10px; height: 100%; min-height: 0; overflow: hidden;
+    color: #FFF; border-radius: 6px; padding: 6px; text-align: center;
+    font-family: var(--serif); font-size: 11.5px; letter-spacing: 0.12em; flex: none;
+    margin-bottom: 6px;
   }
 
   /* SVG Seats Styling */
+  .map-wrapper { flex: none; height: 210px; display: flex; align-items: center; justify-content: center; }
   .seat-node { transition: all 0.3s ease; cursor: pointer; }
   .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
@@ -152,45 +151,44 @@
     to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
   }
 
-  /* Compact Result Overlay Card */
-  .result-card-compact {
-    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-    padding: 12px 16px; margin-top: 10px; text-align: left; width: 100%; flex: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.04); animation: fadeIn 0.25s ease-in-out;
+  /* Integrated Result Info Box (Seamless 1-Page Layout) */
+  .result-box-integrated {
+    flex: 1; min-height: 0; background: var(--paper-2); border: 1px solid var(--line-2);
+    border-radius: 8px; padding: 10px 14px; margin-top: 6px; overflow-y: auto;
+    display: flex; flex-direction: column; justify-content: space-between;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
   .status-badge-ok {
     display: inline-flex; align-items: center; gap: 4px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-bottom: 8px;
+    color: var(--ok); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
   }
 
-  .res-head-compact { display: flex; justify-content: space-between; align-items: flex-start; }
-  .res-head-compact h3 { font-family: var(--serif); font-size: 19px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+  .res-head-compact { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px; }
+  .res-head-compact h3 { font-family: var(--serif); font-size: 18px; color: var(--navy); font-weight: 400; line-height: 1.1; }
+  .res-head-compact p { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
 
   .disc-tag {
-    display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
-    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 4px; padding: 2px 6px; margin-top: 4px;
+    display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--navy);
+    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 4px; padding: 2px 6px; margin-top: 3px;
   }
 
   .hero-seat-compact {
-    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 8px; padding: 8px 14px;
-    display: flex; align-items: center; justify-content: space-between; margin: 8px 0;
+    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 6px; padding: 6px 12px;
+    display: flex; align-items: center; justify-content: space-between; margin: 6px 0;
   }
-  .hero-seat-compact .no { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
-  .hero-seat-compact .pos { text-align: right; font-size: 12px; color: var(--ink-2); }
+  .hero-seat-compact .no { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .hero-seat-compact .pos { text-align: right; font-size: 11.5px; color: var(--ink-2); }
 
   /* Neighbor DiSC Profile Grid */
   .neighbors-box-compact {
-    background: var(--paper-2); border: 1px solid var(--line-2); border-radius: 8px;
-    padding: 8px 12px; border-left: 3px solid var(--navy); font-size: 12px;
+    background: #FFF; border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 10px; border-left: 3px solid var(--navy); font-size: 11.5px;
   }
-  .neighbors-box-compact h4 { font-size: 10.5px; font-weight: 700; color: var(--navy); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-  .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .neighbor-col span { display: block; font-size: 10px; color: var(--ink-3); }
-  .neighbor-col b { display: block; font-size: 12.5px; color: var(--ink); margin-top: 1px; }
-  .neighbor-col i { font-style: normal; font-size: 11px; color: var(--navy); font-weight: 600; display: block; }
+  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+  .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .neighbor-col span { display: block; font-size: 9.5px; color: var(--ink-3); }
+  .neighbor-col b { display: block; font-size: 12px; color: var(--ink); }
+  .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; }
   </style>
 </head>
 <body>
@@ -217,11 +215,11 @@
   <!-- Single Viewport Grid -->
   <main class="viewport-grid">
     
-    <!-- Left Column: Automatic Camera Scanner -->
+    <!-- Left Column: Automatic Camera Scanner Only -->
     <div class="card">
       <div class="card-h">
-        <span>Kamera Pemindai QR</span>
-        <small style="font-size: 11px; font-weight: 400; color: var(--ok);">● Aktif Memindai</small>
+        <span>Pemindai QR Tiket</span>
+        <small style="font-size: 11px; font-weight: 600; color: var(--ok);">● Kamera Aktif</small>
       </div>
 
       <!-- Camera Scanner Viewport -->
@@ -236,14 +234,15 @@
       </form>
     </div>
 
-    <!-- Right Column: Interactive Seat Map & Check-In Result -->
-    <div class="right-grid">
-      
-      <div class="map-card-inner">
-        <div class="screen-box" style="width: 100%; max-width: 480px;">PANGGUNG / LAYAR / WHITEBOARD</div>
+    <!-- Right Column: Interactive Seat Map & Integrated Result Card (1 Page) -->
+    <div class="right-card">
+      <div class="card-h">Denah Kursi Pelatihan (U-Shape)</div>
 
-        <!-- SVG U-SHAPE SEAT MAP -->
-        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:480px; max-height: 280px; display:block; margin: 0 auto;">
+      <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
+
+      <!-- SVG U-SHAPE SEAT MAP -->
+      <div class="map-wrapper">
+        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:440px; max-height: 200px; display:block; margin: 0 auto;">
           <g>
             <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
                      fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -256,54 +255,57 @@
 
           <g id="svg-seats-group"></g>
         </svg>
+      </div>
 
-        <!-- Result Card Output (Handbook Card Design) -->
-        <div id="result-container" class="result-card-compact" style="display: none;">
-          <div class="status-badge-ok">
-            ✓ PRESENSI HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
+      <!-- Result Card Output (Seamlessly Integrated inside 1 Page) -->
+      <div id="result-container" class="result-box-integrated" style="display: none;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="status-badge-ok">
+              ✓ PRESENSI TERVERIFIKASI · HADIR <span id="res-timestamp" style="font-weight:400; margin-left:4px;">08:15:02</span>
+            </div>
+            <div style="font-size: 10.5px; color: var(--ink-3);">
+              KODE TIKET: <b style="color: var(--navy);" id="res-code">SMB-005</b>
+            </div>
           </div>
           
           <div class="res-head-compact">
             <div>
               <h3 id="res-name">Dian Permata</h3>
               <p id="res-dept">Sales Lead · Werkudara Group</p>
-              <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
             </div>
-            <div style="font-size: 10.5px; color: var(--ink-3); text-align: right;">
-              KODE TIKET<br><b style="color: var(--navy); font-size: 13px;" id="res-code">SMB-005</b>
-            </div>
+            <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
           </div>
 
           <div class="hero-seat-compact">
             <div>
-              <span style="font-size: 10px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
+              <span style="font-size: 9.5px; color: var(--ink-3); letter-spacing: 0.08em; font-weight: 700;">NOMOR KURSI</span>
               <div class="no" id="res-seat-no">#05</div>
             </div>
             <div class="pos" id="res-seat-pos">
-              <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Ruang Pelatihan Utama</small>
+              <b>Meja Sisi Kiri</b><br><small style="color: var(--ink-3);">Kalyana Resort Kaliurang</small>
             </div>
           </div>
-
-          <!-- Neighbor DiSC Profile Box -->
-          <div class="neighbors-box-compact">
-            <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
-            <div class="neighbor-grid-compact">
-              <div class="neighbor-col">
-                <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
-                <b id="res-left-name">Budi Santoso</b>
-                <i id="res-left-disc">DiSC: S (Steadiness)</i>
-              </div>
-              <div class="neighbor-col">
-                <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
-                <b id="res-right-name">Fitriani Putri</b>
-                <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
 
+        <!-- Neighbor DiSC Profile Grid -->
+        <div class="neighbors-box-compact">
+          <h4>👥 REKAN DUDUK SEBELAH PESERTA &amp; DiSC PROFILE</h4>
+          <div class="neighbor-grid-compact">
+            <div class="neighbor-col">
+              <span>👈 SEBELAH KIRI (<span id="res-left-no">#04</span>)</span>
+              <b id="res-left-name">Budi Santoso</b>
+              <i id="res-left-disc">DiSC: S (Steadiness)</i>
+            </div>
+            <div class="neighbor-col">
+              <span>SEBELAH KANAN (<span id="res-right-no">#06</span>) 👉</span>
+              <b id="res-right-name">Fitriani Putri</b>
+              <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </main>
@@ -465,14 +467,14 @@
     currentActiveSeat = item.seat;
     renderSeats();
 
-    // Show Result Card
+    // Show Result Card inside Right Column
     const container = document.getElementById("result-container");
-    container.style.display = "block";
+    container.style.display = "flex";
 
     document.getElementById("res-timestamp").textContent = checkedInSeats[item.seat] || now;
     document.getElementById("res-name").textContent = item.name;
     document.getElementById("res-dept").textContent = item.dept;
-    document.getElementById("res-disc").textContent = `DiSC Profile: ${item.disc}`;
+    document.getElementById("res-disc").textContent = `DiSC: ${item.disc}`;
     document.getElementById("res-code").textContent = item.code;
     document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
     document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><br><small style="color:var(--ink-3)">Kalyana Resort Kaliurang</small>`;
@@ -512,7 +514,7 @@
   // Automatic Camera Scanner Start
   function startAutoCamera() {
     if (html5QrcodeScanner) return;
-    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 200, height: 200 } }, false);
+    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 190, height: 190 } }, false);
     html5QrcodeScanner.render((decodedText) => {
       selectByTicketCode(decodedText);
     }, (error) => {});
@@ -523,7 +525,7 @@
     loadCheckIns();
     renderSeats();
     startAutoCamera();
-    selectBySeatNumber(5); // Default display Dian Permata
+    selectBySeatNumber(5); // Default display Dian Permata (#05)
   });
   </script>
 </body>
