@@ -74,22 +74,19 @@
     padding: 4px 10px; border-radius: 5px; font-size: 12px; text-decoration: none; font-weight: 600;
   }
 
-  /* 3-Column Single Viewport Grid Layout */
+  /* Single Viewport Grid Layout: Kamera (Kiri) | Info Denah & Ticket (Kanan) */
   .viewport-grid {
     height: calc(100vh - 51px);
     display: grid; 
-    grid-template-columns: 320px 1fr 340px; 
-    gap: 12px;
+    grid-template-columns: 350px 1fr; 
+    gap: 14px;
     padding: 12px 14px; 
     width: 100%; 
-    max-width: 1440px; 
+    max-width: 1360px; 
     margin: 0 auto;
     overflow: hidden;
   }
-  @media(max-width: 1120px) {
-    .viewport-grid { grid-template-columns: 280px 1fr 310px; gap: 10px; }
-  }
-  @media(max-width: 900px) {
+  @media(max-width: 880px) {
     body { overflow-y: auto; height: auto; }
     .viewport-grid { height: auto; grid-template-columns: 1fr; overflow-y: visible; }
   }
@@ -105,7 +102,7 @@
     display: flex; align-items: center; justify-content: space-between; flex: none;
   }
 
-  /* Column 1: Full Height Camera Container */
+  /* Left Column: Full Height Camera Container */
   .camera-container {
     flex: 1; min-height: 0; position: relative; background: #000; border-radius: 8px; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
@@ -163,15 +160,21 @@
     border: 0; border-radius: 6px; cursor: pointer; font-size: 12.5px;
   }
 
-  /* Column 2: Seat Map Layout */
-  .screen-box {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
-    color: #FFF; border-radius: 6px; padding: 8px; text-align: center;
-    font-family: var(--serif); font-size: 12px; letter-spacing: 0.12em; flex: none;
-    margin-bottom: 8px;
+  /* Right Column: Denah Kursi (Atas) & Ticket Details (Bawah) */
+  .right-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    display: flex; flex-direction: column; height: 100%; overflow: hidden;
   }
 
-  .map-wrapper { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 4px; }
+  .screen-box {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-d) 100%);
+    color: #FFF; border-radius: 6px; padding: 6px; text-align: center;
+    font-family: var(--serif); font-size: 11.5px; letter-spacing: 0.12em; flex: none;
+    margin-bottom: 4px;
+  }
+
+  .map-wrapper { flex: none; height: 190px; display: flex; align-items: center; justify-content: center; }
   .seat-node { transition: all 0.3s ease; cursor: pointer; }
   .seat-rect { fill: #0D695B; stroke: #053F36; stroke-width: 1.5; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 700; font-size: 12px; fill: #FFFFFF; pointer-events: none; }
@@ -189,49 +192,44 @@
     to { filter: drop-shadow(0 0 16px rgba(197, 160, 89, 1)); }
   }
 
-  /* Column 3: Keterangan Ticket & Presensi Box */
+  /* Keterangan Ticket & Presensi Result Box (Lower Right Panel) */
   .ticket-box {
     flex: 1; min-height: 0; background: var(--paper-2); border: 1px solid var(--line-2);
-    border-radius: 8px; padding: 12px 14px; overflow-y: auto;
-    display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+    border-radius: 8px; padding: 10px 14px; margin-top: 8px; overflow-y: auto;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
   }
 
   .status-badge-ok {
     display: inline-flex; align-items: center; gap: 4px; background: #E6F4EA; border: 1px solid #CEEAD6;
-    color: var(--ok); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+    color: var(--ok); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
   }
 
-  .res-head-compact { margin-top: 6px; }
-  .res-head-compact h3 { font-family: var(--serif); font-size: 20px; color: var(--navy); font-weight: 400; line-height: 1.1; }
-  .res-head-compact p { font-size: 12.5px; color: var(--ink-3); margin-top: 3px; }
+  .res-head-compact { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 2px; }
+  .res-head-compact h3 { font-family: var(--serif); font-size: 18px; color: var(--navy); font-weight: 400; line-height: 1.1; }
+  .res-head-compact p { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
 
   .disc-tag {
-    display: inline-block; font-size: 11px; font-weight: 700; color: var(--navy);
-    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 5px; padding: 3px 8px; margin-top: 6px;
+    display: inline-block; font-size: 10.5px; font-weight: 700; color: var(--navy);
+    background: #E6EBF4; border: 1px solid #D3DCEB; border-radius: 4px; padding: 2px 6px; margin-top: 3px;
   }
 
   .hero-seat-compact {
-    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 8px; padding: 10px 14px;
+    background: #F4EFE6; border: 1px solid #E2D9C8; border-radius: 6px; padding: 6px 12px;
     display: flex; align-items: center; justify-content: space-between; margin: 4px 0;
   }
-  .hero-seat-compact .no { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .hero-seat-compact .no { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--navy); line-height: 1; }
   .hero-seat-compact .pos { text-align: right; font-size: 11.5px; color: var(--ink-2); }
 
   /* Neighbor DiSC Profile Grid */
   .neighbors-box-compact {
-    background: #FFF; border: 1px solid var(--line); border-radius: 8px;
-    padding: 8px 12px; border-left: 3px solid var(--navy); font-size: 11.5px;
+    background: #FFF; border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 10px; border-left: 3px solid var(--navy); font-size: 11.5px;
   }
-  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+  .neighbors-box-compact h4 { font-size: 10px; font-weight: 700; color: var(--navy); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
   .neighbor-grid-compact { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .neighbor-col span { display: block; font-size: 9.5px; color: var(--ink-3); }
-  .neighbor-col b { display: block; font-size: 12px; color: var(--ink); margin-top: 1px; }
-  .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; margin-top: 1px; }
-
-  .disc-info-footer {
-    background: #F9F7F2; border: 1px dashed var(--line); border-radius: 6px;
-    padding: 6px 10px; font-size: 10.5px; color: var(--ink-3); line-height: 1.35;
-  }
+  .neighbor-col b { display: block; font-size: 12px; color: var(--ink); }
+  .neighbor-col i { font-style: normal; font-size: 10.5px; color: var(--navy); font-weight: 600; display: block; }
   </style>
 </head>
 <body>
@@ -255,10 +253,10 @@
     </div>
   </header>
 
-  <!-- 3-Column Single Viewport Grid -->
+  <!-- Single Viewport Grid Layout -->
   <main class="viewport-grid">
     
-    <!-- Kolom 1: Kamera Pemindai QR (Full Height Viewport) -->
+    <!-- Kolom Kiri: Kamera Pemindai QR (Full Height Viewport) -->
     <div class="card">
       <div class="card-h">
         <span>Kamera Pemindai QR</span>
@@ -284,15 +282,15 @@
       </form>
     </div>
 
-    <!-- Kolom 2: Denah Kursi Pelatihan (U-Shape Map) -->
-    <div class="card">
+    <!-- Kolom Kanan: Panel Info Denah Kursi (Atas) & Ticket Details (Bawah) -->
+    <div class="right-card">
       <div class="card-h">Denah Kursi Pelatihan (U-Shape)</div>
 
       <div class="screen-box">PANGGUNG / LAYAR / WHITEBOARD</div>
 
       <!-- SVG U-SHAPE SEAT MAP -->
       <div class="map-wrapper">
-        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:520px; max-height: 380px; display:block; margin: 0 auto;">
+        <svg viewBox="0 0 540 430" width="100%" height="100%" style="max-width:440px; max-height: 190px; display:block; margin: 0 auto;">
           <g>
             <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
                      fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -306,12 +304,8 @@
           <g id="svg-seats-group"></g>
         </svg>
       </div>
-    </div>
 
-    <!-- Kolom 3: Keterangan Tiket & Data Presensi -->
-    <div class="card">
-      <div class="card-h">Keterangan Tiket &amp; Presensi</div>
-
+      <!-- Keterangan Ticket & Presensi Result Box -->
       <div id="result-container" class="ticket-box">
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -324,8 +318,10 @@
           </div>
           
           <div class="res-head-compact">
-            <h3 id="res-name">Dian Permata</h3>
-            <p id="res-dept">Sales Lead · Werkudara Group</p>
+            <div>
+              <h3 id="res-name">Dian Permata</h3>
+              <p id="res-dept">Sales Lead · Werkudara Group</p>
+            </div>
             <div class="disc-tag" id="res-disc">DiSC Profile: I (Influencing)</div>
           </div>
 
@@ -355,10 +351,6 @@
               <i id="res-right-disc">DiSC: C (Conscientiousness)</i>
             </div>
           </div>
-        </div>
-
-        <div class="disc-info-footer">
-          💡 <b>Info DiSC Profile:</b> Membantu fasilitator &amp; sesama peserta untuk menyesuaikan pola komunikasi &amp; dinamika tim selama sesi bootcamp.
         </div>
       </div>
     </div>
@@ -522,14 +514,14 @@
     currentActiveSeat = item.seat;
     renderSeats();
 
-    // Show Result Card inside Column 3
+    // Show Result Card inside Right Column
     const container = document.getElementById("result-container");
     container.style.display = "flex";
 
     document.getElementById("res-timestamp").textContent = checkedInSeats[item.seat] || now;
     document.getElementById("res-name").textContent = item.name;
     document.getElementById("res-dept").textContent = item.dept;
-    document.getElementById("res-disc").textContent = `DiSC: ${item.disc}`;
+    document.getElementById("res-disc").textContent = `DiSC Profile: ${item.disc}`;
     document.getElementById("res-code").textContent = item.code;
     document.getElementById("res-seat-no").textContent = `#${String(item.seat).padStart(2, '0')}`;
     document.getElementById("res-seat-pos").innerHTML = `<b>${item.pos}</b><br><small style="color:var(--ink-3)">Kalyana Resort Kaliurang</small>`;
