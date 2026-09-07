@@ -485,65 +485,61 @@
 
   <script>
   // Mock participants for dropdown
+  // Mock participants for dropdown
   const MOCK_PARTICIPANTS = [
-    { id: 1, name: "Fadli Fahmi Ali", email: "fadli.ali@werkudara.com", dept: "CEO · Werkudara Group" },
-    { id: 2, name: "Fano Alfian Ardiansyah", email: "fano.alfian@ailesh.com", dept: "Founder & CEO · Ailesh" },
-    { id: 3, name: "Delon Sianipar", email: "delon.sianipar@sandler.co.id", dept: "Senior Consultant · Sandler Training" },
-    { id: 4, name: "Budi Santoso", email: "budi.santoso@werkudara.com", dept: "Sales Executive" },
-    { id: 5, name: "Siti Rahmawati", email: "siti.rahma@werkudara.com", dept: "Account Manager" },
-    { id: 6, name: "Ahmad Rizki", email: "ahmad.rizki@ailesh.com", dept: "Business Development" },
-    { id: 7, name: "Dian Permata", email: "dian.permata@werkudara.com", dept: "Sales Lead" },
-    { id: 8, name: "Eko Prasetyo", email: "eko.prasetyo@sandler.co.id", dept: "Senior Sales Specialist" },
-    { id: 9, name: "Fitriani Putri", email: "fitri.putri@werkudara.com", dept: "Key Account Executive" },
-    { id: 10, name: "Gilang Ramadhan", email: "gilang.r@ailesh.com", dept: "Sustainability Consultant" },
-    { id: 11, name: "Hendra Wijaya", email: "hendra.w@werkudara.com", dept: "Regional Sales Manager" },
-    { id: 12, name: "Indah Lestari", email: "indah.lestari@werkudara.com", dept: "Corporate Sales" },
-    { id: 13, name: "Joko Susilo", email: "joko.susilo@werkudara.com", dept: "Enterprise Sales Executive" },
-    { id: 14, name: "Karin Novita", email: "karin.novita@sandler.co.id", dept: "Sales Trainer Associate" },
-    { id: 15, name: "Lukman Hakim", email: "lukman.hakim@werkudara.com", dept: "Strategic Account Manager" },
-    { id: 16, name: "Maya Anggraini", email: "maya.a@ailesh.com", dept: "ESG & Sales Specialist" },
-    { id: 17, name: "Naufal Pratama", email: "naufal.p@werkudara.com", dept: "Commercial Executive" },
-    { id: 18, name: "Olivia Zahrani", email: "olivia.z@werkudara.com", dept: "Client Relations Lead" },
-    { id: 19, name: "Panji Kusuma", email: "panji.k@werkudara.com", dept: "Business Development Executive" },
-    { id: 20, name: "Rina Marlina", email: "rina.marlina@werkudara.com", dept: "Sales Consultant" }
+    { id: 1, name: "I Gusti Ayu Ananda Putri (Nanda)", email: "nanda@werkudara.com", dept: "DISC D/I · Kamar 421" },
+    { id: 2, name: "Sofyan Thohari (Popan)", email: "popan@werkudara.com", dept: "DISC S · Kamar 425" },
+    { id: 3, name: "Sri Wijayati (Jay)", email: "jay@werkudara.com", dept: "DISC D/I · Kamar 413" },
+    { id: 4, name: "Elfasa Khoirumansyah (Elfasa)", email: "elfasa@werkudara.com", dept: "DISC I/S · Kamar 425" },
+    { id: 5, name: "Maria Dita Fivtiari (Dita)", email: "dita@werkudara.com", dept: "DISC D/C · Kamar 412" },
+    { id: 6, name: "Okki Putri Fadilah (Okki)", email: "okki@werkudara.com", dept: "DISC I/S · Kamar 422" },
+    { id: 7, name: "Nindy Amalia (Nindy)", email: "nindy@werkudara.com", dept: "DISC D/I · Kamar 422" },
+    { id: 8, name: "Paramitha Maharesmi Nugraheni Putri (Mitha)", email: "mitha@werkudara.com", dept: "DISC S/C · Kamar 421" },
+    { id: 9, name: "Fuad Jaka Pamungkas (Jaka)", email: "jaka@werkudara.com", dept: "DISC I/D · Kamar 415" },
+    { id: 10, name: "Dimas Wiyanarko (Dimas)", email: "dimas@werkudara.com", dept: "DISC C/S · Kamar 416" },
+    { id: 11, name: "I Gusti Putu Yaktianuraga (Bagus)", email: "bagus@werkudara.com", dept: "DISC D/I · Kamar 416" },
+    { id: 12, name: "Yulia Mekar Rini (Yulia)", email: "yulia@werkudara.com", dept: "DISC C/S · Kamar 424" },
+    { id: 13, name: "Gilang Risnantyo (Gilang)", email: "gilang@werkudara.com", dept: "DISC D/I · Kamar 414" },
+    { id: 14, name: "Linda Susanto (Linda)", email: "linda@werkudara.com", dept: "DISC S/C · Kamar 423" },
+    { id: 15, name: "Irvani Putri (Irvani)", email: "irvani@werkudara.com", dept: "DISC D/I · Kamar 423" },
+    { id: 16, name: "Ainur Hasanah (Ainur)", email: "ainur@werkudara.com", dept: "DISC I/C · Kamar 417" },
+    { id: 17, name: "Mya Mar'atus Sholikhah (Mya)", email: "mya@werkudara.com", dept: "DISC D/C · Kamar 424" },
+    { id: 18, name: "Adiel Priyarama (Adiel)", email: "adiel@werkudara.com", dept: "DISC S/C · Kamar 414" },
+    { id: 19, name: "Etik Andriyanti (Andri)", email: "andri@werkudara.com", dept: "DISC D/I · Kamar 417" },
+    { id: 20, name: "Kensrie Diah Ayuningtyas (Kensrie)", email: "kensrie@werkudara.com", dept: "DISC D/C · Kamar 413" }
   ];
 
-  // 22 Seat positions in SVG space
+  // 20 Seat positions in SVG space (Revisi: kursi miring 9 & 14 dihapus)
   const SEAT_COORDS = [
     // Sisi Kiri (1-8)
-    { seat: 1, x: 124, y: 80, pos: "Sisi Kiri Meja U (Kursi 1)", rot: 0 },
-    { seat: 2, x: 124, y: 111, pos: "Sisi Kiri Meja U (Kursi 2)", rot: 0 },
-    { seat: 3, x: 124, y: 142, pos: "Sisi Kiri Meja U (Kursi 3)", rot: 0 },
-    { seat: 4, x: 124, y: 173, pos: "Sisi Kiri Meja U (Kursi 4)", rot: 0 },
-    { seat: 5, x: 124, y: 204, pos: "Sisi Kiri Meja U (Kursi 5)", rot: 0 },
-    { seat: 6, x: 124, y: 235, pos: "Sisi Kiri Meja U (Kursi 6)", rot: 0 },
-    { seat: 7, x: 124, y: 266, pos: "Sisi Kiri Meja U (Kursi 7)", rot: 0 },
-    { seat: 8, x: 124, y: 297, pos: "Sisi Kiri Meja U (Kursi 8)", rot: 0 },
-    // Sudut Kiri Bawah (9)
-    { seat: 9, x: 138, y: 345, pos: "Sudut Kiri Bawah Meja U (Kursi 9)", rot: -45 },
-    // Tengah Bawah (10-13)
-    { seat: 10, x: 195, y: 368, pos: "Sisi Tengah Bawah (Kursi 10)", rot: 0 },
-    { seat: 11, x: 235, y: 368, pos: "Sisi Tengah Bawah (Kursi 11)", rot: 0 },
-    { seat: 12, x: 275, y: 368, pos: "Sisi Tengah Bawah (Kursi 12)", rot: 0 },
-    { seat: 13, x: 315, y: 368, pos: "Sisi Tengah Bawah (Kursi 13)", rot: 0 },
-    // Sudut Kanan Bawah (14)
-    { seat: 14, x: 374, y: 345, pos: "Sudut Kanan Bawah Meja U (Kursi 14)", rot: 45 },
-    // Sisi Kanan (15-22)
-    { seat: 15, x: 388, y: 297, pos: "Sisi Kanan Meja U (Kursi 15)", rot: 0 },
-    { seat: 16, x: 388, y: 266, pos: "Sisi Kanan Meja U (Kursi 16)", rot: 0 },
-    { seat: 17, x: 388, y: 235, pos: "Sisi Kanan Meja U (Kursi 17)", rot: 0 },
-    { seat: 18, x: 388, y: 204, pos: "Sisi Kanan Meja U (Kursi 18)", rot: 0 },
-    { seat: 19, x: 388, y: 173, pos: "Sisi Kanan Meja U (Kursi 19)", rot: 0 },
-    { seat: 20, x: 388, y: 142, pos: "Sisi Kanan Meja U (Kursi 20)", rot: 0 },
-    { seat: 21, x: 388, y: 111, pos: "Sisi Kanan Meja U (Kursi 21)", rot: 0 },
-    { seat: 22, x: 388, y: 80, pos: "Sisi Kanan Meja U (Kursi 22)", rot: 0 }
+    { seat: 1, x: 124, y: 80, pos: "Sisi Kiri Meja U (Nanda · Kursi #1)", rot: 0 },
+    { seat: 2, x: 124, y: 111, pos: "Sisi Kiri Meja U (Popan · Kursi #2)", rot: 0 },
+    { seat: 3, x: 124, y: 142, pos: "Sisi Kiri Meja U (Jay · Kursi #3)", rot: 0 },
+    { seat: 4, x: 124, y: 173, pos: "Sisi Kiri Meja U (Elfasa · Kursi #4)", rot: 0 },
+    { seat: 5, x: 124, y: 204, pos: "Sisi Kiri Meja U (Dita · Kursi #5)", rot: 0 },
+    { seat: 6, x: 124, y: 235, pos: "Sisi Kiri Meja U (Okki · Kursi #6)", rot: 0 },
+    { seat: 7, x: 124, y: 266, pos: "Sisi Kiri Meja U (Nindy · Kursi #7)", rot: 0 },
+    { seat: 8, x: 124, y: 297, pos: "Sisi Kiri Meja U (Mitha · Kursi #8)", rot: 0 },
+    // Tengah Bawah (9-12)
+    { seat: 9, x: 195, y: 368, pos: "Sisi Tengah Bawah (Jaka · Kursi #9)", rot: 0 },
+    { seat: 10, x: 235, y: 368, pos: "Sisi Tengah Bawah (Dimas · Kursi #10)", rot: 0 },
+    { seat: 11, x: 275, y: 368, pos: "Sisi Tengah Bawah (Bagus · Kursi #11)", rot: 0 },
+    { seat: 12, x: 315, y: 368, pos: "Sisi Tengah Bawah (Yulia · Kursi #12)", rot: 0 },
+    // Sisi Kanan (13-20)
+    { seat: 13, x: 388, y: 297, pos: "Sisi Kanan Meja U (Gilang · Kursi #13)", rot: 0 },
+    { seat: 14, x: 388, y: 266, pos: "Sisi Kanan Meja U (Linda · Kursi #14)", rot: 0 },
+    { seat: 15, x: 388, y: 235, pos: "Sisi Kanan Meja U (Irvani · Kursi #15)", rot: 0 },
+    { seat: 16, x: 388, y: 204, pos: "Sisi Kanan Meja U (Ainur · Kursi #16)", rot: 0 },
+    { seat: 17, x: 388, y: 173, pos: "Sisi Kanan Meja U (Mya · Kursi #17)", rot: 0 },
+    { seat: 18, x: 388, y: 142, pos: "Sisi Kanan Meja U (Adiel · Kursi #18)", rot: 0 },
+    { seat: 19, x: 388, y: 111, pos: "Sisi Kanan Meja U (Andri · Kursi #19)", rot: 0 },
+    { seat: 20, x: 388, y: 80, pos: "Sisi Kanan Meja U (Kensrie · Kursi #20)", rot: 0 }
   ];
 
   // Neighbor physical adjacency map
-  // Left neighbor is counter-clockwise (lower number), Right neighbor is clockwise (higher number)
   function getSeatNeighbors(seatNum) {
     const leftSeat = seatNum > 1 ? seatNum - 1 : null;
-    const rightSeat = seatNum < 22 ? seatNum + 1 : null;
+    const rightSeat = seatNum < 20 ? seatNum + 1 : null;
     return { leftSeat, rightSeat };
   }
 
@@ -551,18 +547,34 @@
   let bookingsData = {}; // { [seatNum]: { name, email, dept } }
   let selectedSeat = null;
 
-  // Initialize Default Mock Bookings
+  // Initialize Default Bookings from Day 1 Seating Chart
   function initDefaultBookings() {
     const saved = localStorage.getItem("smb_seat_bookings");
     if (saved) {
       bookingsData = JSON.parse(saved);
     } else {
-      // Pre-populate 4 seats for demo
+      // Pre-populate with official Day 1 DISC Empowerment Seating Roster
       bookingsData = {
-        1: { name: "Fadli Fahmi Ali", email: "fadli.ali@werkudara.com", dept: "CEO · Werkudara Group" },
-        8: { name: "Delon Sianipar", email: "delon.sianipar@sandler.co.id", dept: "Senior Trainer" },
-        12: { name: "Fano Alfian Ardiansyah", email: "fano.alfian@ailesh.com", dept: "Founder · Ailesh" },
-        18: { name: "Siti Rahmawati", email: "siti.rahma@werkudara.com", dept: "Account Manager" }
+        1: { name: "I Gusti Ayu Ananda Putri (Nanda)", email: "nanda@werkudara.com", dept: "DISC D/I · Kamar 421" },
+        2: { name: "Sofyan Thohari (Popan)", email: "popan@werkudara.com", dept: "DISC S · Kamar 425" },
+        3: { name: "Sri Wijayati (Jay)", email: "jay@werkudara.com", dept: "DISC D/I · Kamar 413" },
+        4: { name: "Elfasa Khoirumansyah (Elfasa)", email: "elfasa@werkudara.com", dept: "DISC I/S · Kamar 425" },
+        5: { name: "Maria Dita Fivtiari (Dita)", email: "dita@werkudara.com", dept: "DISC D/C · Kamar 412" },
+        6: { name: "Okki Putri Fadilah (Okki)", email: "okki@werkudara.com", dept: "DISC I/S · Kamar 422" },
+        7: { name: "Nindy Amalia (Nindy)", email: "nindy@werkudara.com", dept: "DISC D/I · Kamar 422" },
+        8: { name: "Paramitha Maharesmi Nugraheni Putri (Mitha)", email: "mitha@werkudara.com", dept: "DISC S/C · Kamar 421" },
+        9: { name: "Fuad Jaka Pamungkas (Jaka)", email: "jaka@werkudara.com", dept: "DISC I/D · Kamar 415" },
+        10: { name: "Dimas Wiyanarko (Dimas)", email: "dimas@werkudara.com", dept: "DISC C/S · Kamar 416" },
+        11: { name: "I Gusti Putu Yaktianuraga (Bagus)", email: "bagus@werkudara.com", dept: "DISC D/I · Kamar 416" },
+        12: { name: "Yulia Mekar Rini (Yulia)", email: "yulia@werkudara.com", dept: "DISC C/S · Kamar 424" },
+        13: { name: "Gilang Risnantyo (Gilang)", email: "gilang@werkudara.com", dept: "DISC D/I · Kamar 414" },
+        14: { name: "Linda Susanto (Linda)", email: "linda@werkudara.com", dept: "DISC S/C · Kamar 423" },
+        15: { name: "Irvani Putri (Irvani)", email: "irvani@werkudara.com", dept: "DISC D/I · Kamar 423" },
+        16: { name: "Ainur Hasanah (Ainur)", email: "ainur@werkudara.com", dept: "DISC I/C · Kamar 417" },
+        17: { name: "Mya Mar'atus Sholikhah (Mya)", email: "mya@werkudara.com", dept: "DISC D/C · Kamar 424" },
+        18: { name: "Adiel Priyarama (Adiel)", email: "adiel@werkudara.com", dept: "DISC S/C · Kamar 414" },
+        19: { name: "Etik Andriyanti (Andri)", email: "andri@werkudara.com", dept: "DISC D/I · Kamar 417" },
+        20: { name: "Kensrie Diah Ayuningtyas (Kensrie)", email: "kensrie@werkudara.com", dept: "DISC D/C · Kamar 413" }
       };
       saveBookings();
     }
