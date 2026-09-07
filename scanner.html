@@ -525,7 +525,7 @@ function kioskPanelKanan() {
             </div>
             <div class="seat-pill">#${p.kursi}</div>
             <button class="status-btn ${isHadir ? 'is-hadir' : 'not-hadir'}" data-toggle-presensi="${p.kode}">
-              ${isHadir ? '✓ Hadir' : '+ Check-in'}
+              ${isHadir ? 'Hadir' : '+ Check-in'}
             </button>
           </li>`;
         }).join("")}
@@ -583,7 +583,7 @@ function modalTiketDigital() {
         </div>` : ""}
       </div>
       <div class="mobile-footer">
-        <div class="status-badge-ok">✓ Hadir (Kios &amp; HP Sync)</div>
+        <div class="status-badge-ok">Hadir (Kios &amp; HP Sync)</div>
         <button class="btn-close-modal" data-tutup-modal>Tutup Pass</button>
       </div>
     </div>
@@ -646,7 +646,7 @@ function renderListOnly() {
       </div>
       <div class="seat-pill">#${p.kursi}</div>
       <button class="status-btn ${isHadir ? 'is-hadir' : 'not-hadir'}" data-toggle-presensi="${p.kode}">
-        ${isHadir ? '✓ Hadir' : '+ Check-in'}
+        ${isHadir ? 'Hadir' : '+ Check-in'}
       </button>
     </li>`;
   }).join("");
@@ -674,7 +674,7 @@ function togglePresensi(kode, e) {
     S.hadir.add(p.kode);
     S.orangAktif = p;
     S.showMobilePass = true;
-    pesan(`✓ Presensi ${p.nama} berhasil dicatat.`);
+    pesan(`Presensi ${p.nama} berhasil dicatat.`);
   }
   render();
 }
@@ -736,7 +736,7 @@ function syncStoragePresensi() {
         if (p) {
           S.orangAktif = p;
           S.showMobilePass = true;
-          pesan(`✓ Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
+          pesan(`Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
         }
         render();
       }
@@ -758,7 +758,7 @@ function initRealtimeStream() {
               S.hadir.add(p.kode);
               S.orangAktif = p;
               S.showMobilePass = true;
-              pesan(`✓ Real-time Sync: ${p.nama} baru presensi via HP (Kursi #${p.kursi})!`);
+              pesan(`Real-time Sync: ${p.nama} baru presensi via HP (Kursi #${p.kursi})!`);
               render();
             }
           }
