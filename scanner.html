@@ -583,7 +583,7 @@ function modalTiketDigital() {
         </div>` : ""}
       </div>
       <div class="mobile-footer">
-        <div class="status-badge-ok">Hadir (Kios &amp; HP Sync)</div>
+        <div class="status-badge-ok">Hadir (Sistem Presensi Digital)</div>
         <button class="btn-close-modal" data-tutup-modal>Tutup Pass</button>
       </div>
     </div>
@@ -758,7 +758,7 @@ function initRealtimeStream() {
               S.hadir.add(p.kode);
               S.orangAktif = p;
               S.showMobilePass = true;
-              pesan(`Real-time Sync: ${p.nama} baru presensi via HP (Kursi #${p.kursi})!`);
+              pesan(`Pembaruan Presensi: ${p.nama} telah presensi (Kursi #${p.kursi})!`);
               render();
             }
           }
