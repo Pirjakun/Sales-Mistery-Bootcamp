@@ -192,11 +192,22 @@
     .doc>.chap:first-child{padding-top:0;border-top:0}
     .end,.top{text-align:left}
   }
-  @media(min-width:1360px){
-    .wrap{max-width:1140px}
-    .bar-in{max-width:1140px}
-    .layout{grid-template-columns:350px 1fr;gap:72px}
-  }
+  /* destinasi sekitar */
+  .dest-cat{margin:22px 0 10px;font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);
+    letter-spacing:.02em;border-bottom:1.5px solid var(--line-2);padding-bottom:5px}
+  .dest-cat:first-of-type{margin-top:14px}
+  .dest-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:680px){.dest-grid{grid-template-columns:1fr 1fr}}
+  .dest-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;
+    display:flex;flex-direction:column}
+  .dest-card img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;display:block;
+    border:1px solid var(--line-2)}
+  .dest-card h3{margin:12px 0 4px;font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);
+    line-height:1.25}
+  .dest-meta{font-size:12.5px;color:var(--ink-3);margin-bottom:8px;line-height:1.4}
+  .dest-desk{font-size:13.5px;line-height:1.7;color:var(--ink-2);margin:0 0 10px;flex:1}
+  .dest-cocok{font-size:13px;line-height:1.5;color:var(--navy);margin-top:auto}
+  .dest-cocok b{font-weight:700}
   </style>
 </head>
 <body>
@@ -544,13 +555,93 @@
   <!-- Bab 13 -->
   <section class="chap">
     <div class="chap-h"><span class="chap-n">13</span><h2>Menjelajah Sekitar</h2></div>
-    <p class="p">Di luar jadwal pelatihan, Anda dipersilakan menikmati kawasan sekitar resort. Kaliurang menawarkan tiga hal yang sayang untuk dilewatkan.</p>
-    <p class="p">Mohon menyesuaikan waktu penjelajahan dengan jadwal sesi berikutnya, dan memberi tahu PIC apabila Anda meninggalkan area resort.</p>
-    <div class="card">
-      <div class="kv"><span>Alam</span><b>Panorama lereng Merapi dan udara pegunungan</b></div>
-      <div class="kv"><span>Budaya</span><b>Sejumlah destinasi budaya di sekitar Kaliurang</b></div>
-      <div class="kv"><span>Kuliner</span><b>Hidangan khas setempat di sekitar kawasan resort</b></div>
+    <p class="p">Di luar jadwal pelatihan, Anda dipersilakan menikmati kawasan sekitar resort. Kaliurang menawarkan berbagai destinasi menarik yang sayang untuk dilewatkan.</p>
+
+    <!-- 1. Alam & panorama -->
+    <h3 class="dest-cat">1. Alam &amp; panorama</h3>
+    <div class="dest-grid">
+      <div class="card dest-card">
+        <img src="foto/tankaman-natural-park.jpg" alt="Tankaman Natural Park" loading="lazy">
+        <h3>Tankaman Natural Park</h3>
+        <div class="dest-meta">±2 km · Senin–Jumat 07.15–16.00 · Sabtu–Minggu 06.30–17.30</div>
+        <p class="dest-desk">Kafe dan taman alam di tepi hutan dengan gazebo, area duduk terbuka, dan pemandangan lembah. Buka paling pagi di antara destinasi lain di daftar ini.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Sarapan atau kopi pagi sebelum sesi dimulai. Jalan masuknya sempit, hanya muat satu mobil.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/bhumi-merapi.jpg" alt="Agrowisata Bhumi Merapi" loading="lazy">
+        <h3>Agrowisata Bhumi Merapi</h3>
+        <div class="dest-meta">±2 km · Setiap hari 09.00–17.00</div>
+        <p class="dest-desk">Kawasan agrowisata di kaki Merapi dengan area peternakan, kebun, dan sejumlah titik berfoto bertema. Letaknya di sisi selatan resort, searah dengan perjalanan pulang menuju kota.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Persinggahan pada perjalanan pulang, bukan untuk waktu senggang malam.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/taman-gardu-pandang.jpg" alt="Taman Gardu Pandang Kaliurang" loading="lazy">
+        <h3>Taman Gardu Pandang Kaliurang</h3>
+        <div class="dest-meta">±3 km · Ramai hingga malam hari</div>
+        <p class="dest-desk">Menara pandang bertingkat untuk melihat Merapi tanpa perlu mendaki, dikelilingi taman dan deretan warung makan. Salah satu dari sedikit tempat di daftar ini yang tetap hidup pada malam hari.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Waktu setelah makan malam. Pemandangan paling jernih pada pagi hari.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/tlogo-putri.jpg" alt="Tlogo Putri Kaliurang" loading="lazy">
+        <h3>Tlogo Putri Kaliurang</h3>
+        <div class="dest-meta">±3 km · Umumnya 07.00–16.00</div>
+        <p class="dest-desk">Telaga kecil di kaki Merapi dengan air terjun Tlogo Muncar, jalur jalan kaki, serta deretan warung dan penjual oleh-oleh. Kera liar berkeliaran di sekitar jalur, jadi barang bawaan sebaiknya dijaga.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Jalan santai pagi. Debit air terjun mengecil pada musim kemarau.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/bukit-turgo.jpg" alt="Bukit Turgo" loading="lazy">
+        <h3>Bukit Turgo</h3>
+        <div class="dest-meta">±4 km · Tanpa jam operasional</div>
+        <p class="dest-desk">Jalur trekking pendek di lereng Merapi dengan panorama gunung dan lembah dari puncaknya. Kawasan ini juga dikenal sebagai lokasi pengamatan burung pada pagi hari.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Aktivitas pagi. Perlu alas kaki yang layak dan tidak disarankan saat hujan.</div>
+      </div>
     </div>
+
+    <!-- 2. Budaya & pengetahuan -->
+    <h3 class="dest-cat">2. Budaya &amp; pengetahuan</h3>
+    <div class="dest-grid">
+      <div class="card dest-card">
+        <img src="foto/museum-gunung-merapi.jpg" alt="Museum Gunung Merapi" loading="lazy">
+        <h3>Museum Gunung Merapi</h3>
+        <div class="dest-meta">±0,5 km · Selasa–Minggu 08.00–15.00 · Jumat 08.00–11.00 dan 13.00–14.00 · Senin tutup</div>
+        <p class="dest-desk">Destinasi terdekat dari resort, masih di Dusun Banteng. Museum ini merekam sejarah letusan Merapi, cara gunung api bekerja, serta upaya mitigasi bencana, dilengkapi ruang pemutaran film dan koleksi sisa erupsi 2010.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Kunjungan singkat sebelum atau sesudah sesi, karena jaraknya paling dekat.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/museum-ullen-sentalu.jpg" alt="Museum Ullen Sentalu" loading="lazy">
+        <h3>Museum Ullen Sentalu</h3>
+        <div class="dest-meta">±2,5 km · Selasa–Minggu 08.30–16.00 · Senin tutup</div>
+        <p class="dest-desk">Museum seni dan budaya Jawa yang menyimpan koleksi empat keraton penerus Mataram. Kunjungan dilakukan bersama pemandu dalam beberapa pilihan tur, dan pengambilan foto dibatasi di sebagian ruang.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Peserta yang tertarik sejarah dan budaya. Perlu waktu sekitar satu jam.</div>
+      </div>
+    </div>
+
+    <!-- 3. Kuliner setempat -->
+    <h3 class="dest-cat">3. Kuliner setempat</h3>
+    <div class="dest-grid">
+      <div class="card dest-card">
+        <img src="foto/jadah-tempe-mbah-carik.jpg" alt="Jadah Tempe Mbah Carik" loading="lazy">
+        <h3>Jadah Tempe Mbah Carik</h3>
+        <div class="dest-meta">±2 km · Setiap hari 06.00–18.00</div>
+        <p class="dest-desk">Kudapan paling dikenal dari Kaliurang: jadah dari ketan yang gurih dipadukan dengan tempe dan tahu bacem yang manis. Tersedia pula wajik dan aneka keripik untuk dibawa pulang.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Oleh-oleh, dan satu-satunya di daftar ini yang buka sebelum sesi pagi dimulai.</div>
+      </div>
+
+      <div class="card dest-card">
+        <img src="foto/sate-donal-pak-min.jpg" alt="Sate Donal Pak Min" loading="lazy">
+        <h3>Sate Donal Pak Min</h3>
+        <div class="dest-meta">±2,5 km · Setiap hari 10.00–22.00</div>
+        <p class="dest-desk">Warung sate dan tongseng yang sudah lama ada di kawasan Kaliurang, dengan bumbu kacang kental dan porsi nasi yang mengenyangkan. Penyajiannya perlu waktu karena dibakar setelah dipesan.</p>
+        <div class="dest-cocok"><b>Cocok untuk:</b> Makan malam di luar resort, karena buka sampai pukul 22.00.</div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:20px;">Perhatikan jadwal Anda. Sesi berlangsung padat dari pagi hingga malam, sehingga penjelajahan hanya memungkinkan setelah sesi makan malam atau sebelum aktivitas pagi. Sebagian besar destinasi di atas tutup sebelum pukul 17.00. Mohon memberi tahu PIC apabila Anda meninggalkan area resort.</p>
   </section>
 
   <!-- Bab 14 -->

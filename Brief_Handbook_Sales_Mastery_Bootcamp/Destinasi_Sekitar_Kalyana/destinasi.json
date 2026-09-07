@@ -1,0 +1,87 @@
+{
+  "sumber_jarak": "Perkiraan garis lurus dari Kalyana Resort (Jl. Kaliurang Km 22,38)",
+  "catatan": "Jam operasional dirujuk dari data publik dan wajib dipastikan ulang menjelang acara",
+  "destinasi": [
+    {
+      "slug": "museum-gunung-merapi",
+      "nama": "Museum Gunung Merapi",
+      "kategori": "Budaya & pengetahuan",
+      "jarak": "±0,5 km",
+      "jam": "Selasa–Minggu 08.00–15.00 · Jumat 08.00–11.00 dan 13.00–14.00 · Senin tutup",
+      "desk": "Destinasi terdekat dari resort, masih di Dusun Banteng. Museum ini merekam sejarah letusan Merapi, cara gunung api bekerja, serta upaya mitigasi bencana, dilengkapi ruang pemutaran film dan koleksi sisa erupsi 2010.",
+      "cocok": "Kunjungan singkat sebelum atau sesudah sesi, karena jaraknya paling dekat."
+    },
+    {
+      "slug": "museum-ullen-sentalu",
+      "nama": "Museum Ullen Sentalu",
+      "kategori": "Budaya & pengetahuan",
+      "jarak": "±2,5 km",
+      "jam": "Selasa–Minggu 08.30–16.00 · Senin tutup",
+      "desk": "Museum seni dan budaya Jawa yang menyimpan koleksi empat keraton penerus Mataram. Kunjungan dilakukan bersama pemandu dalam beberapa pilihan tur, dan pengambilan foto dibatasi di sebagian ruang.",
+      "cocok": "Peserta yang tertarik sejarah dan budaya. Perlu waktu sekitar satu jam."
+    },
+    {
+      "slug": "taman-gardu-pandang",
+      "nama": "Taman Gardu Pandang Kaliurang",
+      "kategori": "Alam & panorama",
+      "jarak": "±3 km",
+      "jam": "Ramai hingga malam hari",
+      "desk": "Menara pandang bertingkat untuk melihat Merapi tanpa perlu mendaki, dikelilingi taman dan deretan warung makan. Salah satu dari sedikit tempat di daftar ini yang tetap hidup pada malam hari.",
+      "cocok": "Waktu setelah makan malam. Pemandangan paling jernih pada pagi hari."
+    },
+    {
+      "slug": "tlogo-putri",
+      "nama": "Tlogo Putri Kaliurang",
+      "kategori": "Alam & panorama",
+      "jarak": "±3 km",
+      "jam": "Umumnya 07.00–16.00",
+      "desk": "Telaga kecil di kaki Merapi dengan air terjun Tlogo Muncar, jalur jalan kaki, serta deretan warung dan penjual oleh-oleh. Kera liar berkeliaran di sekitar jalur, jadi barang bawaan sebaiknya dijaga.",
+      "cocok": "Jalan santai pagi. Debit air terjun mengecil pada musim kemarau."
+    },
+    {
+      "slug": "tankaman-natural-park",
+      "nama": "Tankaman Natural Park",
+      "kategori": "Alam & panorama",
+      "jarak": "±2 km",
+      "jam": "Senin–Jumat 07.15–16.00 · Sabtu–Minggu 06.30–17.30",
+      "desk": "Kafe dan taman alam di tepi hutan dengan gazebo, area duduk terbuka, dan pemandangan lembah. Buka paling pagi di antara destinasi lain di daftar ini.",
+      "cocok": "Sarapan atau kopi pagi sebelum sesi dimulai. Jalan masuknya sempit, hanya muat satu mobil."
+    },
+    {
+      "slug": "bukit-turgo",
+      "nama": "Bukit Turgo",
+      "kategori": "Alam & panorama",
+      "jarak": "±4 km",
+      "jam": "Tanpa jam operasional",
+      "desk": "Jalur trekking pendek di lereng Merapi dengan panorama gunung dan lembah dari puncaknya. Kawasan ini juga dikenal sebagai lokasi pengamatan burung pada pagi hari.",
+      "cocok": "Aktivitas pagi. Perlu alas kaki yang layak dan tidak disarankan saat hujan."
+    },
+    {
+      "slug": "jadah-tempe-mbah-carik",
+      "nama": "Jadah Tempe Mbah Carik",
+      "kategori": "Kuliner setempat",
+      "jarak": "±2 km",
+      "jam": "Setiap hari 06.00–18.00",
+      "desk": "Kudapan paling dikenal dari Kaliurang: jadah dari ketan yang gurih dipadukan dengan tempe dan tahu bacem yang manis. Tersedia pula wajik dan aneka keripik untuk dibawa pulang.",
+      "cocok": "Oleh-oleh, dan satu-satunya di daftar ini yang buka sebelum sesi pagi dimulai."
+    },
+    {
+      "slug": "sate-donal-pak-min",
+      "nama": "Sate Donal Pak Min",
+      "kategori": "Kuliner setempat",
+      "jarak": "±2,5 km",
+      "jam": "Setiap hari 10.00–22.00",
+      "desk": "Warung sate dan tongseng yang sudah lama ada di kawasan Kaliurang, dengan bumbu kacang kental dan porsi nasi yang mengenyangkan. Penyajiannya perlu waktu karena dibakar setelah dipesan.",
+      "cocok": "Makan malam di luar resort, karena buka sampai pukul 22.00."
+    },
+    {
+      "slug": "bhumi-merapi",
+      "nama": "Agrowisata Bhumi Merapi",
+      "kategori": "Alam & panorama",
+      "jarak": "±2 km",
+      "jam": "Setiap hari 09.00–17.00",
+      "desk": "Kawasan agrowisata di kaki Merapi dengan area peternakan, kebun, dan sejumlah titik berfoto bertema. Letaknya di sisi selatan resort, searah dengan perjalanan pulang menuju kota.",
+      "cocok": "Persinggahan pada perjalanan pulang, bukan untuk waktu senggang malam."
+    }
+  ]
+}
