@@ -104,23 +104,44 @@
     background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px;
   }
 
-  /* SVG Seat Node Styles */
-  .seat-node { transition: all 0.3s ease; cursor: pointer; opacity: 0.45; }
-  .seat-node:hover { opacity: 0.85; }
+  /* SVG Seat Node & Name Badge Styles */
+  .seat-node { transition: all 0.3s ease; cursor: pointer; opacity: 0.95; }
+  .seat-node:hover { opacity: 1; }
   .seat-rect { fill: #2C3E50; stroke: #1E293B; stroke-width: 1; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 600; font-size: 11.5px; fill: #CBD5E1; pointer-events: none; }
+  .seat-num { font-family: var(--sans); font-weight: 700; font-size: 11.5px; fill: #FFFFFF; pointer-events: none; }
   
-  .seat-node.filled { opacity: 0.7; }
-  .seat-node.filled .seat-rect { fill: #1E3A8A; stroke: #1D4ED8; }
-  .seat-node.filled .seat-num { fill: #93C5FD; }
+  .name-shape {
+    fill: #FFFFFF;
+    stroke: #CBD5E1;
+    stroke-width: 1.2;
+    transition: all 0.3s ease;
+  }
+  .name-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    fill: #1E293B;
+    pointer-events: none;
+  }
+
+  .seat-node.filled { opacity: 1; }
+  .seat-node.filled .seat-rect { fill: #10B981; stroke: #059669; }
+  .seat-node.filled .seat-num { fill: #FFFFFF; }
+  .seat-node.filled .name-shape { fill: #ECFDF5; stroke: #10B981; stroke-width: 1.5; }
+  .seat-node.filled .name-label { fill: #065F46; font-weight: 800; }
 
   /* Active Seat Beacon */
   .seat-node.me { opacity: 1 !important; }
   .seat-node.me .seat-rect {
-    fill: #F59E0B !important; stroke: #78350F !important; stroke-width: 3.5 !important;
+    fill: #F59E0B !important; stroke: #B45309 !important; stroke-width: 3.5 !important;
     filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95));
   }
-  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 800 !important; font-size: 14px !important; }
+  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 800 !important; font-size: 13px !important; }
+  .seat-node.me .name-shape {
+    fill: #FEF3C7 !important; stroke: #F59E0B !important; stroke-width: 2 !important;
+    filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.4));
+  }
+  .seat-node.me .name-label { fill: #78350F !important; font-weight: 800 !important; }
 
   @keyframes sonarPulse {
     0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
@@ -788,6 +809,7 @@ function denah(sorot) {
     const p = org(n);
     const aku = n === sorot;
     const isi = p && S.hadir.has(p.kode);
+    const pNama = p ? esc(p.panggilan) : "";
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
@@ -795,9 +817,31 @@ function denah(sorot) {
 
     const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
 
+    let nameTagSvg = "";
+    if (n <= 8) {
+      // Left side: name badge shape on the left
+      nameTagSvg = `
+        <rect x="-92" y="1" width="86" height="23" rx="6" class="name-shape" />
+        <text x="-49" y="16.5" class="name-label" text-anchor="middle">${pNama}</text>
+      `;
+    } else if (n <= 12) {
+      // Bottom side: name badge shape below
+      nameTagSvg = `
+        <rect x="-26" y="29" width="80" height="21" rx="5" class="name-shape" />
+        <text x="14" y="43.5" class="name-label" text-anchor="middle">${pNama}</text>
+      `;
+    } else {
+      // Right side: name badge shape on the right
+      nameTagSvg = `
+        <rect x="34" y="1" width="86" height="23" rx="6" class="name-shape" />
+        <text x="77" y="16.5" class="name-label" text-anchor="middle">${pNama}</text>
+      `;
+    }
+
     return `
       <g class="${cls}" transform="translate(${item.x}, ${item.y})" data-pilih-kursi="${n}">
         ${aku ? `<circle class="sonar-ring" cx="14" cy="12.5" fill="none" stroke="#F59E0B" />` : ""}
+        ${nameTagSvg}
         <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
         <text x="14" y="17" class="seat-num" text-anchor="middle">${n}</text>
         ${aku ? `
@@ -815,7 +859,7 @@ function denah(sorot) {
   return `<div class="map">
     <div class="stage">PANGGUNG UTAMA · LAYAR &amp; WHITEBOARD</div>
     <div class="map-wrapper-maximized">
-      <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
+      <svg viewBox="20 55 500 375" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
         <g>
           <!-- Wooden U-Shape Table Graphic -->
           <polygon points="160,80 200,80 200,330 340,330 340,80 380,80 380,360 160,360" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
