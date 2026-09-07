@@ -481,18 +481,19 @@ function kioskPanelKanan() {
     list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
   }
 
-  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pirjakun.github.io/Sales-Mistery-Bootcamp/scanner.html&color=12357F&bgcolor=FCFAF6";
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html&color=12357F&bgcolor=FCFAF6";
 
   return `<div class="kiosk-right">
     <!-- QR Code Kiosk Card -->
     <div class="qr-card">
       <div class="qr-frame">
-        <img src="${qrUrl}" alt="QR Code Presensi Bootcamp">
+        <img src="${qrUrl}" alt="QR Code Form Absen Bootcamp">
       </div>
       <div class="qr-info">
-        <div class="qr-tag">SCAN QR PRESENSI PESERTA</div>
-        <h3>Pindai QR ini dari HP Anda</h3>
-        <p>Arahkan kamera HP Anda ke QR Code di samping untuk presensi instan &amp; mendapatkan <b>Tiket Digital &amp; Nomor Kursi Anda</b>.</p>
+        <div class="qr-tag">SCAN QR FORM ABSEN MANDIRI</div>
+        <h3>Pindai QR Form Presensi HP</h3>
+        <p>Pindai QR ini dari HP Anda untuk mengisi <b>Form Absen</b>. Setelah dikonfirmasi, <b>Tiket Digital &amp; Nomor Kursi Anda</b> akan langsung tampil!</p>
+        <a href="checkin.html" target="_blank" style="display:inline-block; margin-top:8px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; color:#fff; text-decoration:none;">Buka Simulasi Form Absen (HP) &rarr;</a>
       </div>
     </div>
 
@@ -724,6 +725,30 @@ document.addEventListener("click", e => {
   }
 });
 
+function syncStoragePresensi() {
+  try {
+    const raw = localStorage.getItem("smb_hadir");
+    if (raw) {
+      const hadirArr = JSON.parse(raw);
+      let prevCount = S.hadir.size;
+      hadirArr.forEach(k => S.hadir.add(k));
+      if (S.hadir.size !== prevCount) {
+        const latestKey = hadirArr[hadirArr.length - 1];
+        const p = P.find(x => x.kode === latestKey);
+        if (p) {
+          S.orangAktif = p;
+          S.showMobilePass = true;
+          pesan(`✓ Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
+        }
+        render();
+      }
+    }
+  } catch(e){}
+}
+
+window.addEventListener("storage", syncStoragePresensi);
+setInterval(syncStoragePresensi, 2000);
+
 setInterval(() => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
@@ -735,6 +760,7 @@ setInterval(() => {
 window.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
+  syncStoragePresensi();
   render();
 });
 </script>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Form Presensi Mandiri — Sales Mastery Bootcamp</title>
+  <meta name="description" content="Form Presensi Mandiri & Digital Ticket Seat Locator Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
+  
+  <!-- Google Fonts: Marcellus & Source Sans 3 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+  :root {
+    --paper: #EFE9DD;
+    --paper-2: #F7F4ED;
+    --card: #FCFAF6;
+    --ink: #141414;
+    --ink-2: #4C4A45;
+    --ink-3: #8A857A;
+    --line: #DCD4C4;
+    --line-2: #EAE3D6;
+    --navy: #12357F;
+    --navy-d: #0E2A66;
+    --sky: #A9D9F2;
+    --ok: #2F6B4F;
+    --ok-soft: #E7F0EA;
+    --warn: #B4402F;
+    --amber: #C08A2E;
+    --gold: #C5A059;
+    --serif: 'Marcellus', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 40%, var(--paper) 100%);
+    display: flex; align-items: center; justify-content: center; padding: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+  .mobile-container {
+    width: 100%; max-width: 440px; background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; box-shadow: 0 16px 36px rgba(0,0,0,0.08); overflow: hidden;
+    display: flex; flex-direction: column; position: relative; min-height: 540px;
+  }
+
+  /* Header */
+  .mobile-head {
+    background: var(--navy); color: #fff; padding: 20px 22px; text-align: center;
+    border-bottom: 3.5px solid var(--amber); position: relative;
+  }
+  .mobile-head .badge-top { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; color: var(--sky); text-transform: uppercase; }
+  .mobile-head h1 { margin: 6px 0 2px; font-family: var(--serif); font-size: 23px; font-weight: 400; color: #fff; }
+  .mobile-head p { margin: 0; font-size: 12.5px; color: #C9D6EC; }
+
+  /* Body Content */
+  .mobile-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+
+  /* Form View Styles */
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--navy); text-transform: uppercase; }
+  .form-select, .form-input {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px;
+    font-size: 14.5px; background: #fff; color: var(--ink); outline: none; font-family: var(--sans);
+  }
+  .form-select:focus, .form-input:focus { border-color: var(--navy); }
+
+  .p-preview-card {
+    background: #F4EFE4; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 14px; margin-top: 4px;
+  }
+  .av {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
+    place-items: center; font-size: 16px; font-weight: 700; flex: none; font-family: var(--serif);
+  }
+  .p-preview-card b { display: block; font-size: 15px; color: var(--navy); font-weight: 700; }
+  .p-preview-card span { font-size: 12.5px; color: var(--ink-2); display: block; margin-top: 2px; }
+
+  .disc-pill { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 3px 10px; display: inline-block; margin-top: 6px; }
+  .disc-pill.D { background: #F8E6E2; color: #A33A28; }
+  .disc-pill.I { background: #FBF0DC; color: #8A6112; }
+  .disc-pill.S { background: #E7F0EA; color: var(--ok); }
+  .disc-pill.C { background: #E6EBF4; color: var(--navy); }
+
+  .btn-submit {
+    width: 100%; padding: 14px; background: var(--navy); color: #fff; border-radius: 12px;
+    font-weight: 700; font-size: 15px; text-align: center; box-shadow: 0 4px 12px rgba(18, 53, 127, 0.2);
+    transition: background 0.2s;
+  }
+  .btn-submit:hover { background: var(--navy-d); }
+  .btn-submit:disabled { background: var(--ink-3); opacity: 0.5; cursor: not-allowed; }
+
+  /* Success View Styles */
+  .success-box {
+    text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 30px 10px; flex: 1;
+  }
+  .check-icon {
+    width: 72px; height: 72px; border-radius: 50%; background: var(--ok-soft); border: 2px solid var(--ok);
+    color: var(--ok); font-size: 36px; font-weight: 800; display: grid; place-items: center;
+    animation: scaleCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-bottom: 16px;
+  }
+  @keyframes scaleCheck { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+  .success-box h2 { font-family: var(--serif); font-size: 26px; color: var(--navy); margin: 0 0 6px; }
+  .success-box p { font-size: 14px; color: var(--ink-2); margin: 0 0 20px; line-height: 1.45; }
+
+  /* Ticket View Styles */
+  .hero-seat-card {
+    background: linear-gradient(135deg, #F5EFE3 0%, #EFE5D3 100%); border: 1.5px solid var(--gold);
+    border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .hero-seat-card .num {
+    font-family: var(--serif); font-size: 50px; font-weight: 700; color: var(--navy);
+    background: #fff; border: 1.5px solid var(--line); border-radius: 12px; width: 68px; height: 68px;
+    display: grid; place-items: center; flex: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .hero-seat-card .desc b { display: block; font-size: 16px; color: var(--navy); font-weight: 700; }
+  .hero-seat-card .desc span { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; display: block; }
+
+  .sec-lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--ink-3); text-transform: uppercase; margin-bottom: 6px; }
+  
+  .nb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nb-box { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #fff; }
+  .nb-box .lbl { font-size: 10px; font-weight: 700; color: var(--ink-3); display: flex; justify-content: space-between; }
+  .nb-box b { display: block; margin-top: 4px; font-size: 13.5px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .tip-card {
+    background: #F4EFE4; border-left: 4px solid var(--amber); border-radius: 8px; padding: 11px 14px;
+    font-size: 12.5px; line-height: 1.5; color: var(--ink-2);
+  }
+  .tip-card b { color: var(--navy); }
+
+  .verified-badge {
+    display: inline-flex; align-items: center; gap: 6px; background: var(--ok-soft); color: var(--ok);
+    border-radius: 999px; padding: 6px 14px; font-size: 12.5px; font-weight: 600; width: fit-content; margin: 0 auto;
+  }
+  .btn-reset {
+    width: 100%; padding: 11px; border: 1px solid var(--line); background: #fff; border-radius: 10px;
+    font-weight: 600; font-size: 13.5px; color: var(--ink-2); text-align: center; margin-top: 8px;
+  }
+
+  .toast {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; background: var(--warn);
+    color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600; z-index: 300;
+  }
+  </style>
+</head>
+<body>
+
+<div class="mobile-container" id="app"></div>
+
+<script>
+/* ---------------- Database ---------------- */
+const P = [
+  ["SMB-001", "Fadli Fahmi Ali", "CEO", "D", 1],
+  ["SMB-002", "Ahmad Rizki", "Business Development", "I", 2],
+  ["SMB-003", "Eko Prasetyo", "Senior Sales Specialist", "S", 3],
+  ["SMB-004", "Budi Santoso", "Sales Executive", "S", 4],
+  ["SMB-005", "Dian Permata", "Sales Lead", "I", 5],
+  ["SMB-006", "Fitriani Putri", "Key Account Executive", "C", 6],
+  ["SMB-007", "Gilang Ramadhan", "Sustainability Consultant", "I", 7],
+  ["SMB-008", "Delon Sianipar", "Senior Consultant", "C", 8],
+  ["SMB-009", "Hendra Wijaya", "Regional Sales Manager", "D", 9],
+  ["SMB-010", "Indah Lestari", "Corporate Sales", "S", 10],
+  ["SMB-011", "Joko Susilo", "Enterprise Sales Executive", "D", 11],
+  ["SMB-012", "Fano Alfian Ardiansyah", "Founder & CEO", "I", 12],
+  ["SMB-013", "Karin Novita", "Sales Trainer Associate", "C", 13],
+  ["SMB-014", "Lukman Hakim", "Strategic Account Manager", "S", 14],
+  ["SMB-015", "Maya Anggraini", "ESG & Sales Specialist", "I", 15],
+  ["SMB-016", "Naufal Pratama", "Commercial Executive", "D", 16],
+  ["SMB-017", "Olivia Zahrani", "Client Relations Lead", "S", 17],
+  ["SMB-018", "Panji Kusuma", "Business Development", "I", 18],
+  ["SMB-019", "Rina Marlina", "Sales Consultant", "C", 19],
+  ["SMB-020", "Siti Rahmawati", "Account Manager", "S", 20],
+  ["SMB-021", "Surya Saputra", "Area Sales Executive", "D", 21],
+  ["SMB-022", "Wahyu Hidayat", "Sales Performance Analyst", "C", 22]
+].map(a => ({ kode: a[0], nama: a[1], peran: a[2], disc: a[3], kursi: a[4] }));
+
+const DISC = { D: "Dominance", I: "Influencing", S: "Steadiness", C: "Conscientiousness" };
+const SARAN = {
+  D: "cenderung langsung ke inti. Sampaikan poin utama lebih dulu.",
+  I: "cenderung ekspresif. Beri ruang untuk berbicara dan bertukar ide.",
+  S: "cenderung tenang dan konsisten. Beri waktu untuk mencerna.",
+  C: "cenderung teliti pada detail. Siapkan data pendukung."
+};
+
+const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
+  : n === 9 ? "Sudut Kiri Bawah Meja U (Kursi #9)"
+  : n <= 13 ? "Sisi Bawah Meja U (Kursi #" + n + ")"
+  : n === 14 ? "Sudut Kanan Bawah Meja U (Kursi #14)"
+  : "Sisi Kanan Meja U (Kursi #" + n + ")";
+
+const org = k => P.find(p => p.kursi === k);
+function tetangga(kursi) {
+  return { kiri: kursi > 1 ? org(kursi - 1) : null, kanan: kursi < 22 ? org(kursi + 1) : null };
+}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+
+const S = {
+  view: "form", // "form", "success", "ticket"
+  pDipilih: null,
+  pesan: null
+};
+
+/* Load stored presensi or initial query param */
+function init() {
+  const params = new URLSearchParams(window.location.search);
+  const kode = params.get("kode");
+  if (kode) {
+    const found = P.find(x => x.kode === kode.toUpperCase());
+    if (found) S.pDipilih = found;
+  }
+  render();
+}
+
+function simpanPresensi(p) {
+  let hadirArr = [];
+  try {
+    const raw = localStorage.getItem("smb_hadir");
+    if (raw) hadirArr = JSON.parse(raw);
+  } catch(e){}
+  if (!hadirArr.includes(p.kode)) {
+    hadirArr.push(p.kode);
+    localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
+  }
+}
+
+function render() {
+  const container = $("#app");
+  if (S.view === "form") {
+    container.innerHTML = `
+      <div class="mobile-head">
+        <div class="badge-top">SALES MASTERY BOOTCAMP</div>
+        <h1>Form Presensi Peserta</h1>
+        <p>Kalyana Resort Kaliurang · 8–10 Sep 2026</p>
+      </div>
+      <div class="mobile-body">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div class="form-group">
+            <label>Pilih Nama Peserta</label>
+            <select class="form-select" id="select-peserta">
+              <option value="">-- Pilih Nama Anda dari Daftar --</option>
+              ${P.map(p => `<option value="${p.kode}" ${S.pDipilih && S.pDipilih.kode === p.kode ? 'selected' : ''}>${esc(p.nama)} (${p.kode})</option>`).join("")}
+            </select>
+          </div>
+
+          ${S.pDipilih ? `
+          <div class="p-preview-card">
+            <div class="av">${inisial(S.pDipilih.nama)}</div>
+            <div>
+              <b>${esc(S.pDipilih.nama)}</b>
+              <span>${esc(S.pDipilih.peran)}</span>
+              <span class="disc-pill ${S.pDipilih.disc}">DiSC: ${S.pDipilih.disc} · ${DISC[S.pDipilih.disc]}</span>
+            </div>
+          </div>
+          ` : `
+          <div style="background:#fff; border:1px dashed var(--line); border-radius:12px; padding:20px; text-align:center; color:var(--ink-3); font-size:13px;">
+            Silakan pilih nama Anda pada menu di atas untuk melakukan presensi.
+          </div>
+          `}
+        </div>
+
+        <button class="btn-submit" id="btn-submit-presensi" ${!S.pDipilih ? 'disabled' : ''}>
+          Konfirmasi Presensi Mandiri
+        </button>
+      </div>
+    `;
+  } else if (S.view === "success") {
+    container.innerHTML = `
+      <div class="mobile-head">
+        <div class="badge-top">SISTEM PRESENSI TERAKREDITASI</div>
+        <h1>Check-in Sukses!</h1>
+        <p>Data presensi tersinkronisasi ke Layar Kiosk</p>
+      </div>
+      <div class="mobile-body">
+        <div class="success-box">
+          <div class="check-icon">✓</div>
+          <h2>Presensi Berhasil</h2>
+          <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di meja U-Shape telah disiapkan.</p>
+          <button class="btn-submit" id="btn-buka-tiket">Buka Tiket Digital &amp; Nomor Kursi</button>
+        </div>
+      </div>
+    `;
+  } else if (S.view === "ticket") {
+    const p = S.pDipilih;
+    const t = tetangga(p.kursi);
+
+    const kartuNb = (lbl, o) => o ? `
+      <div class="nb-box">
+        <div class="lbl"><span>${lbl}</span><span>#${o.kursi}</span></div>
+        <b>${esc(o.nama)}</b>
+        <span class="disc-pill ${o.disc}" style="margin-top:4px; display:inline-block">${o.disc} · ${DISC[o.disc]}</span>
+      </div>` : `
+      <div class="nb-box">
+        <div class="lbl"><span>${lbl}</span><span>—</span></div>
+        <b style="color:var(--ink-3)">Ujung Meja Utama</b>
+      </div>`;
+
+    container.innerHTML = `
+      <div class="mobile-head">
+        <div class="badge-top">E-TICKET &amp; SEAT PASS</div>
+        <h1>${esc(p.nama)}</h1>
+        <p>${esc(p.peran)} · Werkudara Group</p>
+      </div>
+      <div class="mobile-body">
+        <div class="hero-seat-card">
+          <div class="num">${p.kursi}</div>
+          <div class="desc">
+            <b>${sisi(p.kursi)}</b>
+            <span>Tersambung langsung dengan Layar Denah Kiosk U-Shape</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="sec-lbl">REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
+          <div class="nb-grid">
+            ${kartuNb("SEBELAH KIRI", t.kiri)}
+            ${kartuNb("SEBELAH KANAN", t.kanan)}
+          </div>
+        </div>
+
+        ${t.kiri || t.kanan ? `<div class="tip-card">
+          <b>Saran Gaya Komunikasi:</b><br>
+          ${t.kiri ? `${esc(t.kiri.nama.split(" ")[0])}: ${SARAN[t.kiri.disc]}<br>` : ""}
+          ${t.kanan ? `${esc(t.kanan.nama.split(" ")[0])}: ${SARAN[t.kanan.disc]}` : ""}
+        </div>` : ""}
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="verified-badge">✓ Terverifikasi Hadir (Kios &amp; HP Sync)</div>
+          <button class="btn-reset" id="btn-kembali">Kembali ke Form Presensi</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Bind Events
+  const sel = $("#select-peserta");
+  if (sel) {
+    sel.addEventListener("change", e => {
+      const code = e.target.value;
+      S.pDipilih = P.find(x => x.kode === code) || null;
+      render();
+    });
+  }
+
+  const btnSub = $("#btn-submit-presensi");
+  if (btnSub) {
+    btnSub.addEventListener("click", () => {
+      if (!S.pDipilih) return;
+      simpanPresensi(S.pDipilih);
+      S.view = "success";
+      render();
+    });
+  }
+
+  const btnBuka = $("#btn-buka-tiket");
+  if (btnBuka) {
+    btnBuka.addEventListener("click", () => {
+      S.view = "ticket";
+      render();
+    });
+  }
+
+  const btnKembali = $("#btn-kembali");
+  if (btnKembali) {
+    btnKembali.addEventListener("click", () => {
+      S.view = "form";
+      render();
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
