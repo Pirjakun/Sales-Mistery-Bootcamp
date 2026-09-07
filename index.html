@@ -472,9 +472,10 @@
 
   <!-- Bab 11 -->
   <section class="chap">
-    <div class="chap-h"><span class="chap-n">11</span><h2>Denah Ruang Pelatihan</h2></div>
-    <p class="p">Denah tempat duduk 22 kursi bernomor yang mengelilingi meja U (Nomor 1–8 di sisi kiri, 9 di sudut kiri bawah, 10–13 di sisi tengah bawah, 14 di sudut kanan bawah, dan 15–22 di sisi kanan).</p>
-    
+    <div class="chap-h"><span class="chap-n">11</span><h2>Denah Ruang Pelatihan &amp; Ploting Tempat Duduk</h2></div>
+    <p class="p">Denah tempat duduk terdiri atas 20 kursi bernomor yang mengelilingi meja U (Nomor 1–8 di sisi kiri, 9–12 di sisi tengah bawah, dan 13–20 di sisi kanan). Penyusunan tempat duduk diselaraskan berdasarkan prinsip <b>DISC Empowerment Seating</b>.</p>
+    <p class="p" style="margin-top:-8px; font-size:13px; color:var(--tx-mut);"><b>Prinsip Ploting:</b> High-drive dipasangkan dengan gaya listening/detail; gaya stabil dipasangkan dengan assertiveness/urgency; profil interpersonal dipertemukan dengan profil struktur/hasil agar saling menutup development area.</p>
+
     <figure class="fig">
       <img src="aset/ruang-pelatihan.jpg" alt="Ruang pelatihan utama Kalyana Resort dengan susunan meja U" loading="lazy">
       <figcaption>Ruang pelatihan utama Kalyana Resort dengan tata letak meja U.</figcaption>
@@ -488,54 +489,158 @@
 
         <!-- U-SHAPED WOODEN TABLE -->
         <g>
-          <!-- Main Table Shape -->
           <polygon points="
-            160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330
+            160,80 200,80 200,330 340,330 340,80 380,80 380,360 160,360
           " fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-          
-          <!-- Miter Joints -->
-          <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
-          <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
-          <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
-          <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
-
-          <!-- Top Bevel Line -->
-          <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          <line x1="160" y1="330" x2="200" y2="330" stroke="#683910" stroke-width="2"/>
+          <line x1="340" y1="330" x2="380" y2="330" stroke="#683910" stroke-width="2"/>
+          <polyline points="160,80 160,360 380,360 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
         </g>
 
-        <!-- 22 GREEN CHAIRS -->
+        <!-- 20 SEATS WITH DISC EMPOWERMENT COLORING -->
         <!-- SISI KIRI: Seats 1 to 8 -->
-        <g transform="translate(124, 80)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text></g>
-        <g transform="translate(124, 111)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text></g>
-        <g transform="translate(124, 142)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text></g>
-        <g transform="translate(124, 173)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text></g>
-        <g transform="translate(124, 204)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text></g>
-        <g transform="translate(124, 235)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text></g>
-        <g transform="translate(124, 266)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text></g>
-        <g transform="translate(124, 297)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text></g>
+        <!-- 1: Nanda (D/I) Red -->
+        <g transform="translate(124, 80)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text></g>
+        <!-- 2: Popan (S) Green -->
+        <g transform="translate(124, 111)"><rect width="28" height="25" rx="7" fill="#27AE60" stroke="#1E8449" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text></g>
+        <!-- 3: Jay (D/I) Red -->
+        <g transform="translate(124, 142)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text></g>
+        <!-- 4: Elfasa (I/S) Yellow -->
+        <g transform="translate(124, 173)"><rect width="28" height="25" rx="7" fill="#F39C12" stroke="#D68910" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text></g>
+        <!-- 5: Dita (D/C) Red -->
+        <g transform="translate(124, 204)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text></g>
+        <!-- 6: Okki (I/S) Yellow -->
+        <g transform="translate(124, 235)"><rect width="28" height="25" rx="7" fill="#F39C12" stroke="#D68910" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text></g>
+        <!-- 7: Nindy (D/I) Red -->
+        <g transform="translate(124, 266)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">7</text></g>
+        <!-- 8: Mitha (S/C) Green -->
+        <g transform="translate(124, 297)"><rect width="28" height="25" rx="7" fill="#27AE60" stroke="#1E8449" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">8</text></g>
 
-        <!-- SUDUT KIRI BAWAH: Seat 9 (Bentuk kursi miring, angka 9 tetap TEGAK LURUS) -->
-        <g transform="translate(138, 345)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5" transform="rotate(-45, 14, 12.5)"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">9</text></g>
+        <!-- SISI TENGAH BAWAH: Seats 9 to 12 -->
+        <!-- 9: Jaka (I/D) Yellow -->
+        <g transform="translate(195, 368)"><rect width="28" height="25" rx="7" fill="#F39C12" stroke="#D68910" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">9</text></g>
+        <!-- 10: Dimas (C/S) Blue -->
+        <g transform="translate(235, 368)"><rect width="28" height="25" rx="7" fill="#2980B9" stroke="#1F618D" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text></g>
+        <!-- 11: Bagus (D/I) Red -->
+        <g transform="translate(275, 368)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">11</text></g>
+        <!-- 12: Yulia (C/S) Blue -->
+        <g transform="translate(315, 368)"><rect width="28" height="25" rx="7" fill="#2980B9" stroke="#1F618D" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">12</text></g>
 
-        <!-- SISI TENGAH BAWAH: Seats 10 to 13 -->
-        <g transform="translate(195, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text></g>
-        <g transform="translate(235, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">11</text></g>
-        <g transform="translate(275, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">12</text></g>
-        <g transform="translate(315, 368)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">13</text></g>
-
-        <!-- SUDUT KANAN BAWAH: Seat 14 (Bentuk kursi miring, angka 14 tetap TEGAK LURUS) -->
-        <g transform="translate(374, 345)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5" transform="rotate(45, 14, 12.5)"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">14</text></g>
-
-        <!-- SISI KANAN: Seats 15 to 22 -->
-        <g transform="translate(388, 297)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">15</text></g>
-        <g transform="translate(388, 266)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">16</text></g>
-        <g transform="translate(388, 235)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text></g>
-        <g transform="translate(388, 204)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">18</text></g>
-        <g transform="translate(388, 173)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">19</text></g>
-        <g transform="translate(388, 142)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">20</text></g>
-        <g transform="translate(388, 111)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">21</text></g>
-        <g transform="translate(388, 80)"><rect width="28" height="25" rx="7" fill="#0D695B" stroke="#053F36" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">22</text></g>
+        <!-- SISI KANAN: Seats 13 to 20 -->
+        <!-- 13: Gilang (D/I) Red -->
+        <g transform="translate(388, 297)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">13</text></g>
+        <!-- 14: Linda (S/C) Green -->
+        <g transform="translate(388, 266)"><rect width="28" height="25" rx="7" fill="#27AE60" stroke="#1E8449" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">14</text></g>
+        <!-- 15: Irvani (D/I) Red -->
+        <g transform="translate(388, 235)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">15</text></g>
+        <!-- 16: Ainur (I/C) Yellow -->
+        <g transform="translate(388, 204)"><rect width="28" height="25" rx="7" fill="#F39C12" stroke="#D68910" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">16</text></g>
+        <!-- 17: Mya (D/C) Red -->
+        <g transform="translate(388, 173)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">17</text></g>
+        <!-- 18: Adiel (S/C) Green -->
+        <g transform="translate(388, 142)"><rect width="28" height="25" rx="7" fill="#27AE60" stroke="#1E8449" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">18</text></g>
+        <!-- 19: Andri (D/I) Red -->
+        <g transform="translate(388, 111)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">19</text></g>
+        <!-- 20: Kensrie (D/C) Red -->
+        <g transform="translate(388, 80)"><rect width="28" height="25" rx="7" fill="#E74C3C" stroke="#C0392B" stroke-width="1.5"/><text x="14" y="17" font-family="var(--sans)" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">20</text></g>
       </svg>
+
+      <!-- LEGEND DISC EMPOWERMENT -->
+      <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:14px; font-size:12px; font-weight:600;">
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; height:14px; background:#E74C3C; border-radius:3px; display:inline-block;"></span> Dominant (D)</span>
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; height:14px; background:#F39C12; border-radius:3px; display:inline-block;"></span> Influential (I)</span>
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; height:14px; background:#27AE60; border-radius:3px; display:inline-block;"></span> Steadiness (S)</span>
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; height:14px; background:#2980B9; border-radius:3px; display:inline-block;"></span> Conscientiousness (C)</span>
+      </div>
+    </div>
+
+    <!-- SEAT ROSTER LIST (1 - 20) -->
+    <div class="day" style="margin-top:20px;">
+      <h3>SEAT ROSTER · DAY 1 &amp; DAY 2</h3>
+      <div class="card" style="padding:12px;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#1 Nanda</b><br><small style="color:var(--tx-mut)">I Gusti Ayu Ananda Putri</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#2 Popan</b><br><small style="color:var(--tx-mut)">Sofyan Thohari</small></div>
+            <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">S</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#3 Jay</b><br><small style="color:var(--tx-mut)">Sri Wijayati</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#4 Elfasa</b><br><small style="color:var(--tx-mut)">Elfasa Khoirumansyah</small></div>
+            <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">I/S</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#5 Dita</b><br><small style="color:var(--tx-mut)">Maria Dita Fivtiari</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#6 Okki</b><br><small style="color:var(--tx-mut)">Okki Putri Fadilah</small></div>
+            <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">I/S</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#7 Nindy</b><br><small style="color:var(--tx-mut)">Nindy Amalia</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#8 Mitha</b><br><small style="color:var(--tx-mut)">Paramitha Maharesmi</small></div>
+            <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">S/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#9 Jaka</b><br><small style="color:var(--tx-mut)">Fuad Jaka Pamungkas</small></div>
+            <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">I/D</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#10 Dimas</b><br><small style="color:var(--tx-mut)">Dimas Wiyanarko</small></div>
+            <span style="background:#2980B9; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">C/S</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#11 Bagus</b><br><small style="color:var(--tx-mut)">I Gusti Putu Yaktianuraga</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#12 Yulia</b><br><small style="color:var(--tx-mut)">Yulia Mekar Rini</small></div>
+            <span style="background:#2980B9; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">C/S</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#13 Gilang</b><br><small style="color:var(--tx-mut)">Gilang Risnantyo</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#14 Linda</b><br><small style="color:var(--tx-mut)">Linda Susanto</small></div>
+            <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">S/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#15 Irvani</b><br><small style="color:var(--tx-mut)">Irvani Putri</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#16 Ainur</b><br><small style="color:var(--tx-mut)">Ainur Hasanah</small></div>
+            <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">I/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#17 Mya</b><br><small style="color:var(--tx-mut)">Mya Mar'atus Sholikhah</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#18 Adiel</b><br><small style="color:var(--tx-mut)">Adiel Priyarama</small></div>
+            <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">S/C</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#19 Andri</b><br><small style="color:var(--tx-mut)">Etik Andriyanti</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/I</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.03); padding:8px 12px; border-radius:8px;">
+            <div><b>#20 Kensrie</b><br><small style="color:var(--tx-mut)">Kensrie Diah Ayuningtyas</small></div>
+            <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px;">D/C</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

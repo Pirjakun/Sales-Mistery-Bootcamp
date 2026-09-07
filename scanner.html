@@ -299,27 +299,27 @@ const SESI = [
 ];
 
 const P = [
-  ["SMB-001", "I Gusti Ayu Ananda Putri", "Nanda", "D", 1],
-  ["SMB-002", "Sofyan Thohari", "Popan", "S", 2],
-  ["SMB-003", "Sri Wijayati", "Jay", "D", 3],
-  ["SMB-004", "Elfasa Khoirumansyah", "Elfasa", "I", 4],
-  ["SMB-005", "Maria Dita Fivtiari", "Dita", "D", 5],
-  ["SMB-006", "Okki Putri Fadilah", "Okki", "I", 6],
-  ["SMB-007", "Nindy Amalia", "Nindy", "D", 7],
-  ["SMB-008", "Paramitha Maharesmi Nugraheni Putri", "Mitha", "S", 8],
-  ["SMB-009", "Fuad Jaka Pamungkas", "Jaka", "I", 9],
-  ["SMB-010", "Dimas Wiyanarko", "Dimas", "C", 10],
-  ["SMB-011", "I Gusti Putu Yaktianuraga", "Bagus", "D", 11],
-  ["SMB-012", "Yulia Mekar Rini", "Yulia", "C", 12],
-  ["SMB-013", "Gilang Risnantyo", "Gilang", "D", 13],
-  ["SMB-014", "Linda Susanto", "Linda", "S", 14],
-  ["SMB-015", "Irvani Putri", "Irvani", "D", 15],
-  ["SMB-016", "Ainur Hasanah", "Ainur", "I", 16],
-  ["SMB-017", "Mya Mar'atus Sholikhah", "Mya", "D", 17],
-  ["SMB-018", "Adiel Priyarama", "Adiel", "S", 18],
-  ["SMB-019", "Etik Andriyanti", "Andri", "D", 19],
-  ["SMB-020", "Kensrie Diah Ayuningtyas", "Kensrie", "D", 20]
-].map(a => ({ kode: a[0], nama: a[1], peran: a[2], disc: a[3], kursi: a[4] }));
+  ["SMB-001", "I Gusti Ayu Ananda Putri", "Nanda", "D/I", 1, "421", "Perempuan"],
+  ["SMB-002", "Sofyan Thohari", "Popan", "S", 2, "425", "Laki-laki"],
+  ["SMB-003", "Sri Wijayati", "Jay", "D/I", 3, "413", "Perempuan"],
+  ["SMB-004", "Elfasa Khoirumansyah", "Elfasa", "I/S", 4, "425", "Laki-laki"],
+  ["SMB-005", "Maria Dita Fivtiari", "Dita", "D/C", 5, "412", "Perempuan"],
+  ["SMB-006", "Okki Putri Fadilah", "Okki", "I/S", 6, "422", "Perempuan"],
+  ["SMB-007", "Nindy Amalia", "Nindy", "D/I", 7, "422", "Perempuan"],
+  ["SMB-008", "Paramitha Maharesmi Nugraheni Putri", "Mitha", "S/C", 8, "421", "Perempuan"],
+  ["SMB-009", "Fuad Jaka Pamungkas", "Jaka", "I/D", 9, "415", "Laki-laki"],
+  ["SMB-010", "Dimas Wiyanarko", "Dimas", "C/S", 10, "416", "Laki-laki"],
+  ["SMB-011", "I Gusti Putu Yaktianuraga", "Bagus", "D/I", 11, "416", "Laki-laki"],
+  ["SMB-012", "Yulia Mekar Rini", "Yulia", "C/S", 12, "424", "Perempuan"],
+  ["SMB-013", "Gilang Risnantyo", "Gilang", "D/I", 13, "414", "Laki-laki"],
+  ["SMB-014", "Linda Susanto", "Linda", "S/C", 14, "423", "Perempuan"],
+  ["SMB-015", "Irvani Putri", "Irvani", "D/I", 15, "423", "Perempuan"],
+  ["SMB-016", "Ainur Hasanah", "Ainur", "I/C", 16, "417", "Perempuan"],
+  ["SMB-017", "Mya Mar'atus Sholikhah", "Mya", "D/C", 17, "424", "Perempuan"],
+  ["SMB-018", "Adiel Priyarama", "Adiel", "S/C", 18, "414", "Laki-laki"],
+  ["SMB-019", "Etik Andriyanti", "Andri", "D/I", 19, "417", "Perempuan"],
+  ["SMB-020", "Kensrie Diah Ayuningtyas", "Kensrie", "D/C", 20, "413", "Perempuan"]
+].map(a => ({ kode: a[0], nama: a[1], panggilan: a[2], disc: a[3], kursi: a[4], kamar: a[5], gender: a[6], peran: "Peserta Bootcamp" }));
 
 const DISC = { D: "Dominance", I: "Influencing", S: "Steadiness", C: "Conscientiousness" };
 const SARAN = {
