@@ -32,6 +32,9 @@
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   .wrap{max-width:520px;margin:0 auto;padding:0 20px 40px}
 
+  .room-card{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:14px;transition:transform 0.2s,box-shadow 0.2s;}
+  .room-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(18,53,127,0.1);}
+
   /* pita atas & bawah */
   .band{height:6px;background:var(--navy)}
 
@@ -284,16 +287,292 @@
 
   <!-- Bab 04 -->
   <section class="chap">
-    <div class="chap-h"><span class="chap-n">04</span><h2>Akomodasi &amp; Tempat Duduk</h2></div>
-    <p class="p">Setiap kamar ditempati oleh dua peserta, demikian pula setiap meja di ruang pelatihan. Kunci kamar diserahkan per pasangan, sehingga cukup diwakili oleh salah seorang di antaranya.</p>
-    <p class="p">Mohon memeriksa laci, kamar mandi, serta stopkontak sebelum meninggalkan kamar. Pertukaran teman sekamar dapat diatur secara mandiri setelah kunci diterima, sepanjang jumlahnya tetap dua peserta per kamar dan dikomunikasikan kepada PIC.</p>
-    <div class="card">
-      <div class="kv"><span>Check-in</span><b>Hari pertama, pukul 18.00 di lobi</b></div>
-      <div class="kv"><span>Check-out</span><b>Hari ketiga, sebelum sesi pagi<small>Barang dapat dititipkan hingga kepulangan</small></b></div>
-      <div class="kv"><span>Nomor kamar</span><b>Disampaikan pada saat check-in</b></div>
-      <div class="kv"><span>Nomor kursi</span><b>Tertera pada meja masing-masing</b></div>
+    <div class="chap-h"><span class="chap-n">04</span><h2>Akomodasi &amp; Pembagian Kamar (Rooming List)</h2></div>
+    <p class="p">Setiap kamar ditempati oleh 2–3 penghuni sesuai dengan alokasi jenis kamar dan pertimbangan keseimbangan profil DISC. Kunci kamar diserahkan saat check-in di lobi resort dan dapat diwakili oleh salah satu teman sekamar.</p>
+    <p class="p">Mohon memeriksa laci, kamar mandi, serta stopkontak sebelum meninggalkan kamar. Pertukaran teman sekamar dapat diatur secara mandiri setelah kunci diterima, sepanjang jumlahnya tetap sesuai kapasitas kamar dan dikomunikasikan kepada Event PIC (Chelsy).</p>
+    
+    <div class="card" style="margin-bottom:20px;">
+      <div class="kv"><span>Check-in</span><b>Hari pertama, pukul 18.00 WIB di lobi</b></div>
+      <div class="kv"><span>Check-out</span><b>Hari ketiga, sebelum sesi pagi<small>Barang dapat dititipkan di lobi hingga waktu kepulangan</small></b></div>
+      <div class="kv"><span>Total Akomodasi</span><b>12 Kamar (25 Penghuni)<small>7 Kamar Lantai Bawah · 5 Kamar Lantai Atas</small></b></div>
+    </div>
+
+    <!-- Interactive Rooming List Header & Tabs -->
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-top:16px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+        <h3 style="margin:0; font-size:18px; color:var(--tx-head); font-weight:700;">🏠 Pembagian Kamar (Rooming List Final)</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button id="btn-room-all" onclick="filterRoomFloor('all')" style="background:#12357F; color:#fff; border:1px solid #12357F; padding:6px 14px; border-radius:20px; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s;">Semua (12 Kamar)</button>
+          <button id="btn-room-bawah" onclick="filterRoomFloor('bawah')" style="background:transparent; color:#12357F; border:1px solid #12357F; padding:6px 14px; border-radius:20px; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s;">Lantai Bawah (7)</button>
+          <button id="btn-room-atas" onclick="filterRoomFloor('atas')" style="background:transparent; color:#12357F; border:1px solid #12357F; padding:6px 14px; border-radius:20px; font-weight:600; font-size:13px; cursor:pointer; transition:all 0.2s;">Lantai Atas (5)</button>
+        </div>
+      </div>
+
+      <!-- Search Input for Rooms or Occupants -->
+      <div style="margin-bottom:16px;">
+        <input type="text" id="room-search-input" onkeyup="searchRoomList()" placeholder="🔍 Cari nama peserta atau nomor kamar (mis: 412, Nanda, Fadli)..." style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:var(--bg-body); color:var(--tx-head); font-size:14px; box-sizing:border-box;">
+      </div>
+
+      <!-- Room Grid Container -->
+      <div id="room-grid-container" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:14px;">
+        
+        <!-- LANTAI BAWAH -->
+        <div class="room-card floor-bawah" data-search="411 eyang bu bintang">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 411</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <span style="font-weight:600; font-size:14px;">Eyang</span>
+              <span style="background:#BDC3C7; color:#333; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">-</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <span style="font-weight:600; font-size:14px;">Bu Bintang</span>
+              <span style="background:#BDC3C7; color:#333; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="412 dita chelsy maria dita fivtiari">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 412</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Dita</b><br><small style="color:var(--tx-mut)">Maria Dita Fivtiari</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/C</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <span style="font-weight:600; font-size:14px;">Chelsy</span>
+              <span style="background:#BDC3C7; color:#333; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="413 jay kensrie sri wijayati kensrie diah ayuningtyas">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 413</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Jay</b><br><small style="color:var(--tx-mut)">Sri Wijayati</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Kensrie</b><br><small style="color:var(--tx-mut)">Kensrie Diah Ayuningtyas</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/C</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="414 adiel gilang arie adiel priyarama gilang risnantyo">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 414</span>
+            <span style="background:#FEF9E7; color:#D4AC0D; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">TRP (+1 EB) · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Adiel</b><br><small style="color:var(--tx-mut)">Adiel Priyarama</small></div>
+              <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">S/C</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Gilang</b><br><small style="color:var(--tx-mut)">Gilang Risnantyo</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <span style="font-weight:600; font-size:14px;">Arie</span>
+              <span style="background:#BDC3C7; color:#333; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="415 jaka fadli fuad jaka pamungkas fadli fahmi ali">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 415</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Jaka</b><br><small style="color:var(--tx-mut)">Fuad Jaka Pamungkas</small></div>
+              <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">I/D</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Fadli</b><br><small style="color:var(--tx-mut)">Fadli Fahmi Ali</small></div>
+              <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">S</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="416 bagus dimas i gusti putu yaktianuraga dimas wiyanarko">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 416</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Bagus</b><br><small style="color:var(--tx-mut)">I Gusti Putu Yaktianuraga</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Dimas</b><br><small style="color:var(--tx-mut)">Dimas Wiyanarko</small></div>
+              <span style="background:#2980B9; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">C/S</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-bawah" data-search="417 andri ainur etik andriyanti ainur hasanah">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 417</span>
+            <span style="background:#EBF5FB; color:#2980B9; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Bawah</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Andri</b><br><small style="color:var(--tx-mut)">Etik Andriyanti</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Ainur</b><br><small style="color:var(--tx-mut)">Ainur Hasanah</small></div>
+              <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">I/C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LANTAI ATAS -->
+        <div class="room-card floor-atas" data-search="421 nanda mitha i gusti ayu ananda putri paramitha maharesmi">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 421</span>
+            <span style="background:#EAFAF1; color:#27AE60; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Atas</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Nanda</b><br><small style="color:var(--tx-mut)">I Gusti Ayu Ananda Putri</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Mitha</b><br><small style="color:var(--tx-mut)">Paramitha Maharesmi</small></div>
+              <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">S/C</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-atas" data-search="422 nindy okki nindy amalia okki putri fadilah">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 422</span>
+            <span style="background:#EAFAF1; color:#27AE60; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Atas</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Nindy</b><br><small style="color:var(--tx-mut)">Nindy Amalia</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Okki</b><br><small style="color:var(--tx-mut)">Okki Putri Fadilah</small></div>
+              <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">I/S</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-atas" data-search="423 irvani linda irvani putri linda susanto">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 423</span>
+            <span style="background:#EAFAF1; color:#27AE60; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Atas</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Irvani</b><br><small style="color:var(--tx-mut)">Irvani Putri</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/I</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Linda</b><br><small style="color:var(--tx-mut)">Linda Susanto</small></div>
+              <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">S/C</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-atas" data-search="424 mya yulia mya mar'atus sholikhah yulia mekar rini">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 424</span>
+            <span style="background:#EAFAF1; color:#27AE60; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Atas</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Mya</b><br><small style="color:var(--tx-mut)">Mya Mar'atus Sholikhah</small></div>
+              <span style="background:#E74C3C; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">D/C</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Yulia</b><br><small style="color:var(--tx-mut)">Yulia Mekar Rini</small></div>
+              <span style="background:#2980B9; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">C/S</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-card floor-atas" data-search="425 elfasa popan elfasa khoirumansyah sofyan thohari">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:800; font-size:16px; color:#12357F;">Kamar 425</span>
+            <span style="background:#EAFAF1; color:#27AE60; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px;">DBL · Lt. Atas</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Elfasa</b><br><small style="color:var(--tx-mut)">Elfasa Khoirumansyah</small></div>
+              <span style="background:#F39C12; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">I/S</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.03); padding:6px 10px; border-radius:6px;">
+              <div><b>Popan</b><br><small style="color:var(--tx-mut)">Sofyan Thohari</small></div>
+              <span style="background:#27AE60; color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">S</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
+
+  <script>
+  function filterRoomFloor(floor) {
+    const btnAll = document.getElementById('btn-room-all');
+    const btnBawah = document.getElementById('btn-room-bawah');
+    const btnAtas = document.getElementById('btn-room-atas');
+    const cards = document.querySelectorAll('.room-card');
+
+    btnAll.style.background = 'transparent'; btnAll.style.color = '#12357F'; btnAll.style.border = '1px solid #12357F';
+    btnBawah.style.background = 'transparent'; btnBawah.style.color = '#12357F'; btnBawah.style.border = '1px solid #12357F';
+    btnAtas.style.background = 'transparent'; btnAtas.style.color = '#12357F'; btnAtas.style.border = '1px solid #12357F';
+
+    if (floor === 'bawah') {
+      btnBawah.style.background = '#12357F'; btnBawah.style.color = '#fff';
+    } else if (floor === 'atas') {
+      btnAtas.style.background = '#12357F'; btnAtas.style.color = '#fff';
+    } else {
+      btnAll.style.background = '#12357F'; btnAll.style.color = '#fff';
+    }
+
+    cards.forEach(card => {
+      if (floor === 'all') {
+        card.style.display = 'block';
+      } else if (floor === 'bawah') {
+        card.style.display = card.classList.contains('floor-bawah') ? 'block' : 'none';
+      } else if (floor === 'atas') {
+        card.style.display = card.classList.contains('floor-atas') ? 'block' : 'none';
+      }
+    });
+  }
+
+  function searchRoomList() {
+    const q = document.getElementById('room-search-input').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.room-card');
+    cards.forEach(card => {
+      const text = card.getAttribute('data-search') || '';
+      if (!q || text.includes(q)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+  </script>
 
   <!-- Bab 05 -->
   <section class="chap">
