@@ -741,6 +741,7 @@ function bilahAtas() {
     </div>
     <div class="right">
       <div class="count"><b>${S.hadir.size}</b> / ${P.length} Hadir</div>
+      <button id="btn-reset-global" style="background:#DC2626; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;">Reset Presensi (0 Hadir)</button>
       <div class="clock">${jam(S.jam)}</div>
       <a href="index.html" class="btn-hb">Handbook</a>
     </div>
@@ -1072,6 +1073,22 @@ document.addEventListener("click", e => {
     const kNum = parseInt(nodeKursi.dataset.pilihKursi, 10);
     const p = org(kNum);
     if (p) pilihPeserta(p.kode);
+    return;
+  }
+
+  const btnReset = e.target.closest("#btn-reset-global");
+  if (btnReset) {
+    if (confirm("Kosongkan seluruh data presensi peserta? Semua peserta akan diatur menjadi Belum Hadir.")) {
+      try {
+        localStorage.removeItem("smb_hadir");
+        localStorage.removeItem("smb_my_code");
+      } catch(err){}
+      S.hadir.clear();
+      S.orangAktif = null;
+      S.showMobilePass = false;
+      pesan("Seluruh data presensi telah dikosongkan (0 / 21 Hadir).");
+      render();
+    }
     return;
   }
 

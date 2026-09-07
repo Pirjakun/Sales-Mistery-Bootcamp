@@ -661,6 +661,10 @@ function render() {
         <button class="btn-submit" id="btn-submit-presensi" ${!S.pDipilih ? 'disabled' : ''}>
           Konfirmasi Presensi Mandiri
         </button>
+
+        <button id="btn-reset-checkin-global" style="margin-top:14px; background:transparent; border:1px dashed var(--line); color:var(--ink-3); padding:8px 12px; border-radius:8px; font-size:12px; width:100%; cursor:pointer;">
+          Reset Data Presensi (Kosongkan Semua)
+        </button>
       </div>
     `;
   } else if (S.view === "success") {
@@ -772,6 +776,22 @@ function render() {
       S.pDipilih = null;
       S.view = "form";
       render();
+    });
+  }
+
+  const btnResetAll = $("#btn-reset-checkin-global");
+  if (btnResetAll) {
+    btnResetAll.addEventListener("click", () => {
+      if (confirm("Kosongkan seluruh data presensi peserta? Semua peserta akan diatur menjadi Belum Hadir.")) {
+        try {
+          localStorage.removeItem("smb_hadir");
+          localStorage.removeItem("smb_my_code");
+        } catch(e){}
+        S.pDipilih = null;
+        S.view = "form";
+        alert("Seluruh data presensi telah dikosongkan.");
+        render();
+      }
     });
   }
 }
