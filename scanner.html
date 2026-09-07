@@ -653,7 +653,20 @@ const P = [
   }
 ];
 
-const DISC = { D: "Dominance", I: "Influencing", S: "Steadiness", C: "Conscientiousness" };
+const DISC = {
+  "D": "Dominance",
+  "I": "Influencing",
+  "S": "Steadiness",
+  "C": "Conscientiousness",
+  "D/I": "Dominant - Influential",
+  "I/D": "Influential - Dominant",
+  "D/C": "Dominant - Conscientious",
+  "D/C - Balanced": "Dominant - Conscientious",
+  "I/S": "Influential - Steady",
+  "S/C": "Steady - Conscientious",
+  "C/S": "Conscientious - Steady",
+  "I/C": "Influential - Conscientious"
+};
 const SARAN = {
   D: "cenderung langsung ke inti. Sampaikan poin utama lebih dulu.",
   I: "cenderung ekspresif. Beri ruang untuk berbicara dan bertukar ide.",
@@ -869,7 +882,7 @@ function modalTiketDigital() {
     <div class="nb-box">
       <div class="lbl"><span>${lbl}</span><span>#${o.kursi}</span></div>
       <b>${esc(o.nama)}</b>
-      <span class="disc-badge ${o.disc}" style="margin-top:4px; display:inline-block">${o.disc} · ${DISC[o.disc]}</span>
+      <span class="disc-badge ${o.disc}" style="margin-top:4px; display:inline-block">${o.disc}${o.mbti ? ' (' + o.mbti + ')' : ''} · ${DISC[o.disc] || o.disc}</span>
     </div>` : `
     <div class="nb-box">
       <div class="lbl"><span>${lbl}</span><span>—</span></div>
