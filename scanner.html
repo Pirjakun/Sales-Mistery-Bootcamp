@@ -1083,14 +1083,14 @@ document.addEventListener("click", e => {
   }
 });
 
-function syncStoragePresensi() {
+function syncStoragePresensi(isInitial = false) {
   try {
     const raw = localStorage.getItem("smb_hadir");
     if (raw) {
       const hadirArr = JSON.parse(raw);
       let prevCount = S.hadir.size;
       hadirArr.forEach(k => S.hadir.add(k));
-      if (S.hadir.size !== prevCount) {
+      if (!isInitial && S.hadir.size !== prevCount) {
         const latestKey = hadirArr[hadirArr.length - 1];
         const p = P.find(x => x.kode === latestKey);
         if (p) {
@@ -1128,8 +1128,8 @@ function initRealtimeStream() {
   } catch(e){}
 }
 
-window.addEventListener("storage", syncStoragePresensi);
-setInterval(syncStoragePresensi, 2000);
+window.addEventListener("storage", () => syncStoragePresensi(false));
+setInterval(() => syncStoragePresensi(false), 2000);
 
 setInterval(() => {
   const now = new Date();
@@ -1142,7 +1142,7 @@ setInterval(() => {
 window.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
-  syncStoragePresensi();
+  syncStoragePresensi(true);
   initRealtimeStream();
   render();
 });

@@ -583,6 +583,17 @@ function init() {
   if (kode) {
     const found = P.find(x => x.kode === kode.toUpperCase());
     if (found) S.pDipilih = found;
+  } else {
+    try {
+      const myCode = localStorage.getItem("smb_my_code");
+      if (myCode) {
+        const found = P.find(x => x.kode === myCode);
+        if (found) {
+          S.pDipilih = found;
+          S.view = "ticket";
+        }
+      }
+    } catch(e){}
   }
   render();
 }
@@ -597,6 +608,10 @@ async function simpanPresensi(p) {
     hadirArr.push(p.kode);
     localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
   }
+
+  try {
+    localStorage.setItem("smb_my_code", p.kode);
+  } catch(e){}
 
   // Real-time broadcast across physical devices
   try {
@@ -751,6 +766,10 @@ function render() {
   const btnKembali = $("#btn-kembali");
   if (btnKembali) {
     btnKembali.addEventListener("click", () => {
+      try {
+        localStorage.removeItem("smb_my_code");
+      } catch(e){}
+      S.pDipilih = null;
       S.view = "form";
       render();
     });
