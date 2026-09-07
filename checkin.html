@@ -224,7 +224,7 @@ function init() {
   render();
 }
 
-function simpanPresensi(p) {
+async function simpanPresensi(p) {
   let hadirArr = [];
   try {
     const raw = localStorage.getItem("smb_hadir");
@@ -234,6 +234,15 @@ function simpanPresensi(p) {
     hadirArr.push(p.kode);
     localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
   }
+
+  // Real-time broadcast across physical devices
+  try {
+    await fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "checkin", kode: p.kode, timestamp: Date.now() })
+    });
+  } catch(e){}
 }
 
 function render() {

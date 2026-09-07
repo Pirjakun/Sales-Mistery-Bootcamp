@@ -746,6 +746,30 @@ function syncStoragePresensi() {
   } catch(e){}
 }
 
+function initRealtimeStream() {
+  try {
+    const sse = new EventSource("https://ntfy.sh/smb_bootcamp_checkin_2026/sse");
+    sse.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data && data.message) {
+          const payload = JSON.parse(data.message);
+          if (payload && payload.kode) {
+            const p = P.find(x => x.kode === payload.kode);
+            if (p) {
+              S.hadir.add(p.kode);
+              S.orangAktif = p;
+              S.showMobilePass = true;
+              pesan(`✓ Real-time Sync: ${p.nama} baru presensi via HP (Kursi #${p.kursi})!`);
+              render();
+            }
+          }
+        }
+      } catch(e){}
+    };
+  } catch(e){}
+}
+
 window.addEventListener("storage", syncStoragePresensi);
 setInterval(syncStoragePresensi, 2000);
 
@@ -761,6 +785,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
   syncStoragePresensi();
+  initRealtimeStream();
   render();
 });
 </script>
