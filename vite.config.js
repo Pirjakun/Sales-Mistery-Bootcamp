@@ -9,7 +9,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        scanner: 'scanner.html'
+        scanner: 'scanner.html',
+        checkin: 'checkin.html',
+        booking: 'booking.html'
       }
     }
   }
