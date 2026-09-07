@@ -14,7 +14,8 @@ const PARTICIPANTS = [
     "commStyle": "Communication Style",
     "saran": "Communication Style. Tips: Tips Trainer",
     "salesStrength": "Strength in Sales (MBTI)",
-    "salesRisk": "Potential Sales Risk"
+    "salesRisk": "Potential Sales Risk",
+    "tipsKomunikasi": "Communication Style"
   },
   {
     "kode": "SMB-002",
@@ -30,7 +31,8 @@ const PARTICIPANTS = [
     "commStyle": "Friendly, enthusiastic dan expressive.",
     "saran": "Friendly, enthusiastic dan expressive.. Tips: Fokus pada discipline, sales planning dan follow-up.",
     "salesStrength": "Enerjik, kreatif, komunikatif dan mudah membangun koneksi dengan customer.",
-    "salesRisk": "Bisa kehilangan fokus atau kurang konsisten dalam execution."
+    "salesRisk": "Bisa kehilangan fokus atau kurang konsisten dalam execution.",
+    "tipsKomunikasi": "Sampaikan poin utama secara ramah dan antusias, beri ruang apresiasi atas idenya, lalu bantu menjaga disiplin tindak lanjut."
   },
   {
     "kode": "SMB-003",
@@ -46,7 +48,8 @@ const PARTICIPANTS = [
     "commStyle": "Ramah, supportive dan personal.",
     "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.",
     "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.",
-    "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing."
+    "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.",
+    "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi."
   },
   {
     "kode": "SMB-004",
@@ -62,7 +65,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, energetic dan persuasive.",
     "saran": "Direct, energetic dan persuasive.. Tips: Fokus pada consultative questioning dan active listening.",
     "salesStrength": "Confident, competitive, action-oriented dan cepat mengambil keputusan.",
-    "salesRisk": "Bisa terlalu cepat masuk ke solusi tanpa cukup menggali kebutuhan customer."
+    "salesRisk": "Bisa terlalu cepat masuk ke solusi tanpa cukup menggali kebutuhan customer.",
+    "tipsKomunikasi": "Bicara secara langsung, lugas, dan energik. Fokus pada solusi cepat dan ajak berdiskusi secara interaktif."
   },
   {
     "kode": "SMB-005",
@@ -78,7 +82,8 @@ const PARTICIPANTS = [
     "commStyle": "Energetic, friendly dan engaging.",
     "saran": "Energetic, friendly dan engaging.. Tips: Berikan struktur pipeline management dan follow-up discipline.",
     "salesStrength": "Persuasive, enthusiastic, kreatif dan kuat dalam membangun networking.",
-    "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif."
+    "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif.",
+    "tipsKomunikasi": "Gunakan komunikasi yang energik dan bersahabat. Sampaikan target dengan jelas dan bantu menyusun alur kerja yang rapi."
   },
   {
     "kode": "SMB-006",
@@ -94,7 +99,8 @@ const PARTICIPANTS = [
     "commStyle": "Expressive, warm, engaging dan enthusiastic.",
     "saran": "Expressive, warm, engaging dan enthusiastic.. Tips: Manfaatkan kekuatan interpersonalnya, sambil memperkuat planning dan follow-up discipline.",
     "salesStrength": "Sociable, energik, friendly, spontan dan customer-oriented.",
-    "salesRisk": "Mudah terdistraksi dan dapat kurang konsisten dalam administrasi/follow-up."
+    "salesRisk": "Mudah terdistraksi dan dapat kurang konsisten dalam administrasi/follow-up.",
+    "tipsKomunikasi": "Bicara secara ekspresif, hangat, dan antusias. Apresiasi hasil kerjanya dan bantu menjaga konsistensi rencana kegiatan."
   },
   {
     "kode": "SMB-007",
@@ -110,7 +116,8 @@ const PARTICIPANTS = [
     "commStyle": "Friendly, supportive dan engaging.",
     "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.",
     "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.",
-    "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik."
+    "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.",
+    "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman."
   },
   {
     "kode": "SMB-008",
@@ -126,7 +133,8 @@ const PARTICIPANTS = [
     "commStyle": "Personal, warm dan consultative.",
     "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.",
     "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.",
-    "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik."
+    "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.",
+    "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja."
   },
   {
     "kode": "SMB-009",
@@ -142,7 +150,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, energetic, persuasive dan spontan.",
     "saran": "Direct, energetic, persuasive dan spontan.. Tips: Tekankan listening before pitching dan pentingnya sales planning.",
     "salesStrength": "Berani, energik, cepat mengambil tindakan, adaptif dan nyaman menghadapi situasi yang dinamis.",
-    "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail."
+    "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail.",
+    "tipsKomunikasi": "Bicara secara spontan, energik, dan meyakinkan. Imbangi dengan kesabaran mendengarkan sebelum menyimpulkan."
   },
   {
     "kode": "SMB-010",
@@ -158,7 +167,8 @@ const PARTICIPANTS = [
     "commStyle": "Soft, personal dan consultative.",
     "saran": "Soft, personal dan consultative.. Tips: Dorong assertiveness, objection handling dan closing confidence.",
     "salesStrength": "Empatik, thoughtful, genuine dan mampu memahami perspektif customer.",
-    "salesRisk": "Cenderung overthinking dan kurang nyaman menghadapi rejection atau konflik."
+    "salesRisk": "Cenderung overthinking dan kurang nyaman menghadapi rejection atau konflik.",
+    "tipsKomunikasi": "Bicara secara konsultatif dan apresiatif. Sampaikan ide secara percaya diri sambil mendengarkan masukannya secara empati."
   },
   {
     "kode": "SMB-011",
@@ -174,7 +184,8 @@ const PARTICIPANTS = [
     "commStyle": "Soft, personal dan persuasive secara natural.",
     "saran": "Soft, personal dan persuasive secara natural.. Tips: Dorong keberanian untuk ask for the sale dan menghadapi rejection.",
     "salesStrength": "Empatik, kreatif, mampu membangun koneksi berdasarkan kebutuhan dan nilai customer.",
-    "salesRisk": "Cenderung menghindari situasi konfrontatif dan dapat terlalu idealis."
+    "salesRisk": "Cenderung menghindari situasi konfrontatif dan dapat terlalu idealis.",
+    "tipsKomunikasi": "Bicara dengan nada lembut dan personal. Dengarkan dengan baik dan bantu memberikan dorongan positif saat mengambil keputusan."
   },
   {
     "kode": "SMB-012",
@@ -190,7 +201,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, factual dan solution-oriented.",
     "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.",
     "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.",
-    "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer."
+    "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.",
+    "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika."
   },
   {
     "kode": "SMB-013",
@@ -206,7 +218,8 @@ const PARTICIPANTS = [
     "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.",
     "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.",
     "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.",
-    "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing."
+    "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.",
+    "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur."
   },
   {
     "kode": "SMB-014",
@@ -222,7 +235,8 @@ const PARTICIPANTS = [
     "commStyle": "Energetic, conversational, enthusiastic.",
     "saran": "Energetic, conversational, enthusiastic.. Tips: Gunakan sales funnel, checklist dan follow-up discipline.",
     "salesStrength": "Sangat komunikatif, enthusiastic, kreatif, mudah membangun networking dan persuasive.",
-    "salesRisk": "Mudah kehilangan fokus dan kurang konsisten dalam follow-up/detail."
+    "salesRisk": "Mudah kehilangan fokus dan kurang konsisten dalam follow-up/detail.",
+    "tipsKomunikasi": "Bicara dengan semangat dan komunikatif. Bantu mengarahkan ide-ide kreatifnya ke dalam langkah eksekusi yang terstruktur."
   },
   {
     "kode": "SMB-015",
@@ -238,7 +252,8 @@ const PARTICIPANTS = [
     "commStyle": "Formal, jelas, faktual dan terstruktur.",
     "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.",
     "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.",
-    "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable."
+    "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.",
+    "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi."
   },
   {
     "kode": "SMB-016",
@@ -254,7 +269,8 @@ const PARTICIPANTS = [
     "commStyle": "Calm, personal dan empathetic.",
     "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.",
     "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.",
-    "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif."
+    "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.",
+    "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan."
   },
   {
     "kode": "SMB-017",
@@ -270,7 +286,8 @@ const PARTICIPANTS = [
     "commStyle": "Singkat, to the point, berbasis fakta dan solusi.",
     "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.",
     "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal."
+    "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.",
+    "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung."
   },
   {
     "kode": "SMB-018",
@@ -286,7 +303,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, spontaneous dan energetic.",
     "saran": "Direct, spontaneous dan energetic.. Tips: Latih active listening, probing dan structured selling.",
     "salesStrength": "Berani, cepat bertindak, confident, adaptif dan kompetitif.",
-    "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses."
+    "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses.",
+    "tipsKomunikasi": "Bicara secara langsung, dinamis, dan energik. Sampaikan poin penting secara terstruktur dan dorong diskusi aktif."
   },
   {
     "kode": "SMB-019",
@@ -302,7 +320,8 @@ const PARTICIPANTS = [
     "commStyle": "Warm, polite dan relationship-oriented.",
     "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.",
     "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.",
-    "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling."
+    "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.",
+    "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang."
   },
   {
     "kode": "SMB-020",
@@ -318,7 +337,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, factual dan solution-oriented.",
     "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.",
     "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building."
+    "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.",
+    "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis."
   },
   {
     "kode": "SMB-021",
@@ -334,7 +354,8 @@ const PARTICIPANTS = [
     "commStyle": "Thoughtful, personal dan consultative.",
     "saran": "Thoughtful, personal dan consultative.. Tips: Latih decisiveness, assertiveness dan closing.",
     "salesStrength": "Empatik, insightful, mampu memahami kebutuhan customer secara mendalam dan membangun trust.",
-    "salesRisk": "Dapat terlalu banyak berpikir sebelum bertindak dan kurang nyaman dengan hard selling."
+    "salesRisk": "Dapat terlalu banyak berpikir sebelum bertindak dan kurang nyaman dengan hard selling.",
+    "tipsKomunikasi": "Bicara secara mendalam, santun, dan konsultatif. Dengarkan pemikirannya dan diskusikan ide dengan pendekatan personal."
   },
   {
     "kode": "SMB-022",
@@ -350,7 +371,8 @@ const PARTICIPANTS = [
     "commStyle": "Direct, confident, strategic dan result-oriented.",
     "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.",
     "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.",
-    "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship."
+    "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.",
+    "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi."
   }
 ];
 
