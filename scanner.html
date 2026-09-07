@@ -3,16 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Check-in Kiosk — Sales Mastery Bootcamp</title>
-  <meta name="description" content="Aplikasi Kiosk Pemindai QR Code Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
+  <title>Check-in Kiosk &amp; Seat Locator — Sales Mastery Bootcamp</title>
+  <meta name="description" content="Aplikasi Kiosk Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
   
   <!-- Google Fonts: Marcellus & Source Sans 3 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- HTML5 QR Code Scanner Library -->
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
   :root {
@@ -53,7 +50,7 @@
   /* ---------- Topbar ---------- */
   .top {
     display: flex; align-items: center; gap: 16px; padding: 10px 24px; border-bottom: 1px solid var(--line);
-    background: rgba(247, 244, 237, 0.95); flex: none;
+    background: rgba(247, 244, 237, 0.95); flex: none; flex-wrap: nowrap;
   }
   .logo {
     width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
@@ -64,13 +61,13 @@
   .top .right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
   .count {
     background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
-    font-size: 13px; font-weight: 600;
+    font-size: 13px; font-weight: 600; white-space: nowrap;
   }
   .count b { font-family: var(--serif); font-size: 16px; color: var(--navy); }
-  .clock { font-family: var(--serif); font-size: 16px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .clock { font-family: var(--serif); font-size: 16px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .btn-hb {
     border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 5px 12px;
-    font-size: 12px; text-decoration: none; font-weight: 600; color: var(--ink-2); display: inline-block;
+    font-size: 12px; text-decoration: none; font-weight: 600; color: var(--ink-2); display: inline-block; white-space: nowrap;
   }
 
   /* ---------- Sesi Berjalan ---------- */
@@ -83,10 +80,10 @@
   .now b { font-size: 15px; font-weight: 600; }
   .now .meta { margin-left: auto; font-size: 12.5px; color: #C9D6EC; text-align: right; }
 
-  /* ---------- Panggung Utama ---------- */
-  main { flex: 1; min-height: 0; padding: 16px 20px; display: grid; gap: 16px; }
-  .idle { grid-template-columns: 1fr 420px; }
-  .result { grid-template-columns: 1fr 460px; }
+  /* ---------- Panggung Utama Kiosk ---------- */
+  main.kiosk-main {
+    flex: 1; min-height: 0; padding: 16px 20px; display: grid; grid-template-columns: 1fr 480px; gap: 16px;
+  }
 
   .panel {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px;
@@ -95,62 +92,7 @@
   .panel h2 { margin: 0 0 3px; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--navy); }
   .panel .hint { font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; }
 
-  /* Kondisi Siaga / Kamera Live */
-  .scanbox {
-    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border: 1px solid var(--line); border-radius: 12px; background: #000; min-height: 0; position: relative; overflow: hidden;
-  }
-  #reader {
-    width: 100% !important; height: 100% !important; position: absolute !important; top: 0; left: 0; border: none !important;
-  }
-  #reader video { width: 100% !important; height: 100% !important; object-fit: cover !important; }
-  #reader img, #reader select, #reader button, #reader span { display: none !important; }
-
-  .scanner-overlay {
-    position: absolute; width: 70%; aspect-ratio: 1; max-width: 210px; pointer-events: none; z-index: 10;
-  }
-  .scanner-corner {
-    position: absolute; width: 22px; height: 22px; border-color: rgba(255, 255, 255, 0.9); border-style: solid;
-  }
-  .scanner-corner.tl { top: 0; left: 0; border-width: 3.5px 0 0 3.5px; border-top-left-radius: 6px; }
-  .scanner-corner.tr { top: 0; right: 0; border-width: 3.5px 3.5px 0 0; border-top-right-radius: 6px; }
-  .scanner-corner.bl { bottom: 0; left: 0; border-width: 0 0 3.5px 3.5px; border-bottom-left-radius: 6px; }
-  .scanner-corner.br { bottom: 0; right: 0; border-width: 0 3.5px 3.5px 0; border-bottom-right-radius: 6px; }
-  .scan-laser {
-    position: absolute; left: 5%; right: 5%; height: 2px; background: var(--amber);
-    box-shadow: 0 0 10px var(--amber); animation: scanLine 2.2s infinite ease-in-out;
-  }
-  @keyframes scanLine { 0% { top: 12%; opacity: 0.3; } 50% { top: 88%; opacity: 1; } 100% { top: 12%; opacity: 0.3; } }
-
-  .manual { margin-top: 12px; display: flex; gap: 8px; flex: none; }
-  .manual input {
-    flex: 1; padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px;
-    background: #fff; font-size: 14.5px; outline: none;
-  }
-  .manual input:focus { border-color: var(--navy); }
-  .manual button { padding: 11px 18px; border-radius: 8px; background: var(--navy); color: #fff; font-weight: 600; font-size: 14px; }
-  
-  .demo { margin-top: 10px; font-size: 12px; color: var(--ink-3); flex: none; }
-  .demo b { display: block; margin-bottom: 4px; font-weight: 600; }
-  .demo button {
-    border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 5px 10px;
-    font-size: 12px; margin: 0 4px 4px 0; font-weight: 600; color: var(--navy);
-  }
-
-  /* Daftar Hadir Terakhir */
-  .recent { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; min-height: 0; }
-  .recent li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
-  .recent li:last-child { border-bottom: 0; }
-  .av {
-    width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
-    place-items: center; font-size: 13px; font-weight: 700; flex: none; font-family: var(--serif);
-  }
-  .recent b { font-size: 14px; font-weight: 600; display: block; color: var(--ink); }
-  .recent span { font-size: 12px; color: var(--ink-3); }
-  .recent .seat-tag { margin-left: auto; font-family: var(--serif); font-size: 16px; color: var(--navy); font-weight: 700; }
-  .empty { color: var(--ink-3); font-size: 13px; padding: 20px 0; text-align: center; }
-
-  /* ---------- SVG Denah Kursi U-Shape ---------- */
+  /* ---------- Left Side: SVG Denah U-Shape ---------- */
   .map { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .stage {
     background: var(--navy); color: #fff; border-radius: 8px; padding: 8px; text-align: center;
@@ -161,8 +103,10 @@
     flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
     background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px;
   }
-  /* Regular / Un-selected Seats: Subtle & Neutral */
-  .seat-node { transition: all 0.3s ease; opacity: 0.45; }
+
+  /* SVG Seat Node Styles */
+  .seat-node { transition: all 0.3s ease; cursor: pointer; opacity: 0.45; }
+  .seat-node:hover { opacity: 0.85; }
   .seat-rect { fill: #2C3E50; stroke: #1E293B; stroke-width: 1; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 600; font-size: 11.5px; fill: #CBD5E1; pointer-events: none; }
   
@@ -170,23 +114,14 @@
   .seat-node.filled .seat-rect { fill: #1E3A8A; stroke: #1D4ED8; }
   .seat-node.filled .seat-num { fill: #93C5FD; }
 
-  /* Currently Checking-in Seat: MAXIMUM VISIBILITY & EYE-CATCHING BEACON */
-  .seat-node.me {
-    opacity: 1 !important;
-  }
+  /* Active Seat Beacon */
+  .seat-node.me { opacity: 1 !important; }
   .seat-node.me .seat-rect {
-    fill: #F59E0B !important;
-    stroke: #78350F !important;
-    stroke-width: 3.5 !important;
+    fill: #F59E0B !important; stroke: #78350F !important; stroke-width: 3.5 !important;
     filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95));
   }
-  .seat-node.me .seat-num {
-    fill: #000000 !important;
-    font-weight: 800 !important;
-    font-size: 14px !important;
-  }
+  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 800 !important; font-size: 14px !important; }
 
-  /* Sonar Ripple & Location Pin Animations */
   @keyframes sonarPulse {
     0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
     100% { r: 36px; opacity: 0; stroke-width: 1px; }
@@ -195,108 +130,156 @@
     0%, 100% { transform: translate(14px, -12px); }
     50% { transform: translate(14px, -18px); }
   }
+  .sonar-ring { animation: sonarPulse 1.6s infinite ease-out; pointer-events: none; }
+  .pin-marker { animation: bouncePin 1.2s infinite ease-in-out; pointer-events: none; }
 
-  .sonar-ring {
-    animation: sonarPulse 1.6s infinite ease-out;
-    pointer-events: none;
+  /* ---------- Right Side: Tab Kiosk Presensi ---------- */
+  .kiosk-right { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+
+  /* Box QR Code Scan Kiosk */
+  .qr-card {
+    background: linear-gradient(135deg, #12357F 0%, #0E2A66 100%);
+    color: #fff; border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 4px 14px rgba(18, 53, 127, 0.15); border: 1.5px solid rgba(169, 217, 242, 0.3); flex: none;
   }
-  .pin-marker {
-    animation: bouncePin 1.2s infinite ease-in-out;
-    pointer-events: none;
+  .qr-frame {
+    background: #fff; padding: 8px; border-radius: 10px; width: 104px; height: 104px;
+    display: grid; place-items: center; flex: none; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .qr-frame img { width: 100%; height: 100%; object-fit: contain; }
+  .qr-info h3 { margin: 4px 0 2px; font-family: var(--serif); font-size: 17px; color: #fff; font-weight: 400; }
+  .qr-info p { margin: 0; font-size: 12px; color: #C9D6EC; line-height: 1.45; }
+  .qr-tag {
+    font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--sky); text-transform: uppercase;
   }
 
-  /* ---------- Kartu Hasil Presensi ---------- */
-  .pass {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
-    display: flex; flex-direction: column; min-height: 0; position: relative; box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  /* List Peserta & Status Presensi */
+  .list-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px;
+    display: flex; flex-direction: column; flex: 1; min-height: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
   }
-  .pass-top { background: var(--navy); color: #fff; padding: 18px 22px; flex: none; border-bottom: 3px solid var(--amber); }
-  .pass-top .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--sky); }
-  .pass-top h2 { margin: 6px 0 2px; font-family: var(--serif); font-size: 25px; font-weight: 400; line-height: 1.15; }
-  .pass-top .role { font-size: 13.5px; color: #C9D6EC; margin-top: 2px; }
-  .top-badges { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .ok-badge {
-    display: inline-flex; align-items: center; gap: 6px; background: rgba(123,211,160,0.18);
-    border: 1px solid rgba(123,211,160,0.5); color: #BFEFD3; border-radius: 999px; padding: 5px 13px;
-    font-size: 12.5px; font-weight: 600;
-  }
-  .disc-top-badge {
-    display: inline-flex; align-items: center; background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25); color: #F1F5F9; border-radius: 999px; padding: 5px 13px;
-    font-size: 12.5px; font-weight: 600;
-  }
+  .list-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex: none; }
+  .list-head h3 { margin: 0; font-family: var(--serif); font-size: 16px; color: var(--navy); }
   
-  .pass-body {
-    padding: 18px 20px; overflow-y: auto; flex: 1; min-height: 0;
-    display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  .filter-tabs { display: flex; gap: 4px; flex: none; }
+  .filter-btn {
+    padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 600; color: var(--ink-3);
+    border: 1px solid var(--line); background: #fff; transition: all 0.2s;
   }
+  .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  .search-box { margin-bottom: 10px; flex: none; }
+  .search-box input {
+    width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px;
+    font-size: 13px; outline: none; background: #fff;
+  }
+  .search-box input:focus { border-color: var(--navy); }
+
+  .p-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; min-height: 0; }
+  .p-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-bottom: 1px solid var(--line-2);
+    border-radius: 6px; transition: background 0.2s; cursor: pointer;
+  }
+  .p-item:hover { background: rgba(18, 53, 127, 0.04); }
+  .p-item:last-child { border-bottom: 0; }
+
+  .av {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: #fff; display: grid;
+    place-items: center; font-size: 12px; font-weight: 700; flex: none; font-family: var(--serif);
+  }
+  .p-info { flex: 1; min-width: 0; }
+  .p-name { font-size: 13.5px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+  .p-role { font-size: 11.5px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   
-  .bigseat {
-    display: flex; align-items: center; gap: 18px; background: linear-gradient(135deg, #F5EFE3 0%, #EFE5D3 100%);
-    border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 18px; flex: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-  }
-  .bigseat .num {
-    font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--navy); font-weight: 700;
-    background: #fff; border: 1.5px solid var(--line); border-radius: 10px; width: 66px; height: 66px;
-    display: grid; place-items: center; flex: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-  .bigseat .where b { display: block; font-size: 16px; font-weight: 700; color: var(--navy); }
-  .bigseat .where span { font-size: 13px; color: var(--ink-2); margin-top: 3px; display: block; }
+  .disc-badge { font-size: 10px; font-weight: 700; border-radius: 999px; padding: 1.5px 6px; flex: none; }
+  .disc-badge.D { background: #F8E6E2; color: #A33A28; }
+  .disc-badge.I { background: #FBF0DC; color: #8A6112; }
+  .disc-badge.S { background: #E7F0EA; color: var(--ok); }
+  .disc-badge.C { background: #E6EBF4; color: var(--navy); }
 
-  .sec { margin: 0; }
-  .sec h3 { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--ink-3); text-transform: uppercase; }
-  .nb { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .nb div { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-  .nb .side { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); display: flex; justify-content: space-between; }
-  .nb b { display: block; margin-top: 6px; font-size: 14.5px; line-height: 1.25; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .seat-pill {
+    font-family: var(--serif); font-size: 14px; font-weight: 700; color: var(--navy);
+    background: #F4EFE4; border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; flex: none;
+  }
+
+  .status-btn {
+    padding: 5px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 600; flex: none;
+    transition: all 0.2s; border: 1px solid transparent;
+  }
+  .status-btn.is-hadir { background: var(--ok-soft); color: var(--ok); border-color: rgba(47, 107, 79, 0.3); }
+  .status-btn.not-hadir { background: #fff; color: var(--ink-2); border-color: var(--line); }
+  .status-btn.not-hadir:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* ---------- Modal / Mobile Screen Preview ("Tiket Digital HP Peserta") ---------- */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 200;
+    animation: fadeIn 0.25s ease-out; padding: 16px;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .mobile-pass-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; width: 100%; max-width: 440px;
+    overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); display: flex; flex-direction: column;
+    position: relative; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); max-height: 90vh;
+  }
+  @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .mobile-header {
+    background: var(--navy); color: #fff; padding: 16px 20px; text-align: center; position: relative;
+    border-bottom: 3px solid var(--amber);
+  }
+  .mobile-header .top-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; color: var(--sky); }
+  .mobile-header h2 { margin: 4px 0 2px; font-family: var(--serif); font-size: 22px; font-weight: 400; }
+  .mobile-header .sub { font-size: 12.5px; color: #C9D6EC; }
+
+  .mobile-body { padding: 16px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
   
-  .disc { display: inline-block; margin-top: 6px; font-size: 11.5px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
-  .disc.D { background: #F8E6E2; color: #A33A28; }
-  .disc.I { background: #FBF0DC; color: #8A6112; }
-  .disc.S { background: #E7F0EA; color: var(--ok); }
-  .disc.C { background: #E6EBF4; color: var(--navy); }
-
-  .tip {
-    margin: 0; background: #F4EFE4; border-left: 4px solid var(--amber); border-radius: 8px;
-    padding: 12px 15px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2);
+  .hero-seat-box {
+    background: linear-gradient(135deg, #F5EFE3 0%, #EFE5D3 100%); border: 1.5px solid var(--gold);
+    border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 16px;
   }
-  .tip b { color: var(--navy); }
+  .hero-seat-box .num {
+    font-family: var(--serif); font-size: 46px; font-weight: 700; color: var(--navy);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; width: 62px; height: 62px;
+    display: grid; place-items: center; flex: none; box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .hero-seat-box .desc b { display: block; font-size: 15px; color: var(--navy); font-weight: 700; }
+  .hero-seat-box .desc span { font-size: 12px; color: var(--ink-2); margin-top: 2px; display: block; }
+
+  .sec-title { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; color: var(--ink-3); text-transform: uppercase; margin-bottom: 6px; }
   
-  .pass-meta-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px;
-  }
-  .meta-item {
-    border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; background: #fff;
-  }
-  .meta-item .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-3); text-transform: uppercase; }
-  .meta-item b { display: block; font-size: 12.5px; color: var(--navy); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nb-box { border: 1px solid var(--line); border-radius: 8px; padding: 10px 11px; background: #fff; }
+  .nb-box .lbl { font-size: 9.5px; font-weight: 700; color: var(--ink-3); display: flex; justify-content: space-between; }
+  .nb-box b { display: block; margin-top: 4px; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .sesi-kini { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: #fff; }
-  .sesi-kini b { display: block; font-size: 14px; line-height: 1.25; color: var(--navy); }
-  .sesi-kini span { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
-
-  .pass-foot { border-top: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex: none; background: #fff; }
-  .pass-foot .code { font-family: var(--serif); font-size: 14px; color: var(--ink-3); letter-spacing: 0.1em; font-weight: 700; }
-  .pass-foot button {
-    margin-left: auto; background: var(--navy); color: #fff; border-radius: 8px;
-    padding: 8px 16px; font-weight: 600; font-size: 13.5px;
+  .tip-box {
+    background: #F4EFE4; border-left: 4px solid var(--amber); border-radius: 6px; padding: 10px 12px;
+    font-size: 12px; line-height: 1.5; color: var(--ink-2);
   }
-  .bar-graphic { display: flex; gap: 2px; align-items: flex-end; height: 22px; }
-  .bar-graphic i { width: 2px; background: var(--ink); display: block; }
+  .tip-box b { color: var(--navy); }
 
-  /* Reset Timer Bar */
-  .reset-line { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--amber); animation: shrink 18s linear forwards; }
-  @keyframes shrink { from { width: 100%; } to { width: 0; } }
+  .mobile-footer {
+    border-top: 1px solid var(--line); padding: 12px 18px; background: #fff; display: flex; align-items: center; justify-content: space-between;
+  }
+  .status-badge-ok {
+    display: inline-flex; align-items: center; gap: 6px; background: var(--ok-soft); color: var(--ok);
+    border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 600;
+  }
+  .btn-close-modal {
+    background: var(--navy); color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600;
+  }
 
   .toast {
     position: fixed; left: 50%; transform: translateX(-50%); bottom: 24px; background: var(--warn);
-    color: #fff; padding: 11px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 50;
+    color: #fff; padding: 11px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 300;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
 
-  @media(max-width: 1100px) {
-    main { grid-template-columns: 1fr !important; grid-template-rows: auto 1fr; }
+  @media(max-width: 1050px) {
+    main.kiosk-main { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
+    body { overflow: auto; }
   }
   </style>
 </head>
@@ -349,17 +332,16 @@ const SARAN = {
 };
 
 const S = {
-  layar: "idle",
-  orang: null,
+  orangAktif: null, // Peserta yang sedang disorot/dilihat tiketnya
   hadir: new Set(["SMB-001", "SMB-005", "SMB-008", "SMB-012", "SMB-018"]),
-  riwayat: ["SMB-001", "SMB-008", "SMB-012", "SMB-005", "SMB-018"],
   jam: 8 * 60 + 52,
-  pesan: null
+  pesan: null,
+  filter: "semua",
+  query: "",
+  showMobilePass: false
 };
 
-let html5QrCode = null;
-
-/* ---------------- Util ---------------- */
+/* ---------------- Helper Utilities ---------------- */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const jam = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
@@ -384,7 +366,7 @@ function tetangga(kursi) {
   return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 22 ? kanan : null };
 }
 
-/* ---------------- Tampilan Components ---------------- */
+/* ---------------- Tampilan Topbar ---------------- */
 function bilahAtas() {
   const s = sesiKini();
   return `
@@ -392,7 +374,7 @@ function bilahAtas() {
     <div class="logo">SM</div>
     <div>
       <h1>Sales Mastery Bootcamp</h1>
-      <div class="sub">Pemindai Presensi &amp; Seat Locator</div>
+      <div class="sub">Check-in Kiosk &amp; Seat Locator Display</div>
     </div>
     <div class="right">
       <div class="count"><b>${S.hadir.size}</b> / ${P.length} Hadir</div>
@@ -410,10 +392,8 @@ function bilahAtas() {
   </div>` : ""}`;
 }
 
+/* ---------------- SVG Denah Tempat Duduk U-Shape ---------------- */
 function denah(sorot) {
-  const t = sorot ? tetangga(sorot) : {};
-  
-  /* SVG Seat Coordinates with Corner Seats #9 (-45deg) and #14 (+45deg) */
   const coords = [
     { n: 1, x: 124, y: 80, rot: 0 },
     { n: 2, x: 124, y: 111, rot: 0 },
@@ -423,12 +403,12 @@ function denah(sorot) {
     { n: 6, x: 124, y: 235, rot: 0 },
     { n: 7, x: 124, y: 266, rot: 0 },
     { n: 8, x: 124, y: 297, rot: 0 },
-    { n: 9, x: 138, y: 345, rot: -45 }, // Sudut Kiri Bawah Corner Seat
+    { n: 9, x: 138, y: 345, rot: -45 }, // Corner Seat
     { n: 10, x: 195, y: 368, rot: 0 },
     { n: 11, x: 235, y: 368, rot: 0 },
     { n: 12, x: 275, y: 368, rot: 0 },
     { n: 13, x: 315, y: 368, rot: 0 },
-    { n: 14, x: 374, y: 345, rot: 45 }, // Sudut Kanan Bawah Corner Seat
+    { n: 14, x: 374, y: 345, rot: 45 }, // Corner Seat
     { n: 15, x: 388, y: 297, rot: 0 },
     { n: 16, x: 388, y: 266, rot: 0 },
     { n: 17, x: 388, y: 235, rot: 0 },
@@ -439,7 +419,6 @@ function denah(sorot) {
     { n: 22, x: 388, y: 80, rot: 0 }
   ];
 
-  // Ensure highlighted active seat renders on top of all other seats
   const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
 
   const svgSeats = sortedCoords.map(item => {
@@ -455,7 +434,7 @@ function denah(sorot) {
     const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
 
     return `
-      <g class="${cls}" transform="translate(${item.x}, ${item.y})">
+      <g class="${cls}" transform="translate(${item.x}, ${item.y})" data-pilih-kursi="${n}">
         ${aku ? `<circle class="sonar-ring" cx="14" cy="12.5" fill="none" stroke="#F59E0B" />` : ""}
         <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
         <text x="14" y="17" class="seat-num" text-anchor="middle">${n}</text>
@@ -472,7 +451,7 @@ function denah(sorot) {
   }).join("");
 
   return `<div class="map">
-    <div class="stage">PANGGUNG · LAYAR · WHITEBOARD</div>
+    <div class="stage">PANGGUNG UTAMA · LAYAR &amp; WHITEBOARD</div>
     <div class="map-wrapper-maximized">
       <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
         <g>
@@ -491,188 +470,213 @@ function denah(sorot) {
   </div>`;
 }
 
-function layarSiaga() {
-  const r = S.riwayat.slice(-6).reverse();
-  return `<main class="idle">
-    <section class="panel">
-      <h2>Pemindai QR Tiket</h2>
-      <div class="hint">Arahkan QR Code tiket ke kamera untuk presensi instan</div>
-      <div class="scanbox">
-        <div id="reader"></div>
-        <div class="scanner-overlay">
-          <div class="scanner-corner tl"></div>
-          <div class="scanner-corner tr"></div>
-          <div class="scanner-corner bl"></div>
-          <div class="scanner-corner br"></div>
-          <div class="scan-laser"></div>
+/* ---------------- Right Side: Kiosk Controls & List ---------------- */
+function kioskPanelKanan() {
+  // Filter participants
+  let list = P;
+  if (S.filter === "hadir") list = list.filter(p => S.hadir.has(p.kode));
+  if (S.filter === "belum") list = list.filter(p => !S.hadir.has(p.kode));
+  if (S.query.trim()) {
+    const q = S.query.toLowerCase().trim();
+    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
+  }
+
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pirjakun.github.io/Sales-Mistery-Bootcamp/scanner.html&color=12357F&bgcolor=FCFAF6";
+
+  return `<div class="kiosk-right">
+    <!-- QR Code Kiosk Card -->
+    <div class="qr-card">
+      <div class="qr-frame">
+        <img src="${qrUrl}" alt="QR Code Presensi Bootcamp">
+      </div>
+      <div class="qr-info">
+        <div class="qr-tag">SCAN QR PRESENSI PESERTA</div>
+        <h3>Pindai QR ini dari HP Anda</h3>
+        <p>Arahkan kamera HP Anda ke QR Code di samping untuk presensi instan &amp; mendapatkan <b>Tiket Digital &amp; Nomor Kursi Anda</b>.</p>
+      </div>
+    </div>
+
+    <!-- List Peserta & Filter -->
+    <div class="list-card">
+      <div class="list-head">
+        <h3>Daftar Presensi Peserta</h3>
+        <div class="filter-tabs">
+          <button class="filter-btn ${S.filter === 'semua' ? 'active' : ''}" data-filter="semua">Semua (${P.length})</button>
+          <button class="filter-btn ${S.filter === 'hadir' ? 'active' : ''}" data-filter="hadir">Hadir (${S.hadir.size})</button>
+          <button class="filter-btn ${S.filter === 'belum' ? 'active' : ''}" data-filter="belum">Belum (${P.length - S.hadir.size})</button>
         </div>
       </div>
-      <div class="manual">
-        <input id="kode" placeholder="Atau ketik kode tiket / nama, mis. SMB-018" autocomplete="off">
-        <button data-cari>Cari</button>
-      </div>
-      <div class="demo">
-        <b>Simulasi Pemindaian Fast Check-In</b>
-        ${["SMB-018", "SMB-005", "SMB-009", "SMB-014", "SMB-022"].map(k => `<button data-demo="${k}">${k}</button>`).join("")}
-      </div>
-    </section>
 
-    <section class="panel">
-      <h2>Baru Saja Hadir</h2>
-      <div class="hint">${S.hadir.size} dari ${P.length} peserta sudah check-in</div>
-      ${r.length ? `<ul class="recent">${r.map(k => {
-        const p = P.find(x => x.kode === k);
-        return `
-        <li>
-          <div class="av">${inisial(p.nama)}</div>
-          <div><b>${esc(p.nama)}</b><span>${esc(p.peran)}</span></div>
-          <div class="seat-tag">#${p.kursi}</div>
-        </li>`;
-      }).join("")}</ul>` : `<div class="empty">Belum ada peserta yang memindai tiket di perangkat ini.</div>`}
-    </section>
-  </main>`;
+      <div class="search-box">
+        <input type="text" id="input-search" placeholder="Cari nama, kode tiket, atau nomor kursi..." value="${esc(S.query)}">
+      </div>
+
+      <ul class="p-list">
+        ${list.map(p => {
+          const isHadir = S.hadir.has(p.kode);
+          return `
+          <li class="p-item" data-pilih-peserta="${p.kode}">
+            <div class="av">${inisial(p.nama)}</div>
+            <div class="p-info">
+              <div class="p-name">
+                ${esc(p.nama)}
+                <span class="disc-badge ${p.disc}">${p.disc}</span>
+              </div>
+              <div class="p-role">${esc(p.peran)}</div>
+            </div>
+            <div class="seat-pill">#${p.kursi}</div>
+            <button class="status-btn ${isHadir ? 'is-hadir' : 'not-hadir'}" data-toggle-presensi="${p.kode}">
+              ${isHadir ? '✓ Hadir' : '+ Check-in'}
+            </button>
+          </li>`;
+        }).join("")}
+      </ul>
+    </div>
+  </div>`;
 }
 
-function layarHasil() {
-  const p = S.orang, t = tetangga(p.kursi);
-  const kartu = (lbl, o) => o ? `
-    <div>
-      <div class="side"><span>${lbl}</span><span>#${o.kursi}</span></div>
+/* ---------------- Modal Ticket Digital HP Peserta ---------------- */
+function modalTiketDigital() {
+  if (!S.showMobilePass || !S.orangAktif) return "";
+  const p = S.orangAktif;
+  const t = tetangga(p.kursi);
+
+  const kartuNb = (lbl, o) => o ? `
+    <div class="nb-box">
+      <div class="lbl"><span>${lbl}</span><span>#${o.kursi}</span></div>
       <b>${esc(o.nama)}</b>
-      <span class="disc ${o.disc}">${o.disc} · ${DISC[o.disc]}</span>
+      <span class="disc-badge ${o.disc}" style="margin-top:4px; display:inline-block">${o.disc} · ${DISC[o.disc]}</span>
     </div>` : `
-    <div>
-      <div class="side"><span>${lbl}</span><span>—</span></div>
+    <div class="nb-box">
+      <div class="lbl"><span>${lbl}</span><span>—</span></div>
       <b style="color:var(--ink-3)">Ujung Meja Utama</b>
     </div>`;
-  const s = sesiKini();
-  return `<main class="result">
-    <section class="panel">${denah(p.kursi)}</section>
 
-    <section class="pass">
-      <div class="reset-line"></div>
-      <div class="pass-top">
-        <div class="lbl">PRESENSI TERCATAT</div>
+  return `
+  <div class="modal-overlay" id="modal-bg">
+    <div class="mobile-pass-card">
+      <div class="mobile-header">
+        <div class="top-tag">TIKET DIGITAL &amp; SEAT PASS</div>
         <h2>${esc(p.nama)}</h2>
-        <div class="role">${esc(p.peran)} · Werkudara Group</div>
-        <div class="top-badges">
-          <div class="ok-badge">✓ Hadir pukul ${jam(S.jam)}</div>
-          <div class="disc-top-badge">Gaya DiSC: ${p.disc} · ${DISC[p.disc]}</div>
-        </div>
+        <div class="sub">${esc(p.peran)} · Werkudara Group</div>
       </div>
-      <div class="pass-body">
-        <div class="bigseat">
+      <div class="mobile-body">
+        <div class="hero-seat-box">
           <div class="num">${p.kursi}</div>
-          <div class="where">
+          <div class="desc">
             <b>${sisi(p.kursi)}</b>
-            <span>Nomor kursi tertera di denah U-Shape</span>
+            <span>Tersinkronisasi otomatis dengan Denah Kiosk U-Shape</span>
           </div>
         </div>
 
-        <div class="sec">
-          <h3>REKAN DUDUK SEBELAH &amp; DiSC PROFILE</h3>
-          <div class="nb">${kartu("SEBELAH KIRI", t.kiri)}${kartu("SEBELAH KANAN", t.kanan)}</div>
+        <div>
+          <div class="sec-title">REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
+          <div class="nb-grid">
+            ${kartuNb("SEBELAH KIRI", t.kiri)}
+            ${kartuNb("SEBELAH KANAN", t.kanan)}
+          </div>
         </div>
 
-        ${t.kiri || t.kanan ? `<div class="tip">
-          <b>Menyesuaikan Gaya Komunikasi:</b>
-          ${t.kiri ? `${esc(t.kiri.nama.split(" ")[0])} ${SARAN[t.kiri.disc]}` : ""}
-          ${t.kanan ? ` ${esc(t.kanan.nama.split(" ")[0])} ${SARAN[t.kanan.disc]}` : ""}
+        ${t.kiri || t.kanan ? `<div class="tip-box">
+          <b>Saran Gaya Komunikasi:</b><br>
+          ${t.kiri ? `${esc(t.kiri.nama.split(" ")[0])}: ${SARAN[t.kiri.disc]}<br>` : ""}
+          ${t.kanan ? `${esc(t.kanan.nama.split(" ")[0])}: ${SARAN[t.kanan.disc]}` : ""}
         </div>` : ""}
-
-        ${s ? `<div class="sec sesi-kini">
-          <h3>SESI BERLANGSUNG</h3>
-          <b>${esc(s.nama)}</b>
-          <span>${s.mulai} – ${s.selesai} · ${esc(s.tempat)}</span>
-        </div>` : ""}
-
-        <div class="pass-meta-grid">
-          <div class="meta-item">
-            <div class="lbl">LOKASI BOOTCAMP</div>
-            <b>Kalyana Resort Kaliurang</b>
-          </div>
-          <div class="meta-item">
-            <div class="lbl">AKSES FASILITAS</div>
-            <b>Meeting Room &amp; Dining</b>
-          </div>
-        </div>
       </div>
-      <div class="pass-foot">
-        <div class="bar-graphic">${Array.from({ length: 26 }, (_, i) => `<i style="height:${10 + ((i * 7) % 15)}px"></i>`).join("")}</div>
-        <div class="code">${p.kode}</div>
-        <button data-selesai>Selesai</button>
+      <div class="mobile-footer">
+        <div class="status-badge-ok">✓ Hadir (Kios &amp; HP Sync)</div>
+        <button class="btn-close-modal" data-tutup-modal>Tutup Pass</button>
       </div>
-  </main>`;
+    </div>
+  </div>`;
 }
 
-/* ---------------- Camera Scanner Init ---------------- */
-function startAutoCamera() {
-  if (S.layar !== "idle") return;
-  setTimeout(() => {
-    const readerEl = document.getElementById("reader");
-    if (!readerEl) return;
-    if (html5QrCode) {
-      try { html5QrCode.clear(); } catch(e){}
-    }
-    html5QrCode = new Html5Qrcode("reader");
-    const config = { fps: 15, qrbox: { width: 200, height: 200 } };
-    const onScanSuccess = (decodedText) => {
-      cari(decodedText);
-    };
-
-    html5QrCode.start({ facingMode: "user" }, config, onScanSuccess)
-      .catch(err => {
-        html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess)
-          .catch(err2 => {
-            Html5Qrcode.getCameras().then(cameras => {
-              if (cameras && cameras.length) {
-                html5QrCode.start(cameras[0].id, config, onScanSuccess);
-              }
-            }).catch(e => {});
-          });
-      });
-  }, 100);
-}
-
-function stopAutoCamera() {
-  if (html5QrCode) {
-    try {
-      html5QrCode.stop().then(() => {
-        html5QrCode.clear();
-      }).catch(e => {});
-    } catch(e){}
-  }
-}
-
-/* ---------------- Render & Logic Handler ---------------- */
+/* ---------------- Render Main App ---------------- */
 function render() {
-  $("#app").innerHTML = bilahAtas() + (S.layar === "idle" ? layarSiaga() : layarHasil()) +
-    (S.pesan ? `<div class="toast">${esc(S.pesan)}</div>` : "");
-  
-  const i = $("#kode"); if (i) i.focus();
-  clearTimeout(window._kembali);
+  const sorotKursi = S.orangAktif ? S.orangAktif.kursi : null;
 
-  if (S.layar === "idle") {
-    startAutoCamera();
-  } else {
-    stopAutoCamera();
-    window._kembali = setTimeout(() => {
-      S.layar = "idle";
-      S.orang = null;
-      render();
-    }, 18000);
+  $("#app").innerHTML = `
+    ${bilahAtas()}
+    <main class="kiosk-main">
+      <section class="panel">
+        <h2>Denah Tempat Duduk U-Shape</h2>
+        <div class="hint">Ketuk nomor kursi atau nama peserta untuk melihat detail lokasi duduk</div>
+        ${denah(sorotKursi)}
+      </section>
+      <section class="panel" style="padding:0; background:transparent; border:0; box-shadow:none;">
+        ${kioskPanelKanan()}
+      </section>
+    </main>
+    ${modalTiketDigital()}
+    ${S.pesan ? `<div class="toast">${esc(S.pesan)}</div>` : ""}
+  `;
+
+  // Bind Search Input Focus
+  const sInput = $("#input-search");
+  if (sInput) {
+    sInput.addEventListener("input", e => {
+      S.query = e.target.value;
+      renderListOnly();
+    });
   }
 }
 
-function cari(kode) {
-  const k = String(kode || "").trim().toUpperCase();
-  const p = P.find(x => x.kode === k) || P.find(x => x.nama.toUpperCase().includes(k) && k.length > 2);
-  if (!p) { pesan("Kode tiket atau nama tidak terdaftar dalam sistem presensi."); return; }
+function renderListOnly() {
+  const listEl = $(".p-list");
+  if (!listEl) return render();
   
+  let list = P;
+  if (S.filter === "hadir") list = list.filter(p => S.hadir.has(p.kode));
+  if (S.filter === "belum") list = list.filter(p => !S.hadir.has(p.kode));
+  if (S.query.trim()) {
+    const q = S.query.toLowerCase().trim();
+    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
+  }
+
+  listEl.innerHTML = list.map(p => {
+    const isHadir = S.hadir.has(p.kode);
+    return `
+    <li class="p-item" data-pilih-peserta="${p.kode}">
+      <div class="av">${inisial(p.nama)}</div>
+      <div class="p-info">
+        <div class="p-name">
+          ${esc(p.nama)}
+          <span class="disc-badge ${p.disc}">${p.disc}</span>
+        </div>
+        <div class="p-role">${esc(p.peran)}</div>
+      </div>
+      <div class="seat-pill">#${p.kursi}</div>
+      <button class="status-btn ${isHadir ? 'is-hadir' : 'not-hadir'}" data-toggle-presensi="${p.kode}">
+        ${isHadir ? '✓ Hadir' : '+ Check-in'}
+      </button>
+    </li>`;
+  }).join("");
+}
+
+function pilihPeserta(kode) {
+  const p = P.find(x => x.kode === kode);
+  if (!p) return;
   S.hadir.add(p.kode);
-  S.riwayat = S.riwayat.filter(x => x !== p.kode).concat(p.kode);
-  S.orang = p;
-  S.layar = "hasil";
+  S.orangAktif = p;
+  S.showMobilePass = true;
+  render();
+}
+
+function togglePresensi(kode, e) {
+  if (e) e.stopPropagation();
+  const p = P.find(x => x.kode === kode);
+  if (!p) return;
+
+  if (S.hadir.has(p.kode)) {
+    S.hadir.delete(p.kode);
+    if (S.orangAktif && S.orangAktif.kode === p.kode) S.orangAktif = null;
+    pesan(`Presensi ${p.nama} dibatalkan.`);
+  } else {
+    S.hadir.add(p.kode);
+    S.orangAktif = p;
+    S.showMobilePass = true;
+    pesan(`✓ Presensi ${p.nama} berhasil dicatat.`);
+  }
   render();
 }
 
@@ -680,30 +684,54 @@ function pesan(t) {
   S.pesan = t;
   render();
   clearTimeout(window._p);
-  window._p = setTimeout(() => { S.pesan = null; render(); }, 3200);
+  window._p = setTimeout(() => { S.pesan = null; render(); }, 3000);
 }
 
+/* ---------------- Event Listeners ---------------- */
 document.addEventListener("click", e => {
-  const t = e.target.closest("[data-cari],[data-demo],[data-selesai]");
-  if (!t) return;
-  if (t.dataset.demo !== undefined) return cari(t.dataset.demo);
-  if (t.hasAttribute("data-cari")) return cari($("#kode").value);
-  if (t.hasAttribute("data-selesai")) { S.layar = "idle"; S.orang = null; render(); }
-});
+  const btnFilter = e.target.closest("[data-filter]");
+  if (btnFilter) {
+    S.filter = btnFilter.dataset.filter;
+    render();
+    return;
+  }
 
-document.addEventListener("keydown", e => {
-  if (e.key !== "Enter") return;
-  if (S.layar === "hasil") { S.layar = "idle"; S.orang = null; render(); return; }
-  const i = $("#kode"); if (i && i.value.trim()) cari(i.value);
+  const btnToggle = e.target.closest("[data-toggle-presensi]");
+  if (btnToggle) {
+    togglePresensi(btnToggle.dataset.togglePresensi, e);
+    return;
+  }
+
+  const itemPeserta = e.target.closest("[data-pilih-peserta]");
+  if (itemPeserta) {
+    pilihPeserta(itemPeserta.dataset.pilihPeserta);
+    return;
+  }
+
+  const nodeKursi = e.target.closest("[data-pilih-kursi]");
+  if (nodeKursi) {
+    const kNum = parseInt(nodeKursi.dataset.pilihKursi, 10);
+    const p = org(kNum);
+    if (p) pilihPeserta(p.kode);
+    return;
+  }
+
+  const btnTutup = e.target.closest("[data-tutup-modal]");
+  if (btnTutup || e.target.id === "modal-bg") {
+    S.showMobilePass = false;
+    render();
+    return;
+  }
 });
 
 setInterval(() => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
-  if (S.layar === "idle") render();
+  const cEl = $(".clock");
+  if (cEl) cEl.textContent = jam(S.jam);
 }, 30000);
 
-// Initial Load
+// Initial Setup
 window.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
