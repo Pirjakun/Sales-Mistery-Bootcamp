@@ -191,14 +191,12 @@ const SARAN = {
 };
 
 const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
-  : n === 9 ? "Sudut Kiri Bawah Meja U (Kursi #9)"
-  : n <= 13 ? "Sisi Bawah Meja U (Kursi #" + n + ")"
-  : n === 14 ? "Sudut Kanan Bawah Meja U (Kursi #14)"
+  : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
   : "Sisi Kanan Meja U (Kursi #" + n + ")";
 
 const org = k => P.find(p => p.kursi === k);
 function tetangga(kursi) {
-  return { kiri: kursi > 1 ? org(kursi - 1) : null, kanan: kursi < 22 ? org(kursi + 1) : null };
+  return { kiri: kursi > 1 ? org(kursi - 1) : null, kanan: kursi < 20 ? org(kursi + 1) : null };
 }
 
 const $ = s => document.querySelector(s);

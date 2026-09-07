@@ -347,9 +347,7 @@ const men = t => (+t.slice(0, 2)) * 60 + (+t.slice(3, 5));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
 
 const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
-  : n === 9 ? "Sudut Kiri Bawah Meja U (Kursi #9)"
-  : n <= 13 ? "Sisi Bawah Meja U (Kursi #" + n + ")"
-  : n === 14 ? "Sudut Kanan Bawah Meja U (Kursi #14)"
+  : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
   : "Sisi Kanan Meja U (Kursi #" + n + ")";
 
 const org = k => P.find(p => p.kursi === k);
@@ -361,7 +359,7 @@ function sesiKini() {
 
 function tetangga(kursi) {
   const kiri = org(kursi - 1), kanan = org(kursi + 1);
-  return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 22 ? kanan : null };
+  return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 20 ? kanan : null };
 }
 
 /* ---------------- Tampilan Topbar ---------------- */
@@ -401,20 +399,18 @@ function denah(sorot) {
     { n: 6, x: 124, y: 235, rot: 0 },
     { n: 7, x: 124, y: 266, rot: 0 },
     { n: 8, x: 124, y: 297, rot: 0 },
-    { n: 9, x: 138, y: 345, rot: -45 }, // Corner Seat
-    { n: 10, x: 195, y: 368, rot: 0 },
-    { n: 11, x: 235, y: 368, rot: 0 },
-    { n: 12, x: 275, y: 368, rot: 0 },
-    { n: 13, x: 315, y: 368, rot: 0 },
-    { n: 14, x: 374, y: 345, rot: 45 }, // Corner Seat
-    { n: 15, x: 388, y: 297, rot: 0 },
-    { n: 16, x: 388, y: 266, rot: 0 },
-    { n: 17, x: 388, y: 235, rot: 0 },
-    { n: 18, x: 388, y: 204, rot: 0 },
-    { n: 19, x: 388, y: 173, rot: 0 },
-    { n: 20, x: 388, y: 142, rot: 0 },
-    { n: 21, x: 388, y: 111, rot: 0 },
-    { n: 22, x: 388, y: 80, rot: 0 }
+    { n: 9, x: 195, y: 368, rot: 0 },
+    { n: 10, x: 235, y: 368, rot: 0 },
+    { n: 11, x: 275, y: 368, rot: 0 },
+    { n: 12, x: 315, y: 368, rot: 0 },
+    { n: 13, x: 388, y: 297, rot: 0 },
+    { n: 14, x: 388, y: 266, rot: 0 },
+    { n: 15, x: 388, y: 235, rot: 0 },
+    { n: 16, x: 388, y: 204, rot: 0 },
+    { n: 17, x: 388, y: 173, rot: 0 },
+    { n: 18, x: 388, y: 142, rot: 0 },
+    { n: 19, x: 388, y: 111, rot: 0 },
+    { n: 20, x: 388, y: 80, rot: 0 }
   ];
 
   const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
@@ -453,14 +449,11 @@ function denah(sorot) {
     <div class="map-wrapper-maximized">
       <svg viewBox="95 55 335 340" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
         <g>
-          <!-- Wooden U-Shape Table Graphic with Corner Bevels -->
-          <polygon points="160,80 200,80 200,315 220,330 320,330 340,315 340,80 380,80 380,330 350,360 190,360 160,330" 
-                   fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-          <line x1="160" y1="330" x2="200" y2="315" stroke="#683910" stroke-width="2"/>
-          <line x1="190" y1="360" x2="220" y2="330" stroke="#683910" stroke-width="2"/>
-          <line x1="380" y1="330" x2="340" y2="315" stroke="#683910" stroke-width="2"/>
-          <line x1="350" y1="360" x2="320" y2="330" stroke="#683910" stroke-width="2"/>
-          <polyline points="160,80 160,330 190,360 350,360 380,330 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          <!-- Wooden U-Shape Table Graphic -->
+          <polygon points="160,80 200,80 200,330 340,330 340,80 380,80 380,360 160,360" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+          <line x1="160" y1="330" x2="200" y2="330" stroke="#683910" stroke-width="2"/>
+          <line x1="340" y1="330" x2="380" y2="330" stroke="#683910" stroke-width="2"/>
+          <polyline points="160,80 160,360 380,360 380,80" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
         </g>
         <g id="svg-seats-group">${svgSeats}</g>
       </svg>
