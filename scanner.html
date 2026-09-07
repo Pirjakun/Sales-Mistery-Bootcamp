@@ -11,6 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- html2canvas for Ticket Image Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
   :root {
     --paper: #EFE9DD;
@@ -723,6 +726,55 @@ const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
 
 const org = k => P.find(p => p.kursi === k);
 
+async function cetakGambarTiket(namaPeserta = "Peserta", selector = ".mobile-pass-card") {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  const btnCetak = document.querySelector("#btn-cetak-kiosk-pass, #btn-cetak-tiket");
+  if (btnCetak) {
+    btnCetak.disabled = true;
+    btnCetak.innerText = "Memproses Gambar...";
+  }
+
+  try {
+    if (window.html2canvas) {
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#FCFAF6',
+        logging: false,
+        onclone: (clonedDoc) => {
+          const btns = clonedDoc.querySelectorAll("#btn-cetak-kiosk-pass, #btn-cetak-tiket, [data-tutup-modal]");
+          btns.forEach(b => b.style.display = "none");
+        }
+      });
+
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      const safeName = namaPeserta.replace(/[^a-zA-Z0-9]/g, "_");
+      a.download = `Tiket_Bootcamp_${safeName}.png`;
+      a.href = dataUrl;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      alert("Modul pencetak gambar sedang dimuat, silakan coba beberapa detik lagi.");
+    }
+  } catch (err) {
+    console.error("Gagal cetak gambar tiket:", err);
+    alert("Gagal mengunduh gambar tiket. Silakan coba kembali.");
+  } finally {
+    if (btnCetak) {
+      btnCetak.disabled = false;
+      if (btnCetak.id === "btn-cetak-kiosk-pass") {
+        btnCetak.innerText = "Cetak Gambar Tiket (PNG)";
+      } else {
+        btnCetak.innerText = "Unduh Tiket sebagai Gambar (PNG)";
+      }
+    }
+  }
+}
+
 function sesiKini() {
   const n = S.jam;
   return SESI.find(s => men(s.mulai) <= n && men(s.selesai) > n) || null;
@@ -975,9 +1027,12 @@ function modalTiketDigital() {
           ${t.kanan ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
         </div>` : ""}
       </div>
-      <div class="mobile-footer">
+      <div class="mobile-footer" style="flex-wrap:wrap; gap:8px;">
         <div class="status-badge-ok">Hadir (Sistem Presensi Digital)</div>
-        <button class="btn-close-modal" data-tutup-modal>Tutup Pass</button>
+        <div style="display:flex; gap:8px; width:100%; margin-top:4px;">
+          <button class="btn-close-modal" id="btn-cetak-kiosk-pass" style="background:var(--ok); flex:1;">Cetak Gambar Tiket (PNG)</button>
+          <button class="btn-close-modal" data-tutup-modal style="flex:1;">Tutup Pass</button>
+        </div>
       </div>
     </div>
   </div>`;
@@ -1121,6 +1176,12 @@ document.addEventListener("click", e => {
       pesan("Seluruh data presensi telah dikosongkan (0 / 21 Hadir).");
       render();
     }
+    return;
+  }
+
+  const btnCetakKiosk = e.target.closest("#btn-cetak-kiosk-pass");
+  if (btnCetakKiosk) {
+    cetakGambarTiket(S.orangAktif ? S.orangAktif.nama : "Peserta", ".mobile-pass-card");
     return;
   }
 

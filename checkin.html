@@ -11,6 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- html2canvas for Ticket Image Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
   :root {
     --paper: #EFE9DD;
@@ -714,6 +717,51 @@ function denah(sorot) {
   </div>`;
 }
 
+async function cetakGambarTiket(namaPeserta = "Peserta", selector = "#app") {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  const btnCetak = document.querySelector("#btn-cetak-tiket");
+  if (btnCetak) {
+    btnCetak.disabled = true;
+    btnCetak.innerText = "Memproses Gambar...";
+  }
+
+  try {
+    if (window.html2canvas) {
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#FCFAF6',
+        logging: false,
+        onclone: (clonedDoc) => {
+          const btns = clonedDoc.querySelectorAll("#btn-cetak-tiket, #btn-kembali");
+          btns.forEach(b => b.style.display = "none");
+        }
+      });
+
+      const dataUrl = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      const safeName = namaPeserta.replace(/[^a-zA-Z0-9]/g, "_");
+      a.download = `Tiket_Bootcamp_${safeName}.png`;
+      a.href = dataUrl;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      alert("Modul pencetak gambar sedang dimuat, silakan coba beberapa detik lagi.");
+    }
+  } catch (err) {
+    console.error("Gagal cetak gambar tiket:", err);
+    alert("Gagal mengunduh gambar tiket. Silakan coba kembali.");
+  } finally {
+    if (btnCetak) {
+      btnCetak.disabled = false;
+      btnCetak.innerText = "Unduh Tiket sebagai Gambar (PNG)";
+    }
+  }
+}
+
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
@@ -886,6 +934,9 @@ function render() {
 
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div class="verified-badge">Terverifikasi Hadir (Sistem Presensi Digital)</div>
+          <button class="btn-submit" id="btn-cetak-tiket" style="background:var(--ok); margin-top:4px;">
+            Unduh Tiket sebagai Gambar (PNG)
+          </button>
           <button class="btn-reset" id="btn-kembali">Kembali ke Form Presensi</button>
         </div>
       </div>
@@ -917,6 +968,13 @@ function render() {
     btnBuka.addEventListener("click", () => {
       S.view = "ticket";
       render();
+    });
+  }
+
+  const btnCetak = $("#btn-cetak-tiket");
+  if (btnCetak) {
+    btnCetak.addEventListener("click", () => {
+      cetakGambarTiket(S.pDipilih ? S.pDipilih.nama : "Peserta", "#app");
     });
   }
 
