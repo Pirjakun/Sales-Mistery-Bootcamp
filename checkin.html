@@ -290,7 +290,11 @@ function render() {
       </div>
       <div class="mobile-body">
         <div class="success-box">
-          <div class="check-icon"></div>
+          <div class="check-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
           <h2>Presensi Berhasil</h2>
           <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di meja U-Shape telah disiapkan.</p>
           <button class="btn-submit" id="btn-buka-tiket">Buka Tiket Digital &amp; Nomor Kursi</button>
