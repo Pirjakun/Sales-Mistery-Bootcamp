@@ -855,12 +855,12 @@ function denah(sorot) {
     { n: 6, x: 124, y: 240, rot: 0 },
     { n: 7, x: 124, y: 277, rot: 0 },
     { n: 8, x: 124, y: 314, rot: 0 },
-    { n: 9, x: 138, y: 355, rot: -45 },
-    { n: 10, x: 195, y: 380, rot: 0 },
-    { n: 11, x: 235, y: 380, rot: 0 },
-    { n: 12, x: 275, y: 380, rot: 0 },
-    { n: 13, x: 315, y: 380, rot: 0 },
-    { n: 14, x: 374, y: 355, rot: 45 },
+    { n: 9, x: 136, y: 355, rot: -45 },
+    { n: 10, x: 188, y: 380, rot: 0 },
+    { n: 11, x: 232, y: 380, rot: 0 },
+    { n: 12, x: 276, y: 380, rot: 0 },
+    { n: 13, x: 320, y: 380, rot: 0 },
+    { n: 14, x: 376, y: 355, rot: 45 },
     { n: 15, x: 388, y: 314, rot: 0 },
     { n: 16, x: 388, y: 277, rot: 0 },
     { n: 17, x: 388, y: 240, rot: 0 },
@@ -875,11 +875,12 @@ function denah(sorot) {
 
   const svgSeats = sortedCoords.map(item => {
     const n = item.n;
-    const p = org(n);
+    const isSerong = (n === 9 || n === 14);
+    const p = isSerong ? null : org(n);
     const aku = n === sorot;
     const isi = p && hadirSet.has(p.kode);
-    const pNama = p ? esc(p.panggilan) : (n === 14 ? "Buffer" : "");
-    const pDisc = p ? esc(p.disc) : (n === 14 ? "—" : "");
+    const pNama = isSerong ? "Buffer" : (p ? esc(p.panggilan) : "");
+    const pDisc = isSerong ? "—" : (p ? esc(p.disc) : "");
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
@@ -907,11 +908,11 @@ function denah(sorot) {
         <text x="-51" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
       `;
     } else if (n <= 14) {
-      // Bottom side & angled corners (9-14): name badge below
+      // Bottom side & angled corners (9-14): non-overlapping compact badge below
       nameTagSvg = `
-        <rect x="-14" y="32" width="56" height="28" rx="5" class="name-shape ${discCls}" />
-        <text x="14" y="45" class="name-label-title" text-anchor="middle" style="font-size:10.5px">${pNama}</text>
-        <text x="14" y="56" class="name-label-disc" text-anchor="middle" style="font-size:9px">${pDisc}</text>
+        <rect x="-5" y="32" width="38" height="28" rx="5" class="name-shape ${discCls}" />
+        <text x="14" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
+        <text x="14" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
       `;
     } else {
       // Right side (15-22): name badge on the right
@@ -935,7 +936,7 @@ function denah(sorot) {
             <circle cx="0" cy="-12" r="2.2" fill="#FFFFFF" />
           </g>
         ` : ""}
-        <title>Kursi #${n}: ${p ? esc(p.nama) + ' (' + p.disc + ')' : (n === 14 ? 'Buffer' : 'Kosong')}</title>
+        <title>Kursi #${n}: ${isSerong ? 'Buffer (Kosong)' : (p ? esc(p.nama) + ' (' + p.disc + ')' : 'Kosong')}</title>
       </g>
     `;
   }).join("");
