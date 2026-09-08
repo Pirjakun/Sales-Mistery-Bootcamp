@@ -600,6 +600,21 @@ const P = [
   }
 ];
 
+const DISC = {
+  "D": "Dominance",
+  "I": "Influencing",
+  "S": "Steadiness",
+  "C": "Conscientiousness",
+  "D/I": "Dominant - Influential",
+  "I/D": "Influential - Dominant",
+  "D/C": "Dominant - Conscientious",
+  "D/C - Balanced": "Dominant - Conscientious",
+  "I/S": "Influential - Steady",
+  "S/C": "Steady - Conscientious",
+  "C/S": "Conscientious - Steady",
+  "I/C": "Influential - Conscientious"
+};
+
 function denah(sorot) {
   const hadirSet = getHadirSet();
   const coords = [
@@ -752,6 +767,30 @@ async function cetakGambarTiket(namaPeserta = "Peserta", selector = "#app") {
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+
+const org = k => P.find(p => p.kursi === k);
+const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
+  : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
+  : "Sisi Kanan Meja U (Kursi #" + n + ")";
+
+function tetangga(kursi) {
+  return {
+    kiri: kursi > 1 ? org(kursi - 1) : null,
+    kanan: kursi < 20 ? org(kursi + 1) : null
+  };
+}
+
+function getHadirSet() {
+  const set = new Set();
+  try {
+    const raw = localStorage.getItem("smb_hadir");
+    if (raw) {
+      const arr = JSON.parse(raw);
+      arr.forEach(k => set.add(k));
+    }
+  } catch(e){}
+  return set;
+}
 
 const S = {
   view: "form", // "form", "success", "ticket"
