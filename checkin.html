@@ -781,7 +781,8 @@ function init() {
   render();
 }
 
-async function simpanPresensi(p) {
+function simpanPresensi(p) {
+  if (!p || !p.kode) return;
   let hadirArr = [];
   try {
     const raw = localStorage.getItem("smb_hadir");
@@ -789,21 +790,21 @@ async function simpanPresensi(p) {
   } catch(e){}
   if (!hadirArr.includes(p.kode)) {
     hadirArr.push(p.kode);
-    localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
+    try {
+      localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
+    } catch(e){}
   }
 
   try {
     localStorage.setItem("smb_my_code", p.kode);
   } catch(e){}
 
-  // Real-time broadcast across physical devices
-  try {
-    await fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "checkin", kode: p.kode, timestamp: Date.now() })
-    });
-  } catch(e){}
+  // Real-time broadcast across physical devices (non-blocking)
+  fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "checkin", kode: p.kode, timestamp: Date.now() })
+  }).catch(() => {});
 }
 
 function render() {
@@ -841,7 +842,7 @@ function render() {
           `}
         </div>
 
-        <button class="btn-submit" id="btn-submit-presensi" ${!S.pDipilih ? 'disabled' : ''}>
+        <button class="btn-submit" id="btn-submit-presensi" type="button">
           Konfirmasi Presensi Mandiri
         </button>
 
@@ -901,7 +902,7 @@ function render() {
         </div>
 
         <div>
-          <div class="sec-lbl">DENAH LOKASI KURSI (POSISI DUDUK)</div>
+          <div class="sec-lbl">DENAH LOKASI KURSI (POSSI DUDUK)</div>
           ${denah(p.kursi)}
         </div>
 
@@ -942,9 +943,21 @@ function render() {
 
   const btnSub = $("#btn-submit-presensi");
   if (btnSub) {
-    btnSub.addEventListener("click", () => {
-      if (!S.pDipilih) return;
-      simpanPresensi(S.pDipilih);
+    btnSub.addEventListener("click", (e) => {
+      e.preventDefault();
+      const selVal = $("#select-peserta") ? $("#select-peserta").value : "";
+      const p = (selVal ? P.find(x => x.kode === selVal) : null) || S.pDipilih;
+      if (!p) {
+        alert("Silakan pilih nama Anda pada menu 'Pilih Nama Peserta' di atas terlebih dahulu.");
+        const selEl = $("#select-peserta");
+        if (selEl) {
+          selEl.style.borderColor = "var(--warn)";
+          selEl.focus();
+        }
+        return;
+      }
+      S.pDipilih = p;
+      simpanPresensi(p);
       S.view = "success";
       render();
     });
