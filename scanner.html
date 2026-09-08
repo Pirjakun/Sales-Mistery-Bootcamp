@@ -1291,13 +1291,19 @@ setInterval(() => {
 }, 30000);
 
 // Initial Setup
-window.addEventListener("DOMContentLoaded", () => {
+function bootScanner() {
   const now = new Date();
   S.jam = now.getHours() * 60 + now.getMinutes();
   syncStoragePresensi(true);
   initRealtimeStream();
   render();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootScanner);
+} else {
+  bootScanner();
+}
 </script>
 </body>
 </html>

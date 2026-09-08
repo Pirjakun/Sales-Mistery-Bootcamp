@@ -794,11 +794,17 @@
   }
 
   // Initialize App
-  window.addEventListener("DOMContentLoaded", () => {
+  function bootBooking() {
     initDefaultBookings();
     renderSeats();
     populateParticipantDropdown();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootBooking);
+  } else {
+    bootBooking();
+  }
   </script>
 </body>
 </html>
