@@ -508,39 +508,37 @@
     { id: 20, name: "Kensrie Diah Ayuningtyas", email: "kensrie@werkudara.com", dept: "Hunting & Closing · DISC D/C" }
   ];
 
-  // 22 Seat positions in SVG space
+  // 20 Seat positions in SVG space
   const SEAT_COORDS = [
     // Sisi Kiri (1-8)
     { seat: 1, x: 124, y: 80, pos: "Sisi Kiri Meja U (Kursi 1 · Nanda)", rot: 0 },
-    { seat: 2, x: 124, y: 111, pos: "Sisi Kiri Meja U (Kursi 2 · Dimas)", rot: 0 },
+    { seat: 2, x: 124, y: 111, pos: "Sisi Kiri Meja U (Kursi 2 · Popan)", rot: 0 },
     { seat: 3, x: 124, y: 142, pos: "Sisi Kiri Meja U (Kursi 3 · Jay)", rot: 0 },
     { seat: 4, x: 124, y: 173, pos: "Sisi Kiri Meja U (Kursi 4 · Elfasa)", rot: 0 },
     { seat: 5, x: 124, y: 204, pos: "Sisi Kiri Meja U (Kursi 5 · Dita)", rot: 0 },
-    { seat: 6, x: 124, y: 235, pos: "Sisi Kiri Meja U (Kursi 6 · Jaka)", rot: 0 },
+    { seat: 6, x: 124, y: 235, pos: "Sisi Kiri Meja U (Kursi 6 · Okki)", rot: 0 },
     { seat: 7, x: 124, y: 266, pos: "Sisi Kiri Meja U (Kursi 7 · Nindy)", rot: 0 },
     { seat: 8, x: 124, y: 297, pos: "Sisi Kiri Meja U (Kursi 8 · Mitha)", rot: 0 },
-    // Tengah Bawah & Sudut (9-14)
-    { seat: 9, x: 138, y: 345, pos: "Sudut Kiri Bawah (Kursi 9 · Okki)", rot: -45 },
-    { seat: 10, x: 195, y: 368, pos: "Sisi Tengah Bawah (Kursi 10 · Fadli)", rot: 0 },
-    { seat: 11, x: 235, y: 368, pos: "Sisi Tengah Bawah (Kursi 11 · Mya)", rot: 0 },
-    { seat: 12, x: 275, y: 368, pos: "Sisi Tengah Bawah (Kursi 12 · Yulia)", rot: 0 },
-    { seat: 13, x: 315, y: 368, pos: "Sisi Tengah Bawah (Kursi 13 · Gilang)", rot: 0 },
-    { seat: 14, x: 374, y: 345, pos: "Sudut Kanan Bawah (Kursi 14 · Buffer)", rot: 45 },
-    // Sisi Kanan (15-22)
-    { seat: 15, x: 388, y: 297, pos: "Sisi Kanan Meja U (Kursi 15 · Irvani)", rot: 0 },
-    { seat: 16, x: 388, y: 266, pos: "Sisi Kanan Meja U (Kursi 16 · Ainur)", rot: 0 },
-    { seat: 17, x: 388, y: 235, pos: "Sisi Kanan Meja U (Kursi 17 · Bagus)", rot: 0 },
-    { seat: 18, x: 388, y: 204, pos: "Sisi Kanan Meja U (Kursi 18 · Linda)", rot: 0 },
-    { seat: 19, x: 388, y: 173, pos: "Sisi Kanan Meja U (Kursi 19 · Andri)", rot: 0 },
-    { seat: 20, x: 388, y: 142, pos: "Sisi Kanan Meja U (Kursi 20 · Popan)", rot: 0 },
-    { seat: 21, x: 388, y: 111, pos: "Sisi Kanan Meja U (Kursi 21 · Kensrie)", rot: 0 },
-    { seat: 22, x: 388, y: 80, pos: "Sisi Kanan Meja U (Kursi 22 · Adiel)", rot: 0 }
+    // Sisi Tengah Bawah (9-12)
+    { seat: 9, x: 195, y: 368, pos: "Sisi Tengah Bawah (Kursi 9 · Jaka)", rot: 0 },
+    { seat: 10, x: 235, y: 368, pos: "Sisi Tengah Bawah (Kursi 10 · Dimas)", rot: 0 },
+    { seat: 11, x: 275, y: 368, pos: "Sisi Tengah Bawah (Kursi 11 · Bagus)", rot: 0 },
+    { seat: 12, x: 315, y: 368, pos: "Sisi Tengah Bawah (Kursi 12 · Yulia)", rot: 0 },
+    // Sisi Kanan (13-20)
+    { seat: 13, x: 388, y: 80, pos: "Sisi Kanan Meja U (Kursi 13 · Gilang)", rot: 0 },
+    { seat: 14, x: 388, y: 111, pos: "Sisi Kanan Meja U (Kursi 14 · Linda)", rot: 0 },
+    { seat: 15, x: 388, y: 142, pos: "Sisi Kanan Meja U (Kursi 15 · Irvani)", rot: 0 },
+    { seat: 16, x: 388, y: 173, pos: "Sisi Kanan Meja U (Kursi 16 · Ainur)", rot: 0 },
+    { seat: 17, x: 388, y: 204, pos: "Sisi Kanan Meja U (Kursi 17 · Mya)", rot: 0 },
+    { seat: 18, x: 388, y: 235, pos: "Sisi Kanan Meja U (Kursi 18 · Adiel)", rot: 0 },
+    { seat: 19, x: 388, y: 266, pos: "Sisi Kanan Meja U (Kursi 19 · Andri)", rot: 0 },
+    { seat: 20, x: 388, y: 297, pos: "Sisi Kanan Meja U (Kursi 20 · Kensrie)", rot: 0 }
   ];
 
   // Neighbor physical adjacency map
   function getSeatNeighbors(seatNum) {
     const leftSeat = seatNum > 1 ? seatNum - 1 : null;
-    const rightSeat = seatNum < 22 ? seatNum + 1 : null;
+    const rightSeat = seatNum < 20 ? seatNum + 1 : null;
     return { leftSeat, rightSeat };
   }
 
