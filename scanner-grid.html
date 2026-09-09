@@ -416,6 +416,33 @@
     .seating-grid { gap: 8px; }
     .card-name { font-size: 15px; }
   }
+
+  /* Zoom Controls & Touch Pinch Styling */
+  .zoom-controls {
+    position: absolute; top: 6px; right: 6px; z-index: 50;
+    display: flex; gap: 4px; background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px); padding: 4px; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.15);
+  }
+  .zoom-controls button {
+    background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+    width: 30px; height: 30px; border-radius: 6px; font-weight: 800; font-size: 15px;
+    display: grid; place-items: center; cursor: pointer; user-select: none; transition: all 0.15s ease;
+    line-height: 1; padding: 0;
+  }
+  .zoom-controls button:hover, .zoom-controls button:active {
+    background: var(--amber, #F59E0B); color: #000; border-color: #F59E0B; transform: scale(0.95);
+  }
+  .zoom-controls .btn-zoom-reset {
+    width: auto; padding: 0 8px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  }
+
+  .zoom-hint {
+    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.85); color: #F8FAFC; font-size: 10px; font-weight: 600;
+    padding: 3px 10px; border-radius: 12px; pointer-events: none; opacity: 0.9;
+    white-space: nowrap; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
   </style>
 </head>
 <body>
@@ -1028,13 +1055,19 @@ function denah(sorot) {
     `;
   }).join("");
 
-  return `<div class="map">
+  return `<div class="map" data-zoom-container style="position:relative; overflow:hidden;">
     <div class="stage-banner">PANGGUNG · LAYAR · WHITEBOARD</div>
+    <div class="zoom-controls">
+      <button type="button" class="btn-zoom-in" title="Zoom In">+</button>
+      <button type="button" class="btn-zoom-out" title="Zoom Out">−</button>
+      <button type="button" class="btn-zoom-reset" title="Reset Zoom">Reset</button>
+    </div>
     <div class="map-wrapper-grid">
       <div class="seating-grid">
         ${cardsHtml}
       </div>
     </div>
+    <div class="zoom-hint">Gunakan 2 jari / pinch untuk zoom &amp; geser denah, atau tombol + / -</div>
   </div>`;
 }
 
@@ -1201,6 +1234,7 @@ function renderModalSmart() {
       const node = tempDiv.firstElementChild;
       if (node) document.body.appendChild(node);
     }
+    initZoomableMaps();
     return;
   }
 
@@ -1211,6 +1245,7 @@ function renderModalSmart() {
     const node = tempDiv.firstElementChild;
     if (node) document.body.appendChild(node);
   }
+  initZoomableMaps();
 }
 
 function renderToastSmart() {
@@ -1262,6 +1297,7 @@ function render() {
 
   renderModalSmart();
   renderToastSmart();
+  initZoomableMaps();
 }
 
 function renderListOnly() {
@@ -1453,6 +1489,135 @@ setInterval(() => {
   const cEl = $(".clock");
   if (cEl) cEl.textContent = jam(S.jam);
 }, 30000);
+
+/* ---------------- Zoom & Pan Gesture Engine ---------------- */
+function makeZoomable(container) {
+  if (!container) return;
+
+  const svg = container.querySelector("svg, .zoomable-svg, .map-wrapper-grid");
+  const btnIn = container.querySelector(".btn-zoom-in");
+  const btnOut = container.querySelector(".btn-zoom-out");
+  const btnReset = container.querySelector(".btn-zoom-reset");
+  if (!svg) return;
+
+  if (container._hasZoom) return;
+  container._hasZoom = true;
+
+  let scale = 1;
+  let pointX = 0;
+  let pointY = 0;
+  let startX = 0;
+  let startY = 0;
+  let isDragging = false;
+  let initialPinchDist = null;
+  let initialScale = 1;
+
+  function updateTransform(smooth = false) {
+    scale = Math.min(Math.max(1, scale), 3.5);
+    if (scale === 1) {
+      pointX = 0;
+      pointY = 0;
+    }
+    svg.style.transition = smooth ? "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)" : "none";
+    svg.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+  }
+
+  if (btnIn) {
+    btnIn.onclick = (e) => { e.stopPropagation(); scale += 0.4; updateTransform(true); };
+  }
+  if (btnOut) {
+    btnOut.onclick = (e) => { e.stopPropagation(); scale -= 0.4; updateTransform(true); };
+  }
+  if (btnReset) {
+    btnReset.onclick = (e) => { e.stopPropagation(); scale = 1; pointX = 0; pointY = 0; updateTransform(true); };
+  }
+
+  // Double Tap Zoom
+  let lastTap = 0;
+  container.addEventListener("touchend", e => {
+    if (e.target.closest(".zoom-controls")) return;
+    const currentTime = Date.now();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 300 && tapLength > 0 && e.touches.length === 0) {
+      scale = scale > 1.2 ? 1 : 2.2;
+      updateTransform(true);
+      e.preventDefault();
+    }
+    lastTap = currentTime;
+  });
+
+  // Touch Pinch & Pan
+  container.addEventListener("touchstart", e => {
+    if (e.target.closest(".zoom-controls")) return;
+    if (e.touches.length === 2) {
+      initialPinchDist = Math.hypot(
+        e.touches[0].pageX - e.touches[1].pageX,
+        e.touches[0].pageY - e.touches[1].pageY
+      );
+      initialScale = scale;
+    } else if (e.touches.length === 1 && scale > 1) {
+      isDragging = true;
+      startX = e.touches[0].pageX - pointX;
+      startY = e.touches[0].pageY - pointY;
+    }
+  }, { passive: true });
+
+  container.addEventListener("touchmove", e => {
+    if (e.touches.length === 2 && initialPinchDist) {
+      if (e.cancelable) e.preventDefault();
+      const currentDist = Math.hypot(
+        e.touches[0].pageX - e.touches[1].pageX,
+        e.touches[0].pageY - e.touches[1].pageY
+      );
+      scale = initialScale * (currentDist / initialPinchDist);
+      updateTransform(false);
+    } else if (e.touches.length === 1 && isDragging && scale > 1) {
+      if (e.cancelable) e.preventDefault();
+      pointX = e.touches[0].pageX - startX;
+      pointY = e.touches[0].pageY - startY;
+      updateTransform(false);
+    }
+  }, { passive: false });
+
+  container.addEventListener("touchend", e => {
+    if (e.touches.length < 2) initialPinchDist = null;
+    if (e.touches.length === 0) isDragging = false;
+  });
+
+  // Mouse Drag & Wheel
+  container.addEventListener("wheel", e => {
+    if (e.cancelable) e.preventDefault();
+    scale += e.deltaY < 0 ? 0.25 : -0.25;
+    updateTransform(true);
+  }, { passive: false });
+
+  container.addEventListener("mousedown", e => {
+    if (e.target.closest(".zoom-controls")) return;
+    if (scale > 1) {
+      isDragging = true;
+      startX = e.clientX - pointX;
+      startY = e.clientY - pointY;
+      container.style.cursor = "grabbing";
+    }
+  });
+
+  window.addEventListener("mousemove", e => {
+    if (isDragging && scale > 1) {
+      pointX = e.clientX - startX;
+      pointY = e.clientY - startY;
+      updateTransform(false);
+    }
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+    container.style.cursor = "default";
+  });
+}
+
+function initZoomableMaps() {
+  document.querySelectorAll("[data-zoom-container], .map, .map-card-box").forEach(makeZoomable);
+}
 
 // Initial Setup
 function bootScanner() {
