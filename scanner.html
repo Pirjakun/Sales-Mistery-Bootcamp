@@ -952,9 +952,12 @@ function kioskPanelKanan() {
     list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
   }
 
-  const checkinTarget = window.location.origin.includes("http")
-    ? window.location.origin + window.location.pathname.replace(/scanner(-grid)?\.html$/, "checkin.html") + "?sesi=1"
-    : "https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html?sesi=1";
+  let checkinTarget = window.location.href.split('?')[0].split('#')[0].replace(/\/(scanner-grid|scanner)(\.html)?\/?$/i, '/checkin.html');
+  if (!checkinTarget.includes('checkin.html')) {
+    checkinTarget = "https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html";
+  }
+  checkinTarget += "?sesi=1";
+
   const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(checkinTarget) + "&color=12357F&bgcolor=FCFAF6";
 
   return `<div class="kiosk-right">
@@ -967,7 +970,7 @@ function kioskPanelKanan() {
         <div class="qr-tag">SCAN QR FORM ABSEN MANDIRI</div>
         <h3>Pindai QR Form Presensi HP</h3>
         <p>Pindai QR ini dari HP Anda untuk mengisi <b>Form Absen</b>. Setelah dikonfirmasi, <b>Tiket Digital &amp; Nomor Kursi Anda</b> akan langsung tampil!</p>
-        <a href="checkin.html" target="_blank" style="display:inline-block; margin-top:8px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; color:#fff; text-decoration:none;">Buka Form Absen Mandiri (HP) &rarr;</a>
+        <a href="${checkinTarget}" target="_blank" style="display:inline-block; margin-top:8px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; color:#fff; text-decoration:none;">Buka Form Absen Mandiri (HP) &rarr;</a>
       </div>
     </div>
 
