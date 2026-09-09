@@ -546,10 +546,10 @@ const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCas
 function init() {
   const params = new URLSearchParams(window.location.search);
   const sesiParam = params.get("sesi");
-  if (sesiParam === "2" || sesiParam === "grid") {
-    S.sesi = 2;
-  } else {
+  if (sesiParam === "1") {
     S.sesi = 1;
+  } else {
+    S.sesi = 2; // Default to Sesi 2 Grid
   }
 
   const kode = params.get("kode");
@@ -575,7 +575,6 @@ function init() {
 function simpanPresensi(p) {
   if (!p || !p.kode) return;
   
-  // Save to Sesi 1 or Sesi 2 storage
   const storageKey = S.sesi === 2 ? "smb_hadir_grid" : "smb_hadir";
   let hadirArr = [];
   try {
@@ -587,7 +586,7 @@ function simpanPresensi(p) {
     hadirArr.push(p.kode);
     try {
       localStorage.setItem(storageKey, JSON.stringify(hadirArr));
-      localStorage.setItem("smb_hadir", JSON.stringify(hadirArr)); // sync global
+      localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
     } catch(e){}
   }
 
@@ -595,7 +594,6 @@ function simpanPresensi(p) {
     localStorage.setItem("smb_my_code", p.kode);
   } catch(e){}
 
-  // Real-time broadcast across physical devices (non-blocking)
   fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -603,37 +601,21 @@ function simpanPresensi(p) {
   }).catch(() => {});
 }
 
-function switchSesi(newSesi) {
-  if (S.sesi === newSesi) return;
-  S.sesi = newSesi;
-  S.pDipilih = null;
-  S.view = "form";
-  render();
-}
-
 function render() {
   const container = $("#app");
   const P_SESI = getActivePList();
-
-  const sessionSwitcherHtml = `
-    <div class="session-tab-wrap">
-      <div class="session-tab-btn ${S.sesi === 1 ? 'active' : ''}" data-switch-sesi="1">Sesi 1 (U-Shape)</div>
-      <div class="session-tab-btn ${S.sesi === 2 ? 'active' : ''}" data-switch-sesi="2">Sesi 2 (Grid 5x5)</div>
-    </div>
-  `;
 
   if (S.view === "form") {
     container.innerHTML = `
       <div class="mobile-head">
         <div class="badge-top">SALES MASTERY BOOTCAMP</div>
         <h1>Form Presensi Peserta</h1>
-        <p>${S.sesi === 2 ? 'Sesi 2: Classroom Grid Layout 5x5' : 'Sesi 1: U-Shape Layout'} · Kalyana Resort</p>
-        ${sessionSwitcherHtml}
+        <p>Sesi 2: Classroom Grid Layout 5x5 · Kalyana Resort</p>
       </div>
       <div class="mobile-body">
         <div style="display:flex; flex-direction:column; gap:16px;">
           <div class="form-group">
-            <label>Pilih Nama Peserta (${S.sesi === 2 ? 'Sesi 2 Grid' : 'Sesi 1 U-Shape'})</label>
+            <label>Pilih Nama Peserta (Sesi 2 Grid)</label>
             <select class="form-select" id="select-peserta">
               <option value="">-- Pilih Nama Anda dari Daftar --</option>
               ${P_SESI.map(p => `<option value="${p.kode}" ${S.pDipilih && S.pDipilih.kode === p.kode ? 'selected' : ''}>${esc(p.nama)} (${p.kode})</option>`).join("")}
@@ -657,7 +639,7 @@ function render() {
         </div>
 
         <button class="btn-submit" id="btn-submit-presensi" type="button">
-          Konfirmasi Presensi Mandiri (${S.sesi === 2 ? 'Sesi 2' : 'Sesi 1'})
+          Konfirmasi Presensi Mandiri (Sesi 2)
         </button>
 
         <button id="btn-reset-checkin-global" style="margin-top:14px; background:transparent; border:1px dashed var(--line); color:var(--ink-3); padding:8px 12px; border-radius:8px; font-size:12px; width:100%; cursor:pointer;">
@@ -670,8 +652,7 @@ function render() {
       <div class="mobile-head">
         <div class="badge-top">SISTEM PRESENSI TERAKREDITASI</div>
         <h1>Check-in Sukses!</h1>
-        <p>Data presensi tersinkronisasi ke Layar Kiosk ${S.sesi === 2 ? 'Grid 5x5' : 'U-Shape'}</p>
-        ${sessionSwitcherHtml}
+        <p>Data presensi tersinkronisasi ke Layar Kiosk Grid 5x5</p>
       </div>
       <div class="mobile-body">
         <div class="success-box">
@@ -681,7 +662,7 @@ function render() {
             </svg>
           </div>
           <h2>Presensi Berhasil</h2>
-          <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di ${S.sesi === 2 ? 'Denah Grid 5x5' : 'Meja U-Shape'} telah disiapkan.</p>
+          <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di Denah Grid 5x5 telah disiapkan.</p>
           <button class="btn-submit" id="btn-buka-tiket">Buka Tiket Digital &amp; Nomor Kursi</button>
         </div>
       </div>
@@ -703,10 +684,10 @@ function render() {
 
     container.innerHTML = `
       <div class="mobile-head">
-        <div class="badge-top">E-TICKET &amp; SEAT PASS — SESI ${S.sesi}</div>
+        <div class="badge-top">E-TICKET &amp; SEAT PASS — SESI 2 GRID</div>
         <h1>${esc(p.nama)}</h1>
         <p>${esc(p.peran)} · Sales Mastery Bootcamp</p>
-        ${sessionSwitcherHtml}
+      </div>`l}
       </div>
       <div class="mobile-body">
         <div class="hero-seat-card">
