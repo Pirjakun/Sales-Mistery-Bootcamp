@@ -60,8 +60,21 @@
     border-bottom: 3.5px solid var(--amber); position: relative;
   }
   .mobile-head .badge-top { font-size: 10px; font-weight: 800; letter-spacing: 0.16em; color: var(--sky); text-transform: uppercase; }
-  .mobile-head h1 { margin: 6px 0 2px; font-family: var(--serif); font-size: 23px; font-weight: 400; color: #fff; }
+  .mobile-head h1 { margin: 6px 0 2px; font-family: var(--serif); font-size: 22px; font-weight: 400; color: #fff; }
   .mobile-head p { margin: 0; font-size: 12.5px; color: #C9D6EC; }
+
+  /* Session Switcher Pill in Header */
+  .session-tab-wrap {
+    display: flex; justify-content: center; gap: 4px; margin-top: 10px; background: rgba(255,255,255,0.12);
+    padding: 3px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+  }
+  .session-tab-btn {
+    flex: 1; padding: 5px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; color: #C9D6EC;
+    transition: all 0.2s; cursor: pointer; text-align: center;
+  }
+  .session-tab-btn.active {
+    background: #fff; color: var(--navy); box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  }
 
   /* Body Content */
   .mobile-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
@@ -150,12 +163,6 @@
     font-weight: 600; font-size: 13.5px; color: var(--ink-2); text-align: center; margin-top: 8px;
   }
 
-  .toast {
-    position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; background: var(--warn);
-    color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600; z-index: 300;
-  }
-
-  /* SVG Map & Seat Node Styles for Mobile Ticket */
   .map-card-box {
     background: rgba(247, 244, 237, 0.5);
     border: 1px solid var(--line-2);
@@ -166,62 +173,50 @@
   .stage-tag {
     background: var(--navy); color: #fff; border-radius: 6px; padding: 6px; text-align: center;
     font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 8px;
-    font-family: var(--serif);
+    font-family: var(--serif); text-transform: uppercase;
   }
   .map-svg-wrap {
-    width: 100%; height: 230px; display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 220px; display: flex; align-items: center; justify-content: center;
   }
 
-  /* SVG Map & Seat Node Styles for Mobile Ticket */
-  .map-card-box {
-    background: rgba(247, 244, 237, 0.5);
-    border: 1px solid var(--line-2);
-    border-radius: 12px;
-    padding: 10px;
-    margin-top: 4px;
+  /* 5x5 Seating Grid Mobile Styles */
+  .seating-grid-mobile {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; width: 100%; padding: 4px;
   }
-  .stage-tag {
-    background: var(--navy); color: #fff; border-radius: 6px; padding: 6px; text-align: center;
-    font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 8px;
-    font-family: var(--serif);
+  .seating-grid-mobile .grid-card {
+    border-radius: 8px; padding: 6px 4px; display: flex; flex-direction: column; justify-content: space-between;
+    border: 1.2px solid; min-height: 54px; text-align: center; position: relative; user-select: none;
   }
-  .map-svg-wrap {
-    width: 100%; height: 230px; display: flex; align-items: center; justify-content: center;
+  .seating-grid-mobile .card-top-num { font-size: 9px; font-weight: 700; color: #8C877D; text-align: left; }
+  .seating-grid-mobile .card-name { font-size: 11px; font-weight: 700; line-height: 1.1; margin: 2px 0 1px; color: #1E1E1E; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .seating-grid-mobile .card-disc { font-size: 8px; font-weight: 600; color: #7A7570; }
+  .seating-grid-mobile .card-hadir-badge { position: absolute; top: 2px; right: 3px; background: #2F6B4F; color: #fff; font-size: 8px; font-weight: 800; padding: 1px 3px; border-radius: 3px; }
+  
+  .seating-grid-mobile .grid-card.disc-D { background: #FDF2F0; border-color: #E68A7C; }
+  .seating-grid-mobile .grid-card.disc-C { background: #EBF3FE; border-color: #92B7F4; }
+  .seating-grid-mobile .grid-card.disc-S { background: #EAF7EE; border-color: #8BD6A8; }
+  .seating-grid-mobile .grid-card.disc-I { background: #FEF8E7; border-color: #E8D18C; }
+  .seating-grid-mobile .grid-card.disc-neutral { background: #F3EFE7; border-color: #D8D1C2; }
+  
+  .seating-grid-mobile .grid-card.me {
+    border-color: #F59E0B !important; border-width: 2.5px !important;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.6) !important; background: #FEF3C7 !important;
   }
 
+  /* U-Shape SVG Styles */
   .seat-node { transition: all 0.3s ease; opacity: 0.95; }
   .seat-rect { fill: #1E3A8A; stroke: #1E293B; stroke-width: 1.2; rx: 7px; transition: all 0.3s; }
   .seat-num { font-family: var(--sans); font-weight: 800; font-size: 11.5px; fill: #FFFFFF; pointer-events: none; }
   
-  .name-shape {
-    transition: all 0.3s ease;
-    stroke-width: 1.5;
-  }
+  .name-shape { transition: all 0.3s ease; stroke-width: 1.5; }
   .name-shape.disc-D { fill: #FFF5F5; stroke: #EF4444; }
   .name-shape.disc-I { fill: #FFFBEB; stroke: #F59E0B; }
   .name-shape.disc-S { fill: #F0FDF4; stroke: #10B981; }
   .name-shape.disc-C { fill: #EFF6FF; stroke: #3B82F6; }
   .name-shape.disc-neutral { fill: #F9FAFB; stroke: #9CA3AF; }
 
-  .name-label-title {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 800;
-    fill: #1E293B;
-    pointer-events: none;
-  }
-  .name-label-disc {
-    font-family: var(--sans);
-    font-size: 9px;
-    font-weight: 700;
-    fill: #64748B;
-    pointer-events: none;
-  }
-
-  .name-shape.disc-D ~ .name-label-title { fill: #7F1D1D; }
-  .name-shape.disc-I ~ .name-label-title { fill: #78350F; }
-  .name-shape.disc-S ~ .name-label-title { fill: #064E3B; }
-  .name-shape.disc-C ~ .name-label-title { fill: #1E3A8A; }
+  .name-label-title { font-family: var(--sans); font-size: 11px; font-weight: 800; fill: #1E293B; pointer-events: none; }
+  .name-label-disc { font-family: var(--sans); font-size: 9px; font-weight: 700; fill: #64748B; pointer-events: none; }
 
   .seat-node.filled { opacity: 1; }
   .seat-node.filled .seat-rect { fill: #10B981; stroke: #059669; }
@@ -256,395 +251,123 @@
 <div class="mobile-container" id="app"></div>
 
 <script>
-/* ---------------- Database ---------------- */
-const P = [
-  {
-    "kode": "SMB-001",
-    "nama": "I Gusti Ayu Ananda Putri",
-    "panggilan": "Nanda",
-    "disc": "D/I",
-    "mbti": "ENFP",
-    "kursi": 1,
-    "kamar": "421",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tegas, berorientasi hasil, berani mengambil keputusan, bergerak cepat.",
-    "commStyle": "Friendly, enthusiastic dan expressive.",
-    "saran": "Friendly, enthusiastic dan expressive.. Tips: Fokus pada discipline, sales planning dan follow-up.",
-    "salesStrength": "Enerjik, kreatif, komunikatif dan mudah membangun koneksi dengan customer.",
-    "salesRisk": "Bisa kehilangan fokus atau kurang konsisten dalam execution.",
-    "tipsKomunikasi": "Sampaikan poin utama secara ramah dan antusias, beri ruang apresiasi atas idenya, lalu bantu menjaga disiplin tindak lanjut."
-  },
-  {
-    "kode": "SMB-016",
-    "nama": "Sofyan Thohari",
-    "panggilan": "Popan",
-    "disc": "S",
-    "mbti": "ISFP",
-    "kursi": 2,
-    "kamar": "425",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tenang, kooperatif, sabar, menjaga hubungan baik.",
-    "commStyle": "Calm, personal dan empathetic.",
-    "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.",
-    "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.",
-    "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.",
-    "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan."
-  },
-  {
-    "kode": "SMB-010",
-    "nama": "Sri Wijayati",
-    "panggilan": "Jay",
-    "disc": "D/I",
-    "mbti": "INFP",
-    "kursi": 3,
-    "kamar": "416",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Assertive dan influential; percaya diri menyampaikan pendapat dan mengejar hasil.",
-    "commStyle": "Soft, personal dan consultative.",
-    "saran": "Soft, personal dan consultative.. Tips: Dorong assertiveness, objection handling dan closing confidence.",
-    "salesStrength": "Empatik, thoughtful, genuine dan mampu memahami perspektif customer.",
-    "salesRisk": "Cenderung overthinking dan kurang nyaman menghadapi rejection atau konflik.",
-    "tipsKomunikasi": "Bicara secara konsultatif dan apresiatif. Sampaikan ide secara percaya diri sambil mendengarkan masukannya secara empati."
-  },
-  {
-    "kode": "SMB-003",
-    "nama": "Elfasa Khoirumansyah",
-    "panggilan": "Elfasa",
-    "disc": "I/S",
-    "mbti": "ISFJ",
-    "kursi": 4,
-    "kamar": "425",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Komunikatif, approachable, kooperatif, nyaman membangun hubungan.",
-    "commStyle": "Ramah, supportive dan personal.",
-    "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.",
-    "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.",
-    "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.",
-    "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi."
-  },
-  {
-    "kode": "SMB-008",
-    "nama": "Maria Dita Fivtiari",
-    "panggilan": "Dita",
-    "disc": "D/C",
-    "mbti": "INFP",
-    "kursi": 5,
-    "kamar": "415",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Kuat pada hasil, dengan perhatian terhadap standar dan kualitas.",
-    "commStyle": "Personal, warm dan consultative.",
-    "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.",
-    "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.",
-    "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.",
-    "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja."
-  },
-  {
-    "kode": "SMB-007",
-    "nama": "Okki Putri Fadilah",
-    "panggilan": "Okki",
-    "disc": "I/S",
-    "mbti": "ESFJ",
-    "kursi": 6,
-    "kamar": "422",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Interpersonal-oriented, komunikatif, menjaga hubungan baik.",
-    "commStyle": "Friendly, supportive dan engaging.",
-    "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.",
-    "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.",
-    "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.",
-    "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman."
-  },
-  {
-    "kode": "SMB-004",
-    "nama": "Nindy Amalia",
-    "panggilan": "Nindy",
-    "disc": "D/I",
-    "mbti": "ESTP",
-    "kursi": 7,
-    "kamar": "422",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Sangat berorientasi hasil, berani, kompetitif, dan persistent.",
-    "commStyle": "Direct, energetic dan persuasive.",
-    "saran": "Direct, energetic dan persuasive.. Tips: Fokus pada consultative questioning dan active listening.",
-    "salesStrength": "Confident, competitive, action-oriented dan cepat mengambil keputusan.",
-    "salesRisk": "Bisa terlalu cepat masuk ke solusi tanpa cukup menggali kebutuhan customer.",
-    "tipsKomunikasi": "Bicara secara langsung, lugas, dan energik. Fokus pada solusi cepat dan ajak berdiskusi secara interaktif."
-  },
-  {
-    "kode": "SMB-011",
-    "nama": "Paramitha Maharesmi Nugraheni Putri",
-    "panggilan": "Mitha",
-    "disc": "S/C",
-    "mbti": "INFP",
-    "kursi": 8,
-    "kamar": "423",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Stabil, hati-hati, cukup terstruktur dan balanced.",
-    "commStyle": "Soft, personal dan persuasive secara natural.",
-    "saran": "Soft, personal dan persuasive secara natural.. Tips: Dorong keberanian untuk ask for the sale dan menghadapi rejection.",
-    "salesStrength": "Empatik, kreatif, mampu membangun koneksi berdasarkan kebutuhan dan nilai customer.",
-    "salesRisk": "Cenderung menghindari situasi konfrontatif dan dapat terlalu idealis.",
-    "tipsKomunikasi": "Bicara dengan nada lembut dan personal. Dengarkan dengan baik dan bantu memberikan dorongan positif saat mengambil keputusan."
-  },
-  {
-    "kode": "SMB-014",
-    "nama": "Fuad Jaka Pamungkas",
-    "panggilan": "Jaka",
-    "disc": "I/D",
-    "mbti": "ENFP",
-    "kursi": 9,
-    "kamar": "412",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Komunikatif, cukup berani, terdorong memengaruhi orang lain.",
-    "commStyle": "Energetic, conversational, enthusiastic.",
-    "saran": "Energetic, conversational, enthusiastic.. Tips: Gunakan sales funnel, checklist dan follow-up discipline.",
-    "salesStrength": "Sangat komunikatif, enthusiastic, kreatif, mudah membangun networking dan persuasive.",
-    "salesRisk": "Mudah kehilangan fokus dan kurang konsisten dalam follow-up/detail.",
-    "tipsKomunikasi": "Bicara dengan semangat dan komunikatif. Bantu mengarahkan ide-ide kreatifnya ke dalam langkah eksekusi yang terstruktur."
-  },
-  {
-    "kode": "SMB-015",
-    "nama": "Dimas Wiyanarko",
-    "panggilan": "Dimas",
-    "disc": "C/S",
-    "mbti": "ISTJ",
-    "kursi": 10,
-    "kamar": "413",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Sangat kuat pada struktur, ketelitian, dan konsistensi.",
-    "commStyle": "Formal, jelas, faktual dan terstruktur.",
-    "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.",
-    "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.",
-    "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.",
-    "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi."
-  },
-  {
-    "kode": "SMB-022",
-    "nama": "I Gusti Putu Yaktianuraga",
-    "panggilan": "Bagus",
-    "disc": "D/I",
-    "mbti": "ENTJ",
-    "kursi": 11,
-    "kamar": "413",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tegas, ambisius, optimis, mandiri, suka tantangan, dan persuasive.",
-    "commStyle": "Direct, confident, strategic dan result-oriented.",
-    "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.",
-    "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.",
-    "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.",
-    "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi."
-  },
-  {
-    "kode": "SMB-012",
-    "nama": "Yulia Mekar Rini",
-    "panggilan": "Yulia",
-    "disc": "C/S",
-    "mbti": "ISTP",
-    "kursi": 12,
-    "kamar": "424",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Teliti, sistematis, hati-hati, membutuhkan kejelasan.",
-    "commStyle": "Direct, factual dan solution-oriented.",
-    "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.",
-    "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.",
-    "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.",
-    "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika."
-  },
-  {
-    "kode": "SMB-020",
-    "nama": "Gilang Risnantyo",
-    "panggilan": "Gilang",
-    "disc": "D/I",
-    "mbti": "ISTP",
-    "kursi": 13,
-    "kamar": "414",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Berorientasi hasil, tegas, proaktif, percaya diri, menyukai tantangan.",
-    "commStyle": "Direct, factual dan solution-oriented.",
-    "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.",
-    "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.",
-    "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis."
-  },
-  {
-    "kode": "SMB-019",
-    "nama": "Linda Susanto",
-    "panggilan": "Linda",
-    "disc": "S/C",
-    "mbti": "ISFJ",
-    "kursi": 14,
-    "kamar": "417",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tenang, stabil, kooperatif, menjaga hubungan, nyaman dengan struktur.",
-    "commStyle": "Warm, polite dan relationship-oriented.",
-    "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.",
-    "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.",
-    "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.",
-    "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang."
-  },
-  {
-    "kode": "SMB-005",
-    "nama": "Irvani Putri",
-    "panggilan": "Irvani",
-    "disc": "D/I",
-    "mbti": "ENFP",
-    "kursi": 15,
-    "kamar": "417",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Aktif, memiliki drive terhadap hasil, nyaman menyampaikan pendapat.",
-    "commStyle": "Energetic, friendly dan engaging.",
-    "saran": "Energetic, friendly dan engaging.. Tips: Berikan struktur pipeline management dan follow-up discipline.",
-    "salesStrength": "Persuasive, enthusiastic, kreatif dan kuat dalam membangun networking.",
-    "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif.",
-    "tipsKomunikasi": "Gunakan komunikasi yang energik dan bersahabat. Sampaikan target dengan jelas dan bantu menyusun alur kerja yang rapi."
-  },
-  {
-    "kode": "SMB-013",
-    "nama": "Ainur Hasanah",
-    "panggilan": "Ainur",
-    "disc": "I/C",
-    "mbti": "INFP",
-    "kursi": 16,
-    "kamar": "421",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Komunikatif/influential dengan perhatian terhadap detail.",
-    "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.",
-    "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.",
-    "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.",
-    "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.",
-    "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur."
-  },
-  {
-    "kode": "SMB-006",
-    "nama": "Mya Mar'atus Sholikhah",
-    "panggilan": "Mya",
-    "disc": "D/C",
-    "mbti": "ESFP",
-    "kursi": 17,
-    "kamar": "424",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Berorientasi hasil sekaligus memastikan pekerjaan dilakukan dengan baik.",
-    "commStyle": "Expressive, warm, engaging dan enthusiastic.",
-    "saran": "Expressive, warm, engaging dan enthusiastic.. Tips: Manfaatkan kekuatan interpersonalnya, sambil memperkuat planning dan follow-up discipline.",
-    "salesStrength": "Sociable, energik, friendly, spontan dan customer-oriented.",
-    "salesRisk": "Mudah terdistraksi dan dapat kurang konsisten dalam administrasi/follow-up.",
-    "tipsKomunikasi": "Bicara secara ekspresif, hangat, dan antusias. Apresiasi hasil kerjanya dan bantu menjaga konsistensi rencana kegiatan."
-  },
-  {
-    "kode": "SMB-017",
-    "nama": "Adiel Priyarama",
-    "panggilan": "Adiel",
-    "disc": "S/C",
-    "mbti": "ISTP",
-    "kursi": 18,
-    "kamar": "414",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Stabil, terstruktur, mempertimbangkan sesuatu sebelum bertindak.",
-    "commStyle": "Singkat, to the point, berbasis fakta dan solusi.",
-    "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.",
-    "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.",
-    "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung."
-  },
-  {
-    "kode": "SMB-009",
-    "nama": "Etik Andriyanti",
-    "panggilan": "Andri",
-    "disc": "D/I",
-    "mbti": "ESTP",
-    "kursi": 19,
-    "kamar": "423",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Action-oriented, berani mengambil keputusan, cukup komunikatif.",
-    "commStyle": "Direct, energetic, persuasive dan spontan.",
-    "saran": "Direct, energetic, persuasive dan spontan.. Tips: Tekankan listening before pitching dan pentingnya sales planning.",
-    "salesStrength": "Berani, energik, cepat mengambil tindakan, adaptif dan nyaman menghadapi situasi yang dinamis.",
-    "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail.",
-    "tipsKomunikasi": "Bicara secara spontan, energik, dan meyakinkan. Imbangi dengan kesabaran mendengarkan sebelum menyimpulkan."
-  },
-  {
-    "kode": "SMB-018",
-    "nama": "Kensrie Diah Ayuningtyas",
-    "panggilan": "Kensrie",
-    "disc": "D/C",
-    "mbti": "ESTP",
-    "kursi": 20,
-    "kamar": "416",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Balanced antara orientasi hasil dan kebutuhan kualitas/struktur.",
-    "commStyle": "Direct, spontaneous dan energetic.",
-    "saran": "Direct, spontaneous dan energetic.. Tips: Latih active listening, probing dan structured selling.",
-    "salesStrength": "Berani, cepat bertindak, confident, adaptif dan kompetitif.",
-    "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses.",
-    "tipsKomunikasi": "Bicara secara langsung, dinamis, dan energik. Sampaikan poin penting secara terstruktur dan dorong diskusi aktif."
-  }
+/* ---------------- Database Sesi 1 (U-Shape) ---------------- */
+const P1 = [
+  { "kode": "SMB-001", "nama": "I Gusti Ayu Ananda Putri", "panggilan": "Nanda", "disc": "D/I", "mbti": "ENFP", "kursi": 1, "kamar": "421", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Tegas, berorientasi hasil, berani mengambil keputusan, bergerak cepat.", "commStyle": "Friendly, enthusiastic dan expressive.", "saran": "Friendly, enthusiastic dan expressive.. Tips: Fokus pada discipline, sales planning dan follow-up.", "salesStrength": "Enerjik, kreatif, komunikatif dan mudah membangun koneksi dengan customer.", "salesRisk": "Bisa kehilangan fokus atau kurang konsisten dalam execution.", "tipsKomunikasi": "Sampaikan poin utama secara ramah dan antusias, beri ruang apresiasi atas idenya, lalu bantu menjaga disiplin tindak lanjut." },
+  { "kode": "SMB-016", "nama": "Sofyan Thohari", "panggilan": "Popan", "disc": "S", "mbti": "ISFP", "kursi": 2, "kamar": "425", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Tenang, kooperatif, sabar, menjaga hubungan baik.", "commStyle": "Calm, personal dan empathetic.", "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.", "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.", "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.", "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan." },
+  { "kode": "SMB-010", "nama": "Sri Wijayati", "panggilan": "Jay", "disc": "D/I", "mbti": "INFP", "kursi": 3, "kamar": "416", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Assertive dan influential; percaya diri menyampaikan pendapat dan mengejar hasil.", "commStyle": "Soft, personal dan consultative.", "saran": "Soft, personal dan consultative.. Tips: Dorong assertiveness, objection handling dan closing confidence.", "salesStrength": "Empatik, thoughtful, genuine dan mampu memahami perspektif customer.", "salesRisk": "Cenderung overthinking dan kurang nyaman menghadapi rejection atau konflik.", "tipsKomunikasi": "Bicara secara konsultatif dan apresiatif. Sampaikan ide secara percaya diri sambil mendengarkan masukannya secara empati." },
+  { "kode": "SMB-003", "nama": "Elfasa Khoirumansyah", "panggilan": "Elfasa", "disc": "I/S", "mbti": "ISFJ", "kursi": 4, "kamar": "425", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Komunikatif, approachable, kooperatif, nyaman membangun hubungan.", "commStyle": "Ramah, supportive dan personal.", "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.", "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.", "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.", "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi." },
+  { "kode": "SMB-008", "nama": "Maria Dita Fivtiari", "panggilan": "Dita", "disc": "D/C", "mbti": "INFP", "kursi": 5, "kamar": "415", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Kuat pada hasil, dengan perhatian terhadap standar dan kualitas.", "commStyle": "Personal, warm dan consultative.", "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.", "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.", "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.", "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja." },
+  { "kode": "SMB-007", "nama": "Okki Putri Fadilah", "panggilan": "Okki", "disc": "I/S", "mbti": "ESFJ", "kursi": 6, "kamar": "422", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Interpersonal-oriented, komunikatif, menjaga hubungan baik.", "commStyle": "Friendly, supportive dan engaging.", "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.", "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.", "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.", "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman." },
+  { "kode": "SMB-004", "nama": "Nindy Amalia", "panggilan": "Nindy", "disc": "D/I", "mbti": "ESTP", "kursi": 7, "kamar": "422", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Sangat berorientasi hasil, berani, kompetitif, dan persistent.", "commStyle": "Direct, energetic dan persuasive.", "saran": "Direct, energetic dan persuasive.. Tips: Fokus pada consultative questioning dan active listening.", "salesStrength": "Confident, competitive, action-oriented dan cepat mengambil keputusan.", "salesRisk": "Bisa terlalu cepat masuk ke solusi tanpa cukup menggali kebutuhan customer.", "tipsKomunikasi": "Bicara secara langsung, lugas, dan energik. Fokus pada solusi cepat dan ajak berdiskusi secara interaktif." },
+  { "kode": "SMB-011", "nama": "Paramitha Maharesmi Nugraheni Putri", "panggilan": "Mitha", "disc": "S/C", "mbti": "INFP", "kursi": 8, "kamar": "423", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Stabil, hati-hati, cukup terstruktur dan balanced.", "commStyle": "Soft, personal dan persuasive secara natural.", "saran": "Soft, personal dan persuasive secara natural.. Tips: Dorong keberanian untuk ask for the sale dan menghadapi rejection.", "salesStrength": "Empatik, kreatif, mampu membangun koneksi berdasarkan kebutuhan dan nilai customer.", "salesRisk": "Cenderung menghindari situasi konfrontatif dan dapat terlalu idealis.", "tipsKomunikasi": "Bicara dengan nada lembut dan personal. Dengarkan dengan baik dan bantu memberikan dorongan positif saat mengambil keputusan." },
+  { "kode": "SMB-014", "nama": "Fuad Jaka Pamungkas", "panggilan": "Jaka", "disc": "I/D", "mbti": "ENFP", "kursi": 9, "kamar": "412", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Komunikatif, cukup berani, terdorong memengaruhi orang lain.", "commStyle": "Energetic, conversational, enthusiastic.", "saran": "Energetic, conversational, enthusiastic.. Tips: Gunakan sales funnel, checklist dan follow-up discipline.", "salesStrength": "Sangat komunikatif, enthusiastic, kreatif, mudah membangun networking dan persuasive.", "salesRisk": "Mudah kehilangan fokus dan kurang konsisten dalam follow-up/detail.", "tipsKomunikasi": "Bicara dengan semangat dan komunikatif. Bantu mengarahkan ide-ide kreatifnya ke dalam langkah eksekusi yang terstruktur." },
+  { "kode": "SMB-015", "nama": "Dimas Wiyanarko", "panggilan": "Dimas", "disc": "C/S", "mbti": "ISTJ", "kursi": 10, "kamar": "413", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Sangat kuat pada struktur, ketelitian, dan konsistensi.", "commStyle": "Formal, jelas, faktual dan terstruktur.", "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.", "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.", "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.", "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi." },
+  { "kode": "SMB-022", "nama": "I Gusti Putu Yaktianuraga", "panggilan": "Bagus", "disc": "D/I", "mbti": "ENTJ", "kursi": 11, "kamar": "413", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Tegas, ambisius, optimis, mandiri, suka tantangan, dan persuasive.", "commStyle": "Direct, confident, strategic dan result-oriented.", "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.", "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.", "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.", "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi." },
+  { "kode": "SMB-012", "nama": "Yulia Mekar Rini", "panggilan": "Yulia", "disc": "C/S", "mbti": "ISTP", "kursi": 12, "kamar": "424", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Teliti, sistematis, hati-hati, membutuhkan kejelasan.", "commStyle": "Direct, factual dan solution-oriented.", "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.", "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.", "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.", "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika." },
+  { "kode": "SMB-020", "nama": "Gilang Risnantyo", "panggilan": "Gilang", "disc": "D/I", "mbti": "ISTP", "kursi": 13, "kamar": "414", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Berorientasi hasil, tegas, proaktif, percaya diri, menyukai tantangan.", "commStyle": "Direct, factual dan solution-oriented.", "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.", "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.", "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.", "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis." },
+  { "kode": "SMB-019", "nama": "Linda Susanto", "panggilan": "Linda", "disc": "S/C", "mbti": "ISFJ", "kursi": 14, "kamar": "417", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Tenang, stabil, kooperatif, menjaga hubungan, nyaman dengan struktur.", "commStyle": "Warm, polite dan relationship-oriented.", "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.", "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.", "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.", "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang." },
+  { "kode": "SMB-005", "nama": "Irvani Putri", "panggilan": "Irvani", "disc": "D/I", "mbti": "ENFP", "kursi": 15, "kamar": "417", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Aktif, memiliki drive terhadap hasil, nyaman menyampaikan pendapat.", "commStyle": "Energetic, friendly dan engaging.", "saran": "Energetic, friendly dan engaging.. Tips: Berikan struktur pipeline management dan follow-up discipline.", "salesStrength": "Persuasive, enthusiastic, kreatif dan kuat dalam membangun networking.", "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif.", "tipsKomunikasi": "Gunakan komunikasi yang energik dan bersahabat. Sampaikan target dengan jelas dan bantu menyusun alur kerja yang rapi." },
+  { "kode": "SMB-013", "nama": "Ainur Hasanah", "panggilan": "Ainur", "disc": "I/C", "mbti": "INFP", "kursi": 16, "kamar": "421", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Komunikatif/influential dengan perhatian terhadap detail.", "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.", "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.", "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.", "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.", "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur." },
+  { "kode": "SMB-006", "nama": "Mya Mar'atus Sholikhah", "panggilan": "Mya", "disc": "D/C", "mbti": "ESFP", "kursi": 17, "kamar": "424", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Berorientasi hasil sekaligus memastikan pekerjaan dilakukan dengan baik.", "commStyle": "Expressive, warm, engaging dan enthusiastic.", "saran": "Expressive, warm, engaging dan enthusiastic.. Tips: Manfaatkan kekuatan interpersonalnya, sambil memperkuat planning dan follow-up discipline.", "salesStrength": "Sociable, energik, friendly, spontan dan customer-oriented.", "salesRisk": "Mudah terdistraksi dan dapat kurang konsisten dalam administrasi/follow-up.", "tipsKomunikasi": "Bicara secara ekspresif, hangat, dan antusias. Apresiasi hasil kerjanya dan bantu menjaga konsistensi rencana kegiatan." },
+  { "kode": "SMB-017", "nama": "Adiel Priyarama", "panggilan": "Adiel", "disc": "S/C", "mbti": "ISTP", "kursi": 18, "kamar": "414", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Stabil, terstruktur, mempertimbangkan sesuatu sebelum bertindak.", "commStyle": "Singkat, to the point, berbasis fakta dan solusi.", "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.", "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.", "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.", "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung." },
+  { "kode": "SMB-009", "nama": "Etik Andriyanti", "panggilan": "Andri", "disc": "D/I", "mbti": "ESTP", "kursi": 19, "kamar": "423", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Action-oriented, berani mengambil keputusan, cukup komunikatif.", "commStyle": "Direct, energetic, persuasive dan spontan.", "saran": "Direct, energetic, persuasive dan spontan.. Tips: Tekankan listening before pitching dan pentingnya sales planning.", "salesStrength": "Berani, energik, cepat mengambil tindakan, adaptif dan nyaman menghadapi situasi yang dinamis.", "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail.", "tipsKomunikasi": "Bicara secara spontan, energik, dan meyakinkan. Imbangi dengan kesabaran mendengarkan sebelum menyimpulkan." },
+  { "kode": "SMB-018", "nama": "Kensrie Diah Ayuningtyas", "panggilan": "Kensrie", "disc": "D/C", "mbti": "ESTP", "kursi": 20, "kamar": "416", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Balanced antara orientasi hasil dan kebutuhan kualitas/struktur.", "commStyle": "Direct, spontaneous dan energetic.", "saran": "Direct, spontaneous dan energetic.. Tips: Latih active listening, probing dan structured selling.", "salesStrength": "Berani, cepat bertindak, confident, adaptif dan kompetitif.", "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses.", "tipsKomunikasi": "Bicara secara langsung, dinamis, dan energik. Sampaikan poin penting secara terstruktur dan dorong diskusi aktif." }
+];
+
+/* ---------------- Database Sesi 2 (Grid 5x5) ---------------- */
+const P2 = [
+  { "kode": "SMB-001", "nama": "I Gusti Ayu Ananda Putri", "panggilan": "Nanda", "disc": "D/I", "mbti": "ENFP", "kursi": 1, "kamar": "421", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Tegas, berorientasi hasil, berani mengambil keputusan, bergerak cepat.", "commStyle": "Friendly, enthusiastic dan expressive.", "saran": "Friendly, enthusiastic dan expressive.. Tips: Fokus pada discipline, sales planning dan follow-up.", "salesStrength": "Enerjik, kreatif, komunikatif dan mudah membangun koneksi dengan customer.", "salesRisk": "Bisa kehilangan fokus atau kurang konsisten dalam execution.", "tipsKomunikasi": "Sampaikan poin utama secara ramah dan antusias, beri ruang apresiasi atas idenya, lalu bantu menjaga disiplin tindak lanjut." },
+  { "kode": "SMB-015", "nama": "Dimas Wiyanarko", "panggilan": "Dimas", "disc": "C/S", "mbti": "ISTJ", "kursi": 2, "kamar": "413", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Sangat kuat pada struktur, ketelitian, dan konsistensi.", "commStyle": "Formal, jelas, faktual dan terstruktur.", "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.", "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.", "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.", "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi." },
+  { "kode": "SMB-A01", "nama": "Ailesh 1", "panggilan": "Ailesh 1", "disc": "profil menyusul", "mbti": "-", "kursi": 3, "kamar": "-", "gender": "-", "peran": "Tamu / Participant", "karakter": "Profil peserta menyusul.", "commStyle": "Profesional", "saran": "Menunggu pembaruan profil.", "salesStrength": "-", "salesRisk": "-", "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik." },
+  { "kode": "SMB-A02", "nama": "Ailesh 2", "panggilan": "Ailesh 2", "disc": "profil menyusul", "mbti": "-", "kursi": 4, "kamar": "-", "gender": "-", "peran": "Tamu / Participant", "karakter": "Profil peserta menyusul.", "commStyle": "Profesional", "saran": "Menunggu pembaruan profil.", "salesStrength": "-", "salesRisk": "-", "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik." },
+  { "kode": "SMB-A03", "nama": "Ailesh 3", "panggilan": "Ailesh 3", "disc": "profil menyusul", "mbti": "-", "kursi": 5, "kamar": "-", "gender": "-", "peran": "Tamu / Participant", "karakter": "Profil peserta menyusul.", "commStyle": "Profesional", "saran": "Menunggu pembaruan profil.", "salesStrength": "-", "salesRisk": "-", "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik." },
+
+  { "kode": "SMB-010", "nama": "Sri Wijayati", "panggilan": "Jay", "disc": "D/I", "mbti": "INFP", "kursi": 6, "kamar": "416", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Assertive dan influential; percaya diri menyampaikan pendapat dan mengejar hasil.", "commStyle": "Soft, personal dan consultative.", "saran": "Soft, personal dan consultative.. Tips: Dorong assertiveness, objection handling dan closing confidence.", "salesStrength": "Empatik, thoughtful, genuine dan mampu memahami perspektif customer.", "salesRisk": "Cenderung overthinking dan kurang nyaman menghadapi rejection atau konflik.", "tipsKomunikasi": "Bicara secara konsultatif dan apresiatif. Sampaikan ide secara percaya diri sambil mendengarkan masukannya secara empati." },
+  { "kode": "SMB-019", "nama": "Linda Susanto", "panggilan": "Linda", "disc": "S/C", "mbti": "ISFJ", "kursi": 7, "kamar": "417", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Tenang, stabil, kooperatif, menjaga hubungan, nyaman dengan struktur.", "commStyle": "Warm, polite dan relationship-oriented.", "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.", "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.", "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.", "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang." },
+  { "kode": "SMB-004", "nama": "Nindy Amalia", "panggilan": "Nindy", "disc": "D/I", "mbti": "ESTP", "kursi": 8, "kamar": "422", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Sangat berorientasi hasil, berani, kompetitif, dan persistent.", "commStyle": "Direct, energetic dan persuasive.", "saran": "Direct, energetic dan persuasive.. Tips: Fokus pada consultative questioning dan active listening.", "salesStrength": "Confident, competitive, action-oriented dan cepat mengambil keputusan.", "salesRisk": "Bisa terlalu cepat masuk ke solusi tanpa cukup menggali kebutuhan customer.", "tipsKomunikasi": "Bicara secara langsung, lugas, dan energik. Fokus pada solusi cepat dan ajak berdiskusi secara interaktif." },
+  { "kode": "SMB-011", "nama": "Paramitha Maharesmi Nugraheni Putri", "panggilan": "Mitha", "disc": "S/C", "mbti": "INFP", "kursi": 9, "kamar": "423", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Stabil, hati-hati, cukup terstruktur dan balanced.", "commStyle": "Soft, personal dan persuasive secara natural.", "saran": "Soft, personal dan persuasive secara natural.. Tips: Dorong keberanian untuk ask for the sale dan menghadapi rejection.", "salesStrength": "Empatik, kreatif, mampu membangun koneksi berdasarkan kebutuhan dan nilai customer.", "salesRisk": "Cenderung menghindari situasi konfrontatif dan dapat terlalu idealis.", "tipsKomunikasi": "Bicara dengan nada lembut dan personal. Dengarkan dengan baik dan bantu memberikan dorongan positif saat mengambil keputusan." },
+  { "kode": "SMB-020", "nama": "Gilang Risnantyo", "panggilan": "Gilang", "disc": "D/I", "mbti": "ISTP", "kursi": 10, "kamar": "414", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Berorientasi hasil, tegas, proaktif, percaya diri, menyukai tantangan.", "commStyle": "Direct, factual dan solution-oriented.", "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.", "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.", "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.", "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis." },
+
+  { "kode": "SMB-008", "nama": "Maria Dita Fivtiari", "panggilan": "Dita", "disc": "D/C", "mbti": "INFP", "kursi": 11, "kamar": "415", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Kuat pada hasil, dengan perhatian terhadap standar dan kualitas.", "commStyle": "Personal, warm dan consultative.", "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.", "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.", "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.", "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja." },
+  { "kode": "SMB-FADLI", "nama": "Fadli Fahmi Ali", "panggilan": "Fadli", "disc": "S", "mbti": "Trainer", "kursi": 12, "kamar": "-", "gender": "Laki-laki", "peran": "Lead Trainer & Facilitator", "karakter": "Menginspirasi, terstruktur, empati tinggi dan berorientasi pada pengembangan peserta.", "commStyle": "Clear, engaging, supportive", "saran": "Lead Trainer Sesi Sales Mastery Bootcamp.", "salesStrength": "Mastery dalam Sandler Selling System, fasilitator berpengalaman.", "salesRisk": "-", "tipsKomunikasi": "Komunikasi aktif dan responsif dalam diskusi sesi bootcamp." },
+  { "kode": "SMB-014", "nama": "Fuad Jaka Pamungkas", "panggilan": "Jaka", "disc": "I/D", "mbti": "ENFP", "kursi": 13, "kamar": "412", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Komunikatif, cukup berani, terdorong memengaruhi orang lain.", "commStyle": "Energetic, conversational, enthusiastic.", "saran": "Energetic, conversational, enthusiastic.. Tips: Gunakan sales funnel, checklist dan follow-up discipline.", "salesStrength": "Sangat komunikatif, enthusiastic, kreatif, mudah membangun networking dan persuasive.", "salesRisk": "Mudah kehilangan fokus dan kurang konsisten dalam follow-up/detail.", "tipsKomunikasi": "Bicara dengan semangat dan komunikatif. Bantu mengarahkan ide-ide kreatifnya ke dalam langkah eksekusi yang terstruktur." },
+  { "kode": "SMB-017", "nama": "Adiel Priyarama", "panggilan": "Adiel", "disc": "S/C", "mbti": "ISTP", "kursi": 14, "kamar": "414", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Stabil, terstruktur, mempertimbangkan sesuatu sebelum bertindak.", "commStyle": "Singkat, to the point, berbasis fakta dan solusi.", "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.", "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.", "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.", "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung." },
+  { "kode": "SMB-005", "nama": "Irvani Putri", "panggilan": "Irvani", "disc": "D/I", "mbti": "ENFP", "kursi": 15, "kamar": "417", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Aktif, memiliki drive terhadap hasil, nyaman menyampaikan pendapat.", "commStyle": "Energetic, friendly dan engaging.", "saran": "Energetic, friendly dan engaging.. Tips: Berikan struktur pipeline management dan follow-up discipline.", "salesStrength": "Persuasive, enthusiastic, kreatif dan kuat dalam membangun networking.", "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif.", "tipsKomunikasi": "Gunakan komunikasi yang energik dan bersahabat. Sampaikan target dengan jelas dan bantu menyusun alur kerja yang rapi." },
+
+  { "kode": "SMB-006", "nama": "Mya Mar'atus Sholikhah", "panggilan": "Mya", "disc": "D/C", "mbti": "ESFP", "kursi": 16, "kamar": "424", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Berorientasi hasil sekaligus memastikan pekerjaan dilakukan dengan baik.", "commStyle": "Expressive, warm, engaging dan enthusiastic.", "saran": "Expressive, warm, engaging dan enthusiastic.. Tips: Manfaatkan kekuatan interpersonalnya, sambil memperkuat planning dan follow-up discipline.", "salesStrength": "Sociable, energik, friendly, spontan dan customer-oriented.", "salesRisk": "Mudah terdistraksi dan dapat kurang konsisten dalam administrasi/follow-up.", "tipsKomunikasi": "Bicara secara ekspresif, hangat, dan antusias. Apresiasi hasil kerjanya dan bantu menjaga konsistensi rencana kegiatan." },
+  { "kode": "SMB-016", "nama": "Sofyan Thohari", "panggilan": "Popan", "disc": "S", "mbti": "ISFP", "kursi": 17, "kamar": "425", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Tenang, kooperatif, sabar, menjaga hubungan baik.", "commStyle": "Calm, personal dan empathetic.", "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.", "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.", "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.", "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan." },
+  { "kode": "SMB-009", "nama": "Etik Andriyanti", "panggilan": "Andri", "disc": "D/I", "mbti": "ESTP", "kursi": 18, "kamar": "423", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Action-oriented, berani mengambil keputusan, cukup komunikatif.", "commStyle": "Direct, energetic, persuasive dan spontan.", "saran": "Direct, energetic, persuasive dan spontan.. Tips: Tekankan listening before pitching dan pentingnya sales planning.", "salesStrength": "Berani, energik, cepat mengambil tindakan, adaptif dan nyaman menghadapi situasi yang dinamis.", "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail.", "tipsKomunikasi": "Bicara secara spontan, energik, dan meyakinkan. Imbangi dengan kesabaran mendengarkan sebelum menyimpulkan." },
+  { "kode": "SMB-003", "nama": "Elfasa Khoirumansyah", "panggilan": "Elfasa", "disc": "I/S", "mbti": "ISFJ", "kursi": 19, "kamar": "425", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Komunikatif, approachable, kooperatif, nyaman membangun hubungan.", "commStyle": "Ramah, supportive dan personal.", "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.", "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.", "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.", "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi." },
+  { "kode": "SMB-018", "nama": "Kensrie Diah Ayuningtyas", "panggilan": "Kensrie", "disc": "D/C", "mbti": "ESTP", "kursi": 20, "kamar": "416", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Balanced antara orientasi hasil dan kebutuhan kualitas/struktur.", "commStyle": "Direct, spontaneous dan energetic.", "saran": "Direct, spontaneous dan energetic.. Tips: Latih active listening, probing dan structured selling.", "salesStrength": "Berani, cepat bertindak, confident, adaptif dan kompetitif.", "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses.", "tipsKomunikasi": "Bicara secara langsung, dinamis, dan energik. Sampaikan poin penting secara terstruktur dan dorong diskusi aktif." },
+
+  { "kode": "SMB-013", "nama": "Ainur Hasanah", "panggilan": "Ainur", "disc": "I/C", "mbti": "INFP", "kursi": 21, "kamar": "421", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Komunikatif/influential dengan perhatian terhadap detail.", "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.", "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.", "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.", "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.", "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur." },
+  { "kode": "SMB-CAD01", "nama": "Cadangan", "panggilan": "cadangan", "disc": "cadangan", "mbti": "-", "kursi": 22, "kamar": "-", "gender": "-", "peran": "Kursi Cadangan", "karakter": "Kursi cadangan tambahan peserta.", "commStyle": "-", "saran": "-", "salesStrength": "-", "salesRisk": "-", "tipsKomunikasi": "-" },
+  { "kode": "SMB-007", "nama": "Okki Putri Fadilah", "panggilan": "Okki", "disc": "I/S", "mbti": "ESFJ", "kursi": 23, "kamar": "422", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Interpersonal-oriented, komunikatif, menjaga hubungan baik.", "commStyle": "Friendly, supportive dan engaging.", "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.", "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.", "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.", "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman." },
+  { "kode": "SMB-022", "nama": "I Gusti Putu Yaktianuraga", "panggilan": "Bagus", "disc": "D/I", "mbti": "ENTJ", "kursi": 24, "kamar": "413", "gender": "Laki-laki", "peran": "Peserta Bootcamp", "karakter": "Tegas, ambisius, optimis, mandiri, suka tantangan, dan persuasive.", "commStyle": "Direct, confident, strategic dan result-oriented.", "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.", "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.", "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.", "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi." },
+  { "kode": "SMB-012", "nama": "Yulia Mekar Rini", "panggilan": "Yulia", "disc": "C/S", "mbti": "ISTP", "kursi": 25, "kamar": "424", "gender": "Perempuan", "peran": "Peserta Bootcamp", "karakter": "Teliti, sistematis, hati-hati, membutuhkan kejelasan.", "commStyle": "Direct, factual dan solution-oriented.", "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.", "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.", "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.", "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika." }
 ];
 
 const DISC = {
-  "D": "Dominance",
-  "I": "Influencing",
-  "S": "Steadiness",
-  "C": "Conscientiousness",
-  "D/I": "Dominant - Influential",
-  "I/D": "Influential - Dominant",
-  "D/C": "Dominant - Conscientious",
-  "D/C - Balanced": "Dominant - Conscientious",
-  "I/S": "Influential - Steady",
-  "S/C": "Steady - Conscientious",
-  "C/S": "Conscientious - Steady",
-  "I/C": "Influential - Conscientious"
+  "D": "Dominance", "I": "Influencing", "S": "Steadiness", "C": "Conscientiousness",
+  "D/I": "Dominant - Influential", "I/D": "Influential - Dominant", "D/C": "Dominant - Conscientious",
+  "I/S": "Influential - Steady", "S/C": "Steady - Conscientious", "C/S": "Conscientious - Steady", "I/C": "Influential - Conscientious",
+  "profil menyusul": "Profil Menyusul", "cadangan": "Cadangan"
 };
 
-function denah(sorot) {
+const S = {
+  sesi: 1, // 1 (U-Shape) or 2 (Grid 5x5)
+  view: "form",
+  pDipilih: null,
+  pesan: null
+};
+
+function getActivePList() {
+  return S.sesi === 2 ? P2 : P1;
+}
+
+function getHadirSet() {
+  const set = new Set();
+  try {
+    const key = S.sesi === 2 ? "smb_hadir_grid" : "smb_hadir";
+    const raw = localStorage.getItem(key) || localStorage.getItem("smb_hadir");
+    if (raw) {
+      const arr = JSON.parse(raw);
+      arr.forEach(k => set.add(k));
+    }
+  } catch(e){}
+  return set;
+}
+
+function getDiscColorCls(disc) {
+  const d = String(disc || "").toUpperCase();
+  if (d.includes("PROFIL MENYUSUL") || d.includes("CADANGAN")) return "disc-neutral";
+  if (d.startsWith("D")) return "disc-D";
+  if (d.startsWith("I")) return "disc-I";
+  if (d.startsWith("C")) return "disc-C";
+  if (d.startsWith("S")) return "disc-S";
+  return "disc-neutral";
+}
+
+/* ---------------- Render Denah U-Shape SVG ---------------- */
+function denahUShape(sorot) {
   const hadirSet = getHadirSet();
+  const P_SESI = getActivePList();
+  const orgLocal = k => P_SESI.find(p => p.kursi === k);
+
   const coords = [
-    { n: 1, x: 124, y: 55, rot: 0 },
-    { n: 2, x: 124, y: 92, rot: 0 },
-    { n: 3, x: 124, y: 129, rot: 0 },
-    { n: 4, x: 124, y: 166, rot: 0 },
-    { n: 5, x: 124, y: 203, rot: 0 },
-    { n: 6, x: 124, y: 240, rot: 0 },
-    { n: 7, x: 124, y: 277, rot: 0 },
-    { n: 8, x: 124, y: 314, rot: 0 },
-    { n: 9, x: 188, y: 380, rot: 0 },
-    { n: 10, x: 232, y: 380, rot: 0 },
-    { n: 11, x: 276, y: 380, rot: 0 },
-    { n: 12, x: 320, y: 380, rot: 0 },
-    { n: 13, x: 388, y: 55, rot: 0 },
-    { n: 14, x: 388, y: 92, rot: 0 },
-    { n: 15, x: 388, y: 129, rot: 0 },
-    { n: 16, x: 388, y: 166, rot: 0 },
-    { n: 17, x: 388, y: 203, rot: 0 },
-    { n: 18, x: 388, y: 240, rot: 0 },
-    { n: 19, x: 388, y: 277, rot: 0 },
-    { n: 20, x: 388, y: 314, rot: 0 }
+    { n: 1, x: 124, y: 55 }, { n: 2, x: 124, y: 92 }, { n: 3, x: 124, y: 129 }, { n: 4, x: 124, y: 166 },
+    { n: 5, x: 124, y: 203 }, { n: 6, x: 124, y: 240 }, { n: 7, x: 124, y: 277 }, { n: 8, x: 124, y: 314 },
+    { n: 9, x: 188, y: 380 }, { n: 10, x: 232, y: 380 }, { n: 11, x: 276, y: 380 }, { n: 12, x: 320, y: 380 },
+    { n: 13, x: 388, y: 55 }, { n: 14, x: 388, y: 92 }, { n: 15, x: 388, y: 129 }, { n: 16, x: 388, y: 166 },
+    { n: 17, x: 388, y: 203 }, { n: 18, x: 388, y: 240 }, { n: 19, x: 388, y: 277 }, { n: 20, x: 388, y: 314 }
   ];
 
   const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
 
   const svgSeats = sortedCoords.map(item => {
     const n = item.n;
-    const p = org(n);
+    const p = orgLocal(n);
     const aku = n === sorot;
     const isi = p && hadirSet.has(p.kode);
     const pNama = p ? esc(p.panggilan) : "";
@@ -654,17 +377,7 @@ function denah(sorot) {
     if (aku) cls += "me ";
     else if (isi) cls += "filled ";
 
-    function getDiscColorCls(disc) {
-      const d = String(disc || "").toUpperCase();
-      if (d.startsWith("D")) return "disc-D";
-      if (d.startsWith("I")) return "disc-I";
-      if (d.startsWith("C")) return "disc-C";
-      if (d.startsWith("S")) return "disc-S";
-      return "disc-neutral";
-    }
-
     const discCls = getDiscColorCls(pDisc);
-
     let nameTagSvg = "";
     if (n <= 8) {
       nameTagSvg = `
@@ -699,7 +412,6 @@ function denah(sorot) {
             <circle cx="0" cy="-12" r="2.2" fill="#FFFFFF" />
           </g>
         ` : ""}
-        <title>Kursi #${n}: ${p ? esc(p.nama) + ' (' + p.disc + ')' : 'Kosong'}</title>
       </g>
     `;
   }).join("");
@@ -709,7 +421,6 @@ function denah(sorot) {
     <div class="map-svg-wrap">
       <svg viewBox="20 30 500 425" width="100%" height="100%" style="width:100%; height:100%; max-height:220px; object-fit:contain; display:block; margin: 0 auto;">
         <g>
-          <!-- Wooden U-Shape Table Graphic -->
           <polygon points="160,40 200,40 200,345 340,345 340,40 380,40 380,375 160,375" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
           <polyline points="160,40 160,375 380,375 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
         </g>
@@ -717,6 +428,70 @@ function denah(sorot) {
       </svg>
     </div>
   </div>`;
+}
+
+/* ---------------- Render Denah Grid 5x5 ---------------- */
+function denahGrid(sorot) {
+  const hadirSet = getHadirSet();
+  const P_SESI = getActivePList();
+
+  const cardsHtml = P_SESI.map(p => {
+    const k = p.kursi;
+    const aku = k === sorot;
+    const isHadir = hadirSet.has(p.kode);
+    const discCls = getDiscColorCls(p.disc);
+
+    let cls = `grid-card ${discCls} `;
+    if (aku) cls += "me ";
+    if (isHadir) cls += "filled ";
+
+    return `
+      <div class="${cls}">
+        ${isHadir ? `<div class="card-hadir-badge">&#10003;</div>` : ""}
+        <div class="card-top-num">${k}</div>
+        <div class="card-name">${esc(p.panggilan)}</div>
+        <div class="card-disc">${esc(p.disc)}</div>
+      </div>
+    `;
+  }).join("");
+
+  return `<div class="map-card-box">
+    <div class="stage-tag">PANGGUNG · LAYAR · WHITEBOARD</div>
+    <div class="seating-grid-mobile">
+      ${cardsHtml}
+    </div>
+  </div>`;
+}
+
+function denah(sorot) {
+  return S.sesi === 2 ? denahGrid(sorot) : denahUShape(sorot);
+}
+
+function sisi(n) {
+  if (S.sesi === 2) {
+    const row = Math.ceil(n / 5);
+    const col = ((n - 1) % 5) + 1;
+    return `Baris ke-${row}, Kolom ke-${col} (Kursi #${n})`;
+  }
+  return n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
+    : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
+    : "Sisi Kanan Meja U (Kursi #" + n + ")";
+}
+
+function tetangga(kursi) {
+  const P_SESI = getActivePList();
+  const orgLocal = k => P_SESI.find(p => p.kursi === k);
+  if (S.sesi === 2) {
+    const col = (kursi - 1) % 5;
+    return {
+      kiri: col > 0 ? orgLocal(kursi - 1) : null,
+      kanan: col < 4 ? orgLocal(kursi + 1) : null
+    };
+  }
+  return {
+    kiri: kursi > 1 ? orgLocal(kursi - 1) : null,
+    kanan: kursi < 20 ? orgLocal(kursi + 1) : null
+  };
 }
 
 async function cetakGambarTiket(namaPeserta = "Peserta", selector = "#app") {
@@ -745,7 +520,7 @@ async function cetakGambarTiket(namaPeserta = "Peserta", selector = "#app") {
       const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       const safeName = namaPeserta.replace(/[^a-zA-Z0-9]/g, "_");
-      a.download = `Tiket_Bootcamp_${safeName}.png`;
+      a.download = `Tiket_Bootcamp_Sesi${S.sesi}_${safeName}.png`;
       a.href = dataUrl;
       document.body.appendChild(a);
       a.click();
@@ -768,48 +543,25 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
 
-const org = k => P.find(p => p.kursi === k);
-const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
-  : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
-  : "Sisi Kanan Meja U (Kursi #" + n + ")";
-
-function tetangga(kursi) {
-  return {
-    kiri: kursi > 1 ? org(kursi - 1) : null,
-    kanan: kursi < 20 ? org(kursi + 1) : null
-  };
-}
-
-function getHadirSet() {
-  const set = new Set();
-  try {
-    const raw = localStorage.getItem("smb_hadir");
-    if (raw) {
-      const arr = JSON.parse(raw);
-      arr.forEach(k => set.add(k));
-    }
-  } catch(e){}
-  return set;
-}
-
-const S = {
-  view: "form", // "form", "success", "ticket"
-  pDipilih: null,
-  pesan: null
-};
-
-/* Load stored presensi or initial query param */
 function init() {
   const params = new URLSearchParams(window.location.search);
+  const sesiParam = params.get("sesi");
+  if (sesiParam === "2" || sesiParam === "grid") {
+    S.sesi = 2;
+  } else {
+    S.sesi = 1;
+  }
+
   const kode = params.get("kode");
+  const P_SESI = getActivePList();
   if (kode) {
-    const found = P.find(x => x.kode === kode.toUpperCase());
+    const found = P_SESI.find(x => x.kode === kode.toUpperCase());
     if (found) S.pDipilih = found;
   } else {
     try {
       const myCode = localStorage.getItem("smb_my_code");
       if (myCode) {
-        const found = P.find(x => x.kode === myCode);
+        const found = P_SESI.find(x => x.kode === myCode);
         if (found) {
           S.pDipilih = found;
           S.view = "ticket";
@@ -822,15 +574,20 @@ function init() {
 
 function simpanPresensi(p) {
   if (!p || !p.kode) return;
+  
+  // Save to Sesi 1 or Sesi 2 storage
+  const storageKey = S.sesi === 2 ? "smb_hadir_grid" : "smb_hadir";
   let hadirArr = [];
   try {
-    const raw = localStorage.getItem("smb_hadir");
+    const raw = localStorage.getItem(storageKey);
     if (raw) hadirArr = JSON.parse(raw);
   } catch(e){}
+
   if (!hadirArr.includes(p.kode)) {
     hadirArr.push(p.kode);
     try {
-      localStorage.setItem("smb_hadir", JSON.stringify(hadirArr));
+      localStorage.setItem(storageKey, JSON.stringify(hadirArr));
+      localStorage.setItem("smb_hadir", JSON.stringify(hadirArr)); // sync global
     } catch(e){}
   }
 
@@ -842,26 +599,44 @@ function simpanPresensi(p) {
   fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ action: "checkin", kode: p.kode, timestamp: Date.now() })
+    body: JSON.stringify({ action: "checkin", kode: p.kode, sesi: S.sesi, timestamp: Date.now() })
   }).catch(() => {});
+}
+
+function switchSesi(newSesi) {
+  if (S.sesi === newSesi) return;
+  S.sesi = newSesi;
+  S.pDipilih = null;
+  S.view = "form";
+  render();
 }
 
 function render() {
   const container = $("#app");
+  const P_SESI = getActivePList();
+
+  const sessionSwitcherHtml = `
+    <div class="session-tab-wrap">
+      <div class="session-tab-btn ${S.sesi === 1 ? 'active' : ''}" data-switch-sesi="1">Sesi 1 (U-Shape)</div>
+      <div class="session-tab-btn ${S.sesi === 2 ? 'active' : ''}" data-switch-sesi="2">Sesi 2 (Grid 5x5)</div>
+    </div>
+  `;
+
   if (S.view === "form") {
     container.innerHTML = `
       <div class="mobile-head">
         <div class="badge-top">SALES MASTERY BOOTCAMP</div>
         <h1>Form Presensi Peserta</h1>
-        <p>Kalyana Resort Kaliurang · 8–10 Sep 2026</p>
+        <p>${S.sesi === 2 ? 'Sesi 2: Classroom Grid Layout 5x5' : 'Sesi 1: U-Shape Layout'} · Kalyana Resort</p>
+        ${sessionSwitcherHtml}
       </div>
       <div class="mobile-body">
         <div style="display:flex; flex-direction:column; gap:16px;">
           <div class="form-group">
-            <label>Pilih Nama Peserta</label>
+            <label>Pilih Nama Peserta (${S.sesi === 2 ? 'Sesi 2 Grid' : 'Sesi 1 U-Shape'})</label>
             <select class="form-select" id="select-peserta">
               <option value="">-- Pilih Nama Anda dari Daftar --</option>
-              ${P.map(p => `<option value="${p.kode}" ${S.pDipilih && S.pDipilih.kode === p.kode ? 'selected' : ''}>${esc(p.nama)} (${p.kode})</option>`).join("")}
+              ${P_SESI.map(p => `<option value="${p.kode}" ${S.pDipilih && S.pDipilih.kode === p.kode ? 'selected' : ''}>${esc(p.nama)} (${p.kode})</option>`).join("")}
             </select>
           </div>
 
@@ -882,7 +657,7 @@ function render() {
         </div>
 
         <button class="btn-submit" id="btn-submit-presensi" type="button">
-          Konfirmasi Presensi Mandiri
+          Konfirmasi Presensi Mandiri (${S.sesi === 2 ? 'Sesi 2' : 'Sesi 1'})
         </button>
 
         <button id="btn-reset-checkin-global" style="margin-top:14px; background:transparent; border:1px dashed var(--line); color:var(--ink-3); padding:8px 12px; border-radius:8px; font-size:12px; width:100%; cursor:pointer;">
@@ -895,7 +670,8 @@ function render() {
       <div class="mobile-head">
         <div class="badge-top">SISTEM PRESENSI TERAKREDITASI</div>
         <h1>Check-in Sukses!</h1>
-        <p>Data presensi tersinkronisasi ke Layar Kiosk</p>
+        <p>Data presensi tersinkronisasi ke Layar Kiosk ${S.sesi === 2 ? 'Grid 5x5' : 'U-Shape'}</p>
+        ${sessionSwitcherHtml}
       </div>
       <div class="mobile-body">
         <div class="success-box">
@@ -905,7 +681,7 @@ function render() {
             </svg>
           </div>
           <h2>Presensi Berhasil</h2>
-          <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di meja U-Shape telah disiapkan.</p>
+          <p>Selamat datang <b>${esc(S.pDipilih.nama)}</b>!<br>Nomor kursi Anda di ${S.sesi === 2 ? 'Denah Grid 5x5' : 'Meja U-Shape'} telah disiapkan.</p>
           <button class="btn-submit" id="btn-buka-tiket">Buka Tiket Digital &amp; Nomor Kursi</button>
         </div>
       </div>
@@ -922,26 +698,27 @@ function render() {
       </div>` : `
       <div class="nb-box">
         <div class="lbl"><span>${lbl}</span><span>—</span></div>
-        <b style="color:var(--ink-3)">Ujung Meja Utama</b>
+        <b style="color:var(--ink-3)">Ujung Baris Tempat Duduk</b>
       </div>`;
 
     container.innerHTML = `
       <div class="mobile-head">
-        <div class="badge-top">E-TICKET &amp; SEAT PASS</div>
+        <div class="badge-top">E-TICKET &amp; SEAT PASS — SESI ${S.sesi}</div>
         <h1>${esc(p.nama)}</h1>
-        <p>${esc(p.peran)} · Werkudara Group</p>
+        <p>${esc(p.peran)} · Sales Mastery Bootcamp</p>
+        ${sessionSwitcherHtml}
       </div>
       <div class="mobile-body">
         <div class="hero-seat-card">
           <div class="num">${p.kursi}</div>
           <div class="desc">
             <b>${sisi(p.kursi)}</b>
-            <span>Tersambung langsung dengan Layar Denah Kiosk U-Shape</span>
+            <span>Tersambung langsung dengan Layar Kiosk ${S.sesi === 2 ? 'Grid 5x5' : 'U-Shape'}</span>
           </div>
         </div>
 
         <div>
-          <div class="sec-lbl">DENAH LOKASI KURSI (POSSI DUDUK)</div>
+          <div class="sec-lbl">DENAH LOKASI KURSI (${S.sesi === 2 ? 'GRID 5X5 CLASSROOM' : 'U-SHAPE'})</div>
           ${denah(p.kursi)}
         </div>
 
@@ -953,14 +730,14 @@ function render() {
           </div>
         </div>
 
-        ${t.kiri || t.kanan ? `<div class="tip-card">
+        ${(t.kiri && t.kiri.tipsKomunikasi !== "-") || (t.kanan && t.kanan.tipsKomunikasi !== "-") ? `<div class="tip-card">
           <b>Tips Cara Berkomunikasi:</b><br>
-          ${t.kiri ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
-          ${t.kanan ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
+          ${t.kiri && t.kiri.tipsKomunikasi !== "-" ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
+          ${t.kanan && t.kanan.tipsKomunikasi !== "-" ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
         </div>` : ""}
 
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <div class="verified-badge">Terverifikasi Hadir (Sistem Presensi Digital)</div>
+          <div class="verified-badge">Terverifikasi Hadir (Sesi ${S.sesi} Presensi)</div>
           <button class="btn-submit" id="btn-cetak-tiket" style="background:var(--ok); margin-top:4px;">
             Unduh Tiket sebagai Gambar (PNG)
           </button>
@@ -971,11 +748,17 @@ function render() {
   }
 
   // Bind Events
+  document.querySelectorAll("[data-switch-sesi]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      switchSesi(parseInt(btn.dataset.switchSesi, 10));
+    });
+  });
+
   const sel = $("#select-peserta");
   if (sel) {
     sel.addEventListener("change", e => {
       const code = e.target.value;
-      S.pDipilih = P.find(x => x.kode === code) || null;
+      S.pDipilih = P_SESI.find(x => x.kode === code) || null;
       render();
     });
   }
@@ -985,7 +768,7 @@ function render() {
     btnSub.addEventListener("click", (e) => {
       e.preventDefault();
       const selVal = $("#select-peserta") ? $("#select-peserta").value : "";
-      const p = (selVal ? P.find(x => x.kode === selVal) : null) || S.pDipilih;
+      const p = (selVal ? P_SESI.find(x => x.kode === selVal) : null) || S.pDipilih;
       if (!p) {
         alert("Silakan pilih nama Anda pada menu 'Pilih Nama Peserta' di atas terlebih dahulu.");
         const selEl = $("#select-peserta");
@@ -1035,6 +818,7 @@ function render() {
       if (confirm("Kosongkan seluruh data presensi peserta? Semua peserta akan diatur menjadi Belum Hadir.")) {
         try {
           localStorage.removeItem("smb_hadir");
+          localStorage.removeItem("smb_hadir_grid");
           localStorage.removeItem("smb_my_code");
         } catch(e){}
         S.pDipilih = null;

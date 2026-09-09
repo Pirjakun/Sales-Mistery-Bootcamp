@@ -952,7 +952,10 @@ function kioskPanelKanan() {
     list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
   }
 
-  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html&color=12357F&bgcolor=FCFAF6";
+  const checkinTarget = window.location.origin.includes("http")
+    ? window.location.origin + window.location.pathname.replace(/scanner(-grid)?\.html$/, "checkin.html") + "?sesi=1"
+    : "https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html?sesi=1";
+  const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(checkinTarget) + "&color=12357F&bgcolor=FCFAF6";
 
   return `<div class="kiosk-right">
     <!-- QR Code Kiosk Card -->
