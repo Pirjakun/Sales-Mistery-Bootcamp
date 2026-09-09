@@ -3,6 +3,8 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/scanner", "destination": "/scanner.html" },
+    { "source": "/scanner-grid", "destination": "/scanner-grid.html" },
+    { "source": "/scanner-sesi2", "destination": "/scanner-grid.html" },
     { "source": "/checkin", "destination": "/checkin.html" },
     { "source": "/booking", "destination": "/booking.html" }
   ]

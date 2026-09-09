@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         scanner: 'scanner.html',
+        scannerGrid: 'scanner-grid.html',
         checkin: 'checkin.html',
         booking: 'booking.html'
       }

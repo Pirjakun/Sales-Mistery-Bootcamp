@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Check-in Kiosk &amp; Seat Locator — Sales Mastery Bootcamp</title>
-  <meta name="description" content="Aplikasi Kiosk Presensi & Locator Tempat Duduk Peserta Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort Kaliurang.">
+  <title>Check-in Kiosk &amp; Seat Locator — Sesi 2 Grid Classroom — Sales Mastery Bootcamp</title>
+  <meta name="description" content="Kiosk Presensi & Locator Tempat Duduk Peserta Sesi 2 Grid Classroom — Sales Mastery Bootcamp 8–10 September 2026 di Kalyana Resort.">
   
   <!-- Google Fonts: Marcellus & Source Sans 3 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,7 @@
   }
   .top h1 { margin: 0; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--navy); }
   .top .sub { font-size: 12px; color: var(--ink-3); margin-top: 1px; }
-  .top .right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .top .right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
   .count {
     background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
     font-size: 13px; font-weight: 600; white-space: nowrap;
@@ -95,9 +95,9 @@
   .now b { font-size: 15px; font-weight: 600; }
   .now .meta { margin-left: auto; font-size: 12.5px; color: #C9D6EC; text-align: right; }
 
-  /* ---------- Panggung Utama Kiosk ---------- */
+  /* ---------- Main Kiosk Layout ---------- */
   main.kiosk-main {
-    flex: 1; min-height: 0; padding: 16px 20px; display: grid; grid-template-columns: 1fr 480px; gap: 16px;
+    flex: 1; min-height: 0; padding: 16px 20px; display: grid; grid-template-columns: 1fr 440px; gap: 16px;
   }
 
   .panel {
@@ -107,83 +107,166 @@
   .panel h2 { margin: 0 0 3px; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--navy); }
   .panel .hint { font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; }
 
-  /* ---------- Left Side: SVG Denah U-Shape ---------- */
+  /* ---------- Left Side: Grid Layout Denah Tempat Duduk 5x5 ---------- */
   .map { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-  .stage {
-    background: var(--navy); color: #fff; border-radius: 8px; padding: 8px; text-align: center;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 8px; flex: none;
-    font-family: var(--serif);
-  }
-  .map-wrapper-maximized {
-    flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center;
-    background: rgba(247, 244, 237, 0.5); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px;
-  }
-
-  /* SVG Seat Node & Name Badge Styles */
-  .seat-node { transition: all 0.3s ease; cursor: pointer; opacity: 0.95; }
-  .seat-node:hover { opacity: 1; }
-  .seat-rect { fill: #1E3A8A; stroke: #1E293B; stroke-width: 1.2; rx: 7px; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 800; font-size: 11.5px; fill: #FFFFFF; pointer-events: none; }
   
-  .name-shape {
-    transition: all 0.3s ease;
-    stroke-width: 1.5;
-  }
-  .name-shape.disc-D { fill: #FFF5F5; stroke: #EF4444; }
-  .name-shape.disc-I { fill: #FFFBEB; stroke: #F59E0B; }
-  .name-shape.disc-S { fill: #F0FDF4; stroke: #10B981; }
-  .name-shape.disc-C { fill: #EFF6FF; stroke: #3B82F6; }
-  .name-shape.disc-neutral { fill: #F9FAFB; stroke: #9CA3AF; }
-
-  .name-label-title {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 800;
-    fill: #1E293B;
-    pointer-events: none;
-  }
-  .name-label-disc {
-    font-family: var(--sans);
-    font-size: 9px;
+  /* Banner Panggung Utama */
+  .stage-banner {
+    background: #12357F;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 12px;
     font-weight: 700;
-    fill: #64748B;
-    pointer-events: none;
+    letter-spacing: 0.16em;
+    margin-bottom: 14px;
+    flex: none;
+    font-family: var(--serif);
+    box-shadow: 0 2px 6px rgba(18, 53, 127, 0.2);
+    text-transform: uppercase;
   }
 
-  .name-shape.disc-D ~ .name-label-title { fill: #7F1D1D; }
-  .name-shape.disc-I ~ .name-label-title { fill: #78350F; }
-  .name-shape.disc-S ~ .name-label-title { fill: #064E3B; }
-  .name-shape.disc-C ~ .name-label-title { fill: #1E3A8A; }
-
-  .seat-node.filled { opacity: 1; }
-  .seat-node.filled .seat-rect { fill: #10B981; stroke: #059669; }
-  .seat-node.filled .seat-num { fill: #FFFFFF; }
-
-  /* Active Seat Beacon */
-  .seat-node.me { opacity: 1 !important; }
-  .seat-node.me .seat-rect {
-    fill: #F59E0B !important; stroke: #B45309 !important; stroke-width: 3.5 !important;
-    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95));
+  .map-wrapper-grid {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247, 244, 237, 0.6);
+    border: 1px solid var(--line-2);
+    border-radius: 12px;
+    padding: 12px;
+    overflow-y: auto;
   }
-  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 800 !important; font-size: 13px !important; }
-  .seat-node.me .name-shape {
-    fill: #FEF3C7 !important; stroke: #F59E0B !important; stroke-width: 2.5 !important;
-    filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.4));
-  }
-  .seat-node.me .name-label-title { fill: #78350F !important; font-weight: 800 !important; }
 
-  @keyframes sonarPulse {
-    0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
-    100% { r: 36px; opacity: 0; stroke-width: 1px; }
+  /* 5x5 Grid Styling matching Screenshot */
+  .seating-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    max-width: 960px;
+    max-height: 620px;
   }
-  @keyframes bouncePin {
-    0%, 100% { transform: translate(14px, -12px); }
-    50% { transform: translate(14px, -18px); }
-  }
-  .sonar-ring { animation: sonarPulse 1.6s infinite ease-out; pointer-events: none; }
-  .pin-marker { animation: bouncePin 1.2s infinite ease-in-out; pointer-events: none; }
 
-  /* ---------- Right Side: Tab Kiosk Presensi ---------- */
+  .grid-card {
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    user-select: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    border: 1.5px solid;
+    min-height: 80px;
+  }
+
+  .grid-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+
+  /* DISC Color Themes matching Screenshot */
+  /* Red / Coral Theme (D/I, D/C) */
+  .grid-card.disc-D {
+    background: #FDF2F0;
+    border-color: #E68A7C;
+  }
+  .grid-card.disc-D .card-name { color: #1E1E1E; }
+  .grid-card.disc-D .card-disc { color: #8A857A; }
+
+  /* Blue Theme (C/S) */
+  .grid-card.disc-C {
+    background: #EBF3FE;
+    border-color: #92B7F4;
+  }
+  .grid-card.disc-C .card-name { color: #1E1E1E; }
+  .grid-card.disc-C .card-disc { color: #8A857A; }
+
+  /* Green Theme (S/C, S) */
+  .grid-card.disc-S {
+    background: #EAF7EE;
+    border-color: #8BD6A8;
+  }
+  .grid-card.disc-S .card-name { color: #1E1E1E; }
+  .grid-card.disc-S .card-disc { color: #8A857A; }
+
+  /* Yellow / Cream Theme (I/D, I/S, I/C) */
+  .grid-card.disc-I {
+    background: #FEF8E7;
+    border-color: #E8D18C;
+  }
+  .grid-card.disc-I .card-name { color: #1E1E1E; }
+  .grid-card.disc-I .card-disc { color: #8A857A; }
+
+  /* Neutral Theme (Ailesh 1/2/3, Cadangan) */
+  .grid-card.disc-neutral {
+    background: #F3EFE7;
+    border-color: #D8D1C2;
+  }
+  .grid-card.disc-neutral .card-name { color: #7A7570; font-weight: 600; }
+  .grid-card.disc-neutral .card-disc { color: #A09A8E; font-style: italic; }
+
+  /* Card Elements */
+  .card-top-num {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #8C877D;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .card-name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-disc {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  /* Hadir Badge Indicator */
+  .card-hadir-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #2F6B4F;
+    color: #FFFFFF;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* Selected Active Beacon State (.me) */
+  .grid-card.me {
+    border-color: #F59E0B !important;
+    border-width: 3px !important;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
+    animation: cardGlow 1.5s infinite alternate;
+  }
+  @keyframes cardGlow {
+    from { box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+    to { box-shadow: 0 0 24px rgba(245, 158, 11, 0.85); }
+  }
+
+  /* ---------- Right Side: Kiosk Controls ---------- */
   .kiosk-right { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
 
   /* Box QR Code Scan Kiosk */
@@ -260,7 +343,7 @@
   .status-btn.not-hadir { background: #fff; color: var(--ink-2); border-color: var(--line); }
   .status-btn.not-hadir:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
-  /* ---------- Modal / Mobile Screen Preview ("Tiket Digital HP Peserta") ---------- */
+  /* ---------- Modal / Digital Pass HP Peserta ---------- */
   .modal-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55);
     backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 200;
@@ -330,6 +413,8 @@
   @media(max-width: 1050px) {
     main.kiosk-main { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
     body { overflow: auto; }
+    .seating-grid { gap: 8px; }
+    .card-name { font-size: 15px; }
   }
   </style>
 </head>
@@ -338,17 +423,18 @@
 <div class="app" id="app"></div>
 
 <script>
-/* ---------------- Database ---------------- */
+/* ---------------- Database Sesi & Peserta ---------------- */
 const SESI = [
   { mulai: "09:15", selesai: "09:45", nama: "Registrasi Training", tempat: "Lobi Resort" },
-{ mulai: "09:45", selesai: "13:00", nama: "Fundamental Sandler Selling Approach", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
+  { mulai: "09:45", selesai: "13:00", nama: "Fundamental Sandler Selling Approach", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
   { mulai: "13:00", selesai: "14:00", nama: "Lunch Break", tempat: "Dining Hall" },
-  { mulai: "14:00", selesai: "18:00", nama: "Sandler Advanced Execution", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
+  { mulai: "14:00", selesai: "18:00", nama: "Sandler Advanced Execution (Classroom Sesi 2)", tempat: "Meeting Room", oleh: "Fadli Fahmi Ali" },
   { mulai: "18:00", selesai: "19:00", nama: "Check-in Kamar & Refreshing", tempat: "Lobi Resort" },
   { mulai: "19:00", selesai: "21:00", nama: "Dinner & Networking", tempat: "Dining Hall" }
 ];
 
 const P = [
+  // ROW 1 (Seats 1-5)
   {
     "kode": "SMB-001",
     "nama": "I Gusti Ayu Ananda Putri",
@@ -367,29 +453,82 @@ const P = [
     "tipsKomunikasi": "Sampaikan poin utama secara ramah dan antusias, beri ruang apresiasi atas idenya, lalu bantu menjaga disiplin tindak lanjut."
   },
   {
-    "kode": "SMB-016",
-    "nama": "Sofyan Thohari",
-    "panggilan": "Popan",
-    "disc": "S",
-    "mbti": "ISFP",
+    "kode": "SMB-015",
+    "nama": "Dimas Wiyanarko",
+    "panggilan": "Dimas",
+    "disc": "C/S",
+    "mbti": "ISTJ",
     "kursi": 2,
-    "kamar": "425",
+    "kamar": "413",
     "gender": "Laki-laki",
     "peran": "Peserta Bootcamp",
-    "karakter": "Tenang, kooperatif, sabar, menjaga hubungan baik.",
-    "commStyle": "Calm, personal dan empathetic.",
-    "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.",
-    "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.",
-    "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.",
-    "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan."
+    "karakter": "Sangat kuat pada struktur, ketelitian, dan konsistensi.",
+    "commStyle": "Formal, jelas, faktual dan terstruktur.",
+    "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.",
+    "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.",
+    "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.",
+    "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi."
   },
+  {
+    "kode": "SMB-A01",
+    "nama": "Ailesh 1",
+    "panggilan": "Ailesh 1",
+    "disc": "profil menyusul",
+    "mbti": "-",
+    "kursi": 3,
+    "kamar": "-",
+    "gender": "-",
+    "peran": "Tamu / Participant",
+    "karakter": "Profil peserta menyusul.",
+    "commStyle": "Profesional",
+    "saran": "Menunggu pembaruan profil.",
+    "salesStrength": "-",
+    "salesRisk": "-",
+    "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik."
+  },
+  {
+    "kode": "SMB-A02",
+    "nama": "Ailesh 2",
+    "panggilan": "Ailesh 2",
+    "disc": "profil menyusul",
+    "mbti": "-",
+    "kursi": 4,
+    "kamar": "-",
+    "gender": "-",
+    "peran": "Tamu / Participant",
+    "karakter": "Profil peserta menyusul.",
+    "commStyle": "Profesional",
+    "saran": "Menunggu pembaruan profil.",
+    "salesStrength": "-",
+    "salesRisk": "-",
+    "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik."
+  },
+  {
+    "kode": "SMB-A03",
+    "nama": "Ailesh 3",
+    "panggilan": "Ailesh 3",
+    "disc": "profil menyusul",
+    "mbti": "-",
+    "kursi": 5,
+    "kamar": "-",
+    "gender": "-",
+    "peran": "Tamu / Participant",
+    "karakter": "Profil peserta menyusul.",
+    "commStyle": "Profesional",
+    "saran": "Menunggu pembaruan profil.",
+    "salesStrength": "-",
+    "salesRisk": "-",
+    "tipsKomunikasi": "Sambut dengan ramah dan berikan pelayanan terbaik."
+  },
+
+  // ROW 2 (Seats 6-10)
   {
     "kode": "SMB-010",
     "nama": "Sri Wijayati",
     "panggilan": "Jay",
     "disc": "D/I",
     "mbti": "INFP",
-    "kursi": 3,
+    "kursi": 6,
     "kamar": "416",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
@@ -401,55 +540,21 @@ const P = [
     "tipsKomunikasi": "Bicara secara konsultatif dan apresiatif. Sampaikan ide secara percaya diri sambil mendengarkan masukannya secara empati."
   },
   {
-    "kode": "SMB-003",
-    "nama": "Elfasa Khoirumansyah",
-    "panggilan": "Elfasa",
-    "disc": "I/S",
+    "kode": "SMB-019",
+    "nama": "Linda Susanto",
+    "panggilan": "Linda",
+    "disc": "S/C",
     "mbti": "ISFJ",
-    "kursi": 4,
-    "kamar": "425",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Komunikatif, approachable, kooperatif, nyaman membangun hubungan.",
-    "commStyle": "Ramah, supportive dan personal.",
-    "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.",
-    "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.",
-    "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.",
-    "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi."
-  },
-  {
-    "kode": "SMB-008",
-    "nama": "Maria Dita Fivtiari",
-    "panggilan": "Dita",
-    "disc": "D/C",
-    "mbti": "INFP",
-    "kursi": 5,
-    "kamar": "415",
+    "kursi": 7,
+    "kamar": "417",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
-    "karakter": "Kuat pada hasil, dengan perhatian terhadap standar dan kualitas.",
-    "commStyle": "Personal, warm dan consultative.",
-    "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.",
-    "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.",
-    "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.",
-    "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja."
-  },
-  {
-    "kode": "SMB-007",
-    "nama": "Okki Putri Fadilah",
-    "panggilan": "Okki",
-    "disc": "I/S",
-    "mbti": "ESFJ",
-    "kursi": 6,
-    "kamar": "422",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Interpersonal-oriented, komunikatif, menjaga hubungan baik.",
-    "commStyle": "Friendly, supportive dan engaging.",
-    "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.",
-    "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.",
-    "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.",
-    "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman."
+    "karakter": "Tenang, stabil, kooperatif, menjaga hubungan, nyaman dengan struktur.",
+    "commStyle": "Warm, polite dan relationship-oriented.",
+    "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.",
+    "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.",
+    "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.",
+    "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang."
   },
   {
     "kode": "SMB-004",
@@ -457,7 +562,7 @@ const P = [
     "panggilan": "Nindy",
     "disc": "D/I",
     "mbti": "ESTP",
-    "kursi": 7,
+    "kursi": 8,
     "kamar": "422",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
@@ -474,7 +579,7 @@ const P = [
     "panggilan": "Mitha",
     "disc": "S/C",
     "mbti": "INFP",
-    "kursi": 8,
+    "kursi": 9,
     "kamar": "423",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
@@ -486,12 +591,65 @@ const P = [
     "tipsKomunikasi": "Bicara dengan nada lembut dan personal. Dengarkan dengan baik dan bantu memberikan dorongan positif saat mengambil keputusan."
   },
   {
+    "kode": "SMB-020",
+    "nama": "Gilang Risnantyo",
+    "panggilan": "Gilang",
+    "disc": "D/I",
+    "mbti": "ISTP",
+    "kursi": 10,
+    "kamar": "414",
+    "gender": "Laki-laki",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Berorientasi hasil, tegas, proaktif, percaya diri, menyukai tantangan.",
+    "commStyle": "Direct, factual dan solution-oriented.",
+    "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.",
+    "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.",
+    "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.",
+    "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis."
+  },
+
+  // ROW 3 (Seats 11-15)
+  {
+    "kode": "SMB-008",
+    "nama": "Maria Dita Fivtiari",
+    "panggilan": "Dita",
+    "disc": "D/C",
+    "mbti": "INFP",
+    "kursi": 11,
+    "kamar": "415",
+    "gender": "Perempuan",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Kuat pada hasil, dengan perhatian terhadap standar dan kualitas.",
+    "commStyle": "Personal, warm dan consultative.",
+    "saran": "Personal, warm dan consultative.. Tips: Perkuat assertiveness dan keberanian menghadapi objection.",
+    "salesStrength": "Empatik, genuine, mampu memahami kebutuhan customer dan membangun trust.",
+    "salesRisk": "Sensitif terhadap rejection dan cenderung menghindari konflik.",
+    "tipsKomunikasi": "Bicara secara personal dan hangat. Sampaikan data yang jelas serta hargai perhatiannya terhadap standar dan kualitas kerja."
+  },
+  {
+    "kode": "SMB-FADLI",
+    "nama": "Fadli Fahmi Ali",
+    "panggilan": "Fadli",
+    "disc": "S",
+    "mbti": "Trainer",
+    "kursi": 12,
+    "kamar": "-",
+    "gender": "Laki-laki",
+    "peran": "Lead Trainer & Facilitator",
+    "karakter": "Menginspirasi, terstruktur, empati tinggi dan berorientasi pada pengembangan peserta.",
+    "commStyle": "Clear, engaging, supportive",
+    "saran": "Lead Trainer Sesi Sales Mastery Bootcamp.",
+    "salesStrength": "Mastery dalam Sandler Selling System, fasilitator berpengalaman.",
+    "salesRisk": "-",
+    "tipsKomunikasi": "Komunikasi aktif dan responsif dalam diskusi sesi bootcamp."
+  },
+  {
     "kode": "SMB-014",
     "nama": "Fuad Jaka Pamungkas",
     "panggilan": "Jaka",
     "disc": "I/D",
     "mbti": "ENFP",
-    "kursi": 9,
+    "kursi": 13,
     "kamar": "412",
     "gender": "Laki-laki",
     "peran": "Peserta Bootcamp",
@@ -503,89 +661,21 @@ const P = [
     "tipsKomunikasi": "Bicara dengan semangat dan komunikatif. Bantu mengarahkan ide-ide kreatifnya ke dalam langkah eksekusi yang terstruktur."
   },
   {
-    "kode": "SMB-015",
-    "nama": "Dimas Wiyanarko",
-    "panggilan": "Dimas",
-    "disc": "C/S",
-    "mbti": "ISTJ",
-    "kursi": 10,
-    "kamar": "413",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Sangat kuat pada struktur, ketelitian, dan konsistensi.",
-    "commStyle": "Formal, jelas, faktual dan terstruktur.",
-    "saran": "Formal, jelas, faktual dan terstruktur.. Tips: Latih agility, improvisation dan emotional selling.",
-    "salesStrength": "Terstruktur, disiplin, reliable, teliti dan kuat dalam follow-up.",
-    "salesRisk": "Bisa terlalu terpaku pada prosedur dan kurang fleksibel menghadapi customer yang unpredictable.",
-    "tipsKomunikasi": "Gunakan bahasa yang formal, jelas, dan berbasis data faktual. Sampaikan informasi secara terstruktur dan berikan waktu verifikasi."
-  },
-  {
-    "kode": "SMB-022",
-    "nama": "I Gusti Putu Yaktianuraga",
-    "panggilan": "Bagus",
-    "disc": "D/I",
-    "mbti": "ENTJ",
-    "kursi": 11,
-    "kamar": "413",
-    "gender": "Laki-laki",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tegas, ambisius, optimis, mandiri, suka tantangan, dan persuasive.",
-    "commStyle": "Direct, confident, strategic dan result-oriented.",
-    "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.",
-    "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.",
-    "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.",
-    "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi."
-  },
-  {
-    "kode": "SMB-012",
-    "nama": "Yulia Mekar Rini",
-    "panggilan": "Yulia",
-    "disc": "C/S",
+    "kode": "SMB-017",
+    "nama": "Adiel Priyarama",
+    "panggilan": "Adiel",
+    "disc": "S/C",
     "mbti": "ISTP",
-    "kursi": 12,
-    "kamar": "424",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Teliti, sistematis, hati-hati, membutuhkan kejelasan.",
-    "commStyle": "Direct, factual dan solution-oriented.",
-    "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.",
-    "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.",
-    "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.",
-    "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika."
-  },
-  {
-    "kode": "SMB-020",
-    "nama": "Gilang Risnantyo",
-    "panggilan": "Gilang",
-    "disc": "D/I",
-    "mbti": "ISTP",
-    "kursi": 13,
+    "kursi": 14,
     "kamar": "414",
     "gender": "Laki-laki",
     "peran": "Peserta Bootcamp",
-    "karakter": "Berorientasi hasil, tegas, proaktif, percaya diri, menyukai tantangan.",
-    "commStyle": "Direct, factual dan solution-oriented.",
-    "saran": "Direct, factual dan solution-oriented.. Tips: Dorong kemampuan rapport building dan probing questions.",
-    "salesStrength": "Problem solver, praktis, fleksibel dan mampu tetap tenang menghadapi masalah customer.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif dalam relationship building.",
-    "tipsKomunikasi": "Bicara secara efektif, faktual, dan solusi-oriented. Sampaikan poin utama dengan jelas dan ajak berdiskusi secara praktis."
-  },
-  {
-    "kode": "SMB-019",
-    "nama": "Linda Susanto",
-    "panggilan": "Linda",
-    "disc": "S/C",
-    "mbti": "ISFJ",
-    "kursi": 14,
-    "kamar": "417",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Tenang, stabil, kooperatif, menjaga hubungan, nyaman dengan struktur.",
-    "commStyle": "Warm, polite dan relationship-oriented.",
-    "saran": "Warm, polite dan relationship-oriented.. Tips: Fokus pada assertiveness, negotiation dan closing confidence.",
-    "salesStrength": "Attentive, reliable, supportive dan mampu membangun hubungan jangka panjang dengan customer.",
-    "salesRisk": "Kurang nyaman dengan rejection dan aggressive selling.",
-    "tipsKomunikasi": "Bicara dengan hangat, sopan, dan komunikatif. Berikan dukungan penuh dan tekankan nilai kerjasama jangka panjang."
+    "karakter": "Stabil, terstruktur, mempertimbangkan sesuatu sebelum bertindak.",
+    "commStyle": "Singkat, to the point, berbasis fakta dan solusi.",
+    "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.",
+    "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.",
+    "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.",
+    "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung."
   },
   {
     "kode": "SMB-005",
@@ -604,30 +694,15 @@ const P = [
     "salesRisk": "Mudah terdistraksi dan kurang menyukai pekerjaan yang repetitif.",
     "tipsKomunikasi": "Gunakan komunikasi yang energik dan bersahabat. Sampaikan target dengan jelas dan bantu menyusun alur kerja yang rapi."
   },
-  {
-    "kode": "SMB-013",
-    "nama": "Ainur Hasanah",
-    "panggilan": "Ainur",
-    "disc": "I/C",
-    "mbti": "INFP",
-    "kursi": 16,
-    "kamar": "421",
-    "gender": "Perempuan",
-    "peran": "Peserta Bootcamp",
-    "karakter": "Komunikatif/influential dengan perhatian terhadap detail.",
-    "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.",
-    "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.",
-    "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.",
-    "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.",
-    "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur."
-  },
+
+  // ROW 4 (Seats 16-20)
   {
     "kode": "SMB-006",
     "nama": "Mya Mar'atus Sholikhah",
     "panggilan": "Mya",
     "disc": "D/C",
     "mbti": "ESFP",
-    "kursi": 17,
+    "kursi": 16,
     "kamar": "424",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
@@ -639,21 +714,21 @@ const P = [
     "tipsKomunikasi": "Bicara secara ekspresif, hangat, dan antusias. Apresiasi hasil kerjanya dan bantu menjaga konsistensi rencana kegiatan."
   },
   {
-    "kode": "SMB-017",
-    "nama": "Adiel Priyarama",
-    "panggilan": "Adiel",
-    "disc": "S/C",
-    "mbti": "ISTP",
-    "kursi": 18,
-    "kamar": "414",
+    "kode": "SMB-016",
+    "nama": "Sofyan Thohari",
+    "panggilan": "Popan",
+    "disc": "S",
+    "mbti": "ISFP",
+    "kursi": 17,
+    "kamar": "425",
     "gender": "Laki-laki",
     "peran": "Peserta Bootcamp",
-    "karakter": "Stabil, terstruktur, mempertimbangkan sesuatu sebelum bertindak.",
-    "commStyle": "Singkat, to the point, berbasis fakta dan solusi.",
-    "saran": "Singkat, to the point, berbasis fakta dan solusi.. Tips: Berikan case study dan simulasi problem solving; dorong untuk lebih aktif menggali kebutuhan customer.",
-    "salesStrength": "Praktis, cepat membaca masalah, tenang menghadapi situasi sulit, dan mampu mencari solusi secara langsung.",
-    "salesRisk": "Bisa kurang ekspresif dan kurang aktif membangun relationship secara verbal.",
-    "tipsKomunikasi": "Bicara secara singkat, lugas, berbasis fakta, dan berfokus pada pemecahan masalah praktis secara langsung."
+    "karakter": "Tenang, kooperatif, sabar, menjaga hubungan baik.",
+    "commStyle": "Calm, personal dan empathetic.",
+    "saran": "Calm, personal dan empathetic.. Tips: Fokus pada confidence, negotiation dan closing drive.",
+    "salesStrength": "Empatik, observant, fleksibel dan mampu menciptakan interaksi yang nyaman dengan customer.",
+    "salesRisk": "Kurang assertive dan cenderung menghindari situasi yang terlalu konfrontatif.",
+    "tipsKomunikasi": "Bicara dengan nada tenang, hangat, dan empati. Berikan waktu untuk mencerna informasi dan hindari pendekatan yang menekan."
   },
   {
     "kode": "SMB-009",
@@ -661,7 +736,7 @@ const P = [
     "panggilan": "Andri",
     "disc": "D/I",
     "mbti": "ESTP",
-    "kursi": 19,
+    "kursi": 18,
     "kamar": "423",
     "gender": "Perempuan",
     "peran": "Peserta Bootcamp",
@@ -671,6 +746,23 @@ const P = [
     "salesStrength": "Berani, energik, cepat mengambil tindakan, adaptif dan nyaman menghadapi situasi yang dinamis.",
     "salesRisk": "Dapat terlalu cepat bertindak, kurang sabar dan melewatkan detail.",
     "tipsKomunikasi": "Bicara secara spontan, energik, dan meyakinkan. Imbangi dengan kesabaran mendengarkan sebelum menyimpulkan."
+  },
+  {
+    "kode": "SMB-003",
+    "nama": "Elfasa Khoirumansyah",
+    "panggilan": "Elfasa",
+    "disc": "I/S",
+    "mbti": "ISFJ",
+    "kursi": 19,
+    "kamar": "425",
+    "gender": "Laki-laki",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Komunikatif, approachable, kooperatif, nyaman membangun hubungan.",
+    "commStyle": "Ramah, supportive dan personal.",
+    "saran": "Ramah, supportive dan personal.. Tips: Fokus pada confidence, negotiation dan closing technique.",
+    "salesStrength": "Relationship builder, loyal, attentive dan mampu memberikan customer experience yang baik.",
+    "salesRisk": "Kurang assertive ketika harus melakukan negotiation atau closing.",
+    "tipsKomunikasi": "Gunakan pendekatan ramah, kooperatif, dan penuh dukungan. Berikan rasa aman dan ajak berdiskusi tanpa konfrontasi."
   },
   {
     "kode": "SMB-018",
@@ -688,6 +780,93 @@ const P = [
     "salesStrength": "Berani, cepat bertindak, confident, adaptif dan kompetitif.",
     "salesRisk": "Impulsif dan dapat kurang memperhatikan detail atau proses.",
     "tipsKomunikasi": "Bicara secara langsung, dinamis, dan energik. Sampaikan poin penting secara terstruktur dan dorong diskusi aktif."
+  },
+
+  // ROW 5 (Seats 21-25)
+  {
+    "kode": "SMB-013",
+    "nama": "Ainur Hasanah",
+    "panggilan": "Ainur",
+    "disc": "I/C",
+    "mbti": "INFP",
+    "kursi": 21,
+    "kamar": "421",
+    "gender": "Perempuan",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Komunikatif/influential dengan perhatian terhadap detail.",
+    "commStyle": "Personal, hangat, thoughtful dan relationship-oriented.",
+    "saran": "Personal, hangat, thoughtful dan relationship-oriented.. Tips: Latih assertiveness, objection handling dan closing melalui role play bertahap.",
+    "salesStrength": "Empatik, mampu memahami kebutuhan customer, genuine dalam membangun hubungan dan memiliki pendekatan yang personal.",
+    "salesRisk": "Kurang nyaman dengan rejection, konflik, atau aggressive closing.",
+    "tipsKomunikasi": "Bicara secara personal, hangat, dan penuh perhatian. Dengarkan posisinya dan sampaikan masukan secara halus serta terstruktur."
+  },
+  {
+    "kode": "SMB-CAD01",
+    "nama": "Cadangan",
+    "panggilan": "cadangan",
+    "disc": "cadangan",
+    "mbti": "-",
+    "kursi": 22,
+    "kamar": "-",
+    "gender": "-",
+    "peran": "Kursi Cadangan",
+    "karakter": "Kursi cadangan tambahan peserta.",
+    "commStyle": "-",
+    "saran": "-",
+    "salesStrength": "-",
+    "salesRisk": "-",
+    "tipsKomunikasi": "-"
+  },
+  {
+    "kode": "SMB-007",
+    "nama": "Okki Putri Fadilah",
+    "panggilan": "Okki",
+    "disc": "I/S",
+    "mbti": "ESFJ",
+    "kursi": 23,
+    "kamar": "422",
+    "gender": "Perempuan",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Interpersonal-oriented, komunikatif, menjaga hubungan baik.",
+    "commStyle": "Friendly, supportive dan engaging.",
+    "saran": "Friendly, supportive dan engaging.. Tips: Tingkatkan assertiveness, negotiation dan handling difficult customers.",
+    "salesStrength": "Warm, communicative, relationship-oriented dan kuat dalam membangun customer trust.",
+    "salesRisk": "Terlalu mempertimbangkan respons orang lain dan kurang nyaman dengan konflik.",
+    "tipsKomunikasi": "Gunakan bahasa yang ramah, bersahabat, dan mendukung. Libatkan dalam percakapan positif dan ciptakan suasana yang nyaman."
+  },
+  {
+    "kode": "SMB-022",
+    "nama": "I Gusti Putu Yaktianuraga",
+    "panggilan": "Bagus",
+    "disc": "D/I",
+    "mbti": "ENTJ",
+    "kursi": 24,
+    "kamar": "413",
+    "gender": "Laki-laki",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Tegas, ambisius, optimis, mandiri, suka tantangan, dan persuasive.",
+    "commStyle": "Direct, confident, strategic dan result-oriented.",
+    "saran": "Direct, confident, strategic dan result-oriented.. Tips: Tantang untuk listen more, ask more, tell less agar tidak terlalu cepat mengarahkan customer.",
+    "salesStrength": "Strong leadership, decisive, strategic, confident dan sangat target-oriented.",
+    "salesRisk": "Bisa terlalu dominan, impatient dan terlalu fokus pada hasil dibandingkan relationship.",
+    "tipsKomunikasi": "Bicara secara langsung, lugas, berorientasi hasil, dan strategis. Dengarkan sudut pandangnya sebelum memberikan rekomendasi."
+  },
+  {
+    "kode": "SMB-012",
+    "nama": "Yulia Mekar Rini",
+    "panggilan": "Yulia",
+    "disc": "C/S",
+    "mbti": "ISTP",
+    "kursi": 25,
+    "kamar": "424",
+    "gender": "Perempuan",
+    "peran": "Peserta Bootcamp",
+    "karakter": "Teliti, sistematis, hati-hati, membutuhkan kejelasan.",
+    "commStyle": "Direct, factual dan solution-oriented.",
+    "saran": "Direct, factual dan solution-oriented.. Tips: Perkuat rapport building, probing dan storytelling.",
+    "salesStrength": "Practical problem solver, analytical, mandiri dan mampu mencari solusi dengan cepat.",
+    "salesRisk": "Cenderung reserved dan dapat kurang aktif membangun emotional connection dengan customer.",
+    "tipsKomunikasi": "Bicara secara to the point, faktual, dan berfokus pada solusi praktis. Hindari basa-basi berlebih dan tekankan kejelasan logika."
   }
 ];
 
@@ -699,21 +878,16 @@ const DISC = {
   "D/I": "Dominant - Influential",
   "I/D": "Influential - Dominant",
   "D/C": "Dominant - Conscientious",
-  "D/C - Balanced": "Dominant - Conscientious",
   "I/S": "Influential - Steady",
   "S/C": "Steady - Conscientious",
   "C/S": "Conscientious - Steady",
-  "I/C": "Influential - Conscientious"
-};
-const SARAN = {
-  D: "cenderung langsung ke inti. Sampaikan poin utama lebih dulu.",
-  I: "cenderung ekspresif. Beri ruang untuk berbicara dan bertukar ide.",
-  S: "cenderung tenang dan konsisten. Beri waktu untuk mencerna.",
-  C: "cenderung teliti pada detail. Siapkan data pendukung."
+  "I/C": "Influential - Conscientious",
+  "profil menyusul": "Profil Menyusul",
+  "cadangan": "Cadangan"
 };
 
 const S = {
-  orangAktif: null, // Peserta yang sedang disorot/dilihat tiketnya
+  orangAktif: null,
   hadir: new Set(),
   jam: 8 * 60 + 52,
   pesan: null,
@@ -729,11 +903,23 @@ const jam = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 
 const men = t => (+t.slice(0, 2)) * 60 + (+t.slice(3, 5));
 const inisial = n => n.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
 
-const sisi = n => n <= 8 ? "Sisi Kiri Meja U (Kursi #" + n + ")"
-  : n <= 12 ? "Sisi Tengah Bawah Meja U (Kursi #" + n + ")"
-  : "Sisi Kanan Meja U (Kursi #" + n + ")";
+const sisi = n => {
+  const row = Math.ceil(n / 5);
+  const col = ((n - 1) % 5) + 1;
+  return `Baris ke-${row}, Kolom ke-${col} (Kursi #${n})`;
+};
 
 const org = k => P.find(p => p.kursi === k);
+
+function getDiscColorCls(disc) {
+  const d = String(disc || "").toUpperCase();
+  if (d.includes("PROFIL MENYUSUL") || d.includes("CADANGAN")) return "disc-neutral";
+  if (d.startsWith("D")) return "disc-D";
+  if (d.startsWith("I")) return "disc-I";
+  if (d.startsWith("C")) return "disc-C";
+  if (d.startsWith("S")) return "disc-S";
+  return "disc-neutral";
+}
 
 async function cetakGambarTiket(namaPeserta = "Peserta", selector = ".mobile-pass-card") {
   const el = document.querySelector(selector);
@@ -761,7 +947,7 @@ async function cetakGambarTiket(namaPeserta = "Peserta", selector = ".mobile-pas
       const dataUrl = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       const safeName = namaPeserta.replace(/[^a-zA-Z0-9]/g, "_");
-      a.download = `Tiket_Bootcamp_${safeName}.png`;
+      a.download = `Tiket_Grid_Sesi2_${safeName}.png`;
       a.href = dataUrl;
       document.body.appendChild(a);
       a.click();
@@ -775,11 +961,7 @@ async function cetakGambarTiket(namaPeserta = "Peserta", selector = ".mobile-pas
   } finally {
     if (btnCetak) {
       btnCetak.disabled = false;
-      if (btnCetak.id === "btn-cetak-kiosk-pass") {
-        btnCetak.innerText = "Cetak Gambar Tiket (PNG)";
-      } else {
-        btnCetak.innerText = "Unduh Tiket sebagai Gambar (PNG)";
-      }
+      btnCetak.innerText = "Cetak Gambar Tiket (PNG)";
     }
   }
 }
@@ -790,8 +972,10 @@ function sesiKini() {
 }
 
 function tetangga(kursi) {
-  const kiri = org(kursi - 1), kanan = org(kursi + 1);
-  return { kiri: kursi > 1 ? kiri : null, kanan: kursi < 20 ? kanan : null };
+  const col = (kursi - 1) % 5;
+  const kiri = col > 0 ? org(kursi - 1) : null;
+  const kanan = col < 4 ? org(kursi + 1) : null;
+  return { kiri, kanan };
 }
 
 /* ---------------- Tampilan Topbar ---------------- */
@@ -802,18 +986,18 @@ function bilahAtas() {
     <div class="logo">SM</div>
     <div>
       <h1>Sales Mastery Bootcamp</h1>
-      <div class="sub">Check-in Kiosk &amp; Seat Locator Display — Sesi 1 U-Shape</div>
+      <div class="sub">Check-in Kiosk &amp; Seat Locator Display — Sesi 2 Grid Classroom</div>
     </div>
     
     <!-- Session Navigation Switcher -->
     <div class="session-switcher" style="margin-left: 16px;">
-      <a href="scanner.html" class="session-btn active">Sesi 1 (U-Shape)</a>
-      <a href="scanner-grid.html" class="session-btn">Sesi 2 (Grid 5x5)</a>
+      <a href="scanner.html" class="session-btn">Sesi 1 (U-Shape)</a>
+      <a href="scanner-grid.html" class="session-btn active">Sesi 2 (Grid 5x5)</a>
     </div>
 
     <div class="right">
       <div class="count"><b>${S.hadir.size}</b> / ${P.length} Hadir</div>
-      <button id="btn-reset-global" style="background:#DC2626; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;">Reset Presensi (0 Hadir)</button>
+      <button id="btn-reset-global" style="background:#DC2626; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;">Reset Presensi</button>
       <div class="clock">${jam(S.jam)}</div>
       <a href="index.html" class="btn-hb">Handbook</a>
     </div>
@@ -828,128 +1012,46 @@ function bilahAtas() {
   </div>` : ""}`;
 }
 
-/* ---------------- SVG Denah Tempat Duduk U-Shape ---------------- */
+/* ---------------- 5x5 Grid Denah Tempat Duduk ---------------- */
 function denah(sorot) {
-  const hadirSet = typeof getHadirSet === "function" ? getHadirSet() : S.hadir;
-  const coords = [
-    // Sisi Kiri (1-8)
-    { n: 1, x: 124, y: 55, rot: 0 },
-    { n: 2, x: 124, y: 92, rot: 0 },
-    { n: 3, x: 124, y: 129, rot: 0 },
-    { n: 4, x: 124, y: 166, rot: 0 },
-    { n: 5, x: 124, y: 203, rot: 0 },
-    { n: 6, x: 124, y: 240, rot: 0 },
-    { n: 7, x: 124, y: 277, rot: 0 },
-    { n: 8, x: 124, y: 314, rot: 0 },
-    // Sisi Bawah (9-12)
-    { n: 9, x: 188, y: 380, rot: 0 },
-    { n: 10, x: 232, y: 380, rot: 0 },
-    { n: 11, x: 276, y: 380, rot: 0 },
-    { n: 12, x: 320, y: 380, rot: 0 },
-    // Sisi Kanan (13-20)
-    { n: 13, x: 388, y: 55, rot: 0 },
-    { n: 14, x: 388, y: 92, rot: 0 },
-    { n: 15, x: 388, y: 129, rot: 0 },
-    { n: 16, x: 388, y: 166, rot: 0 },
-    { n: 17, x: 388, y: 203, rot: 0 },
-    { n: 18, x: 388, y: 240, rot: 0 },
-    { n: 19, x: 388, y: 277, rot: 0 },
-    { n: 20, x: 388, y: 314, rot: 0 }
-  ];
+  const cardsHtml = P.map(p => {
+    const k = p.kursi;
+    const aku = k === sorot;
+    const isHadir = S.hadir.has(p.kode);
+    const discCls = getDiscColorCls(p.disc);
 
-  const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
-
-  const svgSeats = sortedCoords.map(item => {
-    const n = item.n;
-    const p = org(n);
-    const aku = n === sorot;
-    const isi = p && hadirSet.has(p.kode);
-    const pNama = p ? esc(p.panggilan) : "";
-    const pDisc = p ? esc(p.disc) : "";
-
-    let cls = "seat-node ";
+    let cls = `grid-card ${discCls} `;
     if (aku) cls += "me ";
-    else if (isi) cls += "filled ";
-
-    const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
-
-    function getDiscColorCls(disc) {
-      const d = String(disc || "").toUpperCase();
-      if (d.startsWith("D")) return "disc-D";
-      if (d.startsWith("I")) return "disc-I";
-      if (d.startsWith("C")) return "disc-C";
-      if (d.startsWith("S")) return "disc-S";
-      return "disc-neutral";
-    }
-
-    const discCls = getDiscColorCls(pDisc);
-
-    let nameTagSvg = "";
-    if (n <= 8) {
-      // Left side (1-8): name badge on the left
-      nameTagSvg = `
-        <rect x="-96" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
-        <text x="-51" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
-        <text x="-51" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
-      `;
-    } else if (n <= 12) {
-      // Bottom side (9-12): non-overlapping compact badge below
-      nameTagSvg = `
-        <rect x="-5" y="32" width="38" height="28" rx="5" class="name-shape ${discCls}" />
-        <text x="14" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
-        <text x="14" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
-      `;
-    } else {
-      // Right side (13-20): name badge on the right
-      nameTagSvg = `
-        <rect x="34" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
-        <text x="79" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
-        <text x="79" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
-      `;
-    }
+    if (isHadir) cls += "filled ";
 
     return `
-      <g class="${cls}" transform="translate(${item.x}, ${item.y})" data-pilih-kursi="${n}">
-        ${aku ? `<circle class="sonar-ring" cx="14" cy="12.5" fill="none" stroke="#F59E0B" />` : ""}
-        ${nameTagSvg}
-        <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
-        <text x="14" y="17" class="seat-num" text-anchor="middle" ${rotAttr}>${n}</text>
-        ${aku ? `
-          <g class="pin-marker">
-            <polygon points="0,-4 -5,-12 5,-12" fill="#DC2626" />
-            <circle cx="0" cy="-12" r="5.5" fill="#DC2626" />
-            <circle cx="0" cy="-12" r="2.2" fill="#FFFFFF" />
-          </g>
-        ` : ""}
-        <title>Kursi #${n}: ${p ? esc(p.nama) + ' (' + p.disc + ')' : 'Kosong'}</title>
-      </g>
+      <div class="${cls}" data-pilih-kursi="${k}">
+        ${isHadir ? `<div class="card-hadir-badge">&#10003; HADIR</div>` : ""}
+        <div class="card-top-num">${k}</div>
+        <div class="card-name">${esc(p.panggilan)}</div>
+        <div class="card-disc">${esc(p.disc)}</div>
+      </div>
     `;
   }).join("");
 
   return `<div class="map">
-    <div class="stage">PANGGUNG UTAMA · LAYAR &amp; WHITEBOARD</div>
-    <div class="map-wrapper-maximized">
-      <svg viewBox="20 30 500 425" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
-        <g>
-          <!-- Wooden U-Shape Table Graphic -->
-          <polygon points="160,40 200,40 200,345 340,345 340,40 380,40 380,375 160,375" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-          <polyline points="160,40 160,375 380,375 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
-        </g>
-        <g id="svg-seats-group">${svgSeats}</g>
-      </svg>
+    <div class="stage-banner">PANGGUNG · LAYAR · WHITEBOARD</div>
+    <div class="map-wrapper-grid">
+      <div class="seating-grid">
+        ${cardsHtml}
+      </div>
     </div>
   </div>`;
 }
 
 /* ---------------- Right Side: Kiosk Controls & List ---------------- */
 function kioskPanelKanan() {
-  // Filter participants
   let list = P;
   if (S.filter === "hadir") list = list.filter(p => S.hadir.has(p.kode));
   if (S.filter === "belum") list = list.filter(p => !S.hadir.has(p.kode));
   if (S.query.trim()) {
     const q = S.query.toLowerCase().trim();
-    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
+    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q || p.panggilan.toLowerCase().includes(q));
   }
 
   const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pirjakun.github.io/Sales-Mistery-Bootcamp/checkin.html&color=12357F&bgcolor=FCFAF6";
@@ -963,7 +1065,7 @@ function kioskPanelKanan() {
       <div class="qr-info">
         <div class="qr-tag">SCAN QR FORM ABSEN MANDIRI</div>
         <h3>Pindai QR Form Presensi HP</h3>
-        <p>Pindai QR ini dari HP Anda untuk mengisi <b>Form Absen</b>. Setelah dikonfirmasi, <b>Tiket Digital &amp; Nomor Kursi Anda</b> akan langsung tampil!</p>
+        <p>Pindai QR ini dari HP Anda untuk mengisi <b>Form Absen Sesi 2</b>. Lokasi <b>Kursi Denah Grid 5x5</b> akan otomatis terkonfirmasi!</p>
         <a href="checkin.html" target="_blank" style="display:inline-block; margin-top:8px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; color:#fff; text-decoration:none;">Buka Form Absen Mandiri (HP) &rarr;</a>
       </div>
     </div>
@@ -971,7 +1073,7 @@ function kioskPanelKanan() {
     <!-- List Peserta & Filter -->
     <div class="list-card">
       <div class="list-head">
-        <h3>Daftar Presensi Peserta</h3>
+        <h3>Daftar Presensi Peserta Sesi 2</h3>
         <div class="filter-tabs">
           <button class="filter-btn ${S.filter === 'semua' ? 'active' : ''}" data-filter="semua">Semua (${P.length})</button>
           <button class="filter-btn ${S.filter === 'hadir' ? 'active' : ''}" data-filter="hadir">Hadir (${S.hadir.size})</button>
@@ -980,7 +1082,7 @@ function kioskPanelKanan() {
       </div>
 
       <div class="search-box">
-        <input type="text" id="input-search" placeholder="Cari nama, kode tiket, atau nomor kursi..." value="${esc(S.query)}">
+        <input type="text" id="input-search" placeholder="Cari nama, panggilan, kode, atau nomor kursi..." value="${esc(S.query)}">
       </div>
 
       <ul class="p-list">
@@ -1007,7 +1109,7 @@ function kioskPanelKanan() {
   </div>`;
 }
 
-/* ---------------- Modal Ticket Digital HP Peserta ---------------- */
+/* ---------------- Modal Tiket Digital HP Peserta ---------------- */
 function modalTiketDigital() {
   if (!S.showMobilePass || !S.orangAktif) return "";
   const p = S.orangAktif;
@@ -1021,28 +1123,28 @@ function modalTiketDigital() {
     </div>` : `
     <div class="nb-box">
       <div class="lbl"><span>${lbl}</span><span>—</span></div>
-      <b style="color:var(--ink-3)">Ujung Meja Utama</b>
+      <b style="color:var(--ink-3)">Ujung Baris Grid</b>
     </div>`;
 
   return `
   <div class="modal-overlay" id="modal-bg">
     <div class="mobile-pass-card">
       <div class="mobile-header">
-        <div class="top-tag">TIKET DIGITAL &amp; SEAT PASS</div>
+        <div class="top-tag">TIKET DIGITAL &amp; SEAT PASS — SESI 2 GRID</div>
         <h2>${esc(p.nama)}</h2>
-        <div class="sub">${esc(p.peran)} · Werkudara Group</div>
+        <div class="sub">${esc(p.peran)} · Sales Mastery Bootcamp</div>
       </div>
       <div class="mobile-body">
         <div class="hero-seat-box">
           <div class="num">${p.kursi}</div>
           <div class="desc">
             <b>${sisi(p.kursi)}</b>
-            <span>Tersinkronisasi otomatis dengan Denah Kiosk U-Shape</span>
+            <span>Format Denah Grid Classroom (5 Rows x 5 Columns)</span>
           </div>
         </div>
 
         <div>
-          <div class="sec-title">DENAH LOKASI KURSI (POSISI DUDUK)</div>
+          <div class="sec-title">POSISI DUDUK PADA DENAH GRID</div>
           ${denah(p.kursi)}
         </div>
 
@@ -1054,14 +1156,14 @@ function modalTiketDigital() {
           </div>
         </div>
 
-        ${t.kiri || t.kanan ? `<div class="tip-box">
+        ${(t.kiri && t.kiri.tipsKomunikasi !== "-") || (t.kanan && t.kanan.tipsKomunikasi !== "-") ? `<div class="tip-box">
           <b>Tips Cara Berkomunikasi:</b><br>
-          ${t.kiri ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
-          ${t.kanan ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
+          ${t.kiri && t.kiri.tipsKomunikasi !== "-" ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
+          ${t.kanan && t.kanan.tipsKomunikasi !== "-" ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
         </div>` : ""}
       </div>
       <div class="mobile-footer" style="flex-wrap:wrap; gap:8px;">
-        <div class="status-badge-ok">Hadir (Sistem Presensi Digital)</div>
+        <div class="status-badge-ok">Hadir (Sesi 2 Grid Presensi)</div>
         <div style="display:flex; gap:8px; width:100%; margin-top:4px;">
           <button class="btn-close-modal" id="btn-cetak-kiosk-pass" style="background:var(--ok); flex:1;">Cetak Gambar Tiket (PNG)</button>
           <button class="btn-close-modal" data-tutup-modal style="flex:1;">Tutup Pass</button>
@@ -1079,8 +1181,8 @@ function render() {
     ${bilahAtas()}
     <main class="kiosk-main">
       <section class="panel">
-        <h2>Denah Tempat Duduk U-Shape</h2>
-        <div class="hint">Ketuk nomor kursi atau nama peserta untuk melihat detail lokasi duduk</div>
+        <h2>Denah Tempat Duduk Sesi 2 (Grid Classroom 5x5)</h2>
+        <div class="hint">Ketuk kartu meja atau nama peserta untuk melihat detail lokasi duduk</div>
         ${denah(sorotKursi)}
       </section>
       <section class="panel" style="padding:0; background:transparent; border:0; box-shadow:none;">
@@ -1110,7 +1212,7 @@ function renderListOnly() {
   if (S.filter === "belum") list = list.filter(p => !S.hadir.has(p.kode));
   if (S.query.trim()) {
     const q = S.query.toLowerCase().trim();
-    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q);
+    list = list.filter(p => p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q) || String(p.kursi) === q || p.panggilan.toLowerCase().includes(q));
   }
 
   listEl.innerHTML = list.map(p => {
@@ -1139,6 +1241,7 @@ function pilihPeserta(kode) {
   S.hadir.add(p.kode);
   S.orangAktif = p;
   S.showMobilePass = true;
+  saveStoragePresensi();
   render();
 }
 
@@ -1157,6 +1260,7 @@ function togglePresensi(kode, e) {
     S.showMobilePass = true;
     pesan(`Presensi ${p.nama} berhasil dicatat.`);
   }
+  saveStoragePresensi();
   render();
 }
 
@@ -1165,6 +1269,36 @@ function pesan(t) {
   render();
   clearTimeout(window._p);
   window._p = setTimeout(() => { S.pesan = null; render(); }, 3000);
+}
+
+/* ---------------- Storage Operations ---------------- */
+function saveStoragePresensi() {
+  try {
+    const arr = Array.from(S.hadir);
+    localStorage.setItem("smb_hadir_grid", JSON.stringify(arr));
+    localStorage.setItem("smb_hadir", JSON.stringify(arr));
+  } catch(e){}
+}
+
+function syncStoragePresensi(isInitial = false) {
+  try {
+    const raw = localStorage.getItem("smb_hadir_grid") || localStorage.getItem("smb_hadir");
+    if (raw) {
+      const hadirArr = JSON.parse(raw);
+      let prevCount = S.hadir.size;
+      hadirArr.forEach(k => S.hadir.add(k));
+      if (!isInitial && S.hadir.size !== prevCount) {
+        const latestKey = hadirArr[hadirArr.length - 1];
+        const p = P.find(x => x.kode === latestKey);
+        if (p) {
+          S.orangAktif = p;
+          S.showMobilePass = true;
+          pesan(`Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
+        }
+        render();
+      }
+    }
+  } catch(e){}
 }
 
 /* ---------------- Event Listeners ---------------- */
@@ -1198,15 +1332,15 @@ document.addEventListener("click", e => {
 
   const btnReset = e.target.closest("#btn-reset-global");
   if (btnReset) {
-    if (confirm("Kosongkan seluruh data presensi peserta? Semua peserta akan diatur menjadi Belum Hadir.")) {
+    if (confirm("Kosongkan seluruh data presensi Sesi 2 Grid? Semua peserta akan diatur menjadi Belum Hadir.")) {
       try {
+        localStorage.removeItem("smb_hadir_grid");
         localStorage.removeItem("smb_hadir");
-        localStorage.removeItem("smb_my_code");
       } catch(err){}
       S.hadir.clear();
       S.orangAktif = null;
       S.showMobilePass = false;
-      pesan("Seluruh data presensi telah dikosongkan (0 / 21 Hadir).");
+      pesan("Seluruh data presensi Sesi 2 telah dikosongkan.");
       render();
     }
     return;
@@ -1226,27 +1360,6 @@ document.addEventListener("click", e => {
   }
 });
 
-function syncStoragePresensi(isInitial = false) {
-  try {
-    const raw = localStorage.getItem("smb_hadir");
-    if (raw) {
-      const hadirArr = JSON.parse(raw);
-      let prevCount = S.hadir.size;
-      hadirArr.forEach(k => S.hadir.add(k));
-      if (!isInitial && S.hadir.size !== prevCount) {
-        const latestKey = hadirArr[hadirArr.length - 1];
-        const p = P.find(x => x.kode === latestKey);
-        if (p) {
-          S.orangAktif = p;
-          S.showMobilePass = true;
-          pesan(`Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
-        }
-        render();
-      }
-    }
-  } catch(e){}
-}
-
 function initRealtimeStream() {
   try {
     const sse = new EventSource("https://ntfy.sh/smb_bootcamp_checkin_2026/sse");
@@ -1261,7 +1374,7 @@ function initRealtimeStream() {
               S.hadir.add(p.kode);
               S.orangAktif = p;
               S.showMobilePass = true;
-              pesan(`Pembaruan Presensi: ${p.nama} telah presensi (Kursi #${p.kursi})!`);
+              pesan(`Pembaruan Presensi Sesi 2: ${p.nama} telah presensi (Kursi #${p.kursi})!`);
               render();
             }
           }
