@@ -678,6 +678,17 @@ function init() {
   render();
 }
 
+function broadcastPresensi(p) {
+  if (!p || !p.kode) return;
+  try {
+    fetch("https://ntfy.sh/smb_bootcamp_checkin_2026", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kode: p.kode, nama: p.nama, kursi: p.kursi, timestamp: Date.now() })
+    }).catch(() => {});
+  } catch(e){}
+}
+
 function simpanPresensi(p) {
   if (!p || !p.kode) return;
   
@@ -699,6 +710,8 @@ function simpanPresensi(p) {
   try {
     localStorage.setItem("smb_my_code", p.kode);
   } catch(e){}
+
+  broadcastPresensi(p);
 }
 
 function render() {

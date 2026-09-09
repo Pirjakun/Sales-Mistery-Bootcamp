@@ -1004,6 +1004,7 @@ function syncStoragePresensi(isInitial = false) {
           S.orangAktif = p;
           S.showMobilePass = true;
           pesan(`Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
+          render();
         } else {
           render();
         }
@@ -1027,6 +1028,7 @@ function initRealtimeStream() {
               S.orangAktif = p;
               S.showMobilePass = true;
               pesan(`Pembaruan Presensi: ${p.nama} telah presensi (Kursi #${p.kursi})!`);
+              render();
             }
           }
         }
