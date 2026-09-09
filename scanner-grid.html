@@ -1186,10 +1186,22 @@ function renderModalSmart() {
 
   if (existingModal) {
     if (existingModal.dataset.currentKode === p.kode) {
-      return; // Already open for this exact participant! Leave intact to prevent flickering/re-animating.
+      return; // Already open for this exact participant
+    }
+    // New participant check-in! Directly overwrite/replace modal pass in-place
+    existingModal.dataset.currentKode = p.kode;
+    const cardEl = existingModal.querySelector(".mobile-pass-card");
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = modalTiketDigital().trim();
+    const newCard = tempDiv.querySelector(".mobile-pass-card");
+    if (cardEl && newCard) {
+      cardEl.replaceWith(newCard);
     } else {
       existingModal.remove();
+      const node = tempDiv.firstElementChild;
+      if (node) document.body.appendChild(node);
     }
+    return;
   }
 
   const html = modalTiketDigital();
