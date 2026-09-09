@@ -1128,7 +1128,7 @@ function modalTiketDigital() {
     </div>`;
 
   return `
-  <div class="modal-overlay" id="modal-bg">
+  <div class="modal-overlay" id="modal-bg" data-current-kode="${p.kode}">
     <div class="mobile-pass-card">
       <div class="mobile-header">
         <div class="top-tag">TIKET DIGITAL &amp; SEAT PASS — SESI 2 GRID</div>
@@ -1174,34 +1174,95 @@ function modalTiketDigital() {
   </div>`;
 }
 
+function renderModalSmart() {
+  const existingModal = document.getElementById("modal-bg");
+
+  if (!S.showMobilePass || !S.orangAktif) {
+    if (existingModal) existingModal.remove();
+    return;
+  }
+
+  const p = S.orangAktif;
+
+  if (existingModal) {
+    if (existingModal.dataset.currentKode === p.kode) {
+      return; // Already open for this exact participant! Leave intact to prevent flickering/re-animating.
+    } else {
+      existingModal.remove();
+    }
+  }
+
+  const html = modalTiketDigital();
+  if (html) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html.trim();
+    const node = tempDiv.firstElementChild;
+    if (node) document.body.appendChild(node);
+  }
+}
+
+function renderToastSmart() {
+  let existingToast = document.querySelector(".toast");
+
+  if (!S.pesan) {
+    if (existingToast) existingToast.remove();
+    return;
+  }
+
+  if (existingToast) {
+    existingToast.textContent = S.pesan;
+  } else {
+    const toastNode = document.createElement("div");
+    toastNode.className = "toast";
+    toastNode.textContent = S.pesan;
+    document.body.appendChild(toastNode);
+  }
+}
+
 /* ---------------- Render Main App ---------------- */
 function render() {
   const sorotKursi = S.orangAktif ? S.orangAktif.kursi : null;
 
-  $("#app").innerHTML = `
-    ${bilahAtas()}
-    <main class="kiosk-main">
-      <section class="panel">
-        <h2>Denah Tempat Duduk Sesi 2 (Grid Classroom 5x5)</h2>
-        <div class="hint">Ketuk kartu meja atau nama peserta untuk melihat detail lokasi duduk</div>
-        ${denah(sorotKursi)}
-      </section>
-      <section class="panel" style="padding:0; background:transparent; border:0; box-shadow:none;">
-        ${kioskPanelKanan()}
-      </section>
-    </main>
-    ${modalTiketDigital()}
-    ${S.pesan ? `<div class="toast">${esc(S.pesan)}</div>` : ""}
-  `;
+  const appEl = $("#app");
+  if (appEl) {
+    let mainEl = $("#app-main");
+    if (!mainEl) {
+      appEl.innerHTML = `
+        <div id="app-header">${bilahAtas()}</div>
+        <div id="app-main">
+          <main class="kiosk-main">
+            <section class="panel">
+              <h2>Denah Tempat Duduk Sesi 2 (Grid Classroom 5x5)</h2>
+              <div class="hint">Ketuk kartu meja atau nama peserta untuk melihat detail lokasi duduk</div>
+              <div id="denah-container">${denah(sorotKursi)}</div>
+            </section>
+            <section class="panel" style="padding:0; background:transparent; border:0; box-shadow:none;" id="panel-kanan-container">
+              ${kioskPanelKanan()}
+            </section>
+          </main>
+        </div>
+      `;
+    } else {
+      const headerEl = $("#app-header");
+      const denahEl = $("#denah-container");
+      const panelKananEl = $("#panel-kanan-container");
+      if (headerEl) headerEl.innerHTML = bilahAtas();
+      if (denahEl) denahEl.innerHTML = denah(sorotKursi);
+      if (panelKananEl) panelKananEl.innerHTML = kioskPanelKanan();
+    }
+  }
 
   // Bind Search Input Focus
   const sInput = $("#input-search");
-  if (sInput) {
+  if (sInput && document.activeElement !== sInput) {
     sInput.addEventListener("input", e => {
       S.query = e.target.value;
       renderListOnly();
     });
   }
+
+  renderModalSmart();
+  renderToastSmart();
 }
 
 function renderListOnly() {
@@ -1262,7 +1323,6 @@ function togglePresensi(kode, e) {
     pesan(`Presensi ${p.nama} berhasil dicatat.`);
   }
   saveStoragePresensi();
-  render();
 }
 
 function pesan(t) {
@@ -1295,8 +1355,9 @@ function syncStoragePresensi(isInitial = false) {
           S.orangAktif = p;
           S.showMobilePass = true;
           pesan(`Check-in Sukses: ${p.nama} tersambung ke Kursi #${p.kursi}!`);
+        } else {
+          render();
         }
-        render();
       }
     }
   } catch(e){}
@@ -1342,7 +1403,6 @@ document.addEventListener("click", e => {
       S.orangAktif = null;
       S.showMobilePass = false;
       pesan("Seluruh data presensi Sesi 2 telah dikosongkan.");
-      render();
     }
     return;
   }
@@ -1376,7 +1436,6 @@ function initRealtimeStream() {
               S.orangAktif = p;
               S.showMobilePass = true;
               pesan(`Pembaruan Presensi Sesi 2: ${p.nama} telah presensi (Kursi #${p.kursi})!`);
-              render();
             }
           }
         }
