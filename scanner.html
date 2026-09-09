@@ -534,12 +534,12 @@ function denah(sorot) {
     { n: 7, x: 124, y: 277, rot: 0 },
     { n: 8, x: 124, y: 314, rot: 0 },
     // Sisi Bawah (9-14)
-    { n: 9, x: 168, y: 380, rot: 0 },
-    { n: 10, x: 208, y: 380, rot: 0 },
-    { n: 11, x: 248, y: 380, rot: 0 },
+    { n: 9, x: 152, y: 350, rot: -45 },
+    { n: 10, x: 200, y: 380, rot: 0 },
+    { n: 11, x: 244, y: 380, rot: 0 },
     { n: 12, x: 288, y: 380, rot: 0 },
-    { n: 13, x: 328, y: 380, rot: 0 },
-    { n: 14, x: 368, y: 380, rot: 0 },
+    { n: 13, x: 332, y: 380, rot: 0 },
+    { n: 14, x: 374, y: 350, rot: 45 },
     // Sisi Kanan (15-22: dari bawah y=314 naik ke atas y=55)
     { n: 15, x: 388, y: 314, rot: 0 },
     { n: 16, x: 388, y: 277, rot: 0 },
@@ -565,7 +565,7 @@ function denah(sorot) {
     if (aku) cls += "me ";
     else if (isi) cls += "filled ";
 
-    const rotAttr = item.rot !== 0 ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
+    const rotAttr = item.rot ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
 
     function getDiscColorCls(disc) {
       const d = String(disc || "").toUpperCase();
@@ -586,15 +586,29 @@ function denah(sorot) {
         <text x="-51" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
         <text x="-51" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
       `;
-    } else if (n <= 14) {
-      // Bottom side (9-14): non-overlapping compact badge below
+    } else if (n === 9) {
+      // Corner seat 9 (Okki): bottom-left diagonal badge
+      nameTagSvg = `
+        <rect x="-42" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
+        <text x="-7" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
+        <text x="-7" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+      `;
+    } else if (n === 14) {
+      // Corner seat 14 (Buffer): bottom-right diagonal badge
+      nameTagSvg = `
+        <rect x="0" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
+        <text x="35" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
+        <text x="35" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+      `;
+    } else if (n >= 10 && n <= 13) {
+      // Bottom side (10-13): non-overlapping compact badge below
       nameTagSvg = `
         <rect x="-5" y="32" width="38" height="28" rx="5" class="name-shape ${discCls}" />
         <text x="14" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
         <text x="14" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
       `;
     } else {
-      // Right side (13-20): name badge on the right
+      // Right side (15-22): name badge on the right
       nameTagSvg = `
         <rect x="34" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
         <text x="79" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
@@ -625,9 +639,13 @@ function denah(sorot) {
     <div class="map-wrapper-maximized">
       <svg viewBox="20 30 500 425" width="100%" height="100%" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto;">
         <g>
-          <!-- Wooden U-Shape Table Graphic -->
-          <polygon points="160,40 200,40 200,345 340,345 340,40 380,40 380,375 160,375" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-          <polyline points="160,40 160,375 380,375 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          <!-- Wooden U-Shape Table Graphic with 45-degree Beveled Corners -->
+          <polygon points="160,40 200,40 200,320 220,335 320,335 340,320 340,40 380,40 380,335 345,370 195,370 160,335" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+          <line x1="160" y1="335" x2="200" y2="320" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="195" y1="370" x2="220" y2="335" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="345" y1="370" x2="320" y2="335" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="380" y1="335" x2="340" y2="320" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <polyline points="160,40 160,335 195,370 345,370 380,335 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
         </g>
         <g id="svg-seats-group">${svgSeats}</g>
       </svg>

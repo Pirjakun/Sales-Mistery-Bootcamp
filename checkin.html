@@ -380,21 +380,19 @@ function denahUShape(sorot) {
   const P_SESI = getActivePList();
   const orgLocal = k => P_SESI.find(p => p.kursi === k);
 
-  const isDay3 = S.sesi === 3 || P_SESI.length > 20;
-
-  const coords = isDay3 ? [
-    { n: 1, x: 124, y: 55 }, { n: 2, x: 124, y: 92 }, { n: 3, x: 124, y: 129 }, { n: 4, x: 124, y: 166 },
-    { n: 5, x: 124, y: 203 }, { n: 6, x: 124, y: 240 }, { n: 7, x: 124, y: 277 }, { n: 8, x: 124, y: 314 },
-    { n: 9, x: 168, y: 380 }, { n: 10, x: 208, y: 380 }, { n: 11, x: 248, y: 380 }, { n: 12, x: 288, y: 380 },
-    { n: 13, x: 328, y: 380 }, { n: 14, x: 368, y: 380 },
-    { n: 15, x: 388, y: 314 }, { n: 16, x: 388, y: 277 }, { n: 17, x: 388, y: 240 }, { n: 18, x: 388, y: 203 },
-    { n: 19, x: 388, y: 166 }, { n: 20, x: 388, y: 129 }, { n: 21, x: 388, y: 92 }, { n: 22, x: 388, y: 55 }
+  const isDay3 = S.sesi === 3 || P_SESI.length > 2  const coords = isDay3 ? [
+    { n: 1, x: 124, y: 55, rot: 0 }, { n: 2, x: 124, y: 92, rot: 0 }, { n: 3, x: 124, y: 129, rot: 0 }, { n: 4, x: 124, y: 166, rot: 0 },
+    { n: 5, x: 124, y: 203, rot: 0 }, { n: 6, x: 124, y: 240, rot: 0 }, { n: 7, x: 124, y: 277, rot: 0 }, { n: 8, x: 124, y: 314, rot: 0 },
+    { n: 9, x: 152, y: 350, rot: -45 }, { n: 10, x: 200, y: 380, rot: 0 }, { n: 11, x: 244, y: 380, rot: 0 }, { n: 12, x: 288, y: 380, rot: 0 },
+    { n: 13, x: 332, y: 380, rot: 0 }, { n: 14, x: 374, y: 350, rot: 45 },
+    { n: 15, x: 388, y: 314, rot: 0 }, { n: 16, x: 388, y: 277, rot: 0 }, { n: 17, x: 388, y: 240, rot: 0 }, { n: 18, x: 388, y: 203, rot: 0 },
+    { n: 19, x: 388, y: 166, rot: 0 }, { n: 20, x: 388, y: 129, rot: 0 }, { n: 21, x: 388, y: 92, rot: 0 }, { n: 22, x: 388, y: 55, rot: 0 }
   ] : [
-    { n: 1, x: 124, y: 55 }, { n: 2, x: 124, y: 92 }, { n: 3, x: 124, y: 129 }, { n: 4, x: 124, y: 166 },
-    { n: 5, x: 124, y: 203 }, { n: 6, x: 124, y: 240 }, { n: 7, x: 124, y: 277 }, { n: 8, x: 124, y: 314 },
-    { n: 9, x: 188, y: 380 }, { n: 10, x: 232, y: 380 }, { n: 11, x: 276, y: 380 }, { n: 12, x: 320, y: 380 },
-    { n: 13, x: 388, y: 55 }, { n: 14, x: 388, y: 92 }, { n: 15, x: 388, y: 129 }, { n: 16, x: 388, y: 166 },
-    { n: 17, x: 388, y: 203 }, { n: 18, x: 388, y: 240 }, { n: 19, x: 388, y: 277 }, { n: 20, x: 388, y: 314 }
+    { n: 1, x: 124, y: 55, rot: 0 }, { n: 2, x: 124, y: 92, rot: 0 }, { n: 3, x: 124, y: 129, rot: 0 }, { n: 4, x: 124, y: 166, rot: 0 },
+    { n: 5, x: 124, y: 203, rot: 0 }, { n: 6, x: 124, y: 240, rot: 0 }, { n: 7, x: 124, y: 277, rot: 0 }, { n: 8, x: 124, y: 314, rot: 0 },
+    { n: 9, x: 188, y: 380, rot: 0 }, { n: 10, x: 232, y: 380, rot: 0 }, { n: 11, x: 276, y: 380, rot: 0 }, { n: 12, x: 320, y: 380, rot: 0 },
+    { n: 13, x: 388, y: 55, rot: 0 }, { n: 14, x: 388, y: 92, rot: 0 }, { n: 15, x: 388, y: 129, rot: 0 }, { n: 16, x: 388, y: 166, rot: 0 },
+    { n: 17, x: 388, y: 203, rot: 0 }, { n: 18, x: 388, y: 240, rot: 0 }, { n: 19, x: 388, y: 277, rot: 0 }, { n: 20, x: 388, y: 314, rot: 0 }
   ];
 
   const sortedCoords = [...coords].sort((a, b) => (a.n === sorot ? 1 : 0) - (b.n === sorot ? 1 : 0));
@@ -412,15 +410,30 @@ function denahUShape(sorot) {
     else if (isi) cls += "filled ";
 
     const discCls = getDiscColorCls(pDisc);
+    const rotAttr = item.rot ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
     let nameTagSvg = "";
-    const isBottomRow = isDay3 ? (n >= 9 && n <= 14) : (n >= 9 && n <= 12);
+    
     if (n <= 8) {
       nameTagSvg = `
         <rect x="-96" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
         <text x="-51" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
         <text x="-51" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
       `;
-    } else if (isBottomRow) {
+    } else if (isDay3 && n === 9) {
+      // Corner seat 9 (Okki) - bottom-left diagonal badge
+      nameTagSvg = `
+        <rect x="-42" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
+        <text x="-7" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
+        <text x="-7" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+      `;
+    } else if (isDay3 && n === 14) {
+      // Corner seat 14 (Buffer) - bottom-right diagonal badge
+      nameTagSvg = `
+        <rect x="0" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
+        <text x="35" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
+        <text x="35" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+      `;
+    } else if (isDay3 ? (n >= 10 && n <= 13) : (n >= 9 && n <= 12)) {
       nameTagSvg = `
         <rect x="-5" y="32" width="38" height="28" rx="5" class="name-shape ${discCls}" />
         <text x="14" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
@@ -438,8 +451,8 @@ function denahUShape(sorot) {
       <g class="${cls}" transform="translate(${item.x}, ${item.y})">
         ${aku ? `<circle class="sonar-ring" cx="14" cy="12.5" fill="none" stroke="#F59E0B" />` : ""}
         ${nameTagSvg}
-        <rect width="28" height="25" rx="7" class="seat-rect" />
-        <text x="14" y="17" class="seat-num" text-anchor="middle">${n}</text>
+        <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
+        <text x="14" y="17" class="seat-num" text-anchor="middle" ${rotAttr}>${n}</text>
         ${aku ? `
           <g class="pin-marker">
             <polygon points="0,-4 -5,-12 5,-12" fill="#DC2626" />
@@ -456,13 +469,17 @@ function denahUShape(sorot) {
     <div class="map-svg-wrap">
       <svg viewBox="20 30 500 425" width="100%" height="100%" style="width:100%; height:100%; max-height:220px; object-fit:contain; display:block; margin: 0 auto;">
         <g>
-          <polygon points="160,40 200,40 200,345 340,345 340,40 380,40 380,375 160,375" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
-          <polyline points="160,40 160,375 380,375 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
+          <polygon points="160,40 200,40 200,320 220,335 320,335 340,320 340,40 380,40 380,335 345,370 195,370 160,335" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
+          <line x1="160" y1="335" x2="200" y2="320" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="195" y1="370" x2="220" y2="335" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="345" y1="370" x2="320" y2="335" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <line x1="380" y1="335" x2="340" y2="320" stroke="#784519" stroke-width="1.5" opacity="0.7"/>
+          <polyline points="160,40 160,335 195,370 345,370 380,335 380,40" fill="none" stroke="#E5A869" stroke-width="2" opacity="0.6"/>
         </g>
         <g>${svgSeats}</g>
       </svg>
     </div>
-  </div>`;
+  </div>`;iv>`;
 }
 
 /* ---------------- Render Denah Grid 5x5 ---------------- */
