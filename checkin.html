@@ -720,21 +720,11 @@ function render() {
       S.view = "form";
     }
 
-    const subText = S.sesi === 3 ? "Day 3: U-Shape DISC Empowerment Layout · Kalyana Resort"
-      : S.sesi === 2 ? "Sesi 2: Classroom Grid Layout 5x5 · Kalyana Resort"
-      : "Sesi 1: U-Shape Layout · Kalyana Resort";
-    const selectLabel = S.sesi === 3 ? "Pilih Nama Peserta (Day 3 U-Shape)"
-      : S.sesi === 2 ? "Pilih Nama Peserta (Sesi 2 Grid)"
-      : "Pilih Nama Peserta (Sesi 1 U-Shape)";
-    const btnLabel = S.sesi === 3 ? "Konfirmasi Presensi Mandiri (Day 3)"
-      : S.sesi === 2 ? "Konfirmasi Presensi Mandiri (Sesi 2)"
-      : "Konfirmasi Presensi Mandiri (Sesi 1)";
-    const badgeLabel = S.sesi === 3 ? "E-TICKET & SEAT PASS — DAY 3 U-SHAPE"
-      : S.sesi === 2 ? "E-TICKET & SEAT PASS — SESI 2 GRID"
-      : "E-TICKET & SEAT PASS — SESI 1 U-SHAPE";
-    const denahLabel = S.sesi === 3 ? "DAY 3 U-SHAPE"
-      : S.sesi === 2 ? "GRID 5X5 CLASSROOM"
-      : "U-SHAPE";
+    const subText = "Sales Mastery Bootcamp · Kalyana Resort Kaliurang";
+    const selectLabel = "Pilih Nama Peserta";
+    const btnLabel = "Konfirmasi Presensi Mandiri";
+    const badgeLabel = "E-TICKET & SEAT PASS";
+    const denahLabel = "DENAH LOKASI KURSI";
 
     if (S.view === "form") {
       container.innerHTML = `
@@ -783,7 +773,7 @@ function render() {
         <div class="mobile-head">
           <div class="badge-top">SISTEM PRESENSI TERAKREDITASI</div>
           <h1>Check-in Sukses!</h1>
-          <p>Data presensi tersinkronisasi ke Layar Kiosk (${denahLabel})</p>
+          <p>Data presensi tersinkronisasi ke Layar Kiosk</p>
         </div>
         <div class="mobile-body">
           <div class="success-box">
@@ -793,7 +783,7 @@ function render() {
               </svg>
             </div>
             <h2>Presensi Berhasil</h2>
-            <p>Selamat datang <b>${esc(S.pDipilih ? S.pDipilih.nama : "Peserta")}</b>!<br>Nomor kursi Anda di Denah ${denahLabel} telah disiapkan.</p>
+            <p>Selamat datang <b>${esc(S.pDipilih ? S.pDipilih.nama : "Peserta")}</b>!<br>Nomor kursi Anda di Denah Tempat Duduk telah disiapkan.</p>
             <button class="btn-submit" id="btn-buka-tiket">Buka Tiket Digital &amp; Nomor Kursi</button>
           </div>
         </div>
@@ -824,12 +814,12 @@ function render() {
             <div class="num">${p ? p.kursi : "-"}</div>
             <div class="desc">
               <b>${sisi(p ? p.kursi : 1)}</b>
-              <span>Tersambung langsung dengan Layar Kiosk ${denahLabel}</span>
+              <span>Tersambung langsung dengan Layar Kiosk Utama</span>
             </div>
           </div>
 
           <div>
-            <div class="sec-lbl">DENAH LOKASI KURSI (${denahLabel})</div>
+            <div class="sec-lbl">DENAH LOKASI KURSI</div>
             ${denah(p ? p.kursi : null)}
           </div>
 
@@ -848,7 +838,7 @@ function render() {
           </div>` : ""}
 
           <div style="display:flex; flex-direction:column; gap:8px;">
-            <div class="verified-badge">Terverifikasi Hadir (Sesi ${S.sesi} Presensi)</div>
+            <div class="verified-badge">Terverifikasi Hadir</div>
             <button class="btn-submit" id="btn-cetak-tiket" style="background:var(--ok); margin-top:4px;">
               Unduh Tiket sebagai Gambar (PNG)
             </button>
