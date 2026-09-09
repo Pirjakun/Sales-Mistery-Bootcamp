@@ -1203,20 +1203,7 @@ function renderModalSmart() {
 
 function renderToastSmart() {
   let existingToast = document.querySelector(".toast");
-
-  if (!S.pesan) {
-    if (existingToast) existingToast.remove();
-    return;
-  }
-
-  if (existingToast) {
-    existingToast.textContent = S.pesan;
-  } else {
-    const toastNode = document.createElement("div");
-    toastNode.className = "toast";
-    toastNode.textContent = S.pesan;
-    document.body.appendChild(toastNode);
-  }
+  if (existingToast) existingToast.remove();
 }
 
 /* ---------------- Render Main App ---------------- */
