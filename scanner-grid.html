@@ -215,6 +215,15 @@
   .grid-card.disc-neutral .card-name { color: #7A7570; font-weight: 600; }
   .grid-card.disc-neutral .card-disc { color: #A09A8E; font-style: italic; }
 
+  /* Blue Theme for non-selected seats when a specific seat is highlighted */
+  .grid-card.disc-blue-mode {
+    background: #EBF3FE !important;
+    border-color: #92B7F4 !important;
+  }
+  .grid-card.disc-blue-mode .card-top-num { color: #2563EB !important; }
+  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; }
+  .grid-card.disc-blue-mode .card-disc { color: #3B82F6 !important; }
+
   /* Card Elements */
   .card-top-num {
     font-size: 11.5px;
@@ -1035,9 +1044,15 @@ function denah(sorot) {
     const isHadir = S.hadir.has(p.kode);
     const discCls = getDiscColorCls(p.disc);
 
-    let cls = `grid-card ${discCls} `;
-    if (aku) cls += "me ";
-    if (isHadir) cls += "filled ";
+    let cls = `grid-card `;
+    if (aku) {
+      cls += "me ";
+    } else if (sorot != null) {
+      cls += "disc-blue-mode ";
+    } else {
+      cls += `${discCls} `;
+      if (isHadir) cls += "filled ";
+    }
 
     return `
       <div class="${cls}" data-pilih-kursi="${k}">

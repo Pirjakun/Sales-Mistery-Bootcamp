@@ -234,6 +234,18 @@
   }
   .seat-node.me .name-label-title { fill: #78350F !important; font-weight: 800 !important; }
 
+  /* Blue Theme for all other seats when a specific seat pass is highlighted */
+  .seat-node.seat-blue-mode .seat-rect { fill: #2563EB !important; stroke: #1D4ED8 !important; }
+  .seat-node.seat-blue-mode .seat-num { fill: #FFFFFF !important; font-weight: 800 !important; }
+  .name-shape.disc-blue-mode { fill: #EFF6FF !important; stroke: #93C5FD !important; }
+  .seat-node.seat-blue-mode .name-label-title { fill: #1E40AF !important; font-weight: 700 !important; }
+  .seat-node.seat-blue-mode .name-label-disc { fill: #3B82F6 !important; font-weight: 600 !important; }
+
+  .grid-card.disc-blue-mode { background: #EBF3FE !important; border-color: #92B7F4 !important; }
+  .grid-card.disc-blue-mode .card-top-num { color: #2563EB !important; }
+  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; }
+  .grid-card.disc-blue-mode .card-disc { color: #3B82F6 !important; }
+
   @keyframes sonarPulse {
     0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
     100% { r: 36px; opacity: 0; stroke-width: 1px; }
@@ -425,9 +437,10 @@ function denahUShape(sorot) {
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
+    else if (sorot != null) cls += "seat-blue-mode ";
     else if (isi) cls += "filled ";
 
-    const discCls = getDiscColorCls(pDisc);
+    const discCls = (sorot != null && !aku) ? "disc-blue-mode" : (aku ? "disc-me" : getDiscColorCls(pDisc));
     const rotAttr = item.rot ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
     let nameTagSvg = "";
     
@@ -516,9 +529,15 @@ function denahGrid(sorot) {
     const isHadir = hadirSet.has(p.kode);
     const discCls = getDiscColorCls(p.disc);
 
-    let cls = `grid-card ${discCls} `;
-    if (aku) cls += "me ";
-    if (isHadir) cls += "filled ";
+    let cls = `grid-card `;
+    if (aku) {
+      cls += "me ";
+    } else if (sorot != null) {
+      cls += "disc-blue-mode ";
+    } else {
+      cls += `${discCls} `;
+      if (isHadir) cls += "filled ";
+    }
 
     return `
       <div class="${cls}">

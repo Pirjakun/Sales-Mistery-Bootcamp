@@ -321,6 +321,13 @@
     background: var(--navy); color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600;
   }
 
+  /* Blue Theme for all other seats when a specific seat pass is highlighted */
+  .seat-node.seat-blue-mode .seat-rect { fill: #2563EB !important; stroke: #1D4ED8 !important; }
+  .seat-node.seat-blue-mode .seat-num { fill: #FFFFFF !important; font-weight: 800 !important; }
+  .name-shape.disc-blue-mode { fill: #EFF6FF !important; stroke: #93C5FD !important; }
+  .seat-node.seat-blue-mode .name-label-title { fill: #1E40AF !important; font-weight: 700 !important; }
+  .seat-node.seat-blue-mode .name-label-disc { fill: #3B82F6 !important; font-weight: 600 !important; }
+
   .toast {
     position: fixed; left: 50%; transform: translateX(-50%); bottom: 24px; background: var(--warn);
     color: #fff; padding: 11px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 300;
@@ -583,6 +590,7 @@ function denah(sorot) {
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
+    else if (sorot != null) cls += "seat-blue-mode ";
     else if (isi) cls += "filled ";
 
     const rotAttr = item.rot ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
@@ -596,7 +604,7 @@ function denah(sorot) {
       return "disc-neutral";
     }
 
-    const discCls = getDiscColorCls(pDisc);
+    const discCls = (sorot != null && !aku) ? "disc-blue-mode" : (aku ? "disc-me" : getDiscColorCls(pDisc));
 
     let nameTagSvg = "";
     if (n <= 8) {
