@@ -750,9 +750,18 @@ function kioskPanelKanan() {
             </button>
           </li>`;
         }).join("")}
-      </ul>
     </div>
   </div>`;
+
+function getTransportPulangInfo(pNama) {
+  const name = String(pNama || "").toLowerCase();
+  if (name.includes("adiel") || name.includes("dita") || name.includes("fadli") || name.includes("linda")) {
+    return { mobil: "Avanza 57", driver: "Gilang", passCount: "4 Penumpang", badgeBg: "#D1FAE5", badgeColor: "#065F46", borderColor: "#059669" };
+  }
+  if (name.includes("mitha") || name.includes("mya")) {
+    return { mobil: "Avanza 56", driver: "Yuda", passCount: "5 Penumpang", badgeBg: "#FEF3C7", badgeColor: "#92400E", borderColor: "#D97706" };
+  }
+  return { mobil: "HiAce Premio", driver: "Putra", passCount: "13 Penumpang", badgeBg: "#DBEAFE", badgeColor: "#1E40AF", borderColor: "#2563EB" };
 }
 
 /* ---------------- Modal Ticket Digital HP Peserta ---------------- */
@@ -760,6 +769,7 @@ function modalTiketDigital() {
   if (!S.showMobilePass || !S.orangAktif) return "";
   const p = S.orangAktif;
   const t = tetangga(p.kursi);
+  const tp = getTransportPulangInfo(p.nama);
 
   const kartuNb = (lbl, o) => o ? `
     <div class="nb-box">
@@ -795,6 +805,17 @@ function modalTiketDigital() {
         </div>
 
         <div>
+          <div class="sec-title">INFORMASI TRANSPORT KEPULANGAN</div>
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-left:4px solid ${tp.borderColor}; border-radius:10px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:13.5px; font-weight:800; color:#0F172A;">🚘 ${tp.mobil}</div>
+              <div style="font-size:12px; color:#475569; margin-top:2px;">Driver: <b style="color:#0F172A;">${tp.driver}</b></div>
+            </div>
+            <span style="background:${tp.badgeBg}; color:${tp.badgeColor}; font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px;">${tp.passCount}</span>
+          </div>
+        </div>
+
+        <div>
           <div class="sec-title">REKAN DUDUK SEBELAH &amp; DiSC PROFILE</div>
           <div class="nb-grid">
             ${kartuNb("SEBELAH KIRI", t.kiri)}
@@ -805,8 +826,6 @@ function modalTiketDigital() {
         ${t.kiri || t.kanan ? `<div class="tip-box">
           <b>Tips Cara Berkomunikasi:</b><br>
           ${t.kiri ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
-          ${t.kanan ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
-        </div>` : ""}
       </div>
       <div class="mobile-footer" style="flex-wrap:wrap; gap:8px;">
         <div class="status-badge-ok">Hadir (Sistem Presensi Digital)</div>
