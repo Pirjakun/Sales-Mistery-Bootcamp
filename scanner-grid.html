@@ -217,12 +217,13 @@
 
   /* Blue Theme for non-selected seats when a specific seat is highlighted */
   .grid-card.disc-blue-mode {
-    background: #EBF3FE !important;
-    border-color: #92B7F4 !important;
+    background: #DBEAFE !important;
+    border-color: #3B82F6 !important;
   }
-  .grid-card.disc-blue-mode .card-top-num { color: #2563EB !important; }
-  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; }
-  .grid-card.disc-blue-mode .card-disc { color: #3B82F6 !important; }
+  .grid-card.disc-blue-mode .card-top-num { color: #1D4ED8 !important; font-weight: 800 !important; }
+  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; font-weight: 800 !important; }
+  .grid-card.disc-blue-mode .card-disc { color: #2563EB !important; font-weight: 700 !important; }
+  .grid-card.disc-blue-mode .card-hadir-badge { display: none !important; }
 
   /* Card Elements */
   .card-top-num {
@@ -1056,7 +1057,7 @@ function denah(sorot) {
 
     return `
       <div class="${cls}" data-pilih-kursi="${k}">
-        ${isHadir ? `<div class="card-hadir-badge">&#10003; HADIR</div>` : ""}
+        ${(isHadir && (sorot == null || aku)) ? `<div class="card-hadir-badge">&#10003; HADIR</div>` : ""}
         <div class="card-top-num">${k}</div>
         <div class="card-name">${esc(p.panggilan)}</div>
         <div class="card-disc">${esc(p.disc)}</div>
