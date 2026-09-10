@@ -657,7 +657,7 @@ function denah(sorot) {
   return `<div class="map" data-zoom-container style="position:relative; overflow:hidden;">
     <div class="stage">PANGGUNG UTAMA · LAYAR &amp; WHITEBOARD</div>
     <div class="map-wrapper-maximized" style="position:relative; overflow:hidden; touch-action:none; width:100%; height:100%;">
-      <svg viewBox="-25 10 590 465" width="100%" height="100%" class="zoomable-svg" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto; transform-origin: center center; transition: transform 0.1s ease-out;">
+      <svg viewBox="-75 -20 690 520" width="100%" height="100%" class="zoomable-svg" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto; transform-origin: center center; transition: transform 0.1s ease-out;">
         <g>
           <!-- Wooden U-Shape Table Graphic with 45-degree Beveled Corners -->
           <polygon points="160,40 200,40 200,320 220,335 320,335 340,320 340,40 380,40 380,335 345,370 195,370 160,335" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -814,10 +814,16 @@ function modalTiketDigital() {
   </div>`;
 }
 
+let modalAutoCloseTimer = null;
+
 function renderModalSmart() {
   const existingModal = document.getElementById("modal-bg");
 
   if (!S.showMobilePass || !S.orangAktif) {
+    if (modalAutoCloseTimer) {
+      clearTimeout(modalAutoCloseTimer);
+      modalAutoCloseTimer = null;
+    }
     if (existingModal) existingModal.remove();
     return;
   }
@@ -842,6 +848,13 @@ function renderModalSmart() {
       if (node) document.body.appendChild(node);
     }
     initZoomableMaps();
+
+    // Reset 5s auto-close timer on new checkin
+    if (modalAutoCloseTimer) clearTimeout(modalAutoCloseTimer);
+    modalAutoCloseTimer = setTimeout(() => {
+      S.showMobilePass = false;
+      render();
+    }, 5000);
     return;
   }
 
@@ -852,6 +865,13 @@ function renderModalSmart() {
     const node = tempDiv.firstElementChild;
     if (node) document.body.appendChild(node);
     initZoomableMaps();
+
+    // Start 5s auto-close timer
+    if (modalAutoCloseTimer) clearTimeout(modalAutoCloseTimer);
+    modalAutoCloseTimer = setTimeout(() => {
+      S.showMobilePass = false;
+      render();
+    }, 5000);
   }
 }
 
@@ -1153,6 +1173,10 @@ document.addEventListener("click", e => {
 
   const btnTutup = e.target.closest("[data-tutup-modal]");
   if (btnTutup || e.target.id === "modal-bg") {
+    if (modalAutoCloseTimer) {
+      clearTimeout(modalAutoCloseTimer);
+      modalAutoCloseTimer = null;
+    }
     S.showMobilePass = false;
     render();
     return;
