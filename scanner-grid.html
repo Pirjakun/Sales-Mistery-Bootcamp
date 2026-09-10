@@ -215,23 +215,22 @@
   .grid-card.disc-neutral .card-name { color: #7A7570; font-weight: 600; }
   .grid-card.disc-neutral .card-disc { color: #A09A8E; font-style: italic; }
 
-  /* Blue Theme for non-selected seats when a specific seat is highlighted */
-  .grid-card.disc-blue-mode {
-    background: #DBEAFE !important;
-    border-color: #3B82F6 !important;
-  }
-  .grid-card.disc-blue-mode .card-top-num { color: #1D4ED8 !important; font-weight: 800 !important; }
-  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; font-weight: 800 !important; }
-  .grid-card.disc-blue-mode .card-disc { color: #2563EB !important; font-weight: 700 !important; }
-  .grid-card.disc-blue-mode .card-hadir-badge { display: none !important; }
-
-  /* Card Elements */
+  /* Seat Number Badge: Solid Navy Blue Chair Indicator */
   .card-top-num {
-    font-size: 11.5px;
-    font-weight: 700;
-    color: #8C877D;
+    font-size: 11px;
+    font-weight: 800;
+    color: #FFFFFF;
+    background: #1E3A8A;
+    border-radius: 4px;
+    padding: 2px 6px;
+    display: inline-block;
     line-height: 1;
     margin-bottom: 4px;
+  }
+  .grid-card.me .card-top-num {
+    background: #F59E0B !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
   }
 
   .card-name {
@@ -1045,19 +1044,13 @@ function denah(sorot) {
     const isHadir = S.hadir.has(p.kode);
     const discCls = getDiscColorCls(p.disc);
 
-    let cls = `grid-card `;
-    if (aku) {
-      cls += "me ";
-    } else if (sorot != null) {
-      cls += "disc-blue-mode ";
-    } else {
-      cls += `${discCls} `;
-      if (isHadir) cls += "filled ";
-    }
+    let cls = `grid-card ${discCls} `;
+    if (aku) cls += "me ";
+    if (isHadir) cls += "filled ";
 
     return `
       <div class="${cls}" data-pilih-kursi="${k}">
-        ${(isHadir && (sorot == null || aku)) ? `<div class="card-hadir-badge">&#10003; HADIR</div>` : ""}
+        ${isHadir ? `<div class="card-hadir-badge">&#10003; HADIR</div>` : ""}
         <div class="card-top-num">${k}</div>
         <div class="card-name">${esc(p.panggilan)}</div>
         <div class="card-disc">${esc(p.disc)}</div>

@@ -205,48 +205,33 @@
 
   /* U-Shape SVG Styles */
   .seat-node { transition: all 0.3s ease; opacity: 0.95; }
-  .seat-rect { fill: #1E3A8A; stroke: #1E293B; stroke-width: 1.2; rx: 7px; transition: all 0.3s; }
-  .seat-num { font-family: var(--sans); font-weight: 800; font-size: 11.5px; fill: #FFFFFF; pointer-events: none; }
+  /* Physical Chair Rectangles (.seat-rect): ALL physical chairs are solid Navy Blue */
+  .seat-node .seat-rect { fill: #1E3A8A !important; stroke: #1D4ED8 !important; stroke-width: 1.2px; rx: 7px; transition: all 0.3s; }
+  .seat-node .seat-num { font-family: var(--sans); font-weight: 800; font-size: 11.5px; fill: #FFFFFF !important; pointer-events: none; }
   
+  /* Original DiSC Name Tag Badges */
   .name-shape { transition: all 0.3s ease; stroke-width: 1.5; }
-  .name-shape.disc-D { fill: #FFF5F5; stroke: #EF4444; }
-  .name-shape.disc-I { fill: #FFFBEB; stroke: #F59E0B; }
-  .name-shape.disc-S { fill: #F0FDF4; stroke: #10B981; }
-  .name-shape.disc-C { fill: #EFF6FF; stroke: #3B82F6; }
-  .name-shape.disc-neutral { fill: #F9FAFB; stroke: #9CA3AF; }
+  .name-shape.disc-D { fill: #FFF5F5 !important; stroke: #EF4444 !important; }
+  .name-shape.disc-I { fill: #FFFBEB !important; stroke: #F59E0B !important; }
+  .name-shape.disc-S { fill: #F0FDF4 !important; stroke: #10B981 !important; }
+  .name-shape.disc-C { fill: #EFF6FF !important; stroke: #3B82F6 !important; }
+  .name-shape.disc-neutral { fill: #F9FAFB !important; stroke: #9CA3AF !important; }
 
   .name-label-title { font-family: var(--sans); font-size: 11px; font-weight: 800; fill: #1E293B; pointer-events: none; }
   .name-label-disc { font-family: var(--sans); font-size: 9px; font-weight: 700; fill: #64748B; pointer-events: none; }
 
-  .seat-node.filled { opacity: 1; }
-  .seat-node.filled .seat-rect { fill: #10B981; stroke: #059669; }
-  .seat-node.filled .seat-num { fill: #FFFFFF; }
-
+  /* Active Chair Highlight (Gold/Amber with Red Pin) */
   .seat-node.me { opacity: 1 !important; }
   .seat-node.me .seat-rect {
-    fill: #F59E0B !important; stroke: #B45309 !important; stroke-width: 3.5 !important;
+    fill: #F59E0B !important; stroke: #B45309 !important; stroke-width: 3.5px !important;
     filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.95));
   }
-  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 800 !important; font-size: 13px !important; }
+  .seat-node.me .seat-num { fill: #000000 !important; font-weight: 900 !important; font-size: 13px !important; }
   .seat-node.me .name-shape {
-    fill: #FEF3C7 !important; stroke: #F59E0B !important; stroke-width: 2.5 !important;
+    fill: #FEF3C7 !important; stroke: #F59E0B !important; stroke-width: 2.5px !important;
     filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
   }
-  .seat-node.me .name-label-title { fill: #78350F !important; font-weight: 800 !important; }
-
-  /* Blue Theme for all other seats when a specific seat pass is highlighted */
-  .seat-node.seat-blue-mode { opacity: 1 !important; }
-  .seat-node.seat-blue-mode .seat-rect { fill: #2563EB !important; stroke: #1D4ED8 !important; }
-  .seat-node.seat-blue-mode .seat-num { fill: #FFFFFF !important; font-weight: 800 !important; }
-  .name-shape.disc-blue-mode { fill: #DBEAFE !important; stroke: #3B82F6 !important; stroke-width: 1.5px !important; }
-  .seat-node.seat-blue-mode .name-label-title { fill: #1E40AF !important; font-weight: 800 !important; }
-  .seat-node.seat-blue-mode .name-label-disc { fill: #2563EB !important; font-weight: 700 !important; }
-
-  .grid-card.disc-blue-mode { background: #DBEAFE !important; border-color: #3B82F6 !important; }
-  .grid-card.disc-blue-mode .card-top-num { color: #1D4ED8 !important; font-weight: 800 !important; }
-  .grid-card.disc-blue-mode .card-name { color: #1E40AF !important; font-weight: 800 !important; }
-  .grid-card.disc-blue-mode .card-disc { color: #2563EB !important; font-weight: 700 !important; }
-  .grid-card.disc-blue-mode .card-hadir-badge { display: none !important; }
+  .seat-node.me .name-label-title { fill: #78350F !important; font-weight: 900 !important; }
 
   @keyframes sonarPulse {
     0% { r: 14px; opacity: 0.9; stroke-width: 3px; }
@@ -439,10 +424,8 @@ function denahUShape(sorot) {
 
     let cls = "seat-node ";
     if (aku) cls += "me ";
-    else if (sorot != null) cls += "seat-blue-mode ";
-    else if (isi) cls += "filled ";
 
-    const discCls = (sorot != null && !aku) ? "disc-blue-mode" : (aku ? "disc-me" : getDiscColorCls(pDisc));
+    const discCls = aku ? "disc-me" : getDiscColorCls(pDisc);
     const rotAttr = item.rot ? `transform="rotate(${item.rot}, 14, 12.5)"` : "";
     let nameTagSvg = "";
     
@@ -531,15 +514,8 @@ function denahGrid(sorot) {
     const isHadir = hadirSet.has(p.kode);
     const discCls = getDiscColorCls(p.disc);
 
-    let cls = `grid-card `;
-    if (aku) {
-      cls += "me ";
-    } else if (sorot != null) {
-      cls += "disc-blue-mode ";
-    } else {
-      cls += `${discCls} `;
-      if (isHadir) cls += "filled ";
-    }
+    let cls = `grid-card ${discCls} `;
+    if (aku) cls += "me ";
 
     return `
       <div class="${cls}">
