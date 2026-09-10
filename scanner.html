@@ -351,13 +351,6 @@
   .zoom-controls .btn-zoom-reset {
     width: auto; padding: 0 8px; font-size: 11px; font-weight: 700; text-transform: uppercase;
   }
-
-  .zoom-hint {
-    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
-    background: rgba(15, 23, 42, 0.85); color: #F8FAFC; font-size: 10px; font-weight: 600;
-    padding: 3px 10px; border-radius: 12px; pointer-events: none; opacity: 0.9;
-    white-space: nowrap; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  }
   </style>
 </head>
 <body>
@@ -664,7 +657,7 @@ function denah(sorot) {
   return `<div class="map" data-zoom-container style="position:relative; overflow:hidden;">
     <div class="stage">PANGGUNG UTAMA · LAYAR &amp; WHITEBOARD</div>
     <div class="map-wrapper-maximized" style="position:relative; overflow:hidden; touch-action:none; width:100%; height:100%;">
-      <svg viewBox="20 30 500 425" width="100%" height="100%" class="zoomable-svg" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto; transform-origin: center center; transition: transform 0.1s ease-out;">
+      <svg viewBox="-25 10 590 465" width="100%" height="100%" class="zoomable-svg" style="width:100%; height:100%; max-height:100%; object-fit:contain; display:block; margin: 0 auto; transform-origin: center center; transition: transform 0.1s ease-out;">
         <g>
           <!-- Wooden U-Shape Table Graphic with 45-degree Beveled Corners -->
           <polygon points="160,40 200,40 200,320 220,335 320,335 340,320 340,40 380,40 380,335 345,370 195,370 160,335" fill="#C48849" stroke="#784519" stroke-width="2.5"/>
@@ -681,7 +674,6 @@ function denah(sorot) {
         <button type="button" class="btn-zoom-out" title="Perkecil Denah">−</button>
         <button type="button" class="btn-zoom-reset" title="Reset Zoom">Reset</button>
       </div>
-      <div class="zoom-hint">🔍 Pinch / tombol +/- untuk zoom denah</div>
     </div>
   </div>`;
 }
@@ -938,8 +930,8 @@ function makeZoomable(container) {
   let initialScale = 1;
 
   function updateTransform(smooth = false) {
-    scale = Math.min(Math.max(1, scale), 3.5);
-    if (scale === 1) {
+    scale = Math.min(Math.max(0.5, scale), 3.5);
+    if (scale <= 1) {
       pointX = 0;
       pointY = 0;
     }
