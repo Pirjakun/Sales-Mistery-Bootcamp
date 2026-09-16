@@ -172,17 +172,25 @@ Tiket digital berisi Nomor Kursi, Badge DiSC, Tetangga Kursi Kiri & Kanan, Info 
 
 ## 3. Dashboard Operator & Scanner Admin (`scanner.html` & `scanner-grid.html`)
 
-### Scanner QR Code Operator
-Layar pemindaian QR code untuk verifikasi kehadiran peserta di pintu masuk venue.
+### 3.1 Halaman Scanner Denah U-Shape (`scanner.html`)
+Layar pemindaian QR Form Presensi, denah interaktif meja U-Shape, serta monitor status presensi real-time.
 
-![Scanner Operator](docs/mobile-screenshots/19_scanner_operator.png)
+#### Tampilan Desktop Operator (Layar Utama):
+![Scanner U-Shape Desktop](docs/mobile-screenshots/21_scanner_desktop_ushape.png)
+
+#### Tampilan Mobile Operator:
+![Scanner U-Shape Mobile](docs/mobile-screenshots/19_scanner_operator.png)
 
 ---
 
-### Grid Matrix Denah Interaktif Operator
-Monitor denah tempat duduk secara real-time yang memperlihatkan kursi mana saja yang telah terisi dan siapa yang duduk di dalamnya.
+### 3.2 Halaman Scanner Denah Grid 5x5 (`scanner-grid.html`)
+Layar monitor denah classroom 5x5 real-time yang memperlihatkan posisi tempat duduk peserta, status kehadiran (Emerald Green), serta informasi DiSC & MBTI.
 
-![Grid Dashboard](docs/mobile-screenshots/20_scanner_grid_dashboard.png)
+#### Tampilan Desktop Operator (Layar Utama):
+![Scanner Grid Classroom Desktop](docs/mobile-screenshots/22_scanner_desktop_grid.png)
+
+#### Tampilan Mobile Operator:
+![Scanner Grid Classroom Mobile](docs/mobile-screenshots/20_scanner_grid_dashboard.png)
 
 ---
 

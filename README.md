@@ -12,14 +12,18 @@ Aplikasi Handbook Digital & Sistem Presensi Real-Time untuk acara **Sales Master
 
 ---
 
-## 📸 Dokumentasi Tampilan Mobile
+## 📸 Dokumentasi Tampilan Website & Scanner
 
-Lihat dokumentasi lengkap tampilan website pada layar mobile (smartphone) untuk setiap section di [DOCUMENTATION_MOBILE.md](./DOCUMENTATION_MOBILE.md).
+Lihat dokumentasi lengkap tampilan website (Mobile & Desktop View) untuk setiap section di [DOCUMENTATION_MOBILE.md](./DOCUMENTATION_MOBILE.md).
 
-### Preview Screenshots Mobile:
+### Preview Screenshots Aplikasi & Scanner:
 | Quick Navigation & Header | Form Presensi Peserta | Tiket Pass Digital |
 | :---: | :---: | :---: |
 | ![Header](docs/mobile-screenshots/00_header_nav.png) | ![Presensi](docs/mobile-screenshots/17_checkin_presensi_form.png) | ![Tiket](docs/mobile-screenshots/18_tiket_digital_peserta.png) |
+
+| Dashboard Scanner U-Shape (`scanner.html`) | Dashboard Scanner Grid 5x5 (`scanner-grid.html`) |
+| :---: | :---: |
+| ![Scanner U-Shape](docs/mobile-screenshots/21_scanner_desktop_ushape.png) | ![Scanner Grid](docs/mobile-screenshots/22_scanner_desktop_grid.png) |
 
 ---
 
