@@ -140,12 +140,39 @@
   .seat-node.hadir:not(.me) .name-shape {
     fill: #ECFDF5 !important;
     stroke: #10B981 !important;
-    stroke-width: 2px !important;
+    stroke-width: 1.8px !important;
   }
   .seat-node.hadir:not(.me) .name-label-title {
     fill: #065F46 !important;
     font-weight: 800 !important;
   }
+  .seat-node.hadir:not(.me) .name-label-disc {
+    fill: #059669 !important;
+    font-weight: 700 !important;
+  }
+
+  /* DiSC Name Tag Badges Fill & Border Colors */
+  .name-shape { transition: all 0.3s ease; stroke-width: 1.5px; fill: #F9FAFB; stroke: #CBD5E1; }
+  .name-shape.disc-D { fill: #FFF5F5 !important; stroke: #EF4444 !important; }
+  .name-shape.disc-I { fill: #FFFBEB !important; stroke: #F59E0B !important; }
+  .name-shape.disc-S { fill: #F0FDF4 !important; stroke: #10B981 !important; }
+  .name-shape.disc-C { fill: #EFF6FF !important; stroke: #3B82F6 !important; }
+  .name-shape.disc-neutral { fill: #F8FAFC !important; stroke: #CBD5E1 !important; }
+
+  /* Name Title & DISC Label Typography */
+  .name-label-title { font-family: var(--sans); font-size: 11px; font-weight: 800; fill: #1E293B; pointer-events: none; }
+  .name-label-disc { font-family: var(--sans); font-size: 8.5px; font-weight: 700; fill: #64748B; pointer-events: none; letter-spacing: 0.04em; }
+
+  .name-shape.disc-D ~ .name-label-title { fill: #7F1D1D; }
+  .name-shape.disc-D ~ .name-label-disc { fill: #991B1B; }
+  .name-shape.disc-I ~ .name-label-title { fill: #78350F; }
+  .name-shape.disc-I ~ .name-label-disc { fill: #92400E; }
+  .name-shape.disc-S ~ .name-label-title { fill: #064E3B; }
+  .name-shape.disc-S ~ .name-label-disc { fill: #047857; }
+  .name-shape.disc-C ~ .name-label-title { fill: #1E3A8A; }
+  .name-shape.disc-C ~ .name-label-disc { fill: #1D4ED8; }
+  .name-shape.disc-neutral ~ .name-label-title { fill: #334155; }
+  .name-shape.disc-neutral ~ .name-label-disc { fill: #64748B; }
 
   .seat-node.filled { opacity: 1; }
 
@@ -613,37 +640,37 @@ function denah(sorot) {
     if (n <= 8) {
       // Left side (1-8): name badge on the left
       nameTagSvg = `
-        <rect x="-96" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
-        <text x="-51" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
-        <text x="-51" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
+        <rect x="-96" y="-4" width="90" height="32" rx="6" class="name-shape ${discCls}" />
+        <text x="-51" y="10" class="name-label-title" text-anchor="middle">${pNama}</text>
+        <text x="-51" y="21" class="name-label-disc" text-anchor="middle">${pDisc}</text>
       `;
     } else if (n === 9) {
       // Corner seat 9 (Ainur): bottom-left diagonal badge
       nameTagSvg = `
         <rect x="-42" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
         <text x="-7" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
-        <text x="-7" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+        <text x="-7" y="54" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
       `;
     } else if (n === 14) {
       // Corner seat 14 (Buffer): bottom-right diagonal badge
       nameTagSvg = `
         <rect x="0" y="32" width="70" height="28" rx="5" class="name-shape ${discCls}" />
         <text x="35" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
-        <text x="35" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+        <text x="35" y="54" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
       `;
     } else if (n >= 10 && n <= 13) {
       // Bottom side (10-13): non-overlapping compact badge below
       nameTagSvg = `
         <rect x="-5" y="32" width="38" height="28" rx="5" class="name-shape ${discCls}" />
         <text x="14" y="44" class="name-label-title" text-anchor="middle" style="font-size:10px; font-weight:700;">${pNama}</text>
-        <text x="14" y="55" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
+        <text x="14" y="54" class="name-label-disc" text-anchor="middle" style="font-size:8.5px; font-weight:600;">${pDisc}</text>
       `;
     } else {
       // Right side (15-22): name badge on the right
       nameTagSvg = `
-        <rect x="34" y="-3" width="90" height="30" rx="6" class="name-shape ${discCls}" />
-        <text x="79" y="12" class="name-label-title" text-anchor="middle">${pNama}</text>
-        <text x="79" y="23" class="name-label-disc" text-anchor="middle">${pDisc}</text>
+        <rect x="34" y="-4" width="90" height="32" rx="6" class="name-shape ${discCls}" />
+        <text x="79" y="10" class="name-label-title" text-anchor="middle">${pNama}</text>
+        <text x="79" y="21" class="name-label-disc" text-anchor="middle">${pDisc}</text>
       `;
     }
 
@@ -653,7 +680,6 @@ function denah(sorot) {
         ${nameTagSvg}
         <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
         <text x="14" y="17" class="seat-num" text-anchor="middle" ${rotAttr}>${n}</text>
-        ${isi && !aku ? `<circle cx="23" cy="3" r="5.5" fill="#047857" stroke="#FFFFFF" stroke-width="1.2" /><text x="23" y="5.5" fill="#FFFFFF" font-size="6.5" font-weight="900" text-anchor="middle">✓</text>` : ""}
         ${aku ? `
           <g class="pin-marker">
             <polygon points="0,-4 -5,-12 5,-12" fill="#DC2626" />
