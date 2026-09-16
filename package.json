@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scratch/postbuild_copy_routes.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
