@@ -24,3 +24,12 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Confidential documents & credentials
+*.pdf
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.csv
+
