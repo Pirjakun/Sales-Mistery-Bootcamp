@@ -750,8 +750,10 @@ function kioskPanelKanan() {
             </button>
           </li>`;
         }).join("")}
+      </ul>
     </div>
   </div>`;
+}
 
 function getTransportPulangInfo(pNama) {
   const name = String(pNama || "").toLowerCase();
@@ -826,6 +828,8 @@ function modalTiketDigital() {
         ${t.kiri || t.kanan ? `<div class="tip-box">
           <b>Tips Cara Berkomunikasi:</b><br>
           ${t.kiri ? `<b>${esc(t.kiri.panggilan)}:</b> ${esc(t.kiri.tipsKomunikasi)}<br>` : ""}
+          ${t.kanan ? `<b>${esc(t.kanan.panggilan)}:</b> ${esc(t.kanan.tipsKomunikasi)}` : ""}
+        </div>` : ""}
       </div>
       <div class="mobile-footer" style="flex-wrap:wrap; gap:8px;">
         <div class="status-badge-ok">Hadir (Sistem Presensi Digital)</div>

@@ -385,7 +385,7 @@
 
           <div class="form-group">
             <label for="input-email">Alamat Email *</label>
-            <input type="email" class="form-control" id="input-email" placeholder="contoh@werkudara.com" required>
+            <input type="email" class="form-control" id="input-email" placeholder="contoh@example.com" required>
           </div>
 
           <div class="form-group">
@@ -432,7 +432,7 @@
               </div>
               <div class="ticket-info-item">
                 <span>EMAIL</span>
-                <b id="ticket-email">budi.santoso@werkudara.com</b>
+                <b id="ticket-email">budi.santoso@example.com</b>
               </div>
               <div class="ticket-info-item">
                 <span>JABATAN / DIVISI</span>
@@ -485,28 +485,28 @@
   <script>
   // Mock participants for dropdown (Day 3 DISC Empowerment Seating)
   const MOCK_PARTICIPANTS = [
-    { id: 1, name: "Budi Santoso", email: "budi@werkudara.com", dept: "Prospecting & Business Dev · DISC D/I" },
-    { id: 2, name: "Siti Rahma", email: "siti@werkudara.com", dept: "Solution & B2B Sales · DISC C/S" },
-    { id: 3, name: "Andi Wijaya", email: "andi@werkudara.com", dept: "Consultative Selling · DISC D/I" },
-    { id: 4, name: "Dewi Lestari", email: "dewi@werkudara.com", dept: "Customer Relationship · DISC I/S" },
-    { id: 5, name: "Eka Pratama", email: "eka@werkudara.com", dept: "Consultative Selling · DISC D/C" },
-    { id: 6, name: "Fajar Hidayat", email: "fajar@werkudara.com", dept: "Business Development · DISC I/D" },
-    { id: 7, name: "Gita Gutawa", email: "gita@werkudara.com", dept: "Prospecting & Closing · DISC D/I" },
-    { id: 8, name: "Hendra Setiawan", email: "hendra@werkudara.com", dept: "Consultative Selling · DISC S/C" },
-    { id: 9, name: "Indah Permata", email: "indah@werkudara.com", dept: "Relationship Management · DISC I/C" },
-    { id: 10, name: "Lead Trainer", email: "fadli.ali@werkudara.com", dept: "Lead Trainer & Facilitator · DISC S" },
-    { id: 11, name: "Kartika Sari", email: "kartika@werkudara.com", dept: "Customer Engagement · DISC D/C" },
-    { id: 12, name: "Lukman Hakim", email: "lukman@werkudara.com", dept: "Solution Selling · DISC C/S" },
-    { id: 13, name: "Maya Anggraini", email: "maya@werkudara.com", dept: "Solution Selling · DISC D/I" },
-    { id: 14, name: "Empty / Buffer Seat", email: "buffer@werkudara.com", dept: "Kursi Cadangan / Buffer" },
-    { id: 15, name: "Novi Saputra", email: "novi@werkudara.com", dept: "Business Development · DISC D/I" },
-    { id: 16, name: "Oscar Perdana", email: "oscar@werkudara.com", dept: "Account Management · DISC I/S" },
-    { id: 17, name: "Putra Ramadhan", email: "putra@werkudara.com", dept: "Business Dev & Closing · DISC D/I" },
-    { id: 18, name: "Rina Melati", email: "rina@werkudara.com", dept: "Account Management · DISC S/C" },
-    { id: 19, name: "Setyo Wibowo", email: "setyo@werkudara.com", dept: "Hunting Sales & Closing · DISC D/I" },
-    { id: 20, name: "Tania Putri", email: "tania@werkudara.com", dept: "Account Management · DISC S" },
-    { id: 21, name: "Utami Dewi", email: "utami@werkudara.com", dept: "Hunting & Closing · DISC D/C" },
-    { id: 22, name: "Vicky Hermawan", email: "vicky@werkudara.com", dept: "Solution & Problem Solving · DISC S/C" }
+    { id: 1, name: "Budi Santoso", email: "budi@example.com", dept: "Prospecting & Business Dev · DISC D/I" },
+    { id: 2, name: "Siti Rahma", email: "siti@example.com", dept: "Solution & B2B Sales · DISC C/S" },
+    { id: 3, name: "Andi Wijaya", email: "andi@example.com", dept: "Consultative Selling · DISC D/I" },
+    { id: 4, name: "Dewi Lestari", email: "dewi@example.com", dept: "Customer Relationship · DISC I/S" },
+    { id: 5, name: "Eka Pratama", email: "eka@example.com", dept: "Consultative Selling · DISC D/C" },
+    { id: 6, name: "Fajar Hidayat", email: "fajar@example.com", dept: "Business Development · DISC I/D" },
+    { id: 7, name: "Gita Gutawa", email: "gita@example.com", dept: "Prospecting & Closing · DISC D/I" },
+    { id: 8, name: "Hendra Setiawan", email: "hendra@example.com", dept: "Consultative Selling · DISC S/C" },
+    { id: 9, name: "Indah Permata", email: "indah@example.com", dept: "Relationship Management · DISC I/C" },
+    { id: 10, name: "Lead Trainer", email: "fadli.ali@example.com", dept: "Lead Trainer & Facilitator · DISC S" },
+    { id: 11, name: "Kartika Sari", email: "kartika@example.com", dept: "Customer Engagement · DISC D/C" },
+    { id: 12, name: "Lukman Hakim", email: "lukman@example.com", dept: "Solution Selling · DISC C/S" },
+    { id: 13, name: "Maya Anggraini", email: "maya@example.com", dept: "Solution Selling · DISC D/I" },
+    { id: 14, name: "Empty / Buffer Seat", email: "buffer@example.com", dept: "Kursi Cadangan / Buffer" },
+    { id: 15, name: "Novi Saputra", email: "novi@example.com", dept: "Business Development · DISC D/I" },
+    { id: 16, name: "Oscar Perdana", email: "oscar@example.com", dept: "Account Management · DISC I/S" },
+    { id: 17, name: "Putra Ramadhan", email: "putra@example.com", dept: "Business Dev & Closing · DISC D/I" },
+    { id: 18, name: "Rina Melati", email: "rina@example.com", dept: "Account Management · DISC S/C" },
+    { id: 19, name: "Setyo Wibowo", email: "setyo@example.com", dept: "Hunting Sales & Closing · DISC D/I" },
+    { id: 20, name: "Tania Putri", email: "tania@example.com", dept: "Account Management · DISC S" },
+    { id: 21, name: "Utami Dewi", email: "utami@example.com", dept: "Hunting & Closing · DISC D/C" },
+    { id: 22, name: "Vicky Hermawan", email: "vicky@example.com", dept: "Solution & Problem Solving · DISC S/C" }
   ];
 
   // 22 Seat positions in SVG space (Day 3 U-Shape)
@@ -557,10 +557,10 @@
     } else {
       // Pre-populate 4 seats for demo
       bookingsData = {
-        1: { name: "Lead Trainer", email: "fadli.ali@werkudara.com", dept: "CEO · Werkudara Group" },
+        1: { name: "Lead Trainer", email: "fadli.ali@example.com", dept: "CEO · Werkudara Group" },
         8: { name: "Delon Sianipar", email: "delon.sianipar@sandler.co.id", dept: "Senior Trainer" },
         12: { name: "Fano Alfian Ardiansyah", email: "fano.alfian@ailesh.com", dept: "Founder · Ailesh" },
-        18: { name: "Siti Rahmawati", email: "siti.rahma@werkudara.com", dept: "Account Manager" }
+        18: { name: "Siti Rahmawati", email: "siti.rahma@example.com", dept: "Account Manager" }
       };
       saveBookings();
     }
