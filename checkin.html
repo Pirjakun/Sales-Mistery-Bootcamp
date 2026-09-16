@@ -202,12 +202,39 @@
     border-color: #F59E0B !important; border-width: 2.5px !important;
     box-shadow: 0 0 12px rgba(245, 158, 11, 0.6) !important; background: #FEF3C7 !important;
   }
+  .seating-grid-mobile .grid-card.filled:not(.me) {
+    background: #ECFDF5 !important; border-color: #10B981 !important; border-width: 2px !important;
+  }
+  .seating-grid-mobile .grid-card.filled:not(.me) .card-top-num {
+    background: #10B981 !important; color: #FFFFFF !important; font-weight: 900 !important;
+  }
 
   /* U-Shape SVG Styles */
   .seat-node { transition: all 0.3s ease; opacity: 0.95; }
-  /* Physical Chair Rectangles (.seat-rect): ALL physical chairs are solid Navy Blue */
+  /* Physical Chair Rectangles (.seat-rect): Default physical chairs are solid Navy Blue */
   .seat-node .seat-rect { fill: #1E3A8A !important; stroke: #1D4ED8 !important; stroke-width: 1.2px; rx: 7px; transition: all 0.3s; }
   .seat-node .seat-num { font-family: var(--sans); font-weight: 800; font-size: 11.5px; fill: #FFFFFF !important; pointer-events: none; }
+  
+  /* Checked-in Chair Style (Vibrant Emerald Green) */
+  .seat-node.hadir:not(.me) .seat-rect {
+    fill: #10B981 !important;
+    stroke: #047857 !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.75));
+  }
+  .seat-node.hadir:not(.me) .seat-num {
+    fill: #FFFFFF !important;
+    font-weight: 900 !important;
+  }
+  .seat-node.hadir:not(.me) .name-shape {
+    fill: #ECFDF5 !important;
+    stroke: #10B981 !important;
+    stroke-width: 2px !important;
+  }
+  .seat-node.hadir:not(.me) .name-label-title {
+    fill: #065F46 !important;
+    font-weight: 800 !important;
+  }
   
   /* Original DiSC Name Tag Badges */
   .name-shape { transition: all 0.3s ease; stroke-width: 1.5; }
@@ -429,6 +456,7 @@ function denahUShape(sorot) {
     const pDisc = p ? esc(p.disc) : "";
 
     let cls = "seat-node ";
+    if (isi) cls += "hadir ";
     if (aku) cls += "me ";
 
     const discCls = aku ? "disc-me" : getDiscColorCls(pDisc);
@@ -475,6 +503,7 @@ function denahUShape(sorot) {
         ${nameTagSvg}
         <rect width="28" height="25" rx="7" class="seat-rect" ${rotAttr} />
         <text x="14" y="17" class="seat-num" text-anchor="middle" ${rotAttr}>${n}</text>
+        ${isi && !aku ? `<circle cx="23" cy="3" r="5.5" fill="#047857" stroke="#FFFFFF" stroke-width="1.2" /><text x="23" y="5.5" fill="#FFFFFF" font-size="6.5" font-weight="900" text-anchor="middle">✓</text>` : ""}
         ${aku ? `
           <g class="pin-marker">
             <polygon points="0,-4 -5,-12 5,-12" fill="#DC2626" />
@@ -521,6 +550,7 @@ function denahGrid(sorot) {
     const discCls = getDiscColorCls(p.disc);
 
     let cls = `grid-card ${discCls} `;
+    if (isHadir) cls += "filled ";
     if (aku) cls += "me ";
 
     return `

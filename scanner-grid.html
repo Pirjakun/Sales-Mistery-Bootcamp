@@ -264,6 +264,22 @@
     gap: 3px;
   }
 
+  /* Checked-in Card Styling (.filled) */
+  .grid-card.filled:not(.me) {
+    background: #ECFDF5 !important;
+    border-color: #10B981 !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.25) !important;
+  }
+  .grid-card.filled:not(.me) .card-top-num {
+    background: #10B981 !important;
+    color: #FFFFFF !important;
+    font-weight: 900 !important;
+  }
+  .grid-card.filled:not(.me) .card-name {
+    color: #065F46 !important;
+  }
+
   /* Selected Active Beacon State (.me) */
   .grid-card.me {
     border-color: #F59E0B !important;
