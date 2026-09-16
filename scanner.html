@@ -1213,13 +1213,19 @@ document.addEventListener("click", e => {
 
 function syncStoragePresensi(isInitial = false) {
   try {
+    const validCodes = new Set(P.map(p => p.kode));
     const raw = localStorage.getItem("smb_hadir");
     if (raw) {
       const hadirArr = JSON.parse(raw);
+      const cleanArr = hadirArr.filter(k => validCodes.has(k));
       let prevCount = S.hadir.size;
-      hadirArr.forEach(k => S.hadir.add(k));
+      S.hadir.clear();
+      cleanArr.forEach(k => S.hadir.add(k));
+      if (cleanArr.length !== hadirArr.length) {
+        localStorage.setItem("smb_hadir", JSON.stringify(cleanArr));
+      }
       if (!isInitial && S.hadir.size !== prevCount) {
-        const latestKey = hadirArr[hadirArr.length - 1];
+        const latestKey = cleanArr[cleanArr.length - 1];
         const p = P.find(x => x.kode === latestKey);
         if (p) {
           S.orangAktif = p;

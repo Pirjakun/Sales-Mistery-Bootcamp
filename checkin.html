@@ -377,11 +377,17 @@ function getActivePList() {
 function getHadirSet() {
   const set = new Set();
   try {
+    const P_LIST = getActivePList();
+    const validCodes = new Set(P_LIST.map(p => p.kode));
     const key = S.sesi === 3 ? "smb_hadir_day3" : (S.sesi === 2 ? "smb_hadir_grid" : "smb_hadir");
     const raw = localStorage.getItem(key) || localStorage.getItem("smb_hadir");
     if (raw) {
       const arr = JSON.parse(raw);
-      arr.forEach(k => set.add(k));
+      const cleanArr = arr.filter(k => validCodes.has(k));
+      cleanArr.forEach(k => set.add(k));
+      if (cleanArr.length !== arr.length) {
+        localStorage.setItem(key, JSON.stringify(cleanArr));
+      }
     }
   } catch(e){}
   return set;
@@ -691,6 +697,8 @@ function init() {
         if (found) {
           S.pDipilih = found;
           S.view = "ticket";
+        } else {
+          localStorage.removeItem("smb_my_code");
         }
       }
     } catch(e){}
