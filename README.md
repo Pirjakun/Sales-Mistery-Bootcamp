@@ -1,16 +1,48 @@
-# React + Vite
+# 📱 Sales Mastery Bootcamp 2026 - Web & Mobile Handbook Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplikasi Handbook Digital & Sistem Presensi Real-Time untuk acara **Sales Mastery Bootcamp 2026** di Kalyana Resort Kaliurang, Yogyakarta.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Fitur Utama
 
-## React Compiler
+- **Digital Handbook Interaktif (`index.html`)**: Panduan lengkap 16 Bab acara mulai dari rundown, dresscode, trainer, akomodasi, hingga armada transportasi kepulangan.
+- **Sistem Presensi & Tiket Digital (`checkin.html`)**: Fitur check-in mandiri peserta yang memunculkan tiket pass digital berisi nomor kursi, profil DiSC, tetangga sebelah, info transport kepulangan, serta denah tempat duduk interaktif (dukungan *pinch-to-zoom* & *touch gestures*).
+- **Scanner Operator Admin (`scanner.html` & `scanner-grid.html`)**: Dashboard verifikasi presensi peserta via QR Scanner & denah matrix visual status kehadiran.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 📸 Dokumentasi Tampilan Mobile
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Lihat dokumentasi lengkap tampilan website pada layar mobile (smartphone) untuk setiap section di [DOCUMENTATION_MOBILE.md](./DOCUMENTATION_MOBILE.md).
+
+### Preview Screenshots Mobile:
+| Quick Navigation & Header | Form Presensi Peserta | Tiket Pass Digital |
+| :---: | :---: | :---: |
+| ![Header](docs/mobile-screenshots/00_header_nav.png) | ![Presensi](docs/mobile-screenshots/17_checkin_presensi_form.png) | ![Tiket](docs/mobile-screenshots/18_tiket_digital_peserta.png) |
+
+---
+
+## 🚀 Cara Menjalankan Project
+
+### 1. Development Mode
+```bash
+npm install
+npm run dev
+```
+
+### 2. Build for Production
+```bash
+npm run build
+```
+
+---
+
+## 📄 Struktur Repository
+
+- `index.html` - Handbook Utama Sales Mastery Bootcamp (Bab 01 - 16)
+- `checkin.html` - Halaman Presensi & Tiket Digital Peserta
+- `scanner.html` - Halaman Pemindai QR Operator
+- `scanner-grid.html` - Dashboard Matrix Denah Kursi Real-Time
+- `docs/mobile-screenshots/` - Berkas tangkapan layar tampilan mobile
+- `DOCUMENTATION_MOBILE.md` - Dokumentasi lengkap visual mobile per section
