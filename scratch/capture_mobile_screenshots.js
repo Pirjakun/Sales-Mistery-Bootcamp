@@ -96,20 +96,32 @@ async function run() {
   });
 
   // 18. Tiket Digital Pass (Mobile)
-  console.log('Switching checkin view to ticket pass...');
+  console.log('Switching checkin view to ticket pass (Siti Rahma - Kursi #2)...');
   await page.evaluate(() => {
-    if (typeof S !== 'undefined') {
+    if (typeof S !== 'undefined' && typeof P !== 'undefined') {
+      const p = P.find(x => x.kursi === 2) || P[1];
+      if (p) {
+        S.orangAktif = p;
+        S.hadir.add(p.kode);
+      }
       S.view = 'ticket';
       if (typeof render === 'function') render();
     }
   });
-  await new Promise(r => setTimeout(r, 800));
+  await new Promise(r => setTimeout(r, 1000));
 
   console.log('Capturing 18_tiket_digital_peserta.png...');
-  await page.screenshot({
-    path: path.join(outputDir, '18_tiket_digital_peserta.png'),
-    clip: { x: 0, y: 0, width: 390, height: 844 }
-  });
+  const ticketElement = await page.$('.mobile-pass-card, .mobile-container');
+  if (ticketElement) {
+    await ticketElement.screenshot({
+      path: path.join(outputDir, '18_tiket_digital_peserta.png')
+    });
+  } else {
+    await page.screenshot({
+      path: path.join(outputDir, '18_tiket_digital_peserta.png'),
+      fullPage: true
+    });
+  }
 
   // 19. Scanner Operator Admin
   const scannerPath = `file:///${path.join(rootDir, 'scanner.html').replace(/\\/g, '/')}`;
