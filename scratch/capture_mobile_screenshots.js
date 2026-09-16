@@ -37,7 +37,7 @@ async function run() {
 
   const indexPath = `file:///${path.join(rootDir, 'index.html').replace(/\\/g, '/')}`;
   console.log('Navigating to index.html:', indexPath);
-  await page.goto(indexPath, { waitUntil: 'networkidle0' });
+  await page.goto(indexPath, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => document.fonts.ready);
   await new Promise(r => setTimeout(r, 800));
 
@@ -85,7 +85,7 @@ async function run() {
   // 17. Checkin Form Presensi
   const checkinPath = `file:///${path.join(rootDir, 'checkin.html').replace(/\\/g, '/')}`;
   console.log('Navigating to checkin.html:', checkinPath);
-  await page.goto(checkinPath, { waitUntil: 'networkidle0' });
+  await page.goto(checkinPath, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => document.fonts.ready);
   await new Promise(r => setTimeout(r, 800));
 
@@ -114,7 +114,7 @@ async function run() {
   // 19. Scanner Operator Admin
   const scannerPath = `file:///${path.join(rootDir, 'scanner.html').replace(/\\/g, '/')}`;
   console.log('Navigating to scanner.html:', scannerPath);
-  await page.goto(scannerPath, { waitUntil: 'networkidle0' });
+  await page.goto(scannerPath, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => document.fonts.ready);
   await new Promise(r => setTimeout(r, 800));
 
@@ -127,7 +127,7 @@ async function run() {
   // 20. Scanner Grid Dashboard
   const scannerGridPath = `file:///${path.join(rootDir, 'scanner-grid.html').replace(/\\/g, '/')}`;
   console.log('Navigating to scanner-grid.html:', scannerGridPath);
-  await page.goto(scannerGridPath, { waitUntil: 'networkidle0' });
+  await page.goto(scannerGridPath, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => document.fonts.ready);
   await new Promise(r => setTimeout(r, 800));
 
